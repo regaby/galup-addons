@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Copyright 2016 LasLabs Inc.
+    @author Dave Lasley <dave@laslabs.com>
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+-->
+
+
+<odoo>
+	<data>
+
+
+    <template id="style" name="css" inherit_id="website.assets_frontend">
+      <xpath expr="." position="inside">
+        <link rel="stylesheet" href='/centrodulce_theme/static/src/css/style.css'/>
+      </xpath>
+    </template>
+
+    <template id="layout_centrodulce_header" name="header" inherit_id="website.layout">
+      <xpath expr="//header" position="before">
+        <div class="portada">
+            <div class="portada-img" />
+          
+        </div>
+      </xpath>
+
+      <xpath expr="//header" position="after">
+        <div class="toldo">
+          <div class="toldo-img">
+          </div>
+        </div>
+      </xpath>
+
+
+      <xpath expr="//div[@class='pull-left text-muted']" position="replace">
+        <div class="pull-left text-muted">
+        Desarrollado por <a href="http://galup.com.ar" target="_blank">GALUP</a> <span t-esc="time.strftime('%Y')"></span> 
+        </div>
+      </xpath>
+    </template>
+
+    <template id="footer_custom" inherit_id="website.footer_custom" name="Footer">
+    <xpath expr="//div[@id='footer']" position="replace">
+
+          <div id="footer" class="container hidden-print">
+            <div class="linea"></div>
+            <div class="row">
+                <div class="col-md-4 col-lg-3">
+                    <p>LUNES a SÁBADO <br/>
+                    08:00 a 13:00hs. <br/>
+                    17:00 a 20:30hs.</p>
+                    <address itemscope="itemscope" itemtype="http://schema.org/Organization">
+                        <div t-field="res_company.partner_id" t-field-options='{
+                                "widget": "contact",
+                                "fields": ["address", "phone", "mobile", "fax", "email"]}'/>
+                    </address>
+                </div>
+                <div class="col-md-4  col-lg-3" id="info">
+                  
+                    
+                </div>
+                <div class="col-md-4 col-lg-5 col-lg-offset-1">
+                    
+                    <h2>
+                        <div class="fa seguinos"/>          
+                        <a t-att-href="website.social_facebook" t-if="website.social_facebook" target="_blank"><i class="fa facebook"/></a>
+                        <a t-att-href="website.social_youtube" t-if="website.social_youtube" target="_blank"><i class="fa youtube"/></a>
+                        <a href="http://www.instagram.com/centrodulce" target="_blank" ><div class="fa instagram"/></a>
+                    </h2>
+                    <div class="centrodulce"> 
+                      <h4 >/centrodulce</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="linea"></div>
+        </div>
+        
+    </xpath>
+</template>
+
+
+
+
+
+	</data>
+</odoo>

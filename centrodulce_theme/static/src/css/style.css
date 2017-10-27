@@ -1,0 +1,133 @@
+body {
+/*	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #333333;
+	background-color: red;*/
+	background-color: #f7f9e1; /*amarillo*/
+}
+
+#wrapwrap {	
+	margin-right: auto;
+	margin-left: auto;
+	min-width:1140px;         
+    width:1140px;             /* As IE ignores !important it will set width as 1000px; */
+}
+
+
+
+.navbar-default {
+	background-color: #e02228; /*rojo*/
+	border-color: #e02228; /*rojo*/
+	/*width: 1140px;*/
+	margin-right: auto;
+	margin-left: auto;
+	/*padding-left: 15px;
+	padding-right: 15px;*/
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: #fff;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+	color: #ffffff;
+	background-color: #e02228;
+}
+
+#wrapwrap > footer {
+	height: 100%;
+	background-color: #f7f9e1; /*amarillo*/
+}
+
+a {
+	 color: #e02228; 
+	text-decoration: none;
+}
+
+.navbar-right {
+	 margin-right: 0; 
+}
+
+.portada, .toldo {
+	background-color: #f7f9e1;
+
+}
+
+
+
+.portada-img {
+	margin-top: -2px;
+	background: url("/centrodulce_theme/static/src/img/portada.png");
+    background-repeat: repeat-x ;
+    width: 1140px;
+    height: 306px;
+    margin-right: auto;
+	margin-left: auto;
+    
+}
+
+.toldo-img {
+	margin-top: -2px;
+	background: url("/centrodulce_theme/static/src/img/toldo.png");
+    background-repeat: repeat-x ;
+    width: 1140px;
+    height: 35px;
+    margin-right: auto;
+	margin-left: auto;
+    
+}
+
+.linea {
+	background: url("/centrodulce_theme/static/src/img/linea.png");
+    background-repeat: repeat-x ;
+    width: 1140px;
+    height: 16px;
+    /*margin-right: auto;*/
+	margin-left: -15px;
+    
+}
+
+.seguinos {
+	background: url("/centrodulce_theme/static/src/img/seguinos.png");
+    width: 172px;
+    height: 61px;
+    
+}
+
+.instagram {
+	background: url("/centrodulce_theme/static/src/img/instagram.png");
+    width: 62px;
+    height: 61px;
+    
+}
+
+.facebook {
+	background: url("/centrodulce_theme/static/src/img/facebook.png");
+    width: 62px;
+    height: 61px;
+    
+}
+
+.youtube {
+	background: url("/centrodulce_theme/static/src/img/youtube.png");
+    width: 62px;
+    height: 61px;
+    
+}
+
+.centrodulce {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+	visibility: hidden;
+}
+
+.container {
+	margin-right: auto;
+	margin-left: 0;
+	padding-left: 15px;
+	padding-right: 15px;
+}
