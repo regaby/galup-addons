@@ -11,7 +11,7 @@
     "author": "Galup",
     "license": "LGPL-3",
     "installable": True,
-    "depends": ['website'],
+    "depends": ['website','centrodulce_slider'],
     "data": ['views/assets.xml'],
 }
 

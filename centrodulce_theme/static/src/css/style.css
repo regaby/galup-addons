@@ -10,19 +10,27 @@ body {
 #wrapwrap {	
 	margin-right: auto;
 	margin-left: auto;
-	min-width:1140px;         
-    width:1140px;             /* As IE ignores !important it will set width as 1000px; */
+	min-width:1170px;         
+    width:1170px;             /* As IE ignores !important it will set width as 1000px; */
 }
 
-@media screen and (max-width:320px) {#wrapwrap {width:100%;min-width:100%;}}   
-@media screen and (min-width:321px) and (max-width:838px) {#wrapwrap {width:100%;min-width:100%;}}
+.container {
+	width: 880px;
+}
+
+.container-footer {
+	width: 1170px;
+}
+
+@media screen and (max-width:320px) {#wrapwrap {width:100%;min-width:100%;}.container {width: 100%;}}   
+@media screen and (min-width:321px) and (max-width:838px) {#wrapwrap {width:100%;min-width:100%;}.container {width: 100%;}}
    
 
 
 .navbar-default {
 	background-color: #e02228; /*rojo*/
 	border-color: #e02228; /*rojo*/
-	/*width: 1140px;*/
+	/*width: 1170px;*/
 	margin-right: auto;
 	margin-left: auto;
 	/*padding-left: 15px;
@@ -63,7 +71,7 @@ a {
 	margin-top: -2px;
 	background: url("/centrodulce_theme/static/src/img/portada.png");
     background-repeat: repeat-x ;
-    width: 1140px;
+    width: 1170px;
     height: 306px;
     margin-right: auto;
 	margin-left: auto;
@@ -74,7 +82,7 @@ a {
 	margin-top: -2px;
 	background: url("/centrodulce_theme/static/src/img/toldo.png");
     background-repeat: repeat-x ;
-    width: 1140px;
+    width: 1170px;
     height: 35px;
     margin-right: auto;
 	margin-left: auto;
@@ -84,10 +92,10 @@ a {
 .linea {
 	background: url("/centrodulce_theme/static/src/img/linea.png");
     background-repeat: repeat-x ;
-    width: 1140px;
+    width: 1170px;
     height: 16px;
     /*margin-right: auto;*/
-	margin-left: -15px;
+	
     
 }
 

@@ -20,11 +20,9 @@
     <template id="layout_centrodulce_header" name="header" inherit_id="website.layout">
       <xpath expr="//header" position="before">
         <div class="portada">
-            <div class="portada-img" />
-          
+            <div class="portada-img" />          
         </div>
       </xpath>
-
       <xpath expr="//header" position="after">
         <div class="toldo">
           <div class="toldo-img">
@@ -32,18 +30,44 @@
         </div>
       </xpath>
 
+      <xpath expr="//main" position="replace">
+          <div class="col-md-3 col-sm-4 hidden-xs" id="products_grid_before">
+            <ul class="nav nav-pills nav-stacked mt16">
+                <li t-att-class=" '' if category else 'active' "><a href="/shop">Nuestros productos</a></li>
+                <!-- <t t-foreach="categories" t-as="c">
+                    <t t-call="website_sale.categories_recursive"/>
+                </t> -->
+            </ul>
+          </div>
+          <main class="col-md-9 col-sm-8">
+            <t t-raw="0"/>
+          </main>
+        
+      </xpath>
 
       <xpath expr="//div[@class='pull-left text-muted']" position="replace">
         <div class="pull-left text-muted">
         Desarrollado por <a href="http://galup.com.ar" target="_blank">GALUP</a> <span t-esc="time.strftime('%Y')"></span> 
         </div>
       </xpath>
+
+      <!-- <xpath expr="//a[@class='navbar-brand']" position="replace">
+        <a class="navbar-brand"/>
+        <div class="input-group">
+            <div class="oe_search">
+                <input type="text" name="search" class="search-query form-control oe_search_box" placeholder="Buscar..." t-att-value="search" />
+                <span class="fa fa-remove fa-lg oe_search_clear"></span>
+            </div>
+            <span class="input-group-btn">
+               <button type="submit" class="btn btn-default oe_search_button"><i class="fa fa-search"/></button>
+            </span>
+        </div>
+    </xpath> -->
     </template>
 
     <template id="footer_custom" inherit_id="website.footer_custom" name="Footer">
-    <xpath expr="//div[@id='footer']" position="replace">
-
-          <div id="footer" class="container hidden-print">
+      <xpath expr="//div[@id='footer']" position="replace">
+          <div id="footer" class="container-footer hidden-print">
             <div class="linea"></div>
             <div class="row">
                 <div class="col-md-4 col-lg-3">
@@ -74,10 +98,12 @@
                 </div>
             </div>
             <div class="linea"></div>
-        </div>
-        
-    </xpath>
-</template>
+          </div>
+          
+      </xpath>
+      </template>
+
+
 
 
 
