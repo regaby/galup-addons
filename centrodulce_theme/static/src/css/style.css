@@ -14,6 +14,9 @@ body {
     width:1140px;             /* As IE ignores !important it will set width as 1000px; */
 }
 
+@media screen and (max-width:320px) {#wrapwrap {width:100%;min-width:100%;}}   
+@media screen and (min-width:321px) and (max-width:838px) {#wrapwrap {width:100%;min-width:100%;}}
+   
 
 
 .navbar-default {
