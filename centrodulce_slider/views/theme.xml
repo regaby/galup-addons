@@ -37,8 +37,8 @@
     </template>
 
     <template id="homepage_inherit" inherit_id="website.homepage" name="Homepage"  active="True" customize_show="True">
-      <xpath expr="//div[@id='wrap']" position="replace">
-        <div id="wrap" class="oe_structure oe_empty">
+      <xpath expr="//div[@id='wrap']" position="before">
+        
           <div id="carousel-thumbnail-indicators" class="carousel slide" data-ride="carousel">
           
           <ol class="carousel-indicators">
@@ -127,7 +127,7 @@
           <a class="left carousel-control" href="#carousel-thumbnail-indicators" role="button" data-slide="prev"><img src="/centrodulce_slider/static/src/img/left.png"/></a>
           <a class="right carousel-control" href="#carousel-thumbnail-indicators" role="button" data-slide="next"><img src="/centrodulce_slider/static/src/img/right.png"/></a>
           </div> 
-        </div>  
+        
       </xpath>
     </template> 
 

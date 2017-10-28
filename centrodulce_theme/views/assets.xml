@@ -34,13 +34,14 @@
           <div class="col-md-3 col-sm-4 hidden-xs" id="products_grid_before">
             <ul class="nav nav-pills nav-stacked mt16">
                 <li t-att-class=" '' if category else 'active' "><a href="/shop">Nuestros productos</a></li>
-                <!-- <t t-foreach="categories" t-as="c">
+                <t t-foreach="categories" t-as="c">
                     <t t-call="website_sale.categories_recursive"/>
-                </t> -->
+                </t>
             </ul>
           </div>
           <main class="col-md-9 col-sm-8">
             <t t-raw="0"/>
+
           </main>
         
       </xpath>
@@ -63,6 +64,53 @@
             </span>
         </div>
     </xpath> -->
+    </template>
+
+    <template id="homepage_inherit2" inherit_id="website.homepage" name="Homepage"  active="True" customize_show="True">
+      <xpath expr="//div[@id='wrap']" position="after">
+
+        
+
+          <div class='row'>
+
+            <div class="col-md-12" id="products_grid">
+              <table width="100%">
+                <tbody>
+                  <tr t-ignore="true">
+                    <td t-foreach="range(0,rows)" t-as="row" t-attf-width="#{100/rows}%"></td>
+                  </tr>
+                  <tr t-foreach="bins" t-as="tr_product">
+                    <t t-foreach="tr_product" t-as="td_product">
+                      <t t-if="td_product">
+                      <t t-set="product" t-value="td_product['product']"/>
+                      <td t-att-colspan="td_product['x'] != 1 and td_product['x']"
+                          t-att-rowspan="td_product['y'] != 1 and td_product['y']"
+                          t-attf-class="oe_product oe_grid oe-height-#{td_product['y']*2} #{ td_product['class'] }">
+
+                          <div class="oe_product_cart" t-att-data-publish="product.website_published and 'on' or 'off'">
+                            <t t-set="product_image_big" t-value="td_product['x']+td_product['y'] > 2"/>
+                            <t t-call="website_sale.products_item"/>
+                          </div>
+
+                      </td>
+                      </t>
+                      <td t-if="not td_product" class="oe-height-2"/>
+                    </t>
+                  </tr>
+                </tbody>
+              </table>
+              <t t-if="not bins">
+                <div class="text-center text-muted">
+                  <h3 class="css_editable_display">No product defined.</h3>
+                  <t groups="base.group_website_publisher">
+                    <p groups="base.group_sale_manager">Use the <i>'Content'</i> top menu to create a new product.</p>
+                  </t>
+                </div>
+              </t>
+            </div>
+          </div>
+        
+      </xpath>
     </template>
 
     <template id="footer_custom" inherit_id="website.footer_custom" name="Footer">
