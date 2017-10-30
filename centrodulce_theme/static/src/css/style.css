@@ -19,6 +19,7 @@ body {
 }
 
 .container-footer {
+	margin-top: 20px;
 	width: 1170px;
 }
 
@@ -86,6 +87,7 @@ a {
     height: 35px;
     margin-right: auto;
 	margin-left: auto;
+	margin-bottom: 20px;
     
 }
 
@@ -141,4 +143,8 @@ a {
 	margin-left: 0;
 	padding-left: 15px;
 	padding-right: 15px;
+}
+
+#products_grid{
+	margin-top: 20px;
 }

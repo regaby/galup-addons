@@ -316,5 +316,6 @@ div .news-right{
 .carousel-indicators {
   
    width: 70%; 
+   visibility: hidden;
   
 }
