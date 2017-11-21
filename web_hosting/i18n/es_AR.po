@@ -1,0 +1,583 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* web_hosting
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-17 02:35+0000\n"
+"PO-Revision-Date: 2017-07-17 02:35+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: web_hosting
+#: model:ir.ui.view,arch_db:web_hosting.view_web_hosting_server_form
+msgid "<?xml version=\"1.0\"?>\n"
+"<form>\n"
+"                    <sheet>\n"
+"                        <group>\n"
+"                            <field name=\"name\"/>\n"
+"                            <field name=\"ip\"/>\n"
+"                        </group>\n"
+"                        <group name=\"domains\" string=\"Domains\">\n"
+"                            <field name=\"domain_ids\" nolabel=\"1\"/>\n"
+"                        </group>\n"
+"                    </sheet>\n"
+"                </form>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<form>\n"
+"                    <sheet>\n"
+"                        <group>\n"
+"                            <field name=\"name\"/>\n"
+"                            <field name=\"ip\"/>\n"
+"                        </group>\n"
+"                        <group name=\"domains\" string=\"Domains\">\n"
+"                            <field name=\"domain_ids\" nolabel=\"1\"/>\n"
+"                        </group>\n"
+"                    </sheet>\n"
+"                </form>\n"
+"            "
+
+#. module: web_hosting
+#: model:ir.ui.view,arch_db:web_hosting.view_web_hosting_plan_form
+msgid "<?xml version=\"1.0\"?>\n"
+"<form>\n"
+"                    <sheet>\n"
+"                        <group>\n"
+"                            <field name=\"product_id\"/>\n"
+"                            <field name=\"period\"/>\n"
+"                            <field name=\"start_date\"/>\n"
+"                            <field name=\"due_date\"/>\n"
+"                            <field name=\"state\"/>\n"
+"                        </group>\n"
+"                        \n"
+"                    </sheet>\n"
+"                </form>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<form>\n"
+"                    <sheet>\n"
+"                        <group>\n"
+"                            <field name=\"product_id\"/>\n"
+"                            <field name=\"period\"/>\n"
+"                            <field name=\"start_date\"/>\n"
+"                            <field name=\"due_date\"/>\n"
+"                            <field name=\"state\"/>\n"
+"                        </group>\n"
+"                        \n"
+"                    </sheet>\n"
+"                </form>\n"
+"            "
+
+#. module: web_hosting
+#: model:ir.ui.view,arch_db:web_hosting.view_web_hosting_domain_form
+msgid "<?xml version=\"1.0\"?>\n"
+"<form>\n"
+"                    <sheet>\n"
+"                        <group>\n"
+"                            <group>\n"
+"                                <field name=\"name\"/>\n"
+"                                <field name=\"start_date\"/>\n"
+"                                <field name=\"server_id\"/>\n"
+"                                <field name=\"partner_id\"/>\n"
+"                            </group>\n"
+"                            <group>\n"
+"                                <field name=\"password\"/>\n"
+"                                <field name=\"free\"/>\n"
+"                                <field name=\"subdomain\"/>\n"
+"                            </group>\n"
+"                        </group>\n"
+"                        <group name=\"plans\" string=\"Plans\" attrs=\"{'invisible':[('free','=',True)]}\">\n"
+"                            <field name=\"plan_ids\" nolabel=\"1\"/>\n"
+"                        </group>\n"
+"                        <group name=\"subdomains\" string=\"Sub Domains\" attrs=\"{'invisible':[('subdomain','=',False)]}\">\n"
+"                            <field name=\"subdomain_ids\" nolabel=\"1\"/>\n"
+"                        </group>\n"
+"                    </sheet>\n"
+"                </form>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<form>\n"
+"                    <sheet>\n"
+"                        <group>\n"
+"                            <group>\n"
+"                                <field name=\"name\"/>\n"
+"                                <field name=\"start_date\"/>\n"
+"                                <field name=\"server_id\"/>\n"
+"                                <field name=\"partner_id\"/>\n"
+"                            </group>\n"
+"                            <group>\n"
+"                                <field name=\"password\"/>\n"
+"                                <field name=\"free\"/>\n"
+"                                <field name=\"subdomain\"/>\n"
+"                            </group>\n"
+"                        </group>\n"
+"                        <group name=\"plans\" string=\"Plans\" attrs=\"{'invisible':[('free','=',True)]}\">\n"
+"                            <field name=\"plan_ids\" nolabel=\"1\"/>\n"
+"                        </group>\n"
+"                        <group name=\"subdomains\" string=\"Sub Domains\" attrs=\"{'invisible':[('subdomain','=',False)]}\">\n"
+"                            <field name=\"subdomain_ids\" nolabel=\"1\"/>\n"
+"                        </group>\n"
+"                    </sheet>\n"
+"                </form>\n"
+"            "
+
+#. module: web_hosting
+#: model:ir.ui.view,arch_db:web_hosting.view_web_hosting_server_search
+msgid "<?xml version=\"1.0\"?>\n"
+"<search>\n"
+"                    <field name=\"name\"/>\n"
+"                    <field name=\"ip\"/>\n"
+"                </search>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<search>\n"
+"                    <field name=\"name\"/>\n"
+"                    <field name=\"ip\"/>\n"
+"                </search>\n"
+"            "
+
+#. module: web_hosting
+#: model:ir.ui.view,arch_db:web_hosting.view_web_hosting_domain_search
+msgid "<?xml version=\"1.0\"?>\n"
+"<search>\n"
+"                    <field name=\"name\"/>\n"
+"                    <field name=\"start_date\"/>\n"
+"                    <field name=\"server_id\"/>\n"
+"                    <field name=\"free\"/>\n"
+"                    <field name=\"subdomain\"/>\n"
+"                    <field name=\"state\"/>\n"
+"                </search>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<search>\n"
+"                    <field name=\"name\"/>\n"
+"                    <field name=\"start_date\"/>\n"
+"                    <field name=\"server_id\"/>\n"
+"                    <field name=\"free\"/>\n"
+"                    <field name=\"subdomain\"/>\n"
+"                    <field name=\"state\"/>\n"
+"                </search>\n"
+"            "
+
+#. module: web_hosting
+#: model:ir.ui.view,arch_db:web_hosting.view_web_hosting_server_tree
+msgid "<?xml version=\"1.0\"?>\n"
+"<tree>\n"
+"                    <field name=\"name\"/>\n"
+"                    <field name=\"ip\"/>\n"
+"                </tree>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<tree>\n"
+"                    <field name=\"name\"/>\n"
+"                    <field name=\"ip\"/>\n"
+"                </tree>\n"
+"            "
+
+#. module: web_hosting
+#: model:ir.ui.view,arch_db:web_hosting.view_web_hosting_domain_tree
+msgid "<?xml version=\"1.0\"?>\n"
+"<tree>\n"
+"                    <field name=\"name\"/>\n"
+"                    <field name=\"start_date\"/>\n"
+"                    <field name=\"server_id\"/>\n"
+"                    <field name=\"free\"/>\n"
+"                    <field name=\"subdomain\"/>\n"
+"                    <field name=\"state\"/>\n"
+"\n"
+"                </tree>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<tree>\n"
+"                    <field name=\"name\"/>\n"
+"                    <field name=\"start_date\"/>\n"
+"                    <field name=\"server_id\"/>\n"
+"                    <field name=\"free\"/>\n"
+"                    <field name=\"subdomain\"/>\n"
+"                    <field name=\"state\"/>\n"
+"\n"
+"                </tree>\n"
+"            "
+
+#. module: web_hosting
+#: model:ir.ui.view,arch_db:web_hosting.view_web_hosting_plan_tree
+msgid "<?xml version=\"1.0\"?>\n"
+"<tree>\n"
+"                    <field name=\"product_id\"/>\n"
+"                    <field name=\"period\"/>\n"
+"                    <field name=\"start_date\"/>\n"
+"                    <field name=\"due_date\"/>\n"
+"                    <field name=\"state\"/>\n"
+"                </tree>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<tree>\n"
+"                    <field name=\"product_id\"/>\n"
+"                    <field name=\"period\"/>\n"
+"                    <field name=\"start_date\"/>\n"
+"                    <field name=\"due_date\"/>\n"
+"                    <field name=\"state\"/>\n"
+"                </tree>\n"
+"            "
+
+#. module: web_hosting
+#: model:ir.ui.view,arch_db:web_hosting.product_template_form_view_inherit
+msgid "<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//div[@name='options']\" position=\"inside\">\n"
+"                        <div>\n"
+"                            <field name=\"web_hosting\"/>\n"
+"                            <label for=\"web_hosting\"/>\n"
+"                        </div>\n"
+"                    </xpath>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//div[@name='options']\" position=\"inside\">\n"
+"                        <div>\n"
+"                            <field name=\"web_hosting\"/>\n"
+"                            <label for=\"web_hosting\"/>\n"
+"                        </div>\n"
+"                    </xpath>\n"
+"            "
+
+#. module: web_hosting
+#: model:ir.actions.act_window,help:web_hosting.web_hosting_domain_action
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to add a Domain.\n"
+"              </p>\n"
+"\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to add a Domain.\n"
+"              </p>\n"
+"\n"
+"            "
+
+#. module: web_hosting
+#: model:ir.actions.act_window,help:web_hosting.web_hosting_plan_action
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to add a plan.\n"
+"              </p>\n"
+"\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to add a plan.\n"
+"              </p>\n"
+"\n"
+"            "
+
+#. module: web_hosting
+#: model:ir.actions.act_window,help:web_hosting.web_hosting_server_action
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to add a server.\n"
+"              </p>\n"
+"\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to add a server.\n"
+"              </p>\n"
+"\n"
+"            "
+
+#. module: web_hosting
+#: selection:web.hosting.plan,period:0
+msgid "Annual"
+msgstr "Anual"
+
+#. module: web_hosting
+#: model:ir.ui.menu,name:web_hosting.menu_web_hosting_configuration
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_create_uid
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_plan_create_uid
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_server_create_uid
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_subdomain_create_uid
+#: field:web.hosting.domain,create_uid:0
+#: field:web.hosting.plan,create_uid:0
+#: field:web.hosting.server,create_uid:0
+#: field:web.hosting.subdomain,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_create_date
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_plan_create_date
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_server_create_date
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_subdomain_create_date
+#: field:web.hosting.domain,create_date:0
+#: field:web.hosting.plan,create_date:0
+#: field:web.hosting.server,create_date:0
+#: field:web.hosting.subdomain,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_product_product_taxes_id
+#: field:product.product,taxes_id:0
+msgid "Customer Taxes"
+msgstr "Impuestos cliente"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_display_name
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_plan_display_name
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_server_display_name
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_subdomain_display_name
+#: field:web.hosting.domain,display_name:0
+#: field:web.hosting.plan,display_name:0
+#: field:web.hosting.server,display_name:0
+#: field:web.hosting.subdomain,display_name:0
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: web_hosting
+#: model:ir.actions.act_window,name:web_hosting.web_hosting_domain_action
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_plan_domain_id
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_subdomain_domain_id
+#: model:ir.ui.menu,name:web_hosting.menu_web_hosting_domain
+#: field:web.hosting.plan,domain_id:0
+#: field:web.hosting.subdomain,domain_id:0
+msgid "Domain"
+msgstr "Dominio"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_server_domain_ids
+#: field:web.hosting.server,domain_ids:0
+msgid "Domains"
+msgstr "Dominios"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_plan_due_date
+#: field:web.hosting.plan,due_date:0
+msgid "Due Date"
+msgstr "Fecha vencimiento"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_product_product_property_account_expense_id
+#: field:product.product,property_account_expense_id:0
+msgid "Expense Account"
+msgstr "Cuenta de gastos"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_free
+#: field:web.hosting.domain,free:0
+msgid "Free"
+msgstr "Gratis"
+
+#. module: web_hosting
+#: model:ir.module.category,description:web_hosting.module_web_hosting
+msgid "Helps you manage your institutes different-different users."
+msgstr "Helps you manage your institutes different-different users."
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_id
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_plan_id
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_server_id
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_subdomain_id
+#: field:web.hosting.domain,id:0
+#: field:web.hosting.plan,id:0
+#: field:web.hosting.server,id:0
+#: field:web.hosting.subdomain,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_product_product_property_account_income_id
+#: field:product.product,property_account_income_id:0
+msgid "Income Account"
+msgstr "Cuenta de ingresos"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_server_ip
+#: field:web.hosting.server,ip:0
+msgid "Ip"
+msgstr "IP"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain___last_update
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_plan___last_update
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_server___last_update
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_subdomain___last_update
+#: field:web.hosting.domain,__last_update:0
+#: field:web.hosting.plan,__last_update:0
+#: field:web.hosting.server,__last_update:0
+#: field:web.hosting.subdomain,__last_update:0
+msgid "Last Modified on"
+msgstr "Última Modifiación en"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_write_uid
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_plan_write_uid
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_server_write_uid
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_subdomain_write_uid
+#: field:web.hosting.domain,write_uid:0
+#: field:web.hosting.plan,write_uid:0
+#: field:web.hosting.server,write_uid:0
+#: field:web.hosting.subdomain,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_write_date
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_plan_write_date
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_server_write_date
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_subdomain_write_date
+#: field:web.hosting.domain,write_date:0
+#: field:web.hosting.plan,write_date:0
+#: field:web.hosting.server,write_date:0
+#: field:web.hosting.subdomain,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_name
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_server_name
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_subdomain_name
+#: field:web.hosting.domain,name:0
+#: field:web.hosting.server,name:0
+#: field:web.hosting.subdomain,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: web_hosting
+#: selection:web.hosting.plan,state:0
+msgid "Paid"
+msgstr "Pagado"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_partner_id
+#: field:web.hosting.domain,partner_id:0
+msgid "Partner"
+msgstr "Contacto"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_password
+#: field:web.hosting.domain,password:0
+msgid "Password"
+msgstr "Contraseña"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_plan_period
+#: field:web.hosting.plan,period:0
+msgid "Period"
+msgstr "Periodo"
+
+#. module: web_hosting
+#: model:product.template,name:web_hosting.plan2_product_template
+msgid "Plan 1 GB"
+msgstr "Plan 1 GB"
+
+#. module: web_hosting
+#: model:product.template,name:web_hosting.plan3_product_template
+msgid "Plan 2 GB"
+msgstr "Plan 2 GB"
+
+#. module: web_hosting
+#: model:product.template,name:web_hosting.plan1_product_template
+msgid "Plan 512 MB"
+msgstr "Plan 512 MB"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_plan_ids
+#: field:web.hosting.domain,plan_ids:0
+msgid "Plans"
+msgstr "Planes"
+
+#. module: web_hosting
+#: model:ir.model,name:web_hosting.model_product_product
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_plan_product_id
+#: field:web.hosting.plan,product_id:0
+msgid "Product"
+msgstr "Producto"
+
+#. module: web_hosting
+#: model:ir.model,name:web_hosting.model_product_template
+msgid "Product Template"
+msgstr "Plantilla producto"
+
+#. module: web_hosting
+#: model:ir.actions.act_window,name:web_hosting.web_hosting_server_action
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_server_id
+#: model:ir.ui.menu,name:web_hosting.menu_web_hosting_server
+#: field:web.hosting.domain,server_id:0
+msgid "Server"
+msgstr "Servidor"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_start_date
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_plan_start_date
+#: field:web.hosting.domain,start_date:0
+#: field:web.hosting.plan,start_date:0
+msgid "Start Date"
+msgstr "Fecha inicial"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_state
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_plan_state
+#: field:web.hosting.domain,state:0
+#: field:web.hosting.plan,state:0
+msgid "State"
+msgstr "Estado"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_subdomain_ids
+#: field:web.hosting.domain,subdomain_ids:0
+msgid "Sub domains"
+msgstr "Sub dominios"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_web_hosting_domain_subdomain
+#: field:web.hosting.domain,subdomain:0
+msgid "Subdomain"
+msgstr "Subdominio"
+
+#. module: web_hosting
+#: model:ir.model.fields,help:web_hosting.field_product_product_property_account_expense_id
+#: help:product.product,property_account_expense_id:0
+msgid "This account will be used for invoices instead of the default one to value expenses for the current product."
+msgstr "Esta cuenta se utilizará en facturas, en lugar de la cuenta por defecto, para valorar gastos de este producto."
+
+#. module: web_hosting
+#: model:ir.model.fields,help:web_hosting.field_product_product_property_account_income_id
+#: help:product.product,property_account_income_id:0
+msgid "This account will be used for invoices instead of the default one to value sales for the current product."
+msgstr "Esta cuenta se utilizará en facturas, en lugar de la cuenta por defecto, para valorar las ventas de este producto."
+
+#. module: web_hosting
+#: selection:web.hosting.plan,state:0
+msgid "Unpaid"
+msgstr "No Pagado"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_product_product_supplier_taxes_id
+#: field:product.product,supplier_taxes_id:0
+msgid "Vendor Taxes"
+msgstr "Impuestos de proveedor"
+
+#. module: web_hosting
+#: model:ir.module.category,name:web_hosting.module_web_hosting
+#: model:ir.ui.menu,name:web_hosting.menu_web_hosting
+#: model:res.groups,name:web_hosting.group_web_hosting
+msgid "Web Hosting"
+msgstr "Web Hosting"
+
+#. module: web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_product_product_web_hosting
+#: model:ir.model.fields,field_description:web_hosting.field_product_template_web_hosting
+#: field:product.product,web_hosting:0
+#: field:product.template,web_hosting:0
+msgid "Web hosting"
+msgstr "Web hosting"
+
+#. module: web_hosting
+#: model:ir.actions.act_window,name:web_hosting.web_hosting_plan_action
+msgid "plan"
+msgstr "Plan"
+

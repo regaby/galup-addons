@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>    
+
+        <record model="ir.ui.view" id="view_web_hosting_domain_tree">
+            <field name="name">view.web.hosting.domain.tree</field>
+            <field name="model">web.hosting.domain</field>
+            <field name="arch" type="xml">
+                <tree colors="green:state=='free';red:state=='unpaid'">
+                    <field name="name"/>
+                    <field name="start_date"/>
+                    <field name="server_id"/>
+                    <field name="free"/>
+                    <field name="subdomain"/>
+                    <field name="state"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_web_hosting_domain_form">
+            <field name='name'>view.web.hosting.domain.form</field>
+            <field name="model">web.hosting.domain</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" clickable="True" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" />
+                                <field name="start_date" />
+                                <field name="server_id"/>
+                                <field name="partner_id"/>
+                            </group>
+                            <group>
+                                <field name="password" />
+                                <field name="free"/>
+                                <field name="subdomain"/>
+                            </group>
+                        </group>
+                        <group name="plans" string="Plans" attrs="{'invisible':[('free','=',True)]}">
+                            <field name="plan_ids" nolabel="1" />
+                        </group>
+                        <group name="subdomains" string="Sub Domains" attrs="{'invisible':[('subdomain','=',False)]}">
+                            <field name="subdomain_ids" nolabel="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_web_hosting_domain_search">
+            <field name="name">view.web.hosting.domain.search</field>
+            <field name="model">web.hosting.domain</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="start_date"/>
+                    <field name="server_id"/>
+                    <field name="free"/>
+                    <field name="subdomain"/>
+                    <field name="state"/>
+                </search>
+            </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="web_hosting_domain_action">
+            <field name="name">Domain</field>
+            <field name="res_model">web.hosting.domain</field>
+            <field name="view_mode">tree,form,search</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a Domain.
+              </p>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

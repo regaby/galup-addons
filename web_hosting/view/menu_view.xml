@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- menus -->
+
+        <menuitem name="Web Hosting" id="menu_web_hosting"  />
+
+        <menuitem id="menu_web_hosting_domain" parent="menu_web_hosting" action="web_hosting_domain_action" />
+
+
+        <menuitem name="Configuration" id="menu_web_hosting_configuration"  parent="menu_web_hosting" sequence="100"/>
+
+        <menuitem id="menu_web_hosting_server" parent="menu_web_hosting_configuration" action="web_hosting_server_action" />
+
+
+    </data>
+</openerp>

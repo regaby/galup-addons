@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>    
+
+        <record model="ir.ui.view" id="view_web_hosting_plan_tree">
+            <field name="name">view.web.hosting.plan.tree</field>
+            <field name="model">web.hosting.plan</field>
+            <field name="arch" type="xml">
+                <tree colors="red:state=='unpaid'">
+                    <field name="product_id"/>
+                    <field name="period"/>
+                    <field name="start_date"/>
+                    <field name="due_date"/>
+                    <field name="paid_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_web_hosting_plan_form">
+            <field name='name'>view.web.hosting.plan.form</field>
+            <field name="model">web.hosting.plan</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="product_id"/>
+                            <field name="period"/>
+                            <field name="start_date"/>
+                            <field name="due_date"/>
+                            <field name="paid_date"/>
+                            <field name="state"/>
+                        </group>
+                        
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="web_hosting_plan_action">
+            <field name="name">plan</field>
+            <field name="res_model">web.hosting.plan</field>
+            <field name="view_mode">tree,form,search</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a plan.
+              </p>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

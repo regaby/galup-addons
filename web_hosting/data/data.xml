@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+    <openerp>
+        <data noupdate="0">
+            <record model="product.product" id="plan1">
+                <field name="name">Plan 512 MB</field>
+                <field name="code">512MB</field>
+                <field name="type">service</field>
+                <field name="web_hosting">True</field>
+                <field name="list_price">600</field>
+            </record>
+
+            <record model="product.product" id="plan2">
+                <field name="name">Plan 1 GB</field>
+                <field name="code">1GB</field>
+                <field name="type">service</field>
+                <field name="web_hosting">True</field>
+                <field name="list_price">600</field>
+            </record>
+
+            <record model="product.product" id="plan3">
+                <field name="name">Plan 2 GB</field>
+                <field name="code">2GB</field>
+                <field name="type">service</field>
+                <field name="web_hosting">True</field>
+                <field name="list_price">1200</field>
+            </record>
+            
+        </data>
+    </openerp>
