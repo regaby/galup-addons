@@ -1,0 +1,498 @@
+<?xml version="1.0"?>
+    <openerp>
+        <data noupdate="1">
+            <!-- Title Delete-->
+            <delete id="base.res_partner_title_madam" model="res.partner.title"></delete>
+            <delete id="base.res_partner_title_miss" model="res.partner.title"></delete>
+            <delete id="base.res_partner_title_sir" model="res.partner.title"></delete>
+            <delete id="base.res_partner_title_mister" model="res.partner.title"></delete>
+            <delete id="base.res_partner_title_doctor" model="res.partner.title"></delete>
+            <delete id="base.res_partner_title_prof" model="res.partner.title"></delete>
+        </data>
+        <data noupdate="1">
+            <!-- Category Data-->
+            <record model="sigvat.payroll.category" id="cat1">
+                <field name="name">MAES A</field>
+                <field name="code">1</field>
+            </record>
+            <record model="sigvat.payroll.category" id="cat2">
+                <field name="name">AUX."B"</field> 
+                <field name="code">2</field>
+            </record>
+            <record model="sigvat.payroll.category" id="cat3">
+                <field name="name">AUX.Espec "B"</field>
+                <field name="code">3</field> 
+            </record>
+            <!-- Concept type Data-->
+            <record model="sigvat.payroll.concept.type" id="type1">
+                <field name="code">HRE</field> 
+                <field name="name">Haber Remunerativo</field> 
+            </record>
+            <record model="sigvat.payroll.concept.type" id="type2">
+                <field name="code">HNR</field> 
+                <field name="name">Haber No Remunerativo</field> 
+            </record>
+            <record model="sigvat.payroll.concept.type" id="type3">
+                <field name="code">DED</field> 
+                <field name="name">Deducción</field> 
+            </record>
+            <!-- Concept Data-->
+            <record model="sigvat.payroll.concept" id="conc1">
+                <field name="code">HRE.01</field> 
+                <field name="name">Sueldo</field> 
+                <field name="sequence">1</field> 
+                <field name="type_id" ref="type1"/>
+            </record>
+            <record model="sigvat.payroll.concept" id="conc2">
+                <field name="code">HRE.02</field> 
+                <field name="name">Presentismo</field> 
+                <field name="sequence">2</field> 
+                <field name="type_id" ref="type1"/>
+            </record>
+            <record model="sigvat.payroll.concept" id="conc3">
+                <field name="code">HNR.01</field> 
+                <field name="name">Aguinaldo</field> 
+                <field name="sequence">3</field> 
+                <field name="type_id" ref="type2"/>
+            </record>
+            <record model="sigvat.payroll.concept" id="conc4">
+                <field name="code">HNR.02</field> 
+                <field name="name">Antigüedad</field> 
+                <field name="sequence">4</field> 
+                <field name="type_id" ref="type2"/>
+            </record>
+            <record model="sigvat.payroll.concept" id="conc5">
+                <field name="code">DED.01</field> 
+                <field name="name">Jubilación 11%</field> 
+                <field name="sequence">5</field> 
+                <field name="type_id" ref="type3"/>
+            </record>
+            <record model="sigvat.payroll.concept" id="conc6">
+                <field name="code">DED.02</field> 
+                <field name="name">Jubilación 3%</field> 
+                <field name="sequence">6</field> 
+                <field name="type_id" ref="type3"/>
+            </record>
+            <record model="sigvat.payroll.concept" id="conc7">
+                <field name="code">DED.03</field> 
+                <field name="name">Obra Social</field> 
+                <field name="sequence">7</field> 
+                <field name="type_id" ref="type3"/>
+            </record>
+            <record model="sigvat.payroll.concept" id="conc8">
+                <field name="code">DED.04</field> 
+                <field name="name">FAECYS</field> 
+                <field name="sequence">8</field> 
+                <field name="type_id" ref="type3"/>
+            </record>
+            <!-- Title Data-->
+            <record id="title_1" model="res.partner.title">
+            	<field name="name">IVA Responsable Inscripto</field>
+            	<field name="shortcut">RI</field>
+        	</record>
+        	<record id="title_2" model="res.partner.title">
+            	<field name="name">IVA Responsable no Inscripto</field>
+            	<field name="shortcut">Cod. 2</field>
+        	</record>
+        	<record id="title_3" model="res.partner.title">
+            	<field name="name">IVA no Responsable</field>
+            	<field name="shortcut">Cod. 3</field>
+        	</record>
+        	<record id="title_4" model="res.partner.title">
+            	<field name="name">IVA Sujeto Exento</field>
+            	<field name="shortcut">Cod. 4</field>
+        	</record>
+        	<record id="title_5" model="res.partner.title">
+            	<field name="name">Consumidor Final</field>
+            	<field name="shortcut">Cod. 5</field>
+        	</record>
+        	<record id="title_6" model="res.partner.title">
+            	<field name="name">Responsable Monotributo</field>
+            	<field name="shortcut">Cod. 6</field>
+        	</record>
+        	<record id="title_7" model="res.partner.title">
+            	<field name="name">Sujeto no Categorizado</field>
+            	<field name="shortcut">Cod. 7</field>
+        	</record>
+        	<record id="title_8" model="res.partner.title">
+            	<field name="name">Proveedor del Exterior</field>
+            	<field name="shortcut">Cod. 8</field>
+        	</record>
+        	<record id="title_9" model="res.partner.title">
+            	<field name="name">Cliente del Exterior</field>
+            	<field name="shortcut">Cod. 9</field>
+        	</record>
+        	<record id="title_10" model="res.partner.title">
+            	<field name="name">IVA Liberado – Ley Nº 19.640</field>
+            	<field name="shortcut">Cod. 10</field>
+        	</record>
+        	<record id="title_11" model="res.partner.title">
+            	<field name="name">IVA Responsable Inscripto – Agente de Percepción</field>
+            	<field name="shortcut">Cod. 11</field>
+        	</record>
+        	<record id="title_12" model="res.partner.title">
+            	<field name="name">Pequeño Contribuyente Eventual</field>
+            	<field name="shortcut">Cod. 12</field>
+        	</record>
+        	<record id="title_13" model="res.partner.title">
+            	<field name="name">Monotributista Social</field>
+            	<field name="shortcut">Cod. 13</field>
+        	</record>
+        	<record id="title_14" model="res.partner.title">
+            	<field name="name">Pequeño Contribuyente Eventual Social</field>
+            	<field name="shortcut">Cod. 14</field>
+        	</record>
+            <!-- Voucher Type Data-->
+            <record id="VoucherType1" model="sigvat.voucher.type">
+                <field name="name">FACTURA A</field>
+                <field name="cod">001</field>
+            </record>
+            <record id="VoucherType2" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE DEBITO A</field>
+                <field name="cod">002</field>
+            </record>
+            <record id="VoucherType3" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE CREDITO A</field>
+                <field name="cod">003</field>
+            </record>
+            <record id="VoucherType4" model="sigvat.voucher.type">
+                <field name="name">RECIBOS A</field>
+                <field name="cod">004</field>
+            </record>
+            <record id="VoucherType5" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE VENTA AL CONTADO A</field>
+                <field name="cod">005</field>
+            </record>
+            <record id="VoucherType6" model="sigvat.voucher.type">
+                <field name="name">FACTURAS B</field>
+                <field name="cod">006</field>
+            </record>
+            <record id="VoucherType7" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE DEBITO B</field>
+                <field name="cod">007</field>
+            </record>
+            <record id="VoucherType8" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE CREDITO B</field>
+                <field name="cod">008</field>
+            </record>
+            <record id="VoucherType9" model="sigvat.voucher.type">
+                <field name="name">RECIBOS B</field>
+                <field name="cod">009</field>
+            </record>
+            <record id="VoucherType10" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE VENTA AL CONTADO B</field>
+                <field name="cod">010</field>
+            </record>
+            <record id="VoucherType11" model="sigvat.voucher.type">
+                <field name="name">FACTURAS C</field>
+                <field name="cod">011</field>
+            </record>
+            <record id="VoucherType12" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE DEBITO C</field>
+                <field name="cod">012</field>
+            </record>
+            <record id="VoucherType13" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE CREDITO C</field>
+                <field name="cod">013</field>
+            </record>
+            <record id="VoucherType15" model="sigvat.voucher.type">
+                <field name="name">RECIBOS C</field>
+                <field name="cod">015</field>
+            </record>
+            <record id="VoucherType16" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE VENTA AL CONTADO C</field>
+                <field name="cod">016</field>
+            </record>
+            <record id="VoucherType17" model="sigvat.voucher.type">
+                <field name="name">LIQUIDACION DE SERVICIOS PUBLICOS CLASE A</field>
+                <field name="cod">017</field>
+            </record>
+            <record id="VoucherType18" model="sigvat.voucher.type">
+                <field name="name">LIQUIDACION DE SERVICIOS PUBLICOS CLASE B</field>
+                <field name="cod">018</field>
+            </record>
+            <record id="VoucherType19" model="sigvat.voucher.type">
+                <field name="name">FACTURAS DE EXPORTACION</field>
+                <field name="cod">019</field>
+            </record>
+             <record id="VoucherType20" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE DEBITO POR OPERACIONES CON EL EXTERIOR</field>
+                <field name="cod">020</field>
+            </record>
+            <record id="VoucherType21" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE CREDITO POR OPERACIONES CON EL EXTERIOR</field>
+                <field name="cod">021</field>
+            </record>
+            <record id="VoucherType22" model="sigvat.voucher.type">
+                <field name="name">FACTURAS - PERMISO EXPORTACION SIMPLIFICADO - DTO. 855/97</field>
+                <field name="cod">022</field>
+            </record>
+            <record id="VoucherType23" model="sigvat.voucher.type">
+                <field name="name">COMPROBANTES “A” DE COMPRA PRIMARIA PARA EL SECTOR PESQUERO MARITIMO</field>
+                <field name="cod">023</field>
+            </record>
+            <record id="VoucherType24" model="sigvat.voucher.type">
+                <field name="name">COMPROBANTES “A” DE CONSIGNACION PRIMARIA PARA EL SECTOR PESQUERO MARITIMO</field>
+                <field name="cod">024</field>
+            </record>
+            <record id="VoucherType25" model="sigvat.voucher.type">
+                <field name="name">COMPROBANTES “B” DE COMPRA PRIMARIA PARA EL SECTOR PESQUERO MARITIMO</field>
+                <field name="cod">025</field>
+            </record>
+            <record id="VoucherType26" model="sigvat.voucher.type">
+                <field name="name">COMPROBANTES “B” DE CONSIGNACION PRIMARIA PARA EL SECTOR PESQUERO MARITIMO</field>
+                <field name="cod">026</field>
+            </record>
+            <record id="VoucherType27" model="sigvat.voucher.type">
+                <field name="name">LIQUIDACION UNICA COMERCIAL IMPOSITIVA CLASE A</field>
+                <field name="cod">027</field>
+            </record>
+            <record id="VoucherType28" model="sigvat.voucher.type">
+                <field name="name">LIQUIDACION UNICA COMERCIAL IMPOSITIVA CLASE B</field>
+                <field name="cod">028</field>
+            </record>
+            <record id="VoucherType29" model="sigvat.voucher.type">
+                <field name="name">LIQUIDACION UNICA COMERCIAL IMPOSITIVA CLASE C</field>
+                <field name="cod">029</field>
+            </record>
+            <record id="VoucherType30" model="sigvat.voucher.type">
+                <field name="name">COMPROBANTES DE COMPRA DE BIENES USADOS</field>
+                <field name="cod">030</field>
+            </record>
+            <record id="VoucherType31" model="sigvat.voucher.type">
+                <field name="name">MANDATO - CONSIGNACION</field>
+                <field name="cod">031</field>
+            </record>
+            <record id="VoucherType32" model="sigvat.voucher.type">
+                <field name="name">COMPROBANTES PARA RECICLAR MATERIALES</field>
+                <field name="cod">032</field>
+            </record>
+            <record id="VoucherType33" model="sigvat.voucher.type">
+                <field name="name">LIQUIDACION PRIMARIA DE GRANOS</field>
+                <field name="cod">033</field>
+            </record>
+            <record id="VoucherType34" model="sigvat.voucher.type">
+                <field name="name">COMPROBANTES A DEL APARTADO A  INCISO F)  R.G. N°  1415</field>
+                <field name="cod">034</field>
+            </record>
+            <record id="VoucherType35" model="sigvat.voucher.type">
+                <field name="name">COMPROBANTES B DEL ANEXO I, APARTADO A, INC. F), R.G. N° 1415</field>
+                <field name="cod">035</field>
+            </record>
+            <record id="VoucherType36" model="sigvat.voucher.type">
+                <field name="name">COMPROBANTES C DEL Anexo I, Apartado A, INC.F), R.G. N° 1415</field>
+                <field name="cod">036</field>
+            </record>
+            <record id="VoucherType37" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE DEBITO O DOCUMENTO EQUIVALENTE QUE CUMPLAN CON LA R.G. N° 1415</field>
+                <field name="cod">037</field>
+            </record>
+            <record id="VoucherType38" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE CREDITO O DOCUMENTO EQUIVALENTE QUE CUMPLAN CON LA R.G. N° 1415</field>
+                <field name="cod">038</field>
+            </record>
+            <record id="VoucherType39" model="sigvat.voucher.type">
+                <field name="name">OTROS COMPROBANTES A QUE CUMPLEN CON LA R G  1415</field>
+                <field name="cod">039</field>
+            </record>
+            <record id="VoucherType40" model="sigvat.voucher.type">
+                <field name="name">OTROS COMPROBANTES B QUE CUMPLAN CON LA R.G. N° 1415</field>
+                <field name="cod">040</field>
+            </record>
+            <record id="VoucherType41" model="sigvat.voucher.type">
+                <field name="name">OTROS COMPROBANTES C QUE CUMPLAN CON LA R.G. N° 1415</field>
+                <field name="cod">041</field>
+            </record>
+            <record id="VoucherType43" model="sigvat.voucher.type">
+                <field name="name">NOTA DE CREDITO LIQUIDACION UNICA COMERCIAL IMPOSITIVA CLASE B</field>
+                <field name="cod">043</field>
+            </record>
+            <record id="VoucherType44" model="sigvat.voucher.type">
+                <field name="name">NOTA DE CREDITO LIQUIDACION UNICA COMERCIAL IMPOSITIVA CLASE C</field>
+                <field name="cod">044</field>
+            </record>
+            <record id="VoucherType45" model="sigvat.voucher.type">
+                <field name="name">NOTA DE DEBITO LIQUIDACION UNICA COMERCIAL IMPOSITIVA CLASE A</field>
+                <field name="cod">045</field>
+            </record>
+            <record id="VoucherType46" model="sigvat.voucher.type">
+                <field name="name">NOTA DE DEBITO LIQUIDACION UNICA COMERCIAL IMPOSITIVA CLASE B</field>
+                <field name="cod">046</field>
+            </record>
+            <record id="VoucherType47" model="sigvat.voucher.type">
+                <field name="name">NOTA DE DEBITO LIQUIDACION UNICA COMERCIAL IMPOSITIVA CLASE C</field>
+                <field name="cod">047</field>
+            </record>
+            <record id="VoucherType48" model="sigvat.voucher.type">
+                <field name="name">NOTA DE CREDITO LIQUIDACION UNICA COMERCIAL IMPOSITIVA CLASE A</field>
+                <field name="cod">048</field>
+            </record>
+            <record id="VoucherType49" model="sigvat.voucher.type">
+                <field name="name">COMPROBANTES DE COMPRA DE BIENES NO REGISTRABLES A CONSUMIDORES FINALES</field>
+                <field name="cod">049</field>
+            </record>
+            <record id="VoucherType50" model="sigvat.voucher.type">
+                <field name="name">RECIBO FACTURA A  REGIMEN DE FACTURA DE CREDITO </field>
+                <field name="cod">050</field>
+            </record>
+            <record id="VoucherType51" model="sigvat.voucher.type">
+                <field name="name">FACTURAS M</field>
+                <field name="cod">051</field>
+            </record>
+            <record id="VoucherType52" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE DEBITO M</field>
+                <field name="cod">052</field>
+            </record>
+            <record id="VoucherType53" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE CREDITO M</field>
+                <field name="cod">053</field>
+            </record>
+            <record id="VoucherType54" model="sigvat.voucher.type">
+                <field name="name">RECIBOS M</field>
+                <field name="cod">054</field>
+            </record>
+            <record id="VoucherType55" model="sigvat.voucher.type">
+                <field name="name">NOTAS DE VENTA AL CONTADO M</field>
+                <field name="cod">055</field>
+            </record>
+            <record id="VoucherType56" model="sigvat.voucher.type">
+                <field name="name">COMPROBANTES M DEL ANEXO I  APARTADO A  INC F) R.G. N° 1415</field>
+                <field name="cod">056</field>
+            </record>
+            <record id="VoucherType57" model="sigvat.voucher.type">
+                <field name="name">OTROS COMPROBANTES M QUE CUMPLAN CON LA R.G. N° 1415</field>
+                <field name="cod">057</field>
+            </record>
+            <record id="VoucherType58" model="sigvat.voucher.type">
+                <field name="name">CUENTAS DE VENTA Y LIQUIDO PRODUCTO M</field>
+                <field name="cod">058</field>
+            </record>
+            <record id="VoucherType59" model="sigvat.voucher.type">
+                <field name="name">LIQUIDACIONES M</field>
+                <field name="cod">059</field>
+            </record>
+            <record id="VoucherType60" model="sigvat.voucher.type">
+                <field name="name">CUENTAS DE VENTA Y LIQUIDO PRODUCTO A</field>
+                <field name="cod">060</field>
+            </record>
+            <record id="VoucherType61" model="sigvat.voucher.type">
+                <field name="name">CUENTAS DE VENTA Y LIQUIDO PRODUCTO B</field>
+                <field name="cod">061</field>
+            </record>
+            <record id="VoucherType63" model="sigvat.voucher.type">
+                <field name="name">LIQUIDACIONES A</field>
+                <field name="cod">063</field>
+            </record>
+            <record id="VoucherType64" model="sigvat.voucher.type">
+                <field name="name">LIQUIDACIONES B</field>
+                <field name="cod">064</field>
+            </record>
+            <record id="VoucherType66" model="sigvat.voucher.type">
+                <field name="name">DESPACHO DE IMPORTACION</field>
+                <field name="cod">066</field>
+            </record>
+            <record id="VoucherType68" model="sigvat.voucher.type">
+                <field name="name">LIQUIDACION C</field>
+                <field name="cod">068</field>
+            </record>
+            <record id="VoucherType70" model="sigvat.voucher.type">
+                <field name="name">RECIBOS FACTURA DE CREDITO</field>
+                <field name="cod">070</field>
+            </record>
+             <record id="VoucherType80" model="sigvat.voucher.type">
+                <field name="name">INFORME DIARIO DE CIERRE (ZETA) - CONTROLADORES FISCALES</field>
+                <field name="cod">080</field>
+            </record>
+            <record id="VoucherType81" model="sigvat.voucher.type">
+                <field name="name">TIQUE FACTURA A   </field>
+                <field name="cod">081</field>
+            </record>
+            <record id="VoucherType82" model="sigvat.voucher.type">
+                <field name="name">TIQUE FACTURA B</field>
+                <field name="cod">082</field>
+            </record>
+            <record id="VoucherType83" model="sigvat.voucher.type">
+                <field name="name">TIQUE</field>
+                <field name="cod">083</field>
+            </record>
+            <record id="VoucherType88" model="sigvat.voucher.type">
+                <field name="name">REMITO ELECTRONICO</field>
+                <field name="cod">088</field>
+            </record>
+            <record id="VoucherType89" model="sigvat.voucher.type">
+                <field name="name">RESUMEN DE DATOS</field>
+                <field name="cod">089</field>
+            </record>
+            <record id="VoucherType90" model="sigvat.voucher.type">
+                <field name="name">OTROS COMPROBANTES - DOCUMENTOS EXCEPTUADOS - NOTAS DE CREDITO</field>
+                <field name="cod">090</field>
+            </record>
+            <record id="VoucherType91" model="sigvat.voucher.type">
+                <field name="name">REMITOS R</field>
+                <field name="cod">091</field>
+            </record>
+            <record id="VoucherType99" model="sigvat.voucher.type">
+                <field name="name">OTROS COMPROBANTES QUE NO CUMPLEN O ESTÁN EXCEPTUADOS DE LA R.G. 1415 Y SUS MODIF </field>
+                <field name="cod">099</field>
+            </record>
+            <record id="VoucherType110" model="sigvat.voucher.type">
+                <field name="name">TIQUE NOTA DE CREDITO </field>
+                <field name="cod">110</field>
+            </record>
+            <record id="VoucherType111" model="sigvat.voucher.type">
+                <field name="name">TIQUE FACTURA C</field>
+                <field name="cod">111</field>
+            </record>
+            <record id="VoucherType112" model="sigvat.voucher.type">
+                <field name="name"> TIQUE NOTA DE CREDITO A</field>
+                <field name="cod">112</field>
+            </record>
+            <record id="VoucherType113" model="sigvat.voucher.type">
+                <field name="name">TIQUE NOTA DE CREDITO B</field>
+                <field name="cod">113</field>
+            </record>
+            <record id="VoucherType114" model="sigvat.voucher.type">
+                <field name="name">TIQUE NOTA DE CREDITO C</field>
+                <field name="cod">114</field>
+            </record>
+            <record id="VoucherType115" model="sigvat.voucher.type">
+                <field name="name">TIQUE NOTA DE DEBITO A</field>
+                <field name="cod">115</field>
+            </record>
+            <record id="VoucherType116" model="sigvat.voucher.type">
+                <field name="name">TIQUE NOTA DE DEBITO B</field>
+                <field name="cod">116</field>
+            </record>
+            <record id="VoucherType117" model="sigvat.voucher.type">
+                <field name="name">TIQUE NOTA DE DEBITO C</field>
+                <field name="cod">117</field>
+            </record>
+            <record id="VoucherType118" model="sigvat.voucher.type">
+                <field name="name">TIQUE FACTURA M</field>
+                <field name="cod">118</field>
+            </record>
+            <record id="VoucherType119" model="sigvat.voucher.type">
+                <field name="name">TIQUE NOTA DE CREDITO M</field>
+                <field name="cod">119</field>
+            </record>
+             <record id="VoucherType120" model="sigvat.voucher.type">
+                <field name="name">TIQUE NOTA DE DEBITO M</field>
+                <field name="cod">120</field>
+            </record>
+             <record id="VoucherType131" model="sigvat.voucher.type">
+                <field name="name">LIQUIDACION SECUNDARIA DE GRANOS</field>
+                <field name="cod">131</field>
+            </record>
+             <record id="VoucherType132" model="sigvat.voucher.type">
+                <field name="name">CERTIFICACION ELECTRONICA (GRANOS)</field>
+                <field name="cod">132</field>
+            </record>
+
+
+
+
+
+               
+            
+        </data>
+    </openerp>

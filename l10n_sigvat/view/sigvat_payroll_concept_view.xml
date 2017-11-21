@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>    
+     
+        <record model="ir.ui.view" id="view_sigvat_payroll_concept_tree">
+            <field name="name">view.sigvat.payroll.concept.tree</field>
+            <field name="model">sigvat.payroll.concept</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="sequence"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="description"/>
+                    <field name="type_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_sigvat_payroll_concept_form">
+            <field name='name'>view.sigvat.payroll.concept.form</field>
+            <field name="model">sigvat.payroll.concept</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="sequence"/>
+                            <field name="type_id"/>
+                            <field name="description"/>
+                            <field name="active"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_sigvat_payroll_concept_search">
+            <field name="name">view.sigvat.payroll.concept.search</field>
+            <field name="model">sigvat.payroll.concept</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="description"/>
+                    <field name="active"/>
+                    <field name="type_id"/>
+                    <field name="sequence"/>
+                </search>
+            </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="sigvat_payroll_concept_action">
+            <field name="name">Concept</field>
+            <field name="res_model">sigvat.payroll.concept</field>
+            <field name="view_mode">tree,form,search</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a Concept.
+              </p>
+
+            </field>
+        </record>
+
+        <menuitem id="menu_sigvat_payroll_concept" parent="menu_sigvat_configuration_payroll" action="sigvat_payroll_concept_action" />  
+
+    </data>
+</openerp>

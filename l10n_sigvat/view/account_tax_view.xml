@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>         
+         
+        <record model="ir.ui.view" id="view_sigvat_account_tax_tree">
+            <field name="name">account.tax.tree</field>
+            <field name="inherit_id" ref="account.view_tax_tree"/>
+            <field name="model">account.tax</field>
+            <field name="arch" type="xml">
+                    <field name="type_tax_use" position="after">
+                         <field name="type_tax"/>
+                    </field>    
+            </field>
+        </record>
+        		
+
+        <record model="ir.ui.view" id="view_sigvat_account_tax_form">
+            <field name='name'>account.tax.form</field>
+            <field name="inherit_id" ref="account.view_tax_form"/>
+            <field name="model">account.tax</field>
+            <field name="arch" type="xml">                    
+                    <field name="type_tax_use" position="after">
+                        <field name="type_tax" required="True"/>
+                    </field>
+                    
+            </field>
+        </record>
+        
+    </data>
+</odoo>

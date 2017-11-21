@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>         
+         <record model="ir.actions.act_window" id="sigvat_sale_line">
+            <field name="name">Vat Line</field>
+            <field name="res_model">sigvat.sale.line</field>
+            <field name="view_mode">tree,form,search</field>
+        </record>    
+        
+        <record model="ir.ui.view" id="view_sigvat_sale_line_tree">
+            <field name="name">view.sigvat.sale.line.tree</field>
+            <field name="model">sigvat.sale.line</field>
+            <field name="arch" type="xml">
+                    <tree>
+                         <field name="date"/>
+                         <field name="partner_id"/>
+                         <field name="point_of_sale"/>
+                         <field name="voucher_number"/>
+                         <field name="total_amount"/>
+                    </tree>    
+            </field>
+        </record>
+        		
+
+        <record model="ir.ui.view" id="view_sigvat_sale_line_form">
+            <field name='name'>view.sigvat.sale.line.form</field>
+            <field name="model">sigvat.sale.line</field>
+            <field name="arch" type="xml">
+                <form>                    
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="voucher_type_id" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="partner_id" domain="[('customer','=','True')]" context="{'default_customer': 'True'}"/>
+                            </group>
+                            <group string="Comprobante Nro." >
+                                <field name="point_of_sale" nolabel="1"/>
+                                <field name="voucher_number" nolabel="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="total_amount"/>
+                                <field name="vat_tax_id" domain="[('type_tax_use','=','sale'),('type_tax','=','vat')]" options="{'no_create': True, 'no_open': True}"/>
+                                <!-- <field name="municipal_tax_id" domain="[('type_tax_use','=','sale'),('type_tax','=','municipal')]" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="internal_tax_id" domain="[('type_tax_use','=','sale'),('type_tax','=','internal')]" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="vat_percep_tax_id" domain="[('type_tax_use','=','sale'),('type_tax','=','vat_percep')]" options="{'no_create': True, 'no_open': True}"/> -->
+                                <field name="gross_tax_id" domain="[('type_tax_use','=','sale'),('type_tax','=','gross')]" options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+                            <group>
+                                <field name="net_amount"/>
+                                <field name="vat_amount"/>
+                                <!-- <field name="municipal_amount"/>
+                                <field name="internal_amount"/>
+                                <field name="vat_percep_amount"/> -->
+                                <field name="gross_amount"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="currency_id" options="{'no_create': True}" groups="base.group_multi_currency"/>
+                            </group>
+                            <group>
+                                <field name="operation_code"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_sigvat_sale_line_search">
+    		<field name="name">view.sigvat.sale.line.search</field>
+    		<field name="model">sigvat.sale.line</field>
+    		<field name="arch" type="xml">
+       			 	<search name="name" position="after">
+                        <field name="partner_id"/>
+                    </search>
+    		</field>
+		</record>
+    </data>
+</openerp>

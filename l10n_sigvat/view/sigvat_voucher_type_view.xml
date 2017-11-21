@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>         
+         <record model="ir.actions.act_window" id="voucher_type_action">
+            <field name="name">Voucher Type</field>
+            <field name="res_model">sigvat.voucher.type</field>
+            <field name="view_mode">tree,form,search</field>
+        </record> 
+
+        <menuitem action="voucher_type_action" id="menu_action_voucher_type" parent="menu_sigvat_configuration" sequence="20"/>   
+        
+        <record model="ir.ui.view" id="view_voucher_type_tree">
+            <field name="name">view.voucher.type.tree</field>
+            <field name="model">sigvat.voucher.type</field>
+            <field name="arch" type="xml">
+                    <tree>
+                         <field name="cod"/>
+                         <field name="name"/>
+                    </tree>    
+            </field>
+        </record>
+        		
+
+        <record model="ir.ui.view" id="view_voucher_type_form">
+            <field name='name'>view.voucher.type.form</field>
+            <field name="model">sigvat.voucher.type</field>
+            <field name="arch" type="xml">
+                <form>                    
+                    <sheet>
+                        <group>
+                            <field name="cod"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_voucher_type_search" >
+    		<field name="name">view.voucher.type.search</field>
+    		<field name="model">sigvat.voucher.type</field>
+    		<field name="arch" type="xml">
+       			 	<search name="name" position="after">
+                        <field name="cod"/>
+                        <field name="name"/>
+                    </search>
+    		</field>
+		</record>
+
+    </data>
+</openerp>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>         
+         <record model="ir.actions.act_window" id="res_partner_action">
+            <field name="name">Partner</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form,search</field>
+        </record>    
+        
+        <record model="ir.ui.view" id="view_res_partner_tree">
+            <field name="name">view.res.partner.tree</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                    <field name="phone" position="before">
+                         <field name="cuit" string="CUIT"/>
+                    </field>    
+            </field>
+        </record>
+        		
+
+        <record model="ir.ui.view" id="view_res_partner_form">
+            <field name='name'>view.res_partner.form</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">                    
+                    <field name="website" position="before">
+                        <field name="document_type"/>
+                        <field name="cuit" string="CUIT"/>
+                        <field name="reference" attrs="{'invisible':[('customer','!=',True)],'required':[('customer','=',True)]}"/>
+                        <field name="date_start" string="Date Start" attrs="{'invisible':[('is_beneficiary','!=',True)],'required':[('is_beneficiary','=',True)]}"/> 
+                    </field>
+                    <xpath expr="/form/sheet/notebook/page/group/group/field" position="before">
+                        <field name="is_beneficiary" string="Beneficiary"/>
+                        <field name="is_employeer" string="Employeer Partner"/>
+                    </xpath>
+                    <field name="title" position="attributes">
+                         <attribute name="string">Condición</attribute>
+                    </field>
+                     <field name="title" position="before">
+                    	<field name="sigvat_category_id" attrs="{'invisible':[('is_beneficiary','!=',True)],'required':[('is_beneficiary','=',True)]}" />
+                    </field>
+                    <field name="function" position="attributes">
+                         <attribute name="invisible">True</attribute>
+                    </field>
+                    <field name="fax" position="attributes">
+                         <attribute name="invisible">True</attribute>
+                    </field>
+                    <field name="lang" position="attributes">
+                         <attribute name="invisible">True</attribute>
+                    </field>
+                    <field name="category_id" position="attributes">
+                         <attribute name="invisible">True</attribute>
+                    </field>
+                     <field name="parent_id" position="attributes">
+                         <attribute name="invisible">True</attribute>
+                    </field>
+                     <field name="company_type" position="attributes">
+                         <attribute name="invisible">True</attribute>
+                    </field>
+
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_res_partner_search" >
+    		<field name="name">view.res.partner.search</field>
+    		<field name="model">res.partner</field>
+    		<field name="inherit_id" ref="base.view_res_partner_filter"/>
+    		<field name="arch" type="xml">
+       			 	<field name="name" position="after">
+                         <field name="cuit" string="CUIT"/>
+                    </field>
+    		</field>
+		</record>
+
+        <record model="ir.actions.act_window" id="action_res_partner_invoicepartner">
+            <field name="name">Invoice Partner</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="view_res_partner_tree"/>
+            <field name="domain">[('supplier','=','True')]</field>
+            <field name="context">{'default_supplier': 'True'}</field>
+            <field name="search_view_id" ref="view_res_partner_search"/>
+            <field name="target">current</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add invoice partner.
+              </p><p>
+                Create the first invoice partner..
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_res_partner_invoicepartner" id="menu_action_res_partner_invoicepartner" parent="menu_sigvat_journal" sequence="30"/>
+
+        <record model="ir.actions.act_window" id="action_res_partner_customer">
+            <field name="name">Invoice Customer</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="view_res_partner_tree"/>
+            <field name="domain">[('customer','=','True')]</field>
+            <field name="context">{'default_customer': 'True'}</field>
+            <field name="search_view_id" ref="view_res_partner_search"/>
+            <field name="target">current</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add customer.
+              </p><p>
+                Create the first customer..
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_res_partner_customer" id="menu_action_res_partner_customer" parent="menu_sigvat_journal" sequence="40"/>
+
+        <record model="ir.actions.act_window" id="action_res_partner_employeer">
+            <field name="name">Employeer Parter</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="view_res_partner_tree"/>
+            <field name="domain">[('is_employeer','=','True')]</field>
+            <field name="context">{'default_is_employeer': 'True'}</field>
+            <field name="search_view_id" ref="view_res_partner_search"/>
+            <field name="target">current</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add employeer.
+              </p><p>
+                Create the first employeer..
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_res_partner_employeer" id="menu_action_res_partner_employeer" parent="menu_sigvat_payroll_root" sequence="30"/>
+        
+        <record model="ir.actions.act_window" id="action_res_partner_beneficiary">
+            <field name="name">Beneficiary</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="view_res_partner_tree"/>
+            <field name="domain">[('is_beneficiary','=','True')]</field>
+            <field name="context">{'default_is_beneficiary': 'True'}</field>
+            <field name="search_view_id" ref="view_res_partner_search"/>
+            <field name="target">current</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add beneficiary.
+              </p><p>
+                Create the first beneficiary..
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_res_partner_beneficiary" id="menu_action_res_partner_beneficiary" parent="menu_sigvat_payroll_root" sequence="40"/>
+    </data>
+</odoo>

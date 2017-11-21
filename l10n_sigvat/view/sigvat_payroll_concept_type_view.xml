@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>    
+     
+        <record model="ir.ui.view" id="view_sigvat_payroll_concept_type_tree">
+            <field name="name">view.sigvat.payroll.concept.type.tree</field>
+            <field name="model">sigvat.payroll.concept.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_sigvat_payroll_concept_type_form">
+            <field name='name'>view.sigvat.payroll.concept.type.form</field>
+            <field name="model">sigvat.payroll.concept.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="description"/>
+                            <field name="active"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_sigvat_payroll_concept_type_search">
+            <field name="name">view.sigvat.payroll.concept.type.search</field>
+            <field name="model">sigvat.payroll.concept.type</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="description"/>
+                    <field name="active"/>
+                </search>
+            </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="sigvat_payroll_concept_type_action">
+            <field name="name">Concept Type</field>
+            <field name="res_model">sigvat.payroll.concept.type</field>
+            <field name="view_mode">tree,form,search</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a Concept Type.
+              </p>
+
+            </field>
+        </record>
+
+        <menuitem id="menu_sigvat_payroll_concept_type" parent="menu_sigvat_configuration_payroll" action="sigvat_payroll_concept_type_action" />  
+
+    </data>
+</openerp>

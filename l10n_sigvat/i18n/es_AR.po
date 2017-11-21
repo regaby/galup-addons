@@ -1,0 +1,1055 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_sigvat
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-15 14:24+0000\n"
+"PO-Revision-Date: 2017-06-15 14:24+0000\n"
+"Last-Translator: <Rojas Pablo>\n"
+"Language-Team: Galup\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_sigvat
+#: code:addons/l10n_sigvat/model/sigvat_payroll.py:49
+#, python-format
+msgid " and %s/100"
+msgstr " y %s/100"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_category_active
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_active
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_type_active
+msgid "Active"
+msgstr "Activo"
+
+#. module: l10n_sigvat
+#: model:ir.ui.view,arch_db:l10n_sigvat.view_sigvat_payroll_form
+msgid "Additional notes..."
+msgstr "Notas adicionales..."
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line_amount
+msgid "Amount"
+msgstr "Importe"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_amount_in_words
+msgid "Amount in Words"
+msgstr "Importe en letras"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,month:0
+#: selection:sigvat.payroll,last_deposited_month:0
+#: selection:sigvat.payroll,month:0
+msgid "April"
+msgstr "Abril"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,month:0
+#: selection:sigvat.payroll,last_deposited_month:0
+#: selection:sigvat.payroll,month:0
+msgid "Augost"
+msgstr "Agosto"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,name:l10n_sigvat.action_res_partner_beneficiary
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_beneficiary_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line_beneficiary_id
+#: model:ir.ui.menu,name:l10n_sigvat.menu_action_res_partner_beneficiary
+#: model:ir.ui.view,arch_db:l10n_sigvat.view_res_partner_form
+msgid "Beneficiary"
+msgstr "Beneficiario"
+
+#. module: l10n_sigvat
+#: selection:res.partner,document_type:0
+msgid "CUIL"
+msgstr "CUIL"
+
+#. module: l10n_sigvat
+#: model:ir.ui.view,arch_db:l10n_sigvat.view_res_partner_form
+#: model:ir.ui.view,arch_db:l10n_sigvat.view_res_partner_search
+#: model:ir.ui.view,arch_db:l10n_sigvat.view_res_partner_tree
+#: selection:res.partner,document_type:0
+msgid "CUIT"
+msgstr "CUIT"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,name:l10n_sigvat.sigvat_payroll_category_action
+#: model:ir.model.fields,field_description:l10n_sigvat.field_res_partner_sigvat_category_id
+#: model:ir.ui.menu,name:l10n_sigvat.menu_sigvat_payroll_category
+msgid "Category"
+msgstr "Categoría"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.sigvat_payroll_category_action
+msgid "Click to add a Category."
+msgstr "Clic para agregar una Categoría."
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.sigvat_payroll_concept_type_action
+msgid "Click to add a Concept Type."
+msgstr "Clic para agregar un Tipo de Concepto."
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.sigvat_payroll_concept_action
+msgid "Click to add a Concept."
+msgstr "Clic para agregar un Concepto."
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.sigvat_payroll_line_action
+msgid "Click to add a Payroll Line."
+msgstr "Clic para agregar una línea de Recibo."
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.sigvat_payroll_action
+msgid "Click to add a Payroll."
+msgstr "Clic para agregar un Recibo."
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.action_res_partner_beneficiary
+msgid "Click to add beneficiary."
+msgstr "Clic para agregar un Beneficiario."
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.action_res_partner_employeer
+msgid "Click to add employeer."
+msgstr "Clic para agregar un Empleado."
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.action_res_partner_invoicepartner
+msgid "Click to add invoice partner."
+msgstr "Clic para agregar un Proveedor de Factura."
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.action_sigvat_journal_purchase
+msgid "Click to add vat purchase journal"
+msgstr "Clic agregar Diario IVA Compra"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.action_sigvat_journal_sale
+msgid "Click to add vat sale journal"
+msgstr "Clic para agregar Diario IVA Venta"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,name:l10n_sigvat.title_9
+msgid "Cliente del Exterior"
+msgstr "Cliente del Exterior"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,shortcut:l10n_sigvat.title_1
+msgid "Cod. 1"
+msgstr "Cod. 1"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,shortcut:l10n_sigvat.title_10
+msgid "Cod. 10"
+msgstr "Cod. 10"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,shortcut:l10n_sigvat.title_11
+msgid "Cod. 11"
+msgstr "Cod. 11"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,shortcut:l10n_sigvat.title_12
+msgid "Cod. 12"
+msgstr "Cod. 12"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,shortcut:l10n_sigvat.title_13
+msgid "Cod. 13"
+msgstr "Cod. 13"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,shortcut:l10n_sigvat.title_14
+msgid "Cod. 14"
+msgstr "Cod. 14"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,shortcut:l10n_sigvat.title_2
+msgid "Cod. 2"
+msgstr "Cod. 2"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,shortcut:l10n_sigvat.title_3
+msgid "Cod. 3"
+msgstr "Cod. 3"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,shortcut:l10n_sigvat.title_4
+msgid "Cod. 4"
+msgstr "Cod. 4"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,shortcut:l10n_sigvat.title_5
+msgid "Cod. 5"
+msgstr "Cod. 5"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,shortcut:l10n_sigvat.title_6
+msgid "Cod. 6"
+msgstr "Cod. 6"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,shortcut:l10n_sigvat.title_7
+msgid "Cod. 7"
+msgstr "Cod. 7"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,shortcut:l10n_sigvat.title_8
+msgid "Cod. 8"
+msgstr "Cod. 8"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,shortcut:l10n_sigvat.title_9
+msgid "Cod. 9"
+msgstr "Cod. 9"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_category_code
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_code
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_type_code
+msgid "Code"
+msgstr "Código"
+
+#. module: l10n_sigvat
+#: model:ir.ui.view,arch_db:l10n_sigvat.view_sigvat_purchase_line_form
+msgid "Comprobante Nro."
+msgstr "Comprobante Nro."
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,name:l10n_sigvat.sigvat_payroll_concept_action
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line_concept_id
+#: model:ir.ui.menu,name:l10n_sigvat.menu_sigvat_payroll_concept
+msgid "Concept"
+msgstr "Concepto"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,name:l10n_sigvat.sigvat_payroll_concept_type_action
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_type_id_3566
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line_type_id
+#: model:ir.ui.menu,name:l10n_sigvat.menu_sigvat_payroll_concept_type
+msgid "Concept Type"
+msgstr "Tipo de Concepto"
+
+#. module: l10n_sigvat
+#: model:ir.ui.view,arch_db:l10n_sigvat.view_res_partner_form
+msgid "CondiciÃ³n"
+msgstr "Condición"
+
+#. module: l10n_sigvat
+#: model:ir.ui.menu,name:l10n_sigvat.menu_sigvat_configuration
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,name:l10n_sigvat.title_5
+msgid "Consumidor Final"
+msgstr "Consumidor Final"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.action_res_partner_beneficiary
+msgid "Create the first beneficiary.."
+msgstr "Crear el primer Beneficiario..."
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.action_res_partner_employeer
+msgid "Create the first employeer.."
+msgstr "Crear el primer Empleador..."
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.action_res_partner_invoicepartner
+msgid "Create the first invoice partner.."
+msgstr "Crear el primer Proveedor de Factura..."
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.action_sigvat_journal_purchase
+msgid "Create the first vat purchase journal..."
+msgstr "Crear el primer Diario IVA Compra..."
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,help:l10n_sigvat.action_sigvat_journal_sale
+msgid "Create the first vat sale journal..."
+msgstr "Crear el primer Diario IVA Venta..."
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_create_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_category_create_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_create_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_type_create_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_create_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line_create_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_create_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_create_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_voucher_type_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_create_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_category_create_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_create_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_type_create_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_create_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line_create_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_create_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_create_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_voucher_type_create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_res_partner_cuit
+msgid "Cuit"
+msgstr "Cuit"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_currency_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: l10n_sigvat
+#: selection:res.partner,document_type:0
+msgid "DNI"
+msgstr "DNI"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: l10n_sigvat
+#: model:ir.ui.view,arch_db:l10n_sigvat.view_res_partner_form
+msgid "Date Start"
+msgstr "Fecha Inicio"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_res_partner_date_start
+msgid "Date start"
+msgstr "Fecha Inicio"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_category_description
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_description
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_type_description
+msgid "Description"
+msgstr "Descripción"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,month:0
+#: selection:sigvat.payroll,last_deposited_month:0
+#: selection:sigvat.payroll,month:0
+msgid "Dicember"
+msgstr "Diciembre"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_display_name
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_category_display_name
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_display_name
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_type_display_name
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_display_name
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line_display_name
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_display_name
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_display_name
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_voucher_type_display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_res_partner_document_type
+msgid "Document Type"
+msgstr "Tipo de Documento"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_employeer_id
+msgid "Employeer"
+msgstr "Empleador"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,name:l10n_sigvat.action_res_partner_employeer
+#: model:ir.ui.menu,name:l10n_sigvat.menu_action_res_partner_employeer
+msgid "Employeer Partner"
+msgstr "Proveedor Empleador"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line_employeer_id
+msgid "Employer"
+msgstr "Empleador"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,month:0
+#: selection:sigvat.payroll,last_deposited_month:0
+#: selection:sigvat.payroll,month:0
+msgid "February"
+msgstr "Febrero"
+
+#. module: l10n_sigvat
+#: code:addons/l10n_sigvat/wizard/sigvat_reginfo_cv.py:64
+#: code:addons/l10n_sigvat/wizard/sigvat_reginfo_cv.py:130
+#, python-format
+msgid "Generar Formulario 931"
+msgstr "Generar Formulario 931"
+
+#. module: l10n_sigvat
+#: selection:account.tax,type_tax:0
+msgid "Gross Income"
+msgstr "Ingresos Brutos"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_gross_amount
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_gross_amount
+msgid "Gross Income Amount"
+msgstr "Monto IIBB"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_gross_tax_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_gross_tax_id
+msgid "Gross Income Tax"
+msgstr "Impuesto IIBB"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_category_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_type_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_voucher_type_id
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,name:l10n_sigvat.title_10
+msgid "IVA Liberado â€“ Ley NÂº 19.640"
+msgstr "IVA Liberado â€“ Ley Nº 19.640"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,name:l10n_sigvat.title_1
+msgid "IVA Responsable Inscripto"
+msgstr "IVA Responsable Inscripto"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,name:l10n_sigvat.title_11
+msgid "IVA Responsable Inscripto â€“ Agente de PercepciÃ³n"
+msgstr "IVA Responsable Inscripto â€“ Agente de Percepción"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,name:l10n_sigvat.title_2
+msgid "IVA Responsable no Inscripto"
+msgstr "IVA Responsable no Inscripto"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,name:l10n_sigvat.title_4
+msgid "IVA Sujeto Exento"
+msgstr "IVA Sujeto Exento"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,name:l10n_sigvat.title_3
+msgid "IVA no Responsable"
+msgstr "IVA no Responsable"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_res_partner_reference
+msgid "Identification Number"
+msgstr "Número Identificatorio"
+
+#. module: l10n_sigvat
+#: selection:sigvat.purchase.line,operation_code:0
+#: selection:sigvat.sale.line,operation_code:0
+msgid "ImportaciÃ³n/ExportaciÃ³n Exterior"
+msgstr "Importación/Exportación Exterior"
+
+#. module: l10n_sigvat
+#: selection:sigvat.purchase.line,operation_code:0
+#: selection:sigvat.sale.line,operation_code:0
+msgid "ImportaciÃ³n/ExportaciÃ³n Zona Franca"
+msgstr "Importación/Exportación Zona Franca"
+
+#. module: l10n_sigvat
+#: selection:account.tax,type_tax:0
+msgid "Internal"
+msgstr "Internal"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_internal_amount
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_internal_amount
+msgid "Internal Amount"
+msgstr "Importe Interno"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_internal_tax_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_internal_tax_id
+msgid "Internal Tax"
+msgstr "Impuesto Interno"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,name:l10n_sigvat.action_res_partner_invoicepartner
+#: model:ir.ui.menu,name:l10n_sigvat.menu_action_res_partner_invoicepartner
+msgid "Invoice Partner"
+msgstr "Proveedor de Factura"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_res_partner_is_beneficiary
+msgid "Is beneficiary"
+msgstr "Es Beneficiario"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,month:0
+#: selection:sigvat.payroll,last_deposited_month:0
+#: selection:sigvat.payroll,month:0
+msgid "January"
+msgstr "Enero"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_journal_type
+msgid "Journal type"
+msgstr "Tipo de Diario"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,month:0
+#: selection:sigvat.payroll,last_deposited_month:0
+#: selection:sigvat.payroll,month:0
+msgid "July"
+msgstr "Julio"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,month:0
+#: selection:sigvat.payroll,last_deposited_month:0
+#: selection:sigvat.payroll,month:0
+msgid "June"
+msgstr "Junio"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_last_deposited_month
+msgid "Last Deposited Month"
+msgstr "Último Mes Depositado"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_last_deposited_year
+msgid "Last Deposited Year"
+msgstr "Último Año Depositado"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal___last_update
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll___last_update
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_category___last_update
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept___last_update
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_type___last_update
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line___last_update
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line___last_update
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line___last_update
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_voucher_type___last_update
+msgid "Last Modified on"
+msgstr "Última Modificación en"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_write_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_category_write_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_type_write_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_write_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line_write_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_write_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_write_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_write_uid
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_voucher_type_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_write_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_category_write_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_type_write_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_write_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line_write_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_write_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_write_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_write_date
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_voucher_type_write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: l10n_sigvat
+#: model:ir.ui.view,arch_db:l10n_sigvat.view_sigvat_payroll_form
+msgid "Lines"
+msgstr "Líneas"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,month:0
+#: selection:sigvat.payroll,last_deposited_month:0
+#: selection:sigvat.payroll,month:0
+msgid "March"
+msgstr "Marzo"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,month:0
+#: selection:sigvat.payroll,last_deposited_month:0
+#: selection:sigvat.payroll,month:0
+msgid "May"
+msgstr "Mayo"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,name:l10n_sigvat.title_13
+msgid "Monotributista Social"
+msgstr "Monotributista Social"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_month
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_month
+msgid "Month"
+msgstr "Mes"
+
+#. module: l10n_sigvat
+#: selection:account.tax,type_tax:0
+msgid "Municipal"
+msgstr "Municipal"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_municipal_amount
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_municipal_amount
+msgid "Municipal Amount"
+msgstr "Importe Municipal"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_municipal_tax_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_municipal_tax_id
+msgid "Municipal Tax"
+msgstr "Impuesto Municipal"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,no_movements:0
+#: selection:sigvat.journal,pro_cred_fiscal_comp:0
+msgid "NO"
+msgstr "NO"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_category_name
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_name
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_type_name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_net_amount
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_net_amount
+msgid "Net Amount"
+msgstr "Importe Neto"
+
+#. module: l10n_sigvat
+#: selection:sigvat.purchase.line,operation_code:0
+#: selection:sigvat.sale.line,operation_code:0
+msgid "No Alcanzado"
+msgstr "No Alcanzado"
+
+#. module: l10n_sigvat
+#: selection:sigvat.purchase.line,operation_code:0
+#: selection:sigvat.sale.line,operation_code:0
+msgid "No corresponde"
+msgstr "No corresponde"
+
+#. module: l10n_sigvat
+#: selection:sigvat.purchase.line,operation_code:0
+#: selection:sigvat.sale.line,operation_code:0
+msgid "No gravado"
+msgstr "No gravado"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_no_movements
+msgid "No movements"
+msgstr "Sin movimientos"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_notes
+msgid "Notes"
+msgstr "Notas"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,month:0
+#: selection:sigvat.payroll,last_deposited_month:0
+#: selection:sigvat.payroll,month:0
+msgid "November"
+msgstr "Noviembre"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,month:0
+#: selection:sigvat.payroll,last_deposited_month:0
+#: selection:sigvat.payroll,month:0
+msgid "October"
+msgstr "Octubre"
+
+#. module: l10n_sigvat
+#: selection:sigvat.purchase.line,operation_code:0
+#: selection:sigvat.sale.line,operation_code:0
+msgid "Operaciones de Canje"
+msgstr "Operaciones de Canje"
+
+#. module: l10n_sigvat
+#: selection:sigvat.purchase.line,operation_code:0
+#: selection:sigvat.sale.line,operation_code:0
+msgid "Operaciones exentas"
+msgstr "Operaciones exentas"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_operation_code
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_operation_code
+msgid "Operation Code"
+msgstr "Código de Operación"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,name:l10n_sigvat.res_partner_action
+#: model:ir.model,name:l10n_sigvat.model_res_partner
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_partner_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_partner_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_partner_id
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,name:l10n_sigvat.sigvat_payroll_action
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line_payroll_id
+#: model:ir.ui.menu,name:l10n_sigvat.menu_sigvat_configuration_payroll
+#: model:ir.ui.menu,name:l10n_sigvat.menu_sigvat_payroll
+#: model:ir.ui.menu,name:l10n_sigvat.menu_sigvat_payroll_root
+msgid "Payroll"
+msgstr "Recibo"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,name:l10n_sigvat.sigvat_payroll_line_action
+#: model:ir.ui.menu,name:l10n_sigvat.menu_sigvat_payroll_line
+msgid "Payroll Line"
+msgstr "Línea de Recibo"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line_ids
+msgid "Payroll Lines"
+msgstr "Líneas de Recibo"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,name:l10n_sigvat.title_12
+msgid "PequeÃ±o Contribuyente Eventual"
+msgstr "Pequeño Contribuyente Eventual"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,name:l10n_sigvat.title_14
+msgid "PequeÃ±o Contribuyente Eventual Social"
+msgstr "Pequeño Contribuyente Eventual Social"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_point_of_sale
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_point_of_sale
+msgid "Point of Sale"
+msgstr "Punto de Venta"
+
+#. module: l10n_sigvat
+#: constraint:sigvat.purchase.line:0
+#: constraint:sigvat.sale.line:0
+msgid "Point of sale must be diferent than zero."
+msgstr "Punto de venta debe ser diferente de cero."
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_pro_cred_fiscal_comp
+msgid "Prorratear CrÃ©dito Fiscal Computable"
+msgstr "Prorratear Crédito Fiscal Computable"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,name:l10n_sigvat.title_8
+msgid "Proveedor del Exterior"
+msgstr "Proveedor del Exterior"
+
+#. module: l10n_sigvat
+#: model:ir.ui.view,arch_db:l10n_sigvat.view_sigvat_journal_form
+msgid "Purchase Lines"
+msgstr "Líneas de Compra"
+
+#. module: l10n_sigvat
+#: selection:sigvat.purchase.line,operation_code:0
+#: selection:sigvat.sale.line,operation_code:0
+msgid "Reintegro Decreto 1043/2016"
+msgstr "Reintegro Decreto 1043/2016"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,name:l10n_sigvat.title_6
+msgid "Responsable Monotributo"
+msgstr "Responsable Monotributo"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,no_movements:0
+#: selection:sigvat.journal,pro_cred_fiscal_comp:0
+msgid "SI"
+msgstr "SI"
+
+#. module: l10n_sigvat
+#: model:ir.ui.view,arch_db:l10n_sigvat.view_sigvat_journal_form
+msgid "Sale Lines"
+msgstr "Líneas de Venta"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,month:0
+#: selection:sigvat.payroll,last_deposited_month:0
+#: selection:sigvat.payroll,month:0
+msgid "September"
+msgstr "Septiembre"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_sequence
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_concept_sequence
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_line_sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: l10n_sigvat
+#: model:ir.ui.menu,name:l10n_sigvat.menu_sigvat
+msgid "Sig Vat"
+msgstr "Sig IVA"
+
+#. module: l10n_sigvat
+#: selection:res.partner,document_type:0
+msgid "Sin identificar/venta global diaria"
+msgstr "Sin identificar/venta global diaria"
+
+#. module: l10n_sigvat
+#: model:res.partner.title,name:l10n_sigvat.title_7
+msgid "Sujeto no Categorizado"
+msgstr "Sujeto no Categorizado"
+
+#. module: l10n_sigvat
+#: model:ir.model,name:l10n_sigvat.model_account_tax
+msgid "Tax"
+msgstr "Impuesto"
+
+#. module: l10n_sigvat
+#: sql_constraint:res.partner:0
+msgid "The CUIT already exists"
+msgstr "El CUIT ya existe."
+
+#. module: l10n_sigvat
+#: sql_constraint:sigvat.payroll.line:0
+msgid "The Line already exists"
+msgstr "La línea ya existe."
+
+#. module: l10n_sigvat
+#: sql_constraint:sigvat.payroll.category:0
+#: sql_constraint:sigvat.payroll.concept:0
+#: sql_constraint:sigvat.payroll.concept.type:0
+msgid "The code already exists"
+msgstr "El código ya existe."
+
+#. module: l10n_sigvat
+#: sql_constraint:sigvat.payroll.category:0
+#: sql_constraint:sigvat.payroll.concept:0
+#: sql_constraint:sigvat.payroll.concept.type:0
+msgid "The name already exists"
+msgstr "El nombre ya existe."
+
+#. module: l10n_sigvat
+#: sql_constraint:sigvat.payroll.concept:0
+msgid "The sequence already exists"
+msgstr "La secuencia ya existe."
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_total_amount
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_total_amount
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_total_amount
+msgid "Total Amount"
+msgstr "Monto Total"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_total_deduction
+msgid "Total Deduction"
+msgstr "Deducción Total"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_total_gross
+msgid "Total Gross"
+msgstr "Bruto Total"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_account_tax_type_tax
+msgid "Type Tax"
+msgstr "Tipo de Impuesto"
+
+#. module: l10n_sigvat
+#: model:ir.ui.menu,name:l10n_sigvat.menu_sigvat_journal
+msgid "VAT Journal"
+msgstr "Diario IVA"
+
+#. module: l10n_sigvat
+#: selection:account.tax,type_tax:0
+msgid "Value Added Tax"
+msgstr "Impuesto Valor Agregado"
+
+#. module: l10n_sigvat
+#: selection:account.tax,type_tax:0
+msgid "Value Added Tax Perception"
+msgstr "Percepción Impuesto Valor Agregado"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_vat_amount
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_vat_amount
+msgid "Vat Amount"
+msgstr "Importe IVA"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,name:l10n_sigvat.sigvat_journal_action
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_journal_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_journal_id
+msgid "Vat Journal"
+msgstr "Diario Venta"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,name:l10n_sigvat.sigvat_purchase_line
+msgid "Vat Line"
+msgstr "Línea IVA"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_vat_percep_amount
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_vat_percep_amount
+msgid "Vat Perception Amount"
+msgstr "Monto Percepción IVA"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_vat_percep_tax_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_vat_percep_tax_id
+msgid "Vat Perception Tax"
+msgstr "Impuesto Percepción IVA"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,name:l10n_sigvat.action_sigvat_journal_purchase
+#: model:ir.ui.menu,name:l10n_sigvat.menu_action_sigvat_journal_purchase
+msgid "Vat Purchase Journal"
+msgstr "Diario IVA Compra"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_purchase_line_ids
+msgid "Vat Purchase Line"
+msgstr "Línea IVA Compra"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,name:l10n_sigvat.action_sigvat_journal_sale
+#: model:ir.ui.menu,name:l10n_sigvat.menu_action_sigvat_journal_sale
+msgid "Vat Sale Journal"
+msgstr "Diario IVA Venta"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_sale_line_ids
+msgid "Vat Sale Line"
+msgstr "Línea IVA Venta"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_vat_tax_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_vat_tax_id
+msgid "Vat Tax"
+msgstr "Impuesto IVA"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_voucher_number
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_voucher_number
+msgid "Voucher Number"
+msgstr "Número de comprobante"
+
+#. module: l10n_sigvat
+#: model:ir.actions.act_window,name:l10n_sigvat.voucher_type_action
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_purchase_line_voucher_type_id
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_sale_line_voucher_type_id
+#: model:ir.ui.menu,name:l10n_sigvat.menu_action_voucher_type
+msgid "Voucher Type"
+msgstr "Tipo de comprobante"
+
+#. module: l10n_sigvat
+#: constraint:sigvat.purchase.line:0
+#: constraint:sigvat.sale.line:0
+msgid "Voucher number must be diferent than zero."
+msgstr "Comprobante número debe ser diferente de cero."
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_journal_year
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_payroll_year
+msgid "Year"
+msgstr "Ejercicio"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_voucher_type_cod
+msgid "cod"
+msgstr "cod"
+
+#. module: l10n_sigvat
+#: model:ir.model.fields,field_description:l10n_sigvat.field_sigvat_voucher_type_name
+msgid "name"
+msgstr "Nombre"
+
+#. module: l10n_sigvat
+#: code:addons/l10n_sigvat/model/amount_to_text_es.py:106
+#, python-format
+msgid "no translation function found for lang: '%s'"
+msgstr "No hay traducción para lenguaje: '%s'"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,journal_type:0
+msgid "purchase"
+msgstr "Compra"
+
+#. module: l10n_sigvat
+#: model:ir.model,name:l10n_sigvat.model_res_partner_title
+msgid "res.partner.title"
+msgstr "res.partner.title"
+
+#. module: l10n_sigvat
+#: selection:sigvat.journal,journal_type:0
+msgid "sale"
+msgstr "Venta"
+
+#. module: l10n_sigvat
+#: model:ir.model,name:l10n_sigvat.model_sigvat_journal
+msgid "sigvat.journal"
+msgstr "sigvat.journal"
+
+#. module: l10n_sigvat
+#: model:ir.model,name:l10n_sigvat.model_sigvat_payroll
+msgid "sigvat.payroll"
+msgstr "sigvat.payroll"
+
+#. module: l10n_sigvat
+#: model:ir.model,name:l10n_sigvat.model_sigvat_payroll_category
+msgid "sigvat.payroll.category"
+msgstr "sigvat.payroll.category"
+
+#. module: l10n_sigvat
+#: model:ir.model,name:l10n_sigvat.model_sigvat_payroll_concept
+msgid "sigvat.payroll.concept"
+msgstr "sigvat.payroll.concept"
+
+#. module: l10n_sigvat
+#: model:ir.model,name:l10n_sigvat.model_sigvat_payroll_concept_type
+msgid "sigvat.payroll.concept.type"
+msgstr "sigvat.payroll.concept.type"
+
+#. module: l10n_sigvat
+#: model:ir.model,name:l10n_sigvat.model_sigvat_payroll_line
+msgid "sigvat.payroll.line"
+msgstr "sigvat.payroll.line"
+
+#. module: l10n_sigvat
+#: model:ir.model,name:l10n_sigvat.model_sigvat_purchase_line
+msgid "sigvat.purchase.line"
+msgstr "sigvat.purchase.line"
+
+#. module: l10n_sigvat
+#: model:ir.model,name:l10n_sigvat.model_sigvat_sale_line
+msgid "sigvat.sale.line"
+msgstr "sigvat.sale.line"
+
+#. module: l10n_sigvat
+#: model:ir.model,name:l10n_sigvat.model_sigvat_voucher_type
+msgid "sigvat.voucher.type"
+msgstr "sigvat.voucher.type"
+

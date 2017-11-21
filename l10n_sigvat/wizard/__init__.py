@@ -1,0 +1,1 @@
+import sigvat_reginfo_cv

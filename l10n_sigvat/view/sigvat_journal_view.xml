@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>         
+         <record model="ir.actions.act_window" id="sigvat_journal_action">
+            <field name="name">Vat Journal</field>
+            <field name="res_model">sigvat.journal</field>
+            <field name="view_mode">tree,form,search</field>
+        </record>    
+        
+        <record model="ir.ui.view" id="view_sigvat_journal_tree">
+            <field name="name">view.sigvat.journal.tree</field>
+            <field name="model">sigvat.journal</field>
+            <field name="arch" type="xml">
+                    <tree>
+                         <field name="partner_id"/>
+                         <field name="month"/>
+                         <field name="year"/>
+                    </tree>    
+            </field>
+        </record>
+        		
+
+        <record model="ir.ui.view" id="view_sigvat_journal_form">
+            <field name='name'>view.sigvat.journal.form</field>
+            <field name="model">sigvat.journal</field>
+            <field name="arch" type="xml">
+                <form>                    
+                    <sheet>
+                        <group>
+                            <field name="partner_id" domain="[('customer','=','True')]" context="{'default_customer': 'True'}"/>
+                            <field name="month"/>
+                            <field name="year"/>
+                            <field name="journal_type" invisible='1'/>
+                            <field name="sequence"/>
+                            <field name="no_movements"/>
+                            <field name="pro_cred_fiscal_comp"/>
+                        </group>
+                         <notebook colspan="10">
+                            <page string="Purchase Lines" attrs="{'invisible':[('journal_type','!=','purchase')]}">
+                               <field name="purchase_line_ids"/> 
+                            </page>
+                            <page string="Sale Lines" attrs="{'invisible':[('journal_type','!=','sale')]}">
+                               <field name="sale_line_ids"/> 
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_sigvat_journal_search" >
+    		<field name="name">view.sigvat.journal.search</field>
+    		<field name="model">sigvat.journal</field>
+    		<field name="arch" type="xml">
+       			 	<search name="name" position="after">
+                        <field name="partner_id"/>
+                        <field name="month"/>
+                        <field name="year"/>
+                    </search>
+    		</field>
+		</record>
+
+        <record model="ir.actions.act_window" id="action_sigvat_journal_sale">
+            <field name="name">Vat Sale Journal</field>
+            <field name="res_model">sigvat.journal</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="view_sigvat_journal_tree"/>
+            <field name="domain">[('journal_type','=','sale')]</field>
+            <field name="context">{'default_journal_type': 'sale'}</field>
+            <field name="search_view_id" ref="view_sigvat_journal_search"/>
+            <field name="target">current</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add vat sale journal
+              </p><p>
+                Create the first vat sale journal...
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_sigvat_journal_sale" id="menu_action_sigvat_journal_sale" parent="menu_sigvat_journal" sequence="20"/>
+
+        <record model="ir.actions.act_window" id="action_sigvat_journal_purchase">
+            <field name="name">Vat Purchase Journal</field>
+            <field name="res_model">sigvat.journal</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="view_sigvat_journal_tree"/>
+            <field name="domain">[('journal_type','=','purchase')]</field>
+            <field name="context">{'default_journal_type': 'purchase'}</field>
+            <field name="search_view_id" ref="view_sigvat_journal_search"/>
+            <field name="target">current</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add vat purchase journal
+              </p><p>
+                Create the first vat purchase journal...
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_sigvat_journal_purchase" id="menu_action_sigvat_journal_purchase" parent="menu_sigvat_journal" sequence="10"/>
+    </data>
+</openerp>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- menus -->
+
+        <menuitem name="Sig Vat" id="menu_sigvat"  />
+        <menuitem name="Payroll" id="menu_sigvat_payroll_root" parent="menu_sigvat" sequence="10"/>
+        <menuitem name="VAT Journal" id="menu_sigvat_journal" parent="menu_sigvat" sequence="20"/>
+        <menuitem name="Configuration" id="menu_sigvat_configuration" parent="menu_sigvat" sequence="30"/>
+        <menuitem name="Payroll" id="menu_sigvat_configuration_payroll" parent="menu_sigvat_configuration"/>
+
+        
+        
+
+    </data>
+</openerp>

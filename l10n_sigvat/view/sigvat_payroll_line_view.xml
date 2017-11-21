@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>    
+     
+       
+        
+          
+        
+        <record model="ir.ui.view" id="view_sigvat_payroll_line_tree">
+            <field name="name">view.sigvat.payroll.line.tree</field>
+            <field name="model">sigvat.payroll.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="employeer_id"/>
+                    <field name="beneficiary_id"/>
+                    <field name="sequence"/>
+                    <field name="concept_id" widget="selection"/>
+                    <field name="type_id"/>
+                    <field name="amount"/>
+
+
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_sigvat_payroll_line_form">
+            <field name='name'>view.sigvat.payroll.line.form</field>
+            <field name="model">sigvat.payroll.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group >
+                            <field name="payroll_id"/>
+                            <field name="employeer_id"/>
+                            <field name="beneficiary_id"/>
+                            <field name="sequence"/>
+                            <field name="concept_id" widget="selection"/>
+                            <field name="type_id"/>
+                            <field name="amount"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_sigvat_payroll_line_search">
+            <field name="name">view.sigvat.payroll.line.search</field>
+            <field name="model">sigvat.payroll.line</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="sequence"/>
+                    <field name="concept_id" widget="selection"/>
+                    <field name="type_id"/>
+                    <field name="amount"/>
+                    <field name="employeer_id"/>
+                    <field name="beneficiary_id"/>
+                </search>
+            </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="sigvat_payroll_line_action">
+            <field name="name">Payroll Line</field>
+            <field name="res_model">sigvat.payroll.line</field>
+            <field name="view_mode">tree,form,search</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a Payroll Line.
+              </p>
+
+            </field>
+        </record>
+
+        <menuitem id="menu_sigvat_payroll_line" parent="menu_sigvat_payroll_root" action="sigvat_payroll_line_action" />  
+
+    </data>
+</openerp>

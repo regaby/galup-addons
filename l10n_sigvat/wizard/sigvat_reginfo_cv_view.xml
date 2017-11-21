@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_sigvat_reginfo_cv_form" model="ir.ui.view">
+            <field name="name">sigvat.reginfo.cv.form</field>
+            <field name="model">sigvat.reginfo.cv</field>
+            
+            <field name="arch" type="xml">
+                <form string="AFIP Regimen Informacion Compra Venta">
+                    <group states="choose">
+                        <label align="0.0" string="AFIP regimen informacion Compra Venta en formato txt"/>
+                        
+                    </group>
+                    <footer states="choose">
+                        <button special="cancel" string="Cancelar" class="btn-default"/>
+                        <button type="object" name="generate_header" string="Generate Header" class="btn-primary"/>
+                        <button type="object" name="generate_purchase" string="Generate Purchase" class="btn-primary"/>
+                        <button type="object" name="generate_sale" string="Generate Sale" class="btn-primary"/>
+                        <field invisible="1" name="state"/>
+                   </footer>
+                    <group states="get" string="Archivo generado">
+                        <group>
+                            <label string="Puede descargar el archivo haciendo click en 'Guardar como'" />
+                        </group>
+                        <group>
+                            <field name="name" invisible="1"/>
+                            <field name="data" nolabel="1" readonly="1" filename="name"/>
+                        </group>
+                    </group>
+                    <group states="error" string="Error al generar el archivo">
+                        <group>
+                            <field name="info" nolabel="1" />
+                        </group>
+                    </group>
+                    <footer states="get">
+                        <button special="cancel" string="Cerrar" class="btn-default"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_sigvat_reginfo_cv">
+            <field name="name">AFIP regimen informacion Compra Venta</field>
+            <field name="res_model">sigvat.reginfo.cv</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_sigvat_reginfo_cv_form" />
+            <field name="target">new</field>
+        </record>
+
+        <record model="ir.values" id="sigvat_reginfo_cv_values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'sigvat.journal'" name="model"/>
+            <field name="name">AFIP regimen informacion Compra Venta</field>
+            <field name="value" eval="'ir.actions.act_window,' +str(ref('action_sigvat_reginfo_cv'))" />
+        </record>
+
+    </data>
+</odoo>
