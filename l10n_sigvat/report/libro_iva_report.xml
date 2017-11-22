@@ -25,6 +25,34 @@
         <field name="replace" eval="True"/>
     </ir_set>
 
+    <!-- LIBRO IVA PAGINADO -->
+    <record id="report_libro_iva_compra_page" model="ir.actions.report.xml">
+        <field name="name">Libro Iva Compra</field>
+        <field name="type">ir.actions.report.xml</field>
+        <field name="model">sigvat.journal</field>
+        <field name="report_name">libro_iva_compra_page</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <field name="out_format">1</field>
+        <field name="parser_loc">l10n_sigvat/report/libro_iva.py</field>
+        <field name="report_rml">l10n_sigvat/report/libro_iva_compra_page.odt</field>
+        <field name="parser_state">loc</field>
+        <field name="tml_source">file</field>
+    </record>
+
+    <ir_set>
+        <field name="name">Libro Iva Compra Paginado</field>
+        <field name="key" eval="'action'"/>
+        <field name="key2" eval="'client_print_multi'"/>
+        <field name="models" eval="['sigvat.journal']"/>
+        <field name="value" eval="'ir.actions.report.xml,'+str(report_libro_iva_compra_page)"/>
+        <field name="isobject" eval="True"/>
+        <field name="replace" eval="True"/>
+    </ir_set>
+    <!-- LIBRO IVA ODS -->
+
+
+
     <record id="report_libro_iva_compra_ods" model="ir.actions.report.xml">
         <field name="name">Libro Iva Compra ODS</field>
         <field name="type">ir.actions.report.xml</field>
