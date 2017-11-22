@@ -27,7 +27,7 @@
 
     <!-- LIBRO IVA PAGINADO -->
     <record id="report_libro_iva_compra_page" model="ir.actions.report.xml">
-        <field name="name">Libro Iva Compra</field>
+        <field name="name">Libro Iva Compra Paginado</field>
         <field name="type">ir.actions.report.xml</field>
         <field name="model">sigvat.journal</field>
         <field name="report_name">libro_iva_compra_page</field>
