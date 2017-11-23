@@ -61,6 +61,7 @@
                                 </group>
                                 <div>
                                     <field name="notes" placeholder="Additional notes..." nolabel="1"/>
+                                    <field name="observations" placeholder="Observaciones adicionales..." nolabel="1"/>
                                     <field name="amount_in_words"/>
                                 </div>
                             </page>

@@ -131,6 +131,7 @@ class SigVatPayroll(models.Model):
     total_hnr = fields.Float(string='Total HNR',
         store=True, readonly=True, compute='_compute_amount')
     notes = fields.Text('Notes')
+    observations = fields.Text('Observaciones')
     amount_in_words = fields.Char(string="Amount in Words", readonly=True)
 
 class SigVatPayrollLine(models.Model):
