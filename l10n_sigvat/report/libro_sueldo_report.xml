@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    <record id="report_libro_sueldo_horizontal" model="ir.actions.report.xml">
+        <field name="name">Libro Sueldos</field>
+        <field name="type">ir.actions.report.xml</field>
+        <field name="model">sigvat.payroll</field>
+        <field name="report_name">libro_sueldo_horizontal</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <field name="out_format">1</field>
+        <field name="parser_loc">l10n_sigvat/report/libro_sueldo.py</field>
+        <field name="report_rml">l10n_sigvat/report/Libro_Sueldo_horizontal.odt</field>
+        <field name="parser_state">loc</field>
+        <field name="tml_source">file</field>
+    </record>
+
+    <record id="report_libro_sueldo_vertical" model="ir.actions.report.xml">
+        <field name="name">Libro Sueldos</field>
+        <field name="type">ir.actions.report.xml</field>
+        <field name="model">sigvat.payroll</field>
+        <field name="report_name">libro_sueldo_vertical</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <field name="out_format">1</field>
+        <field name="parser_loc">l10n_sigvat/report/libro_sueldo.py</field>
+        <field name="report_rml">l10n_sigvat/report/Libro_Sueldo_vertical.odt</field>
+        <field name="parser_state">loc</field>
+        <field name="tml_source">file</field>
+    </record>
+
+
+    </data>
+</openerp>
+

@@ -51,6 +51,7 @@
         'view/sigvat_journal_sale_line_view.xml',
         # wizard
         'wizard/sigvat_reginfo_cv_view.xml',
+        'wizard/libro_sueldo_view.xml',
         # Data
         'data/sigvat_data.xml',
         # Security
@@ -59,6 +60,7 @@
         # Report
         'report/payroll_report.xml',
         'report/libro_iva_report.xml',
+        'report/libro_sueldo_report.xml',
     ],
     "installable": True,
     "active": False,

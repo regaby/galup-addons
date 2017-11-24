@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_libro_sueldo_form" model="ir.ui.view">
+            <field name="name">libro.sueldo.form</field>
+            <field name="model">libro.sueldo</field>
+            
+            <field name="arch" type="xml">
+                <form string="Libro Sueldo Ministerio de Trabajo">
+                    <group>
+                        <field name="month" widget="selection"/>
+                        <field name="year" widget="selection"/>
+                        <field name="employeer_id" widget="selection"/>
+                        <field name="format" widget="selection"/>
+                    </group>
+
+                    <footer>
+                        <button special="cancel" string="Cancelar" class="btn-default"/>
+                        <button type="object" name="print_report" string="Generar Reporte" class="btn-primary"/>                        
+                   </footer>
+                    
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_libro_sueldo">
+            <field name="name">Libro Sueldo</field>
+            <field name="res_model">libro.sueldo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_libro_sueldo_form" />
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_sigvat_libro_sueldo" parent="menu_sigvat_payroll_root" action="action_libro_sueldo" />  
+
+        <!-- <record model="ir.values" id="libro_sueldo_values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'sigvat.payroll'" name="model"/>
+            <field name="name">Libro Sueldo Ministerio de Trabajo</field>
+            <field name="value" eval="'ir.actions.act_window,' +str(ref('action_libro_sueldo'))" />
+        </record> -->
+
+    </data>
+</odoo>

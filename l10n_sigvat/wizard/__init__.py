@@ -1,1 +1,2 @@
 import sigvat_reginfo_cv
+import libro_sueldo
