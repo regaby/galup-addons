@@ -103,7 +103,7 @@ class SigVatPayroll(models.Model):
             ('10', 'October'),
             ('11', 'November'),
             ('12', 'Dicember'),])
-    year = fields.Char(compute="_get_year", string="Year")
+    year = fields.Many2one("account.fiscal.position", string='Year', ondelete='restrict', required=True)
     last_deposited_month = fields.Selection(string="Last Deposited Month", 
         selection=[
             ('01', 'January'),
