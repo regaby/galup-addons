@@ -43,6 +43,17 @@
                                <field name="sale_line_ids"/> 
                             </page>
                         </notebook>
+                        <group>
+                            <field name="net_10_amount" />
+                            <field name="net_21_amount" />
+                            <field name="net_27_amount" />
+                            <field name="vat_amount" />
+                            <field name="municipal_amount" />
+                            <field name="internal_amount" />
+                            <field name="vat_percep_amount" />
+                            <field name="gross_amount" />
+                            <field name="total_amount" />
+                        </group>
                     </sheet>
                 </form>
 

@@ -18,11 +18,12 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
+from openerp import models, fields, api, _, exceptions
 from datetime import datetime
 from datetime import timedelta
 import time
-
+import calendar
+from openerp.exceptions import UserError, AccessError
 
 
 
@@ -71,23 +72,23 @@ class SigVatJournal(models.Model):
     purchase_line_ids = fields.One2many ('sigvat.purchase.line', 'journal_id','Vat Purchase Line')
     sale_line_ids = fields.One2many ('sigvat.sale.line', 'journal_id','Vat Sale Line')
 
-    net_10_amount = fields.Float(string='Net 10.5 Amount', digits=(13, 2),
+    net_10_amount = fields.Float(string='Neto 10.5%', digits=(13, 2),
         store=False, readonly=False, compute='_compute_amount')
-    net_21_amount = fields.Float(string='Net 21 Amount', digits=(13, 2),
+    net_21_amount = fields.Float(string='Neto 21%', digits=(13, 2),
         store=False, readonly=False, compute='_compute_amount')
-    net_27_amount = fields.Float(string='Net 27 Amount', digits=(13, 2),
+    net_27_amount = fields.Float(string='Neto 27%', digits=(13, 2),
         store=False, readonly=False, compute='_compute_amount')
-    total_amount = fields.Float(string='Total Amount', digits=(13, 2),
+    total_amount = fields.Float(string='Total Facturado', digits=(13, 2),
         store=False, readonly=False, compute='_compute_amount')
-    vat_amount = fields.Float(string='Vat Amount', digits=(13, 2),
+    vat_amount = fields.Float(string='Iva Factura', digits=(13, 2),
         store=False, readonly=False, compute='_compute_amount')
-    municipal_amount = fields.Float(string='municipal Amount', digits=(13, 2),
+    municipal_amount = fields.Float(string='Percepcion Municipal', digits=(13, 2),
         store=False, readonly=False, compute='_compute_amount')
-    internal_amount = fields.Float(string='internal Amount', digits=(13, 2),
+    internal_amount = fields.Float(string='Impuesto Interno', digits=(13, 2),
         store=False, readonly=False, compute='_compute_amount')
-    vat_percep_amount = fields.Float(string='Vat percep Amount', digits=(13, 2),
+    vat_percep_amount = fields.Float(string='Percepcion Iva', digits=(13, 2),
         store=False, readonly=False, compute='_compute_amount')
-    gross_amount = fields.Float(string='gross Amount', digits=(13, 2),
+    gross_amount = fields.Float(string='Monto Bruto', digits=(13, 2),
         store=False, readonly=False, compute='_compute_amount')
 
 
@@ -172,9 +173,23 @@ class SigVatPurchaseLine(models.Model):
                 return False
         return True
 
+    @api.constrains('auto_confirm')
+    def _check_date(self, cr, uid, ids, context=None):
+        for line in self.browse(cr, uid, ids, context=context):
+            month = int(line.journal_id.month)
+            year = int(line.journal_id.year.name)
+            from_date = str(datetime(year, month, 1))[0:10]
+            last_day = calendar.monthrange(year,month)
+            to_date = str(datetime(year, month, last_day[1]))[0:10]
+
+            if line.date < from_date or line.date > to_date:
+                raise exceptions.Warning(_("La fecha %s no pertenece al periodo %s/%s."%(line.date,month,year)))
+        return True
+
     _constraints = [
         (_check_pos, 'Point of sale must be diferent than zero.', []),
         (_check_voucher_number, 'Voucher number must be diferent than zero.', []),
+        (_check_date, 'La fecha no pertenece al periodo.', []),
     ]
 
 class SigVatSaleLine(models.Model):
