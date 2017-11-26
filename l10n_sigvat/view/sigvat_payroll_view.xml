@@ -27,7 +27,7 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="generate_note" type="object" string="Generate Note" class="oe_highlight"/>
+                        <button name="generate_note" type="object" string="Generar nota al Pie" class="oe_highlight"/>
                     </header>
                     <sheet>
                         <group>
