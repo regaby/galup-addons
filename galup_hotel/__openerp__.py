@@ -2,7 +2,6 @@
 ###########################################################################
 #    Module Writen to OpenERP, Open Source Management Solution
 #
-#    Copyright (c) 2017 Galup Sistemas
 #    All Rights Reserved.
 #    
 ############################################################################
