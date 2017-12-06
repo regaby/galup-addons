@@ -43,7 +43,7 @@ class res_partner(models.Model):
                 else:
                     delta = relativedelta.relativedelta(now, dob)
                     deceased = ''
-                years_months_days = str(delta.years) + "y " + str(delta.months) + "m " + str(delta.days) + "d" + deceased
+                years_months_days = str(delta.years)
             else:
                 years_months_days = "Fecha de nacimiento no asignada !"
 
@@ -65,6 +65,7 @@ class res_partner(models.Model):
     # 'age' : fields.function(_partner_age_fnt, method=True, type='char', size=32, string='Patient Age', help="It shows the age of the patient in years(y), months(m) and days(d).\nIf the patient has died, the age shown is the age at time of death, the age corresponding to the date on the death certificate. It will show also \"deceased\" on the field"),
     age = fields.Char(string='Edad', 
         store=False, readonly=False, compute='_partner_age_fnt')
+    observations = fields.Text('Observaciones')
 
     _defaults = {
         'is_company': False,

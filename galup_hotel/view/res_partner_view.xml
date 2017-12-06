@@ -70,7 +70,7 @@
                     
                     <xpath expr="//notebook/page" position="replace">
                          <page name='observaciones' string="Observaciones" autofocus="autofocus">
-                            <field name="comment" placeholder="Observaciones..."/>
+                            <field name="observations" placeholder="Observaciones..."/>
                         </page>
                     </xpath> 
                     <!-- <page name="internal_notes" position="replace">
