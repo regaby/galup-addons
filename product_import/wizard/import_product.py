@@ -39,19 +39,24 @@ class ImportProduct(models.TransientModel):
         del reader_info[0]
         return keys, reader_info
 
+    def _default_stock_location(self):
+        warehouse = self.env['ir.model.data'].get_object('stock', 'warehouse0')
+        return warehouse.lot_stock_id.id
+
     data = fields.Binary('File', required=True)
     name = fields.Char('Filename')
     delimeter = fields.Char('Delimeter', default=',',
                             help='Default delimeter is ","')
     model = fields.Selection( string="Model" ,selection=[('product','Product'),('category','Product Category')], default='product', required=True)
     action = fields.Selection( string="Action" ,selection=[('create','Create'),('update','Update')], default='create', required=True)
-    location = fields.Many2one('stock.location', 'Default Location', required=True)
-    new_code = fields.Boolean('nuevo_codigo',default=True)
+    stock = fields.Selection( string="Stock" ,selection=[('add','Add Current Stock'),('update','Update Qty on hand')], default='add', required=True)
+    location = fields.Many2one('stock.location', 'Default Location', required=True, default=_default_stock_location)
+    new_code = fields.Boolean('nuevo_codigo',default=False)
     standard_price = fields.Boolean('precio_costo',default=True)
     list_price = fields.Boolean('precio_lista',default=True)
     quantity = fields.Boolean('cantidad',default=True)
-    category = fields.Boolean('categoria',default=True)
-    imagen = fields.Boolean('imagen',default=True)
+    category = fields.Boolean('categoria',default=False)
+    imagen = fields.Boolean('imagen',default=False)
 
     @api.one
     def action_import(self):
@@ -109,9 +114,9 @@ class ImportProduct(models.TransientModel):
             else:
                 raise UserError(_('Product not found with code %s.'%values['codigo']))
             product = product_obj.browse(prod_id)
-            print val
             product.write(val)
         if self.quantity:
+            keys.append(self.stock)
             self.change_product_qty(reader_info,keys)
         if self.imagen:
             self.import_image(reader_info,keys)
@@ -208,13 +213,17 @@ class ImportProduct(models.TransientModel):
 
             # product = data.product_id.with_context(location=data.location_id.id, lot_id= data.lot_id.id)
             # th_qty = product.qty_available
+            if 'add' in keys:
+                qty = prod_lst[0].qty_available + float(values['cantidad'])
+            else:
+                qty = values['cantidad']
             line_data = {
                 'inventory_id': inventory_id.id,
-                'product_qty': values['cantidad'],
+                'product_qty': qty,
                 'location_id': self.location.id,
                 'product_id': val['product'],
                 'product_uom_id': val['uom_id'],
-                'theoretical_qty': val['qty_available'],
+                'theoretical_qty': qty,
                 # 'prod_lot_id': data.lot_id.id
             }
             inventory_line_obj.create(line_data)

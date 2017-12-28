@@ -30,7 +30,8 @@
                         <field name="standard_price" />
                         <field name="category" />
                         <field name="list_price" />
-                        <field name="imagen" />                
+                        <field name="imagen" />
+                        <field name="stock" attrs="{'invisible': [('quantity', '!=', True)]}"/>
                     </group>
                    <separator string="" colspan="4"/>
                    <footer>
