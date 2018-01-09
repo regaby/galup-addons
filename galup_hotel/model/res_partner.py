@@ -20,6 +20,15 @@
 from openerp import models, fields, api, _
 from datetime import datetime
 from dateutil import relativedelta
+import openerp.addons.decimal_precision as dp
+
+
+class HotelDiscount(models.Model):
+
+    _name = 'hotel.discount'
+
+    name = fields.Char('Nombre', required=True)
+    discount = fields.Float(string='Descuento (%)', digits=dp.get_precision('Discount'), default=0.0)
 
 
 class res_partner(models.Model):
@@ -66,6 +75,8 @@ class res_partner(models.Model):
     age = fields.Char(string='Edad', 
         store=False, readonly=False, compute='_partner_age_fnt')
     observations = fields.Text('Observaciones')
+    has_car = fields.Boolean(string="Tiene vehiculo")
+    discount_id = fields.Many2one('hotel.discount', 'Descuento')
 
     _defaults = {
         'is_company': False,
@@ -75,3 +86,35 @@ class res_partner(models.Model):
     _sql_constraints = [
         ('identification_id_uniq', 'UNIQUE (identification_id)',  'El número de identificación debe ser único'),
     ]
+
+class Guest(models.Model):
+
+    _name = 'hotel.guest'
+
+    name = fields.Char('Nombre', required=True)
+    last_name = fields.Char('Apellido', required=True)
+    identification_id = fields.Char(size=20,string="Nro. Documento",help="DNI/CPF/Pasaporte/Travel document", required=True)
+    folio_id = fields.Many2one('hotel.folio', string='Folio',
+                               ondelete='cascade')
+
+class HotelFolio(models.Model):
+
+    _name = 'hotel.folio'
+    _inherit = 'hotel.folio'
+
+    guest_lines = fields.One2many('hotel.guest', 'folio_id',
+                                 readonly=True,
+                                 states={'draft': [('readonly', False)],
+                                         'sent': [('readonly', False)]},
+                                 help="Acompañantes.")
+
+class HotelFolioLine(models.Model):
+
+    _inherit = 'hotel.folio.line'
+
+    @api.onchange('discount_id')
+    def discount_id_change(self):
+        if self.discount_id:
+            self.discount = self.discount_id.discount
+
+    discount_id = fields.Many2one('hotel.discount', 'Descuento')

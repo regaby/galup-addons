@@ -42,7 +42,9 @@
                     </field>
                     <field name="category_id" position="after">
                         <field name="smoker" attrs="{'invisible':[('customer','!=',True)]}"/>
-                        <field name="regular_passenger" attrs="{'invisible':[('customer','!=',True)]}"/>
+                        <!-- <field name="regular_passenger" attrs="{'invisible':[('customer','!=',True)]}"/> -->
+                        <field name="has_car" attrs="{'invisible':[('customer','!=',True)]}"/>
+                        <field name="discount_id" attrs="{'invisible':[('customer','!=',True)]}"/>
                     </field>
                     <field name="mobile" position="attributes">
                          <attribute name="invisible">True</attribute>
