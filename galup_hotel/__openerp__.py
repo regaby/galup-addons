@@ -34,6 +34,9 @@
     "depends": ['hotel','hotel_reservation','hr'],
     "data": [
         'view/res_partner_view.xml',
+        'view/hotel_folio_view.xml',
+        'view/hotel_discount_view.xml',
+        'data/discount_data.xml',
     ],
     "installable": True,
     "active": False,

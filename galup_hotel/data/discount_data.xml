@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+    <openerp>
+        <data noupdate="1">
+            <!-- Data to load -->
+            <record model="hotel.discount" id="discount_0">
+                <field name="name">Tarifa Corporativa</field> 
+                <field name="discount">20</field> 
+            </record>
+            <record model="hotel.discount" id="discount_1">
+                <field name="name">Viajantes / Choferes</field> 
+                <field name="discount">30</field> 
+            </record>
+            <record model="hotel.discount" id="discount_2">
+                <field name="name">Pax Frecuentes</field> 
+                <field name="discount">10</field> 
+            </record>
+            <record model="hotel.discount" id="discount_3">
+                <field name="name">Grupales / Familiares</field> 
+                <field name="discount">20</field> 
+            </record>
+            <record model="hotel.discount" id="discount_4">
+                <field name="name">Ofertas del dia / Baja Ocupación / Portales </field> 
+                <field name="discount">30</field> 
+            </record>
+            
+        </data>
+    </openerp>

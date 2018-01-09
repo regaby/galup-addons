@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>         
+
+
+        <record model="ir.ui.view" id="view_hotel_discount_form">
+            <field name="name">hotel.discount.form</field>
+            <field name="model">hotel.discount</field>
+            <field name="arch" type="xml">
+                <form string=" Descuentos">
+                    <sheet>
+                        <group>
+                            <field name="name" colspan="1" />
+                            <field name="discount" select="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view of Descuentos -->
+        <record model="ir.ui.view" id="view_hotel_discount_tree">
+            <field name="name">hotel.discount.tree</field>
+            <field name="model">hotel.discount</field>
+            <field name="arch" type="xml">
+                <tree string=" Descuentos">
+                    <field name="name" colspan="1" />
+                    <field name="discount" select="1" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action of Descuentos -->
+        <record model="ir.actions.act_window" id="hotel_discount_action">
+            <field name="name">Descuentos</field>
+            <field name="res_model">hotel.discount</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Descuentos" id="menu_hotel_discount"
+            action="hotel_discount_action" sequence="100"
+            parent="hotel.hotel_configuration_menu" />
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>         
+
+
+        <record model="ir.ui.view" id="view_hotel_folio1_form_inherit">
+            <field name='name'>hotel.folio.form</field>
+            <field name="inherit_id" ref="hotel.view_hotel_folio1_form"/>
+            <field name="model">hotel.folio</field>
+            <field name="arch" type="xml">                    
+                <notebook position="inside">
+                    <page string="Huespedes">
+                        <field name="guest_lines">
+                            <tree editable="bottom">
+                                <field name="name"/>
+                                <field name="last_name"/>
+                                <field name="identification_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <xpath expr="//field[@name='room_lines']/form/notebook/page/group/field[@name='discount']" position="before">
+                    <field name="discount_id" />
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>
