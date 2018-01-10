@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+    <openerp>
+        <data noupdate="1">
+            <!-- Data to load -->
+            <record model="hotel.room.type" id="room_type_0">
+                <field name="name">Habitaciones</field> 
+                <field name="capacity">0</field> 
+                <field name="list_price">0</field> 
+                <field name="isroomtype" eval="True"/>
+            </record>
+            <record model="hotel.room.type" id="room_type_1">
+                <field name="name">Simple</field> 
+                <field name="capacity">1</field> 
+                <field name="list_price">1000</field> 
+                <field name="parent_id" ref="room_type_0"/>
+                <field name="parent_id" search="[('name','=','Habitaciones')]" model="product.category"/>
+                <field name="isroomtype" eval="True"/>
+            </record>
+            <record model="hotel.room.type" id="room_type_2">
+                <field name="name">Doble</field> 
+                <field name="capacity">2</field> 
+                <field name="list_price">1280</field> 
+                <field name="parent_id" search="[('name','=','Habitaciones')]" model="product.category"/>
+                <field name="isroomtype" eval="True"/>
+            </record>
+            <record model="hotel.room.type" id="room_type_3">
+                <field name="name">Matrimonial</field> 
+                <field name="capacity">2</field> 
+                <field name="list_price">1350</field> 
+                <field name="parent_id" search="[('name','=','Habitaciones')]" model="product.category"/>
+                <field name="isroomtype" eval="True"/>
+            </record>
+            <record model="hotel.room.type" id="room_type_4">
+                <field name="name">Triple</field> 
+                <field name="capacity">3</field> 
+                <field name="list_price">1500</field> 
+                <field name="parent_id" search="[('name','=','Habitaciones')]" model="product.category"/>
+                <field name="isroomtype" eval="True"/>
+            </record>
+            <record model="hotel.room.type" id="room_type_5">
+                <field name="name">Cuadruple</field> 
+                <field name="capacity">4</field> 
+                <field name="list_price">1800</field> 
+                <field name="parent_id" search="[('name','=','Habitaciones')]" model="product.category"/>
+                <field name="isroomtype" eval="True"/>
+            </record>
+            
+        </data>
+    </openerp>

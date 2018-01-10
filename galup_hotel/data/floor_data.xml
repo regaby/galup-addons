@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+    <openerp>
+        <data noupdate="1">
+            <!-- Data to load -->
+            <record model="hotel.floor" id="floor_0">
+                <field name="name">Primer Piso</field> 
+                <field name="sequence">1</field> 
+            </record>
+            <record model="hotel.floor" id="floor_1">
+                <field name="name">Segundo Piso</field> 
+                <field name="sequence">2</field> 
+            </record>
+            <record model="hotel.floor" id="floor_2">
+                <field name="name">Tercer Piso</field> 
+                <field name="sequence">3</field> 
+            </record>
+            
+        </data>
+    </openerp>

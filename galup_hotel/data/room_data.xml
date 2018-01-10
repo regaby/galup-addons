@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+    <openerp>
+        <data noupdate="1">
+            <!-- Data to load -->
+            <record model="hotel.room" id="room_0">
+                <field name="name">1A</field> 
+                <field name="floor_id" search="[('name','=','Primer Piso')]" model="hotel.floor"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+            <record model="hotel.room" id="room_1">
+                <field name="name">1B</field> 
+                <field name="floor_id" search="[('name','=','Primer Piso')]" model="hotel.floor"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+            <record model="hotel.room" id="room_2">
+                <field name="name">1C</field> 
+                <field name="floor_id" search="[('name','=','Primer Piso')]" model="hotel.floor"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+            <record model="hotel.room" id="room_3">
+                <field name="name">1D</field> 
+                <field name="floor_id" search="[('name','=','Primer Piso')]" model="hotel.floor"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+
+            <record model="hotel.room" id="room_4">
+                <field name="name">2A</field> 
+                <field name="floor_id" search="[('name','=','Segundo Piso')]" model="hotel.floor"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+            <record model="hotel.room" id="room_5">
+                <field name="name">2B</field> 
+                <field name="floor_id" search="[('name','=','Segundo Piso')]" model="hotel.floor"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+            <record model="hotel.room" id="room_6">
+                <field name="name">2C</field> 
+                <field name="floor_id" search="[('name','=','Segundo Piso')]" model="hotel.floor"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+            <record model="hotel.room" id="room_7">
+                <field name="name">2D</field> 
+                <field name="floor_id" search="[('name','=','Segundo Piso')]" model="hotel.floor"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+
+            <record model="hotel.room" id="room_8">
+                <field name="name">3A</field> 
+                <field name="floor_id" search="[('name','=','Tercer Piso')]" model="hotel.floor"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+            <record model="hotel.room" id="room_9">
+                <field name="name">3B</field> 
+                <field name="floor_id" search="[('name','=','Tercer Piso')]" model="hotel.floor"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+            <record model="hotel.room" id="room_10">
+                <field name="name">3C</field> 
+                <field name="floor_id" search="[('name','=','Tercer Piso')]" model="hotel.floor"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+            <record model="hotel.room" id="room_11">
+                <field name="name">3D</field> 
+                <field name="floor_id" search="[('name','=','Tercer Piso')]" model="hotel.floor"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+            
+            
+        </data>
+    </openerp>
