@@ -1,0 +1,214 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-16 15:07+0000\n"
+"PO-Revision-Date: 2018-01-16 15:07+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_import
+#: field:import.product,action:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_action
+msgid "Action"
+msgstr "Acción"
+
+#. module: product_import
+#: selection:import.product,stock:0
+msgid "Add Current Stock"
+msgstr "Agregar a stock actual"
+
+#. module: product_import
+#: code:addons/product_import/models/stock_inventory.py:14
+#, python-format
+msgid "By File"
+msgstr "Por archivo"
+
+#. module: product_import
+#: selection:import.product,action:0
+msgid "Create"
+msgstr "Crear"
+
+#. module: product_import
+#: field:import.product,create_uid:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: product_import
+#: field:import.product,create_date:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: product_import
+#: field:import.product,location:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_location
+msgid "Default Location"
+msgstr "Locación por defecto"
+
+#. module: product_import
+#: help:import.product,delimeter:0
+#: model:ir.model.fields,help:product_import.field_import_product_delimeter
+msgid "Default delimeter is \",\""
+msgstr "Delimitador por defecto es \",\""
+
+#. module: product_import
+#: field:import.product,delimeter:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_delimeter
+msgid "Delimeter"
+msgstr "Delimitador"
+
+#. module: product_import
+#: field:import.product,display_name:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: product_import
+#: field:import.product,data:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_data
+msgid "File"
+msgstr "Archivo"
+
+#. module: product_import
+#: field:import.product,name:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_name
+msgid "Filename"
+msgstr "Nombre de Archivo"
+
+#. module: product_import
+#: field:import.product,id:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_id
+msgid "ID"
+msgstr "ID"
+
+#. module: product_import
+#: model:ir.actions.act_window,name:product_import.action_import_product
+#: model:ir.ui.menu,name:product_import.menu_import_product
+msgid "Import Product"
+msgstr "Importar Productos"
+
+#. module: product_import
+#: model:ir.model,name:product_import.model_stock_inventory
+msgid "Inventory"
+msgstr "Inventario"
+
+#. module: product_import
+#: field:import.product,__last_update:0
+#: model:ir.model.fields,field_description:product_import.field_import_product___last_update
+msgid "Last Modified on"
+msgstr "Última Modifiación en"
+
+#. module: product_import
+#: field:import.product,write_uid:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: product_import
+#: field:import.product,write_date:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: product_import
+#: field:import.product,model:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_model
+msgid "Model"
+msgstr "Modelo"
+
+#. module: product_import
+#: code:addons/product_import/wizard/import_product.py:38
+#, python-format
+msgid "Not 'name' or 'code' keys found"
+msgstr "No se encontró 'name' o 'code' en el archivo"
+
+#. module: product_import
+#: code:addons/product_import/wizard/import_product.py:32
+#, python-format
+msgid "Not a valid file!"
+msgstr "¡Archivo no válido!"
+
+#. module: product_import
+#: selection:import.product,model:0
+msgid "Product"
+msgstr "Producto"
+
+#. module: product_import
+#: selection:import.product,model:0
+msgid "Product Category"
+msgstr "Categoría de Producto"
+
+#. module: product_import
+#: code:addons/product_import/wizard/import_product.py:115
+#, python-format
+msgid "Product not found with code %s.codigo"
+msgstr "Producto no encontrado con código %s.codigo"
+
+#. module: product_import
+#: field:import.product,stock:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_stock
+msgid "Stock"
+msgstr "Stock"
+
+#. module: product_import
+#: selection:import.product,action:0
+msgid "Update"
+msgstr "Actualizar"
+
+#. module: product_import
+#: selection:import.product,stock:0
+msgid "Update Qty on hand"
+msgstr "Actualizar Cantidad en mano"
+
+#. module: product_import
+#: code:addons/product_import/wizard/import_product.py:16
+#, python-format
+msgid "You need to select a file!"
+msgstr "Debe seleccionar un archivo"
+
+#. module: product_import
+#: field:import.product,quantity:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_quantity
+msgid "cantidad"
+msgstr "Cantidad"
+
+#. module: product_import
+#: field:import.product,category:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_category
+msgid "categoria"
+msgstr "Categoria"
+
+#. module: product_import
+#: field:import.product,imagen:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_imagen
+msgid "imagen"
+msgstr "Imagen"
+
+#. module: product_import
+#: field:import.product,new_code:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_new_code
+msgid "nuevo_codigo"
+msgstr "Nuevo_código"
+
+#. module: product_import
+#: field:import.product,standard_price:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_standard_price
+msgid "precio_costo"
+msgstr "Precio_costo"
+
+#. module: product_import
+#: field:import.product,list_price:0
+#: model:ir.model.fields,field_description:product_import.field_import_product_list_price
+msgid "precio_lista"
+msgstr "Precio_lista"
+

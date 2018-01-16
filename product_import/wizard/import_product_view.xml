@@ -8,13 +8,13 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Import Product">
-                <label string="The file must have 6 column keys:
-                'code' => for product reference
-                'name' => for product name
-                'price' => for product price
-                'quantity' => for product quantity
-                'category' => for product category
-                'imagen' => for product image" colspan="4"/>
+                <label string="Este archivo debe contener 6 columnas:                 
+                    'codigo' =&gt; referencia del producto                 
+                    'nombre' =&gt; nombre del producto                 
+                    'precio' =&gt; precio del producto                 
+                    'cantidad' =&gt; cantidad de productos                 
+                    'categoria' =&gt; categoria del producto                 
+                    'imagen' =&gt; imagen del producto" colspan="4"/>
                     <group colspan="4" col="4">
                         <field name="model" />
                         <field name="action" />
