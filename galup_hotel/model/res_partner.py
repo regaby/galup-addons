@@ -77,6 +77,7 @@ class res_partner(models.Model):
     observations = fields.Text('Observaciones')
     has_car = fields.Boolean(string="Tiene vehiculo")
     discount_id = fields.Many2one('hotel.discount', 'Descuento')
+    hotelfolio_ids = fields.One2many('hotel.folio', 'partner_id', 'Folios')
 
     _defaults = {
         'is_company': False,
