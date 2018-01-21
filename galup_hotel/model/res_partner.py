@@ -35,8 +35,11 @@ class res_partner(models.Model):
 
     _name = 'res.partner'
     _inherit = 'res.partner'
+    # _rec_name = 'name'
 
     # _partner_age_fnt = lambda self, cr, uid, ids, name, arg, context={}: self._partner_age(cr, uid, ids, name, arg, context)
+
+    
 
     @api.one
     @api.depends('birthday')
@@ -78,6 +81,7 @@ class res_partner(models.Model):
     has_car = fields.Boolean(string="Tiene vehiculo")
     discount_id = fields.Many2one('hotel.discount', 'Descuento')
     hotelfolio_ids = fields.One2many('hotel.folio', 'partner_id', 'Folios')
+    
 
     _defaults = {
         'is_company': False,
@@ -87,6 +91,22 @@ class res_partner(models.Model):
     _sql_constraints = [
         ('identification_id_uniq', 'UNIQUE (identification_id)',  'El número de identificación debe ser único'),
     ]
+
+    # Método name_get sobrescrito para que se muestre en el campo Huesped el nombre + DNI + cantidad de visitas
+    def name_get(self, cr, uid, ids, context=None):
+    	res = []
+    	partners = self.browse(cr, uid, ids, context)
+    	for partner in partners:
+    		name =str(partner.name)
+    		dni = str(partner.identification_id)
+    		cant = fields.Integer()
+    		cant = 0
+    		for f in partner.hotelfolio_ids:
+    			cant = 1 + cant
+    		visit = str(cant)
+    		tit = name + ' (DNI: ' + dni + ', ' ' Visitas: ' + visit + ') '
+        	res.append((partner.id, tit))
+    	return res
 
 class Guest(models.Model):
 
