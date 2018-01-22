@@ -98,7 +98,7 @@ class res_partner(models.Model):
     	partners = self.browse(cr, uid, ids, context)
     	for partner in partners:
     		name =str(partner.name)
-    		dni = str(partner.identification_id)
+    		dni = str(partner.main_id_number)
     		cant = fields.Integer()
     		cant = 0
     		for f in partner.hotelfolio_ids:

@@ -13,7 +13,13 @@
             <field name="model">res.partner</field>
             <field name="arch" type="xml">
                     <field name="phone" position="before">
-                         <field name="identification_id"/>
+                         <field name="main_id_number" string="DNI"/>
+                    </field>
+                    <field name="main_id_number" position="before">
+                         <field name="name" string="Name"/>
+                    </field>
+                     <field name="display_name" position="attributes">
+                         <attribute name="invisible">True</attribute>
                     </field>
                     <field name="email" position="after">
                          <field name="hotelfolio_ids"/>
@@ -35,7 +41,7 @@
                         <field name="customer" string="Huesped"/>
                     </xpath> -->
                     <field name="function" position="replace">
-                         <field name="identification_id" attrs="{'invisible':[('customer','!=',True)],'required':[('customer','=',False)]}"/> 
+                         <!-- <field name="identification_id" attrs="{'invisible':[('customer','!=',True)],'required':[('customer','=',False)]}"/> -->
                          <field name="job_id" attrs="{'invisible':[('customer','!=',True)],'required':[('customer','=',False)]}" />
                          <field name="nationality_id" attrs="{'invisible':[('customer','!=',True)],'required':[('customer','=',False)]}" />
                          <field name="birthday" attrs="{'invisible':[('customer','!=',True)],'required':[('customer','=',False)]}" />
@@ -112,7 +118,8 @@
     		<field name="inherit_id" ref="base.view_res_partner_filter"/>
     		<field name="arch" type="xml">
        			 	<field name="name" position="after">
-                         <field name="identification_id"/>
+                         <field name="main_id_number" string="DNI"/>
+                         <field name="name"/>
                     </field>
     		</field>
 		</record>
