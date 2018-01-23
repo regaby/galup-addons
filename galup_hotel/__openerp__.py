@@ -40,6 +40,8 @@
         'data/floor_data.xml',
         'data/room_type_data.xml',
         'data/room_data.xml',
+        'data/state_data.xml',
+        'data/service_data.xml',
     ],
     "installable": True,
     "active": False,
