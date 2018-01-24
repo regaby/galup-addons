@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>         
+
+
+        <record model="ir.ui.view" id="view_hotel_room_form_inherit">
+            <field name="name">hotel.room.form</field>
+            <field name="model">hotel.room</field>
+            <field name="inherit_id" ref="hotel.view_hotel_room_form"/>
+            <field name="arch" type="xml">                    
+                <notebook position="inside">
+                    <page string="Incidencias">
+                        <field name="issue_lines">
+                            <tree editable="bottom">
+                                <field name="name"/>
+                                <field name="issue_date"/>
+                                <field name="close_date"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <field name="state" position="before">
+                    <button name="CloseIssue"
+                            string="Desbloquear Habitacion" type="object" class="btn-primary" 
+                            attrs="{'invisible': [('status', '!=', 'blocked')]}"/>
+                </field>
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>
