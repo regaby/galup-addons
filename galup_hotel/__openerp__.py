@@ -36,6 +36,8 @@
         'view/res_partner_view.xml',
         'view/hotel_folio_view.xml',
         'view/hotel_discount_view.xml',
+        'view/hotel_room_view.xml',
+        'wizard/room_issue_wizard_view.xml',
         'data/discount_data.xml',
         'data/floor_data.xml',
         'data/room_type_data.xml',

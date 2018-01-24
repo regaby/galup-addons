@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+
+        <!--Form view for wizard make folio-->
+        <record model="ir.ui.view" id="room_issue_wizard_form_view">
+            <field name="name">room.issue.wizard.form</field>
+            <field name="model">room.issue.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Bloquear Habitacion" version='8.0'>
+                    <separator colspan="4" string="Ingrese el motivo por el que bloquea la habitacion" />
+                    <newline/>
+                    <field name="name" autofocus="True"/>
+                    <footer>
+                        <button name="makeIssue" string="Bloquear Habitacion" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_room_issue_wizard"
+            model="ir.actions.act_window">
+            <field name="name">Bloquear Habitacion</field>
+            <field name="res_model">room.issue.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record model="ir.ui.view" id="view_hotel_room_form_inherit_wizard">
+            <field name="name">hotel.room.form</field>
+            <field name="model">hotel.room</field>
+            <field name="inherit_id" ref="hotel.view_hotel_room_form"/>
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                    <button name="%(action_room_issue_wizard)d"
+                            string="Bloquear Habitacion" type="action" class="btn-primary" 
+                            attrs="{'invisible': [('status', '!=', 'available')]}"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
