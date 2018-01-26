@@ -21,6 +21,8 @@ from openerp import models, fields, api, _
 from datetime import datetime
 from dateutil import relativedelta
 import openerp.addons.decimal_precision as dp
+import time
+from openerp.tools import misc, DEFAULT_SERVER_DATETIME_FORMAT
 
 
 class HotelDiscount(models.Model):
@@ -139,3 +141,41 @@ class HotelFolioLine(models.Model):
             self.discount = self.discount_id.discount
 
     discount_id = fields.Many2one('hotel.discount', 'Descuento')
+
+class HotelRoom(models.Model):
+
+    _inherit = 'hotel.room'    
+
+    status = fields.Selection([('available', 'Available'),
+                               ('occupied', 'Occupied'),
+                               ('blocked', 'Bloqueado'),
+                               ],
+                              'Status', default='available')
+    issue_lines = fields.One2many('hotel.room.issue', 'room_id',help="Incidencias.")
+
+    @api.multi
+    def CloseIssue(self):
+        issue_obj = self.env['hotel.room.issue']
+        room_obj = self.env['hotel.room']
+        print self.id
+        issue_ids = issue_obj.search([('room_id','=',self.id),('close_date','=',False)])
+        print issue_ids
+        for issue in issue_ids:
+            issue.close_date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+        self.status = 'available'
+        self.isroom = True
+        return True
+
+class HotelRoomIssue(models.Model):
+
+    _name = 'hotel.room.issue'
+
+    name = fields.Char('Descripcion', required=True)
+    room_id = fields.Many2one('hotel.room', string='Habitación',
+                               ondelete='cascade')    
+    issue_date = fields.Datetime('Fecha de la incidencia', required=True,
+                                          default=(lambda *a:
+                                          time.strftime
+                                          (DEFAULT_SERVER_DATETIME_FORMAT)))
+    close_date = fields.Datetime('Fecha de resolucion', required=False)
+
