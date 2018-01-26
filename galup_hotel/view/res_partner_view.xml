@@ -13,10 +13,8 @@
             <field name="model">res.partner</field>
             <field name="arch" type="xml">
                     <field name="phone" position="before">
-                         <field name="main_id_number" string="DNI"/>
-                    </field>
-                    <field name="main_id_number" position="before">
                          <field name="name" string="Name"/>
+                         <field name="main_id_number" string="DNI"/>
                     </field>
                      <field name="display_name" position="attributes">
                          <attribute name="invisible">True</attribute>
