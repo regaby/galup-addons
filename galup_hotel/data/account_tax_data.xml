@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+    <openerp>
+        <data noupdate="1">
+            <record id="earlycheckin_70" model="account.tax">
+                <field name="name">Early Checkin 70%</field>
+                <field name="description">Early Checkin 70% 0-2 hrs.</field>
+                <field name="amount_type">code</field>
+                <field name="python_compute">result = price_unit * 0.70</field>
+                <field name="python_applicable">result = True</field>
+                <field name="type_tax_use">sale</field>
+                <field name="check_type">early</field>
+                <field name="hour_from">0</field>
+                <field name="hour_to">2</field>
+            </record>
+            <record id="earlycheckin_40" model="account.tax">
+                <field name="name">Early Checkin 40%</field>
+                <field name="description">Early Checkin 40% 3-4 hrs.</field>
+                <field name="amount_type">code</field>
+                <field name="python_compute">result = price_unit * 0.40</field>
+                <field name="python_applicable">result = True</field>
+                <field name="type_tax_use">sale</field>
+                <field name="check_type">early</field>
+                <field name="hour_from">3</field>
+                <field name="hour_to">5</field>
+            </record>
+            <record id="earlycheckin_30" model="account.tax">
+                <field name="name">Early Checkin 30%</field>
+                <field name="description">Early Checkin 30% 6-11 hrs.</field>
+                <field name="amount_type">code</field>
+                <field name="python_compute">result = price_unit * 0.30</field>
+                <field name="python_applicable">result = True</field>
+                <field name="type_tax_use">sale</field>
+                <field name="check_type">early</field>
+                <field name="hour_from">6</field>
+                <field name="hour_to">11</field>
+            </record>
+
+            <record id="latecheckout_20" model="account.tax">
+                <field name="name">Late Checkout 20%</field>
+                <field name="description">Late Checkout 20% 11-14 hrs.</field>
+                <field name="amount_type">code</field>
+                <field name="python_compute">result = price_unit * 0.20</field>
+                <field name="python_applicable">result = True</field>
+                <field name="type_tax_use">sale</field>
+                <field name="check_type">late</field>
+                <field name="hour_from">11</field>
+                <field name="hour_to">14</field>
+            </record>
+            <record id="latecheckout_40" model="account.tax">
+                <field name="name">Late Checkout 40%</field>
+                <field name="description">Late Checkout 40% 15-18 hrs.</field>
+                <field name="amount_type">code</field>
+                <field name="python_compute">result = price_unit * 0.40</field>
+                <field name="python_applicable">result = True</field>
+                <field name="type_tax_use">sale</field>
+                <field name="check_type">late</field>
+                <field name="hour_from">15</field>
+                <field name="hour_to">18</field>
+            </record>
+            <record id="latecheckout_70" model="account.tax">
+                <field name="name">Late Checkout 70%</field>
+                <field name="description">Late Checkout 70% 19-24 hrs.</field>
+                <field name="amount_type">code</field>
+                <field name="python_compute">result = price_unit * 0.70</field>
+                <field name="python_applicable">result = True</field>
+                <field name="type_tax_use">sale</field>
+                <field name="check_type">late</field>
+                <field name="hour_from">19</field>
+                <field name="hour_to">24</field>
+            </record>
+        </data>
+    </openerp>

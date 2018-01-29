@@ -22,6 +22,18 @@
                 <xpath expr="//field[@name='room_lines']/form/notebook/page/group/field[@name='discount']" position="before">
                     <field name="discount_id" />
                 </xpath>
+                <field name="invoice_status" position='after'>
+                    <field name="early_checkin" />
+                    <field name="early_checkin_hour" attrs="{'invisible':[('early_checkin','=',False)],'required':[('early_checkin','!=',False)]}" />
+                    <field name="late_checkout" />
+                    <field name="late_checkout_hour" attrs="{'invisible':[('late_checkout','=',False)],'required':[('late_checkout','!=',False)]}" />
+                    <field name="check_applied" invisible="False"/>
+                </field>
+                <xpath expr="//button[@name='action_done']" position="after">
+                    <button name="calculate_check" attrs="{'invisible':[('check_applied','!=',False)]}" string="Calcular Early Checkin/Late Checkout" type="object" class="oe_highlight" />
+                    <button name="uncalculate_check" attrs="{'invisible':[('check_applied','=',False)]}" string="Eliminar Early Checkin/Late Checkout" type="object" class="oe_highlight" />
+                </xpath>
+
 
             </field>
         </record>

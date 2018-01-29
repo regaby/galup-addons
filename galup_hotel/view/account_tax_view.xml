@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>         
+
+
+        <record model="ir.ui.view" id="view_tax_form_form_inherit">
+            <field name="name">account.tax.form</field>
+            <field name="model">account.tax</field>
+            <field name="inherit_id" ref="account.view_tax_form"/>
+            <field name="arch" type="xml">                    
+                <field name="name" position="after">
+                    <field name="check_type" />
+                </field>
+                <field name="type_tax_use" position="after">
+                    <field name="hour_from" attrs="{'invisible':[('check_type','=',False)],'required':[('check_type','!=',False)]}" />
+                    <field name="hour_to" attrs="{'invisible':[('check_type','=',False)],'required':[('check_type','!=',False)]}" />
+                </field>
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>
