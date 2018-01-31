@@ -23,6 +23,7 @@ from dateutil import relativedelta
 import openerp.addons.decimal_precision as dp
 import time
 from openerp.tools import misc, DEFAULT_SERVER_DATETIME_FORMAT
+from openerp.exceptions import except_orm, UserError, ValidationError
 
 
 class HotelDiscount(models.Model):
@@ -130,6 +131,45 @@ class HotelFolio(models.Model):
                                  states={'draft': [('readonly', False)],
                                          'sent': [('readonly', False)]},
                                  help="Acompañantes.")
+    early_checkin = fields.Boolean('Early Checkin')
+    late_checkout = fields.Boolean('Late Checkin')
+    early_checkin_hour = fields.Integer('Hora Early Checkin', required=False, default=lambda *a: 0)
+    late_checkout_hour = fields.Integer('Hora Late Checkout', required=False, default=lambda *a: 11)
+    check_applied = fields.Boolean('Check applied')
+
+    @api.multi
+    def calculate_check(self):
+        if not self.early_checkin and not self.late_checkout:
+            raise ValidationError(_('Debe seleccionar la opción de early checkin y/o late checkout'))
+        if self.early_checkin_hour < 0 or self.early_checkin_hour > 11:
+            raise ValidationError(_('El early checkin debe ser entre las 0 y 11 hs.'))
+        if self.late_checkout_hour < 11 or self.late_checkout_hour > 24:
+            raise ValidationError(_('El late checkout debe ser entre las 11 y 24 hs.'))
+        tax_obj = self.env['account.tax']
+        for line in self.room_lines:
+            tax_ids = line.tax_id.ids
+            if self.early_checkin:
+                tax_id = tax_obj.search([('check_type', '=', 'early'),('hour_from', '<=', self.early_checkin_hour),('hour_to', '>=', self.early_checkin_hour)])
+                tax_ids.append(tax_id.id)
+            if self.late_checkout:
+                tax_id = tax_obj.search([('check_type', '=', 'late'),('hour_from', '<=', self.late_checkout_hour),('hour_to', '>=', self.late_checkout_hour)])
+                tax_ids.append(tax_id.id)
+            line.tax_id = tax_ids
+        self.write({'check_applied': True})
+
+    @api.multi
+    def uncalculate_check(self):
+        tax_obj = self.env['account.tax']
+        for line in self.room_lines:
+            tax_ids = line.tax_id.ids
+            if self.early_checkin:
+                tax_id = tax_obj.search([('check_type', '=', 'early'),('hour_from', '<=', self.early_checkin_hour),('hour_to', '>=', self.early_checkin_hour)])
+                tax_ids.remove(tax_id.id)
+            if self.late_checkout:
+                tax_id = tax_obj.search([('check_type', '=', 'late'),('hour_from', '<=', self.late_checkout_hour),('hour_to', '>=', self.late_checkout_hour)])
+                tax_ids.remove(tax_id.id)
+            line.tax_id = [(6, 0, tax_ids)]
+        self.write({'check_applied': False})
 
 class HotelFolioLine(models.Model):
 
@@ -151,15 +191,14 @@ class HotelRoom(models.Model):
                                ('blocked', 'Bloqueado'),
                                ],
                               'Status', default='available')
+    
     issue_lines = fields.One2many('hotel.room.issue', 'room_id',help="Incidencias.")
 
     @api.multi
     def CloseIssue(self):
         issue_obj = self.env['hotel.room.issue']
         room_obj = self.env['hotel.room']
-        print self.id
         issue_ids = issue_obj.search([('room_id','=',self.id),('close_date','=',False)])
-        print issue_ids
         for issue in issue_ids:
             issue.close_date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         self.status = 'available'
@@ -178,4 +217,16 @@ class HotelRoomIssue(models.Model):
                                           time.strftime
                                           (DEFAULT_SERVER_DATETIME_FORMAT)))
     close_date = fields.Datetime('Fecha de resolucion', required=False)
+
+class AccountTax(models.Model):
+    _inherit = 'account.tax'    
+
+    # early checkin / late checkout
+
+    check_type = fields.Selection([('early', 'Early Checkin'),
+                               ('late', 'Late Check Out'),
+                               ],
+                              'Tipo de checkin/checkout')
+    hour_from = fields.Integer('Hora Desde', required=False)
+    hour_to = fields.Integer('Hora Hasta', required=False)
 
