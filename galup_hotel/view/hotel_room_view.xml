@@ -24,6 +24,12 @@
                             string="Desbloquear Habitacion" type="object" class="btn-primary" 
                             attrs="{'invisible': [('status', '!=', 'blocked')]}"/>
                 </field>
+                <xpath expr="//field[@name='room_line_ids']/form/group/field[@name='status']" position="after">
+                    <field name="debt_status" />
+                </xpath>
+                <xpath expr="//field[@name='room_line_ids']/tree/group/field[@name='status']" position="after">
+                    <field name="debt_status" />
+                </xpath>
             </field>
         </record>
 

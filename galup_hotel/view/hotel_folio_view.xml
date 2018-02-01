@@ -23,6 +23,8 @@
                     <field name="discount_id" />
                 </xpath>
                 <field name="invoice_status" position='after'>
+                    <field name="debt_status" />
+                    <newline />
                     <field name="early_checkin" attrs="{'readonly':[('check_applied','!=',False)]}"/>
                     <field name="early_checkin_hour" attrs="{'invisible':[('early_checkin','=',False)],'required':[('early_checkin','!=',False)],'readonly':['|',('state','!=','draft'),('check_applied','!=',False)]}" />
                     <field name="late_checkout" attrs="{'readonly':[('check_applied','!=',False)]}" />
@@ -35,6 +37,17 @@
                 </xpath>
 
 
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_hotel_folio1_tree_inherit">
+            <field name='name'>hotel.folio.tree</field>
+            <field name="inherit_id" ref="hotel.view_hotel_folio1_tree"/>
+            <field name="model">hotel.folio</field>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="debt_status" />
+                </field>
             </field>
         </record>
 
