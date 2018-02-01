@@ -135,7 +135,7 @@ class HotelFolio(models.Model):
     late_checkout = fields.Boolean('Late Checkin')
     early_checkin_hour = fields.Integer('Hora Early Checkin', required=False, default=lambda *a: 0)
     late_checkout_hour = fields.Integer('Hora Late Checkout', required=False, default=lambda *a: 11)
-    check_applied = fields.Boolean('Check applied')
+    check_applied = fields.Boolean('Check applied', default=lambda *a: False)
 
     @api.multi
     def calculate_check(self):
