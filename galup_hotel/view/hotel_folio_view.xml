@@ -23,18 +23,31 @@
                     <field name="discount_id" />
                 </xpath>
                 <field name="invoice_status" position='after'>
-                    <field name="early_checkin" />
-                    <field name="early_checkin_hour" attrs="{'invisible':[('early_checkin','=',False)],'required':[('early_checkin','!=',False)]}" />
-                    <field name="late_checkout" />
-                    <field name="late_checkout_hour" attrs="{'invisible':[('late_checkout','=',False)],'required':[('late_checkout','!=',False)]}" />
-                    <field name="check_applied" invisible="False"/>
+                    <field name="debt_status" />
+                    <newline />
+                    <field name="early_checkin" attrs="{'readonly':[('check_applied','!=',False)]}"/>
+                    <field name="early_checkin_hour" attrs="{'invisible':[('early_checkin','=',False)],'required':[('early_checkin','!=',False)],'readonly':['|',('state','!=','draft'),('check_applied','!=',False)]}" />
+                    <field name="late_checkout" attrs="{'readonly':[('check_applied','!=',False)]}" />
+                    <field name="late_checkout_hour" attrs="{'invisible':[('late_checkout','=',False)],'required':[('late_checkout','!=',False)], 'readonly':['|',('state','!=','draft'),('check_applied','!=',False)]}" />
+                    <field name="check_applied" invisible="True"/>
                 </field>
                 <xpath expr="//button[@name='action_done']" position="after">
-                    <button name="calculate_check" attrs="{'invisible':[('check_applied','!=',False)]}" string="Calcular Early Checkin/Late Checkout" type="object" class="oe_highlight" />
-                    <button name="uncalculate_check" attrs="{'invisible':[('check_applied','=',False)]}" string="Eliminar Early Checkin/Late Checkout" type="object" class="oe_highlight" />
+                    <button name="calculate_check" attrs="{'invisible':['|',('check_applied','!=',False),('state','!=','draft')]}" string="Calcular Early Checkin/Late Checkout" type="object" />
+                    <button name="uncalculate_check" attrs="{'invisible':['|',('check_applied','=',False),('state','!=','draft')]}" string="Eliminar Early Checkin/Late Checkout" type="object" />
                 </xpath>
 
 
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_hotel_folio1_tree_inherit">
+            <field name='name'>hotel.folio.tree</field>
+            <field name="inherit_id" ref="hotel.view_hotel_folio1_tree"/>
+            <field name="model">hotel.folio</field>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="debt_status" />
+                </field>
             </field>
         </record>
 

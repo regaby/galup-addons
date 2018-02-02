@@ -135,7 +135,8 @@ class HotelFolio(models.Model):
     late_checkout = fields.Boolean('Late Checkin')
     early_checkin_hour = fields.Integer('Hora Early Checkin', required=False, default=lambda *a: 0)
     late_checkout_hour = fields.Integer('Hora Late Checkout', required=False, default=lambda *a: 11)
-    check_applied = fields.Boolean('Check applied')
+    check_applied = fields.Boolean('Check applied', default=lambda *a: False)
+    debt_status = fields.Selection(string='Estado de deuda', related='hotel_invoice_id.state')
 
     @api.multi
     def calculate_check(self):
@@ -204,6 +205,12 @@ class HotelRoom(models.Model):
         self.status = 'available'
         self.isroom = True
         return True
+
+class FolioRoomLine(models.Model):
+
+    _inherit = 'folio.room.line'
+    debt_status = fields.Selection(string='Estado de deuda', related='folio_id.debt_status')
+    
 
 class HotelRoomIssue(models.Model):
 
