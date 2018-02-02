@@ -39,6 +39,7 @@
         'view/hotel_discount_view.xml',
         'view/hotel_room_view.xml',
         'view/account_tax_view.xml',
+        'view/hotel_room_state_view_view.xml',
         'wizard/room_issue_wizard_view.xml',
         'data/discount_data.xml',
         'data/floor_data.xml',
