@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>         
+
+
+        <record model="ir.ui.view" id="view_hotel_room_state_view_form">
+            <field name="name">hotel.room.state.view.form</field>
+            <field name="model">hotel.room.state.view</field>
+            <field name="arch" type="xml">
+                <form string="Estado de Habitaciones">
+                    <sheet>
+                        <group>
+                            <field name="room_id" />
+                            <field name="categ_id" />
+                            <field name="checkin_hour" />
+                            <field name="reserva_partner_id" />
+                            <field name="folio_id" />
+                            <field name="folio_partner_id" />
+                            <field name="pax" />
+                            <field name="checkout_hour" />
+                            <field name="folio_state" />
+                            <field name="status" />
+                            <field name="state" />
+                            
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view of Estado de Habitaciones -->
+        <record model="ir.ui.view" id="view_hotel_room_state_view_tree">
+            <field name="name">hotel.room.state.view.tree</field>
+            <field name="model">hotel.room.state.view</field>
+            <field name="arch" type="xml">
+                <tree string="Estado de Habitaciones">
+                    <field name="room_id" />
+                    <field name="categ_id" />
+                    <field name="checkin_hour" />
+                    <field name="reserva_partner_id" />
+                    <field name="folio_id" />
+                    <field name="folio_partner_id" />
+                    <field name="pax" />
+                    <field name="checkout_hour" />
+                    <field name="folio_state" />
+                    <field name="status" />
+                    <field name="state" />
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action of Estado de Habitaciones -->
+        <record model="ir.actions.act_window" id="hotel_room_state_view_action">
+            <field name="name">Estado de Habitaciones</field>
+            <field name="res_model">hotel.room.state.view</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Estado de Habitaciones" id="menu_hotel_room_state_view"
+            action="hotel_room_state_view_action" sequence="20"
+            parent="hotel_reservation.menu_hotel_reservation" />
+
+
+
+    </data>
+</odoo>

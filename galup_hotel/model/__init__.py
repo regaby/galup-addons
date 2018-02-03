@@ -1,1 +1,2 @@
 import res_partner
+import room_state_view
