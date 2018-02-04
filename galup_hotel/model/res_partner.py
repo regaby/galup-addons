@@ -68,7 +68,7 @@ class res_partner(models.Model):
         partner_data = self
         self.age= compute_age_from_dates (partner_data.birthday)
  
-    identification_id = fields.Char(size=20,string="Nro. Documento",help="DNI/CPF/Pasaporte/Travel document")
+    #identification_id = fields.Char(size=20,string="Nro. Documento",help="DNI/CPF/Pasaporte/Travel document")
     job_id = fields.Many2one('hr.job', 'Ocupación/Profesión')
     birthday = fields.Date('Fecha de nacimiento')
     gender = fields.Selection([('male', 'Hombre'), ('female', 'Mujer'), ('other', 'Otro')], string='Género')
@@ -84,11 +84,18 @@ class res_partner(models.Model):
     has_car = fields.Boolean(string="Tiene vehiculo")
     discount_id = fields.Many2one('hotel.discount', 'Descuento')
     hotelfolio_ids = fields.One2many('hotel.folio', 'partner_id', 'Folios')
-    
+    main_id_number = fields.Char('numero', store=False)
+
+    def _get_default_category(self, cr, uid, context=None):
+        res = self.pool.get('res.partner.id_category').search(cr, uid, [('code','=','DNI')], context=context)
+        return res and res[0] or False
 
     _defaults = {
         'is_company': False,
         'customer': False,
+        'main_id_number' : 0,
+        'main_id_category_id' : _get_default_category,
+        
     }
 
     _sql_constraints = [
