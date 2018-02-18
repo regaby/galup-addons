@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
     <openerp>
-        <data noupdate="1">
+        <data noupdate="0">
             <!-- Data to load service type -->
             <record model="hotel.service.type" id="service_type_1">
                 <field name="name">Frigobar</field> 
@@ -10,32 +10,38 @@
  			<record model="hotel.services" id="service_1">
                 <field name="name">Agua Saborizada</field>
                 <field name="list_price">30</field>
+                <field name="isservice">True</field>
                 <field name="categ_id" search="[('name','=','Frigobar')]" model="product.category"/>
 
             </record>
             <record model="hotel.services" id="service_2">
                 <field name="name">Agua Mineral</field>
                 <field name="list_price">35</field>
+                <field name="isservice">True</field>
                 <field name="categ_id" search="[('name','=','Frigobar')]" model="product.category"/>
             </record>
             <record model="hotel.services" id="service_3">
                 <field name="name">Gaseosa</field>
                 <field name="list_price">35</field>
+                <field name="isservice">True</field>
                 <field name="categ_id" search="[('name','=','Frigobar')]" model="product.category"/>
             </record>
             <record model="hotel.services" id="service_4">
                 <field name="name">Alfajor</field>
                 <field name="list_price">10</field>
+                <field name="isservice">True</field>
                 <field name="categ_id" search="[('name','=','Frigobar')]" model="product.category"/>
             </record>
             <record model="hotel.services" id="service_5">
                 <field name="name">Obleas</field>
                 <field name="list_price">15</field>
+                <field name="isservice">True</field>
                 <field name="categ_id" search="[('name','=','Frigobar')]" model="product.category"/>
             </record>
             <record model="hotel.services" id="service_6">
                 <field name="name">Saladix</field>
-                <field name="list_price">15</field>
+                <field name="list_price">15</field> 
+                <field name="isservice">True</field>
                 <field name="categ_id" search="[('name','=','Frigobar')]" model="product.category"/>
             </record>           
         </data>
