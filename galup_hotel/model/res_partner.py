@@ -153,6 +153,10 @@ class HotelFolio(models.Model):
     smoker_partner = fields.Boolean(String='¿Es Fumador?', related='partner_id.smoker') 
     nationality_partner = fields.Many2one('res.country', 'Nacionalidad' , related='partner_id.nationality_id', required=True)
 
+    @api.onchange('country_partner')
+    def on_change_nationality(self):
+        self.nationality_partner = self.country_partner
+
     @api.multi
     def calculate_check(self):
         if not self.early_checkin and not self.late_checkout:
