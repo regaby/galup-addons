@@ -73,7 +73,7 @@ class res_partner(models.Model):
     birthday = fields.Date('Fecha de nacimiento')
     gender = fields.Selection([('male', 'Hombre'), ('female', 'Mujer'), ('other', 'Otro')], string='Género')
     marital = fields.Selection([('single', 'Soltero/a'), ('married', 'Casado/a'), ('widower', 'Viudo/a'), ('divorced', 'Divorciado/a')], string='Estado civil')
-    smoker = fields.Boolean(string="Fumador")
+    smoker = fields.Boolean(string="¿Es fumador?")
     regular_passenger = fields.Boolean(string="Pasajero Frecuente")
     is_passenger = fields.Boolean()
     nationality_id = fields.Many2one('res.country', 'Nacionalidad (País)')
@@ -81,7 +81,7 @@ class res_partner(models.Model):
     age = fields.Char(string='Edad', 
         store=False, readonly=False, compute='_partner_age_fnt')
     observations = fields.Text('Observaciones')
-    has_car = fields.Boolean(string="Tiene vehiculo")
+    has_car = fields.Boolean(string="¿Tiene vehiculo?", default=False)
     discount_id = fields.Many2one('hotel.discount', 'Descuento')
     hotelfolio_ids = fields.One2many('hotel.folio', 'partner_id', 'Folios')
     main_id_number = fields.Char('numero', store=False)
@@ -144,6 +144,8 @@ class HotelFolio(models.Model):
     late_checkout_hour = fields.Integer('Hora Late Checkout', required=False, default=lambda *a: 11)
     check_applied = fields.Boolean('Check applied', default=lambda *a: False)
     debt_status = fields.Selection(string='Estado de deuda', related='hotel_invoice_id.state')
+    car_partner = fields.Boolean(string='¿Tiene vehículo?', related='partner_id.has_car')
+    smoker_partner = fields.Boolean(String='¿Es Fumador?', related='partner_id.smoker') 
 
     @api.multi
     def calculate_check(self):

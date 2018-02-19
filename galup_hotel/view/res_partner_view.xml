@@ -68,6 +68,15 @@
                     <field name="category_id" position="attributes">
                          <attribute name="invisible">True</attribute>
                     </field>
+                    <field name="street2" position="attributes">
+                         <attribute name="invisible">True</attribute>
+                    </field>
+                    <field name="zip" position="attributes">
+                         <attribute name="invisible">True</attribute>
+                    </field>
+                    <field name="website" position="attributes">
+                         <attribute name="invisible">True</attribute>
+                    </field>
                     <page name="sales_purchases" position="attributes">
                          <attribute name="invisible">True</attribute>
                          <attribute name="autofocus">False</attribute>

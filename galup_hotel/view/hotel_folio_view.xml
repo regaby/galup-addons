@@ -7,9 +7,10 @@
             <field name='name'>hotel.folio.form</field>
             <field name="inherit_id" ref="hotel.view_hotel_folio1_form"/>
             <field name="model">hotel.folio</field>
-            <field name="arch" type="xml">                    
-                <notebook position="inside">
-                    <page string="Huespedes">
+            <field name="arch" type="xml"> 
+               <!--  <notebook position="inside"> -->
+               <xpath expr="//form/sheet/notebook/page" position="after">
+                    <page string="Acompañantes">
                         <field name="guest_lines">
                             <tree editable="bottom">
                                 <field name="name"/>
@@ -18,7 +19,8 @@
                             </tree>
                         </field>
                     </page>
-                </notebook>
+                <!-- </notebook> -->
+            </xpath>
                 <xpath expr="//field[@name='room_lines']/form/notebook/page/group/field[@name='discount']" position="before">
                     <field name="discount_id" />
                 </xpath>
@@ -30,6 +32,11 @@
                     <field name="late_checkout" attrs="{'readonly':[('check_applied','!=',False)]}" />
                     <field name="late_checkout_hour" attrs="{'invisible':[('late_checkout','=',False)],'required':[('late_checkout','!=',False)], 'readonly':['|',('state','!=','draft'),('check_applied','!=',False)]}" />
                     <field name="check_applied" invisible="True"/>
+                </field>
+                <field name="email_partner" position='after'>
+                    <field name="car_partner" class="oe_inline"   attrs="{'invisible':[('partner_id','=',False)]}"/>
+                    <field name="smoker_partner" class="oe_inline"   attrs="{'invisible':[('partner_id','=',False)]}"/>
+
                 </field>
                 <xpath expr="//button[@name='action_done']" position="after">
                     <button name="calculate_check" attrs="{'invisible':['|',('check_applied','!=',False),('state','!=','draft')]}" string="Calcular Early Checkin/Late Checkout" type="object" />
