@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
     <openerp>
-        <data noupdate="0">
+        <data noupdate="1">
             <!-- Data to load service type -->
             <record model="hotel.service.type" id="service_type_1">
                 <field name="name">Frigobar</field> 

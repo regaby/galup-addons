@@ -33,6 +33,9 @@
                     <field name="late_checkout_hour" attrs="{'invisible':[('late_checkout','=',False)],'required':[('late_checkout','!=',False)], 'readonly':['|',('state','!=','draft'),('check_applied','!=',False)]}" />
                     <field name="check_applied" invisible="True"/>
                 </field>
+                <field name="country_partner" position='after'>
+                     <field name="nationality_partner" class="oe_inline"   attrs="{'invisible':[('partner_id','=',False)]}"/>
+                </field>
                 <field name="email_partner" position='after'>
                     <field name="car_partner" class="oe_inline"   attrs="{'invisible':[('partner_id','=',False)]}"/>
                     <field name="smoker_partner" class="oe_inline"   attrs="{'invisible':[('partner_id','=',False)]}"/>

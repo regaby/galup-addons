@@ -86,6 +86,11 @@ class res_partner(models.Model):
     hotelfolio_ids = fields.One2many('hotel.folio', 'partner_id', 'Folios')
     main_id_number = fields.Char('numero', store=False)
 
+
+    @api.onchange('country_id')
+    def on_change_nacionality(self):
+        self.nationality_id = self.country_id
+
     def _get_default_category(self, cr, uid, context=None):
         res = self.pool.get('res.partner.id_category').search(cr, uid, [('code','=','DNI')], context=context)
         return res and res[0] or False
@@ -146,6 +151,7 @@ class HotelFolio(models.Model):
     debt_status = fields.Selection(string='Estado de deuda', related='hotel_invoice_id.state')
     car_partner = fields.Boolean(string='¿Tiene vehículo?', related='partner_id.has_car')
     smoker_partner = fields.Boolean(String='¿Es Fumador?', related='partner_id.smoker') 
+    nationality_partner = fields.Many2one('res.country', 'Nacionalidad' , related='partner_id.nationality_id', required=True)
 
     @api.multi
     def calculate_check(self):
