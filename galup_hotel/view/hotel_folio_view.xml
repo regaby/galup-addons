@@ -34,7 +34,7 @@
                     <field name="check_applied" invisible="True"/>
                 </field>
                 <field name="country_partner" position='after'>
-                     <field name="nationality_partner" class="oe_inline"   attrs="{'invisible':[('partner_id','=',False)]}"/>
+                     <field name="nacionality_partner" class="oe_inline"   attrs="{'invisible':[('partner_id','=',False)]}"/>
                 </field>
                 <field name="email_partner" position='after'>
                     <field name="car_partner" class="oe_inline"   attrs="{'invisible':[('partner_id','=',False)]}"/>
