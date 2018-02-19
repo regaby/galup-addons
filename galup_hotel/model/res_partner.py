@@ -88,7 +88,7 @@ class res_partner(models.Model):
 
 
     @api.onchange('country_id')
-    def on_change_nacionality(self):
+    def on_change_nationality(self):
         self.nationality_id = self.country_id
 
     def _get_default_category(self, cr, uid, context=None):
