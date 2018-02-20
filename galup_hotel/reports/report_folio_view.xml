@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <report
+        id="reporte_folio"
+        model="hotel.folio"
+        string="Ficha de registro de pasajeros"
+        name="galup_hotel.report_folio"
+        file="galup_hotel.report_folio"
+        report_type="qweb-pdf"/>
+ </data>
+</openerp> 

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+	<template id="report_folio">
+    	<t t-call="report.html_container">
+        	<t t-foreach="docs" t-as="o">
+        		 <t t-call="report.external_layout">
+                <div class="page">
+                		
+                	<section class="s_title">
+        					   <div class="container">
+          						<div class="row">
+            						<div class="col-md-12">
+              							<h1 class="text-center">
+                    						<font style="font-size: 24px;"><b><u>FICHA DE REGISTRO DE HUÉSPEDES</u></b></font>   
+              							</h1>
+            						</div>
+          						</div>
+        					   </div>
+      					 </section>
+
+                 <hr class="s_separator"/>
+                
+                <section class="s_text_block" style="height: 112px; overflow: hidden;">
+                  <div class="container">
+                      <div class="row">
+                        <div class="col-md-12 mb0 mt0">
+                            <table class="table table-bordered">
+                              <tbody>
+                                  <tr>
+                                    <td>
+                                        <font style="font-size: 12px;"><b>Nombre y Apellido:&amp;nbsp;</b><span t-field="o.partner_id.name"/></font>
+                                    </td>
+                                    <td>
+                                        <font style="font-size: 12px;"><b>Número de Documento:&amp;nbsp;</b><span t-field="o.identification_id"/></font>
+                                    </td>
+                                  </tr>
+                              </tbody>
+                            </table>
+                            <table class="table table-bordered">
+                              <tbody>
+                                  <tr>
+                                    <td>
+                                        <font style="font-size: 12px;"><b>Nacionalidad:&amp;nbsp;</b><span t-field="o.nacionality_partner"/></font>
+                                    </td>
+                                    <td>
+                                        <font style="font-size: 12px;"><b>Provincia/Estado:&amp;nbsp;</b><span t-field="o.state_partner"/></font>
+                                    </td>
+                                    <td>
+                                        <font style="font-size: 12px;"><b>Ciudad:&amp;nbsp;</b><span t-field="o.city_partner"/></font>                   
+                                    </td>
+                                    <td>
+                                        <font style="font-size: 12px;"><b>Dirección:&amp;nbsp;</b><span t-field="o.adress_partner"/></font>
+                                    </td>
+                                  </tr>
+                              </tbody>
+                            </table>
+                            <table class="table table-bordered">
+                              <tbody>
+                                  <tr>
+                                    <td>
+                                        <font style="font-size: 12px;"><b>Edad:&amp;nbsp;</b><span t-field="o.partner_id.age"/></font>
+                                    </td>
+                                    <td>
+                                        <font style="font-size: 12px;"><b>Sexo:&amp;nbsp;</b><span t-field="o.partner_id.gender"/></font>
+                                    </td>
+                                    <td>
+                                        <font style="font-size: 12px;"><b>Estado Civil:&amp;nbsp;</b><span t-field="o.partner_id.marital"/></font>                   
+                                    </td>
+                                    <td>
+                                        <font style="font-size: 12px;"><b>Teléfono:&amp;nbsp;</b><span t-field="o.partner_id.phone"/></font>
+                                    </td>
+                                    <td>
+                                        <font style="font-size: 12px;"><b>Email:&amp;nbsp;</b><span t-field="o.partner_id.email"/></font>
+                                    </td>
+                                  </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                      </div>
+                  </div>
+                </section>
+
+                <hr class="s_separator mt8 mb0"/>
+
+                <section class="s_text_block mt50" style="height: 56px; overflow: hidden;">
+                  <div class="container">
+                      <div class="row">
+                        <div class="col-md-12 mt0 mb0">
+                            <table class="table table-bordered">
+                              <tbody>
+                                  <tr>
+                                    <td> 
+                                        <font style="font-size: 12px;"><b>Checkin:&amp;nbsp;</b><span t-field="o.checkin_date"/></font>
+                                    </td>
+                                    <td> 
+                                        <font style="font-size: 12px;"><b>Checkout:&amp;nbsp;</b><span t-field="o.checkout_date"/></font>
+                                    </td>
+                                  </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                      </div>
+                  </div>
+                </section>
+      
+                
+                  <hr class="s_separator mt0 mb0"/>
+
+                   <section class="s_text_block" style="height: 40px; overflow: hidden;">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 mt16 mb0">
+                              <p style="text-align: center; ">
+                                <font style="font-size: 55px;"><b>   </b></font>                                                            
+                              </p>
+                          </div>
+                        </div>
+                    </div>
+                  </section>
+                  <section class="s_text_block" style="height: 40px; overflow: hidden;">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 mt16 mb0">
+                              <p style="text-align: center; ">
+                                <font style="font-size: 55px;"><b>   </b></font>                                                            
+                              </p>
+                          </div>
+                        </div>
+                    </div>
+                  </section>
+                  <section class="s_text_block" style="height: 40px; overflow: hidden;">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 mt16 mb0">
+                              <p style="text-align: center; ">
+                                <font style="font-size: 55px;"><b>   </b></font>                                                            
+                              </p>
+                          </div>
+                        </div>
+                    </div>
+                  </section>
+                  
+                  <section class="s_text_block mt0" style="height: 64px; overflow: hidden;">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 mb0 mt0">
+                              <p><font style="font-size: 12px;"><b>Firma del huésped: ___________________________&amp;nbsp;</b>&amp;nbsp;</font>&amp;nbsp;</p>
+                    </div>
+                        </div>
+                    </div>
+                  </section>
+
+              
+          
+                  
+                  <hr class="s_separator mt0"/>
+
+                  <section class="s_text_block" style="height: 40px; overflow: hidden;">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 mt16 mb0">
+                              <p style="text-align: center; ">
+                                <font style="font-size: 12px;"><b></b></font>
+                              </p>
+                          </div>
+                        </div>
+                    </div>
+                  </section>
+                   <section class="s_text_block" style="height: 40px; overflow: hidden;">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 mt16 mb0">
+                              <p style="text-align: center; ">
+                                <font style="font-size: 12px;"><b></b></font>
+                              </p>
+                          </div>
+                        </div>
+                    </div>
+                  </section>
+                  <section class="s_text_block" style="height: 40px; overflow: hidden;">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 mt16 mb0">
+                              <p style="text-align: center; ">
+                                <font style="font-size: 55px;"><b>   </b></font>                                                            
+                              </p>
+                          </div>
+                        </div>
+                    </div>
+                  </section>
+                  <section class="s_text_block" style="height: 40px; overflow: hidden;">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 mt16 mb0">
+                              <p style="text-align: center; ">
+                                <font style="font-size: 55px;"><b>   </b></font>                                                            
+                              </p>
+                          </div>
+                        </div>
+                    </div>
+                  </section>
+                   <!--  <section class="s_big_picture bg-primary">
+                        <div class="container">
+                           <div class="row">
+                             <div class="col-md-2 col-md-offset-10"><img src="/static/image/smoke.jpg" class="pull-left" style="width: 100%; animation: none;"/>&amp;nbsp;</div>              
+                           </div>
+                        </div>
+                      
+                    </section> -->
+                  
+                  <section class="s_text_block" style="height: 40px; overflow: hidden;">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 mt16 mb0">
+                              <p style="text-align: center; ">
+                                <font style="font-size: 12px;"><b>Las únicas áreas permitidas para fumar son, el área de la terraza y la parte frontal del hotel.
+De fumarse en alguna de las áreas prohibidas se le cobrara una multa correspondiente al valor de una noche de alojamiento</b></font>
+                              </p>
+                          </div>
+                        </div>
+                    </div>
+                  </section>
+                  <section class="s_text_block" style="height: 40px; overflow: hidden;">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 mt16 mb0">
+                              <p style="text-align: center; ">
+                                <font style="font-size: 55px;"><b>   </b></font>                                                            
+                              </p>
+                          </div>
+                        </div>
+                    </div>
+                  </section>
+                  <section class="s_text_block" style="height: 40px; overflow: hidden;">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 mt16 mb0">
+                              <p style="text-align: center; ">
+                                <font style="font-size: 55px;"><b>   </b></font>                                                            
+                              </p>
+                          </div>
+                        </div>
+                    </div>
+                  </section>
+                  <section class="s_text_block" style="height: 40px; overflow: hidden;">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 mt16 mb0">
+                              <p style="text-align: center; ">
+                                <font style="font-size: 55px;"><b>   </b></font>                                                            
+                              </p>
+                          </div>
+                        </div>
+                    </div>
+                  </section>
+                  <section class="s_text_block" style="height: 40px; overflow: hidden;">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 mt16 mb0">
+                              <p style="text-align: center; ">
+                                <font style="font-size: 8px;">GRACIAS POR ELEGIR AVEMAR APART HOTEL.</font>
+                              </p>
+                          </div>
+                        </div>
+                    </div>
+                  </section>
+                </div>
+      					
+  						</t>
+            </t>
+
+    	</t>
+	</template>
+</data>
+</openerp>
+
