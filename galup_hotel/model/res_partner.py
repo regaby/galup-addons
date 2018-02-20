@@ -191,6 +191,18 @@ class HotelFolio(models.Model):
             line.tax_id = [(6, 0, tax_ids)]
         self.write({'check_applied': False})
 
+    @api.multi
+    def unlink(self):
+        """
+        Overrides orm unlink method.
+        @param self: The object pointer
+        @return: True/False.
+        """
+        for folio in self:
+            if folio.state not in ['cancel']:
+                raise ValidationError(_('Para poder eliminar el registro, el mismo debe estar en estado cancelado.'))
+        return super(HotelFolio, self).unlink()
+
 class HotelFolioLine(models.Model):
 
     _inherit = 'hotel.folio.line'
@@ -255,4 +267,22 @@ class AccountTax(models.Model):
                               'Tipo de checkin/checkout')
     hour_from = fields.Integer('Hora Desde', required=False)
     hour_to = fields.Integer('Hora Hasta', required=False)
+    name = fields.Char(string='Nombre del gasto', required=True)
+
+class HotelReservation(models.Model):
+
+    _name = "hotel.reservation"
+    _inherit = 'hotel.reservation'
+
+    @api.multi
+    def unlink(self):
+        """
+        Overrides orm unlink method.
+        @param self: The object pointer
+        @return: True/False.
+        """
+        for reservation in self:
+            if reservation.state not in ['cancel']:
+                raise ValidationError(_('Para poder eliminar el registro, el mismo debe estar en estado cancelado.'))
+        return super(HotelReservation, self).unlink()
 
