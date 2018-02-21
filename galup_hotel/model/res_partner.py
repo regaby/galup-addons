@@ -103,9 +103,6 @@ class res_partner(models.Model):
         
     }
 
-    _sql_constraints = [
-        ('identification_id_uniq', 'UNIQUE (identification_id)',  'El número de identificación debe ser único'),
-    ]
 
     # Método name_get sobrescrito para que se muestre en el campo Huesped el nombre + DNI + cantidad de visitas
     def name_get(self, cr, uid, ids, context=None):
@@ -122,6 +119,13 @@ class res_partner(models.Model):
     		tit = name + ' (DNI: ' + dni + ', ' ' Visitas: ' + visit + ') '
         	res.append((partner.id, tit))
     	return res
+
+class ResPartnerIdNumber(models.Model):
+    _name = "res.partner.id_number"
+    _inherit = "res.partner.id_number"
+    _sql_constraints = [
+        ('partner_id_number_uniq', 'UNIQUE (category_id,name)',  'El número de identificación debe ser único'),
+    ]
 
 class Guest(models.Model):
 
