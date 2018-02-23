@@ -155,7 +155,8 @@ class HotelFolio(models.Model):
     debt_status = fields.Selection(string='Estado de deuda', related='hotel_invoice_id.state')
     car_partner = fields.Boolean(string='¿Tiene vehículo?', related='partner_id.has_car')
     smoker_partner = fields.Boolean(String='¿Es Fumador?', related='partner_id.smoker') 
-    nacionality_partner = fields.Many2one('res.country', 'Nacionalidad' , related='partner_id.nationality_id', required=True)
+    nacionality_partner = fields.Many2one('res.country', 'Nacionalidad' , related='partner_id.nationality_id', required=True, readonly=True,
+                                    states={'draft': [('readonly', False)]},)
 
     @api.onchange('country_partner')
     def on_change_nationality(self):
@@ -290,3 +291,52 @@ class HotelReservation(models.Model):
                 raise ValidationError(_('Para poder eliminar el registro, el mismo debe estar en estado cancelado.'))
         return super(HotelReservation, self).unlink()
 
+class SaleOrder(models.Model):
+    _name = "sale.order"
+    _inherit = "sale.order"
+
+    state = fields.Selection([
+        ('draft', 'Borrador'),
+        ('sent', ''),
+        ('sale', 'Checkin Realizado'),
+        ('done', 'Checkout Realizado'),
+        ('cancel', 'Cancelled'),
+        ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='draft')
+
+class AccountInvoice(models.Model):
+    _name = "account.invoice"
+    _inherit = "account.invoice"
+
+    state = fields.Selection([
+            ('draft','Factura en Borrador'),
+            ('proforma', 'Pro-forma'),
+            ('proforma2', 'Pro-forma'),
+            ('open', 'Factura Validada'),
+            ('paid', 'Factura Pagada'),
+            ('cancel', 'Cancelled'),], string='Status', index=True, readonly=True, default='draft',
+        track_visibility='onchange', copy=False,
+        help=" * The 'Draft' status is used when a user is encoding a new and unconfirmed Invoice.\n"
+             " * The 'Pro-forma' status is used the invoice does not have an invoice number.\n"
+             " * The 'Open' status is used when user create invoice, an invoice number is generated. Its in open status till user does not pay invoice.\n"
+             " * The 'Paid' status is set automatically when the invoice is paid. Its related journal entries may or may not be reconciled.\n"
+             " * The 'Cancelled' status is used when user cancel invoice.")
+
+class SaleAdvancePaymentInv(models.TransientModel):
+    _name = "sale.advance.payment.inv"    
+    _inherit = "sale.advance.payment.inv"
+
+    @api.model
+    def _get_advance_payment_method(self):
+        if self._count() == 1:
+            sale_obj = self.env['sale.order']
+            order = sale_obj.browse(self._context.get('active_ids'))[0]
+            if all([line.product_id.invoice_policy == 'order' for line in order.order_line]) or order.invoice_count:
+                return 'all'
+        return 'delivered'
+
+    advance_payment_method = fields.Selection([
+        # ('delivered', 'Invoiceable lines'),
+        ('all', 'Facturar lineas'),
+        # ('percentage', 'Down payment (percentage)'),
+        # ('fixed', 'Down payment (fixed amount)')
+        ], string='What do you want to invoice?', default=_get_advance_payment_method, required=True)

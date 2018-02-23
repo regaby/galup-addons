@@ -25,7 +25,7 @@
                     <field name="discount_id" />
                 </xpath>
                 <field name="invoice_status" position='after'>
-                    <field name="debt_status" />
+                    <field name="debt_status" attrs="{'invisible':[('invoice_status','!=','invoiced')]}"/>
                     <newline />
                     <field name="early_checkin" attrs="{'readonly':[('check_applied','!=',False)]}"/>
                     <field name="early_checkin_hour" attrs="{'invisible':[('early_checkin','=',False)],'required':[('early_checkin','!=',False)],'readonly':['|',('state','!=','draft'),('check_applied','!=',False)]}" />
@@ -56,7 +56,7 @@
             <field name="model">hotel.folio</field>
             <field name="arch" type="xml">
                 <field name="state" position="after">
-                    <field name="debt_status" />
+                    <field name="debt_status"/>
                 </field>
             </field>
         </record>

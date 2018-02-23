@@ -20,11 +20,11 @@ class HotelRoomStateView(models.Model):
     folio_partner_id = fields.Many2one('res.partner', string='Huesped Folio', readonly=True)
     folio_name = fields.Char(string='Folio', readonly=True)
     folio_state = fields.Selection([
-            ('draft','Borrador'),
+            ('draft','Factura en Borrador'),
             ('proforma', 'Pro-forma'),
             ('proforma2', 'Pro-forma'),
-            ('open', 'Abierto'),
-            ('paid', 'Pagado'),
+            ('open', 'Factura Validada'),
+            ('paid', 'Factura Pagada'),
             ('cancel', 'Cancelado'),
         ], string='Estado de Deuda', readonly=True)
     pax = fields.Integer('Capacity', readonly=True)
