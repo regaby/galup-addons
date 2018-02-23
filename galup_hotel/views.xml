@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+        <template id="assets_backend" name="custom bar assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/galup_hotel/static/src/css/style.css"/>
+            </xpath>
+        </template>
+
+        <template id="fav_ico" name="Soltic Icon" inherit_id="web.layout">
+            <xpath expr="//html/head/link[1]" position="replace">
+                <link rel="shortcut icon"
+                    href="/galup_hotel/static/src/img/favicon.png"
+                    type="image/x-icon" />
+            </xpath>
+        </template>
+
+</odoo>
+

@@ -50,7 +50,10 @@
         'data/service_data.xml',
         'reports/report_folio_view.xml',
         'reports/report_folio_template.xml',
+        'views.xml',
+
     ],
+    'qweb': ['static/src/xml/base.xml'],
     "installable": True,
     "active": False,
 }
