@@ -28,9 +28,9 @@
                     <field name="debt_status" attrs="{'invisible':[('invoice_status','!=','invoiced')]}"/>
                     <newline />
                     <field name="early_checkin" attrs="{'readonly':[('check_applied','!=',False)]}"/>
-                    <field name="early_checkin_hour" attrs="{'invisible':[('early_checkin','=',False)],'required':[('early_checkin','!=',False)],'readonly':['|',('state','!=','draft'),('check_applied','!=',False)]}" />
+                    <field name="early_checkin_hour" attrs="{'invisible':[('early_checkin','=',False)],'required':[('early_checkin','!=',False)],'readonly':['|',('state','not in',['draft','sale']),('check_applied','!=',False)]}" />
                     <field name="late_checkout" attrs="{'readonly':[('check_applied','!=',False)]}" />
-                    <field name="late_checkout_hour" attrs="{'invisible':[('late_checkout','=',False)],'required':[('late_checkout','!=',False)], 'readonly':['|',('state','!=','draft'),('check_applied','!=',False)]}" />
+                    <field name="late_checkout_hour" attrs="{'invisible':[('late_checkout','=',False)],'required':[('late_checkout','!=',False)], 'readonly':['|',('state','not in',['draft','sale']),('check_applied','!=',False)]}" />
                     <field name="check_applied" invisible="True"/>
                 </field>
                 <field name="country_partner" position='after'>
@@ -42,8 +42,8 @@
 
                 </field>
                 <xpath expr="//button[@name='action_done']" position="after">
-                    <button name="calculate_check" attrs="{'invisible':['|',('check_applied','!=',False),('state','!=','draft')]}" string="Calcular Early Checkin/Late Checkout" type="object" />
-                    <button name="uncalculate_check" attrs="{'invisible':['|',('check_applied','=',False),('state','!=','draft')]}" string="Eliminar Early Checkin/Late Checkout" type="object" />
+                    <button name="calculate_check" attrs="{'invisible':['|',('check_applied','!=',False),('state','not in',['draft','sale'])]}" string="Calcular Early Checkin/Late Checkout" type="object" />
+                    <button name="uncalculate_check" attrs="{'invisible':['|',('check_applied','=',False),('state','not in',['draft','sale'])]}" string="Eliminar Early Checkin/Late Checkout" type="object" />
                 </xpath>
 
 
