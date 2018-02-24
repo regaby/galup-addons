@@ -132,7 +132,7 @@
 		</record>
 
         <record model="ir.actions.act_window" id="action_res_partner_passenger">
-            <field name="name">Huesped</field>
+            <field name="name">Registro de Huésped</field>
             <field name="res_model">res.partner</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
@@ -150,7 +150,9 @@
             </field>
         </record>
 
-        <menuitem action="action_res_partner_passenger" id="menu_action_res_partner_passenger" parent="hotel_reservation.menu_hotel_reservation" sequence="30"/>
+        <menuitem id="menu_action_res_partner_passenger" parent="hotel.hotel_management_menu" sequence="40" name="Huésped"/>
+
+        <menuitem action="action_res_partner_passenger" id="menu_action_res_partner_passenger_menu" parent="menu_action_res_partner_passenger" />
 
     </data>
 </odoo>

@@ -59,8 +59,8 @@
         </record>
 
         <menuitem name="Estado de Habitaciones" id="menu_hotel_room_state_view"
-            action="hotel_room_state_view_action" sequence="20"
-            parent="hotel_reservation.menu_hotel_reservation" />
+            action="hotel_room_state_view_action" sequence="1"
+            parent="hotel.hotel_management_menu" />
 
 
 
