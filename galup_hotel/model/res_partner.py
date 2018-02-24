@@ -155,8 +155,7 @@ class HotelFolio(models.Model):
     debt_status = fields.Selection(string='Estado de deuda', related='hotel_invoice_id.state')
     car_partner = fields.Boolean(string='¿Tiene vehículo?', related='partner_id.has_car')
     smoker_partner = fields.Boolean(String='¿Es Fumador?', related='partner_id.smoker') 
-    nacionality_partner = fields.Many2one('res.country', 'Nacionalidad' , related='partner_id.nationality_id', required=True, readonly=True,
-                                    states={'draft': [('readonly', False)]},)
+    nacionality_partner = fields.Many2one('res.country', 'Nacionalidad' , related='partner_id.nationality_id', required=True)
 
     @api.onchange('country_partner')
     def on_change_nationality(self):
