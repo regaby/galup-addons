@@ -34,6 +34,7 @@
     "depends": ['hotel','hotel_reservation','hr','account_tax_python', 'partner_identification','avemar_backend_theme'],
     "data": [
         'security/ir.model.access.csv',
+        'security/ir_ui_menu_view.xml',
         'view/res_partner_view.xml',
         'view/hotel_folio_view.xml',
         'view/hotel_discount_view.xml',
