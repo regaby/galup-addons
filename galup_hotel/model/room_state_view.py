@@ -27,8 +27,8 @@ class HotelRoomStateView(models.Model):
             ('paid', 'Factura Pagada'),
             ('cancel', 'Cancelado'),
         ], string='Estado de Deuda', readonly=True)
-    pax = fields.Integer('Capacity', readonly=True)
-    checkout_hour = fields.Char('Hora de Salida')
+    pax = fields.Integer('Capacidad', readonly=True)
+    checkout_hour = fields.Char('Salida')
     name = fields.Char('Name')
 
     _order = 'name asc'
@@ -44,13 +44,14 @@ class HotelRoomStateView(models.Model):
                 join product_product pp on (hr.product_id=pp.id)
                 join product_template pt on (pp.product_tmpl_id=pt.id)
                 join product_category pc on (pt.categ_id=pc.id)
-                left join (select check_in::time - '03:00:00'::time as checkin_hour, room_id , rp.name, hr.partner_id
+                left join (select check_in as checkin_hour, room_id , rp.name, hr.partner_id
                     from hotel_room_reservation_line  hrrl
                     join hotel_reservation hr on (hrrl.reservation_id=hr.id)
                     join res_partner rp on (rp.id=hr.partner_id)
-                    where check_in::date = now()::date) reserva on (reserva.room_id = hr.id)
+                    where check_in::date = now()::date and hrrl.state='assigned') reserva on (reserva.room_id = hr.id)
                 left join (select frl.room_id, so.partner_id, rp.name as partner_name, hf.name, coalesce(guest.count,0) + 1 as PAX, ai.state, hf.id as folio_id, 
-                        case when check_out::date = now()::date then check_out::time - '03:00:00'::time  end as checkout_hour
+                        --case when check_out::date = now()::date then check_out::time - '03:00:00'::time  end as checkout_hour
+                        check_out as checkout_hour
                     from folio_room_line frl
                     join hotel_folio hf on (frl.folio_id = hf.id)
                     join sale_order so on (hf.order_id=so.id)
