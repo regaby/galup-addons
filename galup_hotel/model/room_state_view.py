@@ -44,7 +44,7 @@ class HotelRoomStateView(models.Model):
                 join product_product pp on (hr.product_id=pp.id)
                 join product_template pt on (pp.product_tmpl_id=pt.id)
                 join product_category pc on (pt.categ_id=pc.id)
-                left join (select check_in as checkin_hour, room_id , rp.name, hr.partner_id
+                left join (select check_in::time - '03:00:00'::time as checkin_hour, room_id , rp.name, hr.partner_id
                     from hotel_room_reservation_line  hrrl
                     join hotel_reservation hr on (hrrl.reservation_id=hr.id)
                     join res_partner rp on (rp.id=hr.partner_id)
