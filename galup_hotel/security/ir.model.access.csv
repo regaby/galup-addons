@@ -5,7 +5,7 @@ access_hotel_room_issue,access_hotel_room_issue,model_hotel_room_issue,,1,0,0,0
 access_hotel_room_state_view,access_hotel_room_state_view,model_hotel_room_state_view,,1,0,0,0
 access_hotel_room_issue,access_hotel_room_issue,model_hotel_room_issue,hotel.group_hotel_manager,1,1,1,1
 access_hotel_guest,access_hotel_guest,model_hotel_guest,hotel.group_hotel_user,1,1,1,1
-access_hr_job_user,access_hr_job_user,hr.model_hr_job,hotel.group_hotel_user,1,0,0,0
+access_hr_job_user,access_hr_job_user,hr.model_hr_job,hotel.group_hotel_user,1,1,1,0
 access_hr_job_manager,access_hr_job_manager,hr.model_hr_job,hotel.group_hotel_manager,1,1,1,1
 access_prod_temp,access_prod_temp,l10n_ar_account.model_product_template,hotel.group_hotel_manager,1,1,1,1
 access_prod_price_history,access_prod_price_history,product.model_product_price_history,hotel.group_hotel_manager,1,1,1,1
@@ -21,3 +21,4 @@ access_stock_move_manager,access_stock_move_manager,sale_stock.model_stock_move,
 access_stock_picking_manager,access_stock_picking_manager,sale_stock.model_stock_picking,hotel.group_hotel_manager,1,1,1,1
 access_stock_move_user,access_stock_move_user,sale_stock.model_stock_move,hotel.group_hotel_user,1,1,1,0
 access_stock_picking_user,access_stock_picking_user,sale_stock.model_stock_picking,hotel.group_hotel_user,1,1,1,0
+access_account_journal_user,access_account_journal_user,account_check.model_account_journal,hotel.group_hotel_user,1,0,0,0
