@@ -59,5 +59,6 @@ class HotelRoomStateView(models.Model):
                     left join (select folio_id, count(*) from hotel_guest group by folio_id) guest on (guest.folio_id = hf.id)
                     left join account_invoice ai on (hf.hotel_invoice_id = ai.id)
                     where check_in::date <= now()::date
+                    and so.state not in ('done','cancel')
                     and check_out::date >= now()::date) folio on (folio.room_id = hr.id)
         )""" )
