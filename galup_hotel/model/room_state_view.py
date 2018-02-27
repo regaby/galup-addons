@@ -51,7 +51,7 @@ class HotelRoomStateView(models.Model):
                     where check_in::date = now()::date and hrrl.state='assigned') reserva on (reserva.room_id = hr.id)
                 left join (select frl.room_id, so.partner_id, rp.name as partner_name, hf.name, coalesce(guest.count,0) + 1 as PAX, ai.state, hf.id as folio_id, 
                         --case when check_out::date = now()::date then check_out::time - '03:00:00'::time  end as checkout_hour
-                        check_out as checkout_hour
+                        check_out - '03:00:00'::time as checkout_hour
                     from folio_room_line frl
                     join hotel_folio hf on (frl.folio_id = hf.id)
                     join sale_order so on (hf.order_id=so.id)
