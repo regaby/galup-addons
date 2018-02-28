@@ -28,6 +28,15 @@ from openerp.exceptions import except_orm, UserError, ValidationError
 
 class HotelDiscount(models.Model):
 
+    def name_get(self, cr, uid, ids, context=None):
+        res = []
+        discounts = self.browse(cr, uid, ids, context)
+        for disc in discounts:
+            tit = '%s (%d'%(disc.name,disc.discount)
+            tit=tit+"%)"
+            res.append((disc.id, tit))
+        return res
+
     _name = 'hotel.discount'
 
     name = fields.Char('Nombre', required=True)
