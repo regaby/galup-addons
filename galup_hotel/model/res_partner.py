@@ -124,7 +124,7 @@ class ResPartnerIdNumber(models.Model):
     _name = "res.partner.id_number"
     _inherit = "res.partner.id_number"
     _sql_constraints = [
-        ('partner_id_number_uniq', 'UNIQUE (category_id,name)',  'El número de identificación debe ser único'),
+        ('partner_id_number_uniq', 'UNIQUE (category_id,name)',  'El número de identificación del huésped debe ser único'),
     ]
 
 class Guest(models.Model):
