@@ -161,10 +161,13 @@ class HotelFolio(models.Model):
     early_checkin_hour = fields.Integer('Hora Early Checkin', required=False, default=lambda *a: 0)
     late_checkout_hour = fields.Integer('Hora Late Checkout', required=False, default=lambda *a: 11)
     check_applied = fields.Boolean('Check applied', default=lambda *a: False)
-    debt_status = fields.Selection(string='Estado de deuda', related='hotel_invoice_id.state')
+    invoice_state = fields.Selection(string='Estado de Factura', related='hotel_invoice_id.state')
     car_partner = fields.Boolean(string='¿Tiene vehículo?', related='partner_id.has_car')
     smoker_partner = fields.Boolean(String='¿Es Fumador?', related='partner_id.smoker') 
     nacionality_partner = fields.Many2one('res.country', 'Nacionalidad' , related='partner_id.nationality_id', required=True)
+    debt_status = fields.Selection([('debe', 'Debe'),
+                               ('pagado', 'Pagado (Anotar en observaciones los detalles del pago)'),],
+                              'Estado de Deuda', default='debe', required=True)
 
     @api.onchange('country_partner')
     def on_change_nationality(self):
@@ -253,7 +256,8 @@ class HotelRoom(models.Model):
 class FolioRoomLine(models.Model):
 
     _inherit = 'folio.room.line'
-    debt_status = fields.Selection(string='Estado de deuda', related='folio_id.debt_status')
+    invoice_state = fields.Selection(string='Estado de Factura', related='folio_id.invoice_state')
+    debt_status = fields.Selection(string='Estado de Factura', related='folio_id.debt_status')
     
 
 class HotelRoomIssue(models.Model):

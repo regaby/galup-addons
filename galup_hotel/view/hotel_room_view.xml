@@ -26,9 +26,11 @@
                 </field>
                 <xpath expr="//field[@name='room_line_ids']/form/group/field[@name='status']" position="after">
                     <field name="debt_status" />
+                    <field name="invoice_state" group="hotel.group_hotel_manager"/>
                 </xpath>
                 <xpath expr="//field[@name='room_line_ids']/tree/field[@name='status']" position="after">
                     <field name="debt_status" />
+                    <field name="invoice_state" group="hotel.group_hotel_manager"/>
                 </xpath>
                 <page name="Comodidades" position="attributes">
                     <attribute name="invisible">True</attribute>
