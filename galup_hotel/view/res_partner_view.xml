@@ -125,8 +125,7 @@
     		<field name="inherit_id" ref="base.view_res_partner_filter"/>
     		<field name="arch" type="xml">
        			 	<field name="name" position="after">
-                         <field name="main_id_number" string="DNI"/>
-                         <field name="name"/>
+
                     </field>
     		</field>
 		</record>
@@ -135,7 +134,7 @@
             <field name="name">Registro de Huésped</field>
             <field name="res_model">res.partner</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,search</field>
             <field name="view_id" eval="view_res_partner_tree"/>
             <field name="domain">[('customer','=','True')]</field>
             <field name="context">{'default_customer': 'True'}</field>
