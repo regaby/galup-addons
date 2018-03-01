@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    <record id="report_regitro_huesped" model="ir.actions.report.xml">
+        <field name="name">Ficha de Registro de Pasajeros</field>
+        <field name="type">ir.actions.report.xml</field>
+        <field name="model">hotel.folio</field>
+        <field name="report_name">registro_huesped</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <field name="out_format">2</field>
+        <field name="parser_loc">galup_hotel/reports/registro_huesped.py</field>
+        <field name="report_rml">galup_hotel/reports/registro_huesped.odt</field>
+        <field name="parser_state">loc</field>
+        <field name="tml_source">file</field>
+    </record>
+    </data>
+</openerp>
+
