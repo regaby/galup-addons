@@ -93,7 +93,7 @@
                     </xpath> 
                     <xpath expr="/form/sheet/notebook/page" position="before">
                         <page string="Folios" autofocus="autofocus">
-                            <field name="hotelfolio_ids"/>
+                            <field name="hotelfolio_ids" context="{'default_partner_id': id}"/>
                         </page>
                    </xpath>
                     <!-- <page name="internal_notes" position="replace">
@@ -125,7 +125,9 @@
     		<field name="inherit_id" ref="base.view_res_partner_filter"/>
     		<field name="arch" type="xml">
        			 	<field name="name" position="after">
-
+<!--                          <field name="name"/> -->
+<!--                          <field name="main_id_number"/> -->
+<!--                          <field name="phone"/> -->
                     </field>
     		</field>
 		</record>
