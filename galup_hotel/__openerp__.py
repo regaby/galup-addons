@@ -52,7 +52,7 @@
         # 'reports/report_folio_view.xml',
         'reports/report_folio_template.xml',
         'views.xml',
-        'reports/registro_huesped_report.xml',
+        # 'reports/registro_huesped_report.xml',
 
     ],
     'qweb': ['static/src/xml/base.xml'],
