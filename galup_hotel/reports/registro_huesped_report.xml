@@ -8,7 +8,7 @@
         <field name="report_name">registro_huesped</field>
         <field name="report_type">aeroo</field>
         <field name="in_format">oo-odt</field>
-        <field name="out_format">2</field>
+        <field name="out_format">4</field>
         <field name="parser_loc">galup_hotel/reports/registro_huesped.py</field>
         <field name="report_rml">galup_hotel/reports/registro_huesped.odt</field>
         <field name="parser_state">loc</field>
