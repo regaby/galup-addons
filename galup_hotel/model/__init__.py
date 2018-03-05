@@ -1,2 +1,5 @@
 import res_partner
 import room_state_view
+import quick_room_blocked
+import quick_reservation
+import quick_folio
