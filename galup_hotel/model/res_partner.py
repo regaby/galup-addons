@@ -157,7 +157,7 @@ class HotelFolio(models.Model):
                                          'sent': [('readonly', False)]},
                                  help="Acompañantes.")
     early_checkin = fields.Boolean('Early Checkin')
-    late_checkout = fields.Boolean('Late Checkin')
+    late_checkout = fields.Boolean('Late Checkout')
     early_checkin_hour = fields.Integer('Hora Early Checkin', required=False, default=lambda *a: 0)
     late_checkout_hour = fields.Integer('Hora Late Checkout', required=False, default=lambda *a: 11)
     check_applied = fields.Boolean('Check applied', default=lambda *a: False)
