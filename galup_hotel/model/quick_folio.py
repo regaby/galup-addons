@@ -60,7 +60,7 @@ class QuickFolio(models.TransientModel):
                 date = self._context['date'][0:10]
                 cin = date+' 23:59:59'
                 cout = date+' 00:00:00'
-                folio_id = folio_room_obj.search([('room_id','=',int(roomid)),('check_in','<=',cin),('check_out','>=',cout)])
+                folio_id = folio_room_obj.search([('room_id','=',int(roomid)),('check_in','<=',cin),('check_out','>=',cout)],order="check_out desc",limit=1)
                 if folio_id:
                     folio = folio_obj.browse(folio_id.folio_id.id)
                     res.update({'partner_id': folio.partner_id.id,
