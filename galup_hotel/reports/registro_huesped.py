@@ -19,7 +19,7 @@ class Parser(report_sxw.rml_parse):
         self.localcontext.update({
             'get_gender':self._get_gender,
             'get_marital':self._get_marital,
-            
+            'get_room' : self._get_room,
         })
         
     def _get_gender(self, gender):
@@ -27,3 +27,11 @@ class Parser(report_sxw.rml_parse):
 
     def _get_marital(self, marital):
         return MARITAL[marital]
+
+    def _get_room(self):
+        cr = self.cr 
+        uid = self.uid
+
+        hotel_folio = self.localcontext['active_ids']
+        o = self.pool.get('hotel.folio').browse(cr, uid, hotel_folio[0])
+        return o.room_lines
