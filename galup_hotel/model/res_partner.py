@@ -24,6 +24,7 @@ import openerp.addons.decimal_precision as dp
 import time
 from openerp.tools import misc, DEFAULT_SERVER_DATETIME_FORMAT
 from openerp.exceptions import except_orm, UserError, ValidationError
+import re
 
 
 class HotelDiscount(models.Model):
@@ -332,6 +333,45 @@ class AccountInvoice(models.Model):
              " * The 'Open' status is used when user create invoice, an invoice number is generated. Its in open status till user does not pay invoice.\n"
              " * The 'Paid' status is set automatically when the invoice is paid. Its related journal entries may or may not be reconciled.\n"
              " * The 'Cancelled' status is used when user cancel invoice.")
+
+    @api.multi
+    @api.depends('document_number', 'number')
+    def _get_invoice_number(self):
+        """ Funcion que calcula numero de punto de venta y numero de factura
+        a partir del document number. Es utilizado principalmente por el modulo
+        de vat ledger citi
+        """
+        # TODO mejorar estp y almacenar punto de venta y numero de factura por
+        # separado, de hecho con esto hacer mas facil la carga de los
+        # comprobantes de compra
+
+        # decidimos obtener esto solamente para comprobantes con doc number
+        for rec in self:
+            str_number = rec.display_name or False
+            if str_number:
+                if rec.document_type_id.code in ['33', '99', '331', '332']:
+                    point_of_sale = '0'
+                    # leave only numbers and convert to integer
+                    invoice_number = str_number
+                # despachos de importacion
+                elif rec.document_type_id.code == '66':
+                    point_of_sale = '0'
+                    invoice_number = '0'
+                elif "-" in str_number:
+                    splited_number = str_number.split('-')
+                    invoice_number = splited_number.pop()
+                    point_of_sale = splited_number.pop()
+                elif "-" not in str_number and len(str_number) == 12:
+                    point_of_sale = str_number[:4]
+                    invoice_number = str_number[-8:]
+                else:
+                    raise ValidationError(_(
+                        'Could not get invoice number and point of sale for '
+                        'invoice id %i') % (rec.id))
+                rec.invoice_number = int(
+                    re.sub("[^0-9]", "", invoice_number))
+                rec.point_of_sale_number = int(
+                    re.sub("[^0-9]", "", point_of_sale))
 
 class SaleAdvancePaymentInv(models.TransientModel):
     _name = "sale.advance.payment.inv"    
