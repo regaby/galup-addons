@@ -37,6 +37,7 @@ class QuickFolio(models.TransientModel):
     checkin = fields.Datetime('Check In', required=False)
     checkout = fields.Datetime('Check Out', required=False)
     observations = fields.Text('Observaciones')
+    folio_id = fields.Many2one('hotel.folio', 'Folio')
     
 
     @api.model
@@ -67,6 +68,7 @@ class QuickFolio(models.TransientModel):
                         'checkin':folio.checkin_date,
                         'checkout':folio.checkout_date,
                         'observations':folio.observations,
+                        'folio_id': folio.id,
                         })
 
         return res

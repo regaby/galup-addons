@@ -19,6 +19,7 @@
                              <field name="checkin" readonly="1"/>
                              <field name="checkout" readonly="1"/>
                              <field name="observations" readonly="1"/>
+                             <field name="folio_id" readonly="1"/>
                          </group>
                      </sheet>
                      <!-- <footer>
