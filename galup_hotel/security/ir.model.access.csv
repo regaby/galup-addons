@@ -1,8 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_hotel_discount,access_hotel_discount,model_hotel_discount,,1,0,0,0
-access_hotel_guest,access_hotel_guest,model_hotel_guest,,1,0,0,0
-access_hotel_room_issue,access_hotel_room_issue,model_hotel_room_issue,,1,0,0,0
-access_hotel_room_state_view,access_hotel_room_state_view,model_hotel_room_state_view,,1,0,0,0
+access_hotel_room_state_view,access_hotel_room_state_view,model_hotel_room_state_view,hotel.group_hotel_user,1,0,0,0
 access_hotel_room_issue_user,access_hotel_room_issue_user,model_hotel_room_issue,hotel.group_hotel_user,1,0,1,0
 access_hotel_room_issue_manager,access_hotel_room_issue,model_hotel_room_issue,hotel.group_hotel_manager,1,1,1,1
 access_hotel_guest,access_hotel_guest,model_hotel_guest,hotel.group_hotel_user,1,1,1,1
