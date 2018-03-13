@@ -137,6 +137,17 @@ class ResPartnerIdNumber(models.Model):
         ('partner_id_number_uniq', 'UNIQUE (category_id,name)',  'El número de identificación del huésped debe ser único'),
     ]
 
+class ResPartnerIdNumberCategory(models.Model):
+    _name = "res.partner.id_category"
+    _inherit = "res.partner.id_category"
+    afip_code = fields.Integer(default = 99, readonly=True)
+
+class ResCountryEstate(models.Model):
+    _name = "res.country.state"
+    _inherit = "res.country.state"
+    
+    code = fields.Char(required=False) 
+
 class Guest(models.Model):
 
     _name = 'hotel.guest'
