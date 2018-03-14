@@ -53,6 +53,11 @@
                         <field name="has_car" attrs="{'invisible':[('customer','!=',True)]}"/>
                         <field name="discount_id" attrs="{'invisible':[('customer','!=',True)]}"/>
                     </field>
+                    
+                     <field name="main_id_category_id" position="attributes">
+                        <attribute name="options">'no_create' : False</attribute>
+                       
+                    </field>
                     <field name="mobile" position="attributes">
                          <attribute name="invisible">True</attribute>
                     </field>
