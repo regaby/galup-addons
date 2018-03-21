@@ -164,9 +164,6 @@ class HotelFolio(models.Model):
     _inherit = 'hotel.folio'
 
     guest_lines = fields.One2many('hotel.guest', 'folio_id',
-                                 readonly=True,
-                                 states={'draft': [('readonly', False)],
-                                         'sent': [('readonly', False)]},
                                  help="Acompañantes.")
     early_checkin = fields.Boolean('Early Checkin')
     late_checkout = fields.Boolean('Late Checkout')
@@ -231,6 +228,16 @@ class HotelFolio(models.Model):
                 raise ValidationError(_('Para poder eliminar el registro, el mismo debe estar en estado cancelado.'))
         return super(HotelFolio, self).unlink()
 
+    def update_partner2(self, vals, partner):
+        partner_obj = self.env['res.partner']
+        partner = partner_obj.browse(partner)
+        if 'smoker_partner' in vals:
+            partner.write({'smoker': vals['smoker_partner']})
+        if 'car_partner' in vals:
+            partner.write({'has_car': vals['car_partner']})
+        if 'nacionality_partner' in vals:
+            partner.write({'nationality_id': vals['nacionality_partner']})
+
     @api.model
     def create(self, vals, check=True):
         """
@@ -239,15 +246,18 @@ class HotelFolio(models.Model):
         @param vals: dictionary of fields value.
         @return: new record set for hotel folio.
         """
-        partner_obj = self.env['res.partner']
-        partner = partner_obj.browse(vals['partner_id'])
-        if 'smoker_partner' in vals:
-            partner.write({'smoker': vals['smoker_partner']})
-        if 'car_partner' in vals:
-            partner.write({'has_car': vals['car_partner']})
-        if 'nacionality_partner' in vals:
-            partner.write({'nationality_id': vals['nacionality_partner']})
+        self.update_partner2(vals,vals['partner_id'])
         return super(HotelFolio, self).create(vals)
+
+    @api.multi
+    def write(self, vals):
+        """
+        Overrides orm write method.
+        @param self: The object pointer
+        @param vals: dictionary of fields value.
+        """
+        self.update_partner2(vals,self.partner_id.id)
+        return super(HotelFolio, self).write(vals)
 
 class HotelFolioLine(models.Model):
 
