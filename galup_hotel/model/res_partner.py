@@ -231,6 +231,24 @@ class HotelFolio(models.Model):
                 raise ValidationError(_('Para poder eliminar el registro, el mismo debe estar en estado cancelado.'))
         return super(HotelFolio, self).unlink()
 
+    @api.model
+    def create(self, vals, check=True):
+        """
+        Overrides orm create method.
+        @param self: The object pointer
+        @param vals: dictionary of fields value.
+        @return: new record set for hotel folio.
+        """
+        partner_obj = self.env['res.partner']
+        partner = partner_obj.browse(vals['partner_id'])
+        if 'smoker_partner' in vals:
+            partner.write({'smoker': vals['smoker_partner']})
+        if 'car_partner' in vals:
+            partner.write({'has_car': vals['car_partner']})
+        if 'nacionality_partner' in vals:
+            partner.write({'nationality_id': vals['nacionality_partner']})
+        return super(HotelFolio, self).create(vals)
+
 class HotelFolioLine(models.Model):
 
     _inherit = 'hotel.folio.line'
