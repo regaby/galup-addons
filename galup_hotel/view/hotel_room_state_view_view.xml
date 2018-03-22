@@ -34,7 +34,7 @@
             <field name="name">hotel.room.state.view.tree</field>
             <field name="model">hotel.room.state.view</field>
             <field name="arch" type="xml">
-                <tree string="Estado de Habitaciones" colors="gray:status in ('blocked');red:status in ('occupied') and debt_status not in ('pagado');orange:status in ('occupied') and debt_status in ('pagado');green:status in ('available')">
+                <tree string="Estado de Habitaciones" colors="gray:status in ('blocked');red:status in ('occupied') and debt_status not in ('pagado');orange:status in ('occupied') and debt_status in ('pagado');green:status in ('available') and state in ('clean');darkred:status in ('available') and state in ('dirty')">
                     <field name="room_id" />
                     <field name="categ_id" />
                     <field name="checkin_hour" />
@@ -47,6 +47,8 @@
                     <field name="folio_state" group="hotel.group_hotel_manager"/>
                     <field name="status" />
                     <field name="state" />
+                    <button name="action_clean" string="Limpiar Habitación" type="object"  icon="gtk-clear" attrs="{'invisible':[('state','not in',['dirty'])]}" /> 
+                    <button name="action_dirty" string="Habitación Sucia" type="object"  icon="gtk-quit" attrs="{'invisible':[('state','not in',['clean'])]}" /> 
 
                 </tree>
             </field>

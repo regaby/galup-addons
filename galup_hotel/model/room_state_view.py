@@ -10,6 +10,16 @@ class HotelRoomStateView(models.Model):
     _auto = False
     _rec_name = 'name'
 
+    @api.multi
+    def action_clean(self):
+        self.room_id.state = 'clean'
+        return True
+    
+    @api.multi       
+    def action_dirty(self):
+        self.room_id.state = 'dirty'
+        return True
+
     room_id = fields.Many2one('hotel.room', string='Habitacion', readonly=True)
     status = fields.Selection([('available', 'Disponible'), ('occupied', 'Ocupada'),('blocked', 'Bloqueado')],'Estado', readonly=True)
     state = fields.Selection([('clean', 'Limpia'), ('dirty', 'Sucia'),],'Limpieza', readonly=True)
