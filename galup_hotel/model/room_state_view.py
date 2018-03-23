@@ -20,6 +20,11 @@ class HotelRoomStateView(models.Model):
         self.room_id.state = 'dirty'
         return True
 
+    @api.multi
+    def CloseIssue(self):
+        self.room_id.CloseIssue()
+        return True
+
     room_id = fields.Many2one('hotel.room', string='Habitacion', readonly=True)
     status = fields.Selection([('available', 'Disponible'), ('occupied', 'Ocupada'),('blocked', 'Bloqueado')],'Estado', readonly=True)
     state = fields.Selection([('clean', 'Limpia'), ('dirty', 'Sucia'),],'Limpieza', readonly=True)
