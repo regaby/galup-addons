@@ -293,6 +293,15 @@ class HotelRoom(models.Model):
         self.isroom = True
         return True
 
+    @api.multi
+    def makeIssue(self,name_issue,room_id):
+        issue_obj = self.env['hotel.room.issue']
+        issue_obj.create({'name': name_issue,
+                          'room_id': room_id})
+        self.status = 'blocked'
+        self.isroom = False
+        return True
+
 class FolioRoomLine(models.Model):
 
     _inherit = 'folio.room.line'

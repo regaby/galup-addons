@@ -34,11 +34,34 @@ class RoomIssueWizard(models.TransientModel):
     def makeIssue(self):
         issue_obj = self.env['hotel.room.issue']
         room_obj = self.env['hotel.room']
+        reservation_obj = self.env['hotel.room.reservation.line']
         room_id = self._context['active_ids'][0]
         wizard = self.read(['name'])[0]
-        issue_obj.create({'name': wizard['name'],
-                          'room_id': room_id})
-        room = room_obj.browse(room_id)
-        room.status = 'blocked'
-        room.isroom = False
-        return True
+        reservation_ids = reservation_obj.search([('check_in','>',time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)),('state','=','assigned'),('room_id','=',room_id)])
+        if reservation_ids:
+            msg=''
+            for r in reservation_ids:
+                msg += 'Reserva: %s\n'%r.reservation_id.reservation_no
+                msg += 'Huesped: %s\n'%r.reservation_id.partner_id.name
+                msg += 'Checkin: %s\n'%r.check_in
+                msg += 'Checkout: %s\n'%r.check_out
+                msg += '--------------------------------------------\n'
+            msg += '¿Desea bloquear de todas formas?'
+            # dummy, view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'galup_hotel', 'check_reservation_wizard_form_view')
+            dummy, view_id = self.env['ir.model.data'].get_object_reference('galup_hotel', 'check_reservation_wizard_form_view')
+            return {
+                'view_mode': 'form',
+                'view_id': view_id,
+                'view_type': 'form',
+                'res_model': 'check.reservation.wizard',
+                'type': 'ir.actions.act_window',
+                'nodestroy': True,
+                'target': 'new',
+                'domain': '[]',
+                'views': [(view_id, 'form')],
+                'context': {'active_ids': self.id,'default_name':wizard['name'],'default_reservas': msg,'default_room_id': room_id},               
+            }
+        else:
+            room = room_obj.browse(room_id)
+            room.makeIssue(wizard['name'],room_id)
+
