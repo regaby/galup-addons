@@ -20,5 +20,22 @@
 #
 # ---------------------------------------------------------------------------
 
-from . import room_issue_wizard
-from . import check_reservation
+from openerp import models, fields, api
+import time
+from openerp.tools import misc, DEFAULT_SERVER_DATETIME_FORMAT
+
+class CheckReservationWizard(models.TransientModel):
+
+    _name = 'check.reservation.wizard'
+
+    name = fields.Char('Descripcion', required=True)
+    reservas = fields.Text('Reservas', required=True)
+    room_id = fields.Many2one('hotel.room','Room')
+
+    @api.multi
+    def CheckReservationAction(self):
+        room_obj = self.env['hotel.room']
+        wizard = self.read(['name','room_id'])[0]
+        room = room_obj.browse(wizard['room_id'][0])
+        room.makeIssue(wizard['name'],wizard['room_id'][0])
+        return {'type': 'ir.actions.act_window_close'}

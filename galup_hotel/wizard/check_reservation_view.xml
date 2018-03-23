@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+
+        <!--Form view for wizard make folio-->
+        <record model="ir.ui.view" id="check_reservation_wizard_form_view">
+            <field name="name">check.reservation.wizard.form</field>
+            <field name="model">check.reservation.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Bloquear Habitacion" version='8.0'>
+                    <separator colspan="4" string="Existen reservas en la habitación que desea Bloquear" />
+                    <newline/>
+                    <field name="reservas" readonly="True"/>
+                    <field name="name" readonly="True"/>
+                    <field name="room_id" readonly="True"/>
+                    <footer>
+                        <button name="CheckReservationAction" string="Bloquear Habitacion" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        
+
+    </data>
+</openerp>
