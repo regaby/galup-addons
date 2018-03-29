@@ -55,7 +55,7 @@ class HotelRoomStateView(models.Model):
         # self._table = account_invoice_report
         tools.drop_view_if_exists(cr, self._table)
         cr.execute("""CREATE or REPLACE VIEW hotel_room_state_view as (
-            select  hr.id, hr.id as room_id , pt.name as name, hr.status, hr.state , pt.categ_id, pc.name as categ_name, reserva.checkin_hour, reserva.name as reserva_name , 
+            select  hr.id, hr.id as room_id , pt.name as name, hr.status, hr.state , pt.categ_id, pc.name as categ_name, reserva.checkin_hour, --reserva.name as reserva_name , 
                 case when folio.partner_id is not null then folio.partner_id else reserva.partner_id end as partner_id,
                 folio.folio_id, folio.name as folio_name, folio.pax, folio.state as folio_state, to_char(folio.checkout_hour,'DD/MM/YYYY HH24:MI:SS') as checkout_hour, observations, debt_status
                 from hotel_room hr 
