@@ -62,7 +62,7 @@ class QuickReservation(models.TransientModel):
                 date = self._context['date'][0:10]
                 cin = date+' 23:59:59'
                 cout = date+' 00:00:00'
-                reservation_id = room_reservation_obj.search([('room_id','=',int(roomid)),('check_in','<=',cin),('check_out','>=',cout)],order="check_out desc",limit=1)
+                reservation_id = room_reservation_obj.search([('room_id','=',int(roomid)),('check_in','<=',cin),('check_out','>=',cout),('state','=','assigned')],order="check_out desc",limit=1)
                 if reservation_id:
                     reservation = reservation_obj.browse(reservation_id.reservation_id.id)
                     res.update({'partner_id': reservation.partner_id.id,
