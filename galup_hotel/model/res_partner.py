@@ -133,9 +133,23 @@ class res_partner(models.Model):
 class ResPartnerIdNumber(models.Model):
     _name = "res.partner.id_number"
     _inherit = "res.partner.id_number"
-    _sql_constraints = [
-        ('partner_id_number_uniq', 'UNIQUE (category_id,name)',  'El número de identificación del huésped debe ser único'),
-    ]
+
+    @api.constrains('auto_confirm')
+    def _check_dni(self,cr,uid,ids,context=None):
+        demo_record = self.browse(cr,uid,ids,context=context)[0]
+        partner_ids = self.search(cr, uid, [('category_id','=',demo_record.category_id.id),('name','=',demo_record.name),('active','=',True)])
+        partner_ids.remove(ids[0])
+        if len(partner_ids)>0:
+            demo_record = self.browse(cr,uid,partner_ids,context=context)[0]
+            raise ValidationError(_('El número de identificación del huésped debe ser único. Actualmente existe para %s')%(demo_record.partner_id.name))
+            return False
+        return True
+        
+    _constraints = [(_check_dni,"El número de identificación del huésped debe ser único",[])]
+    # _sql_constraints = [
+    #     ('partner_id_number_uniq', 'UNIQUE (category_id,name)',  'El número de identificación del huésped debe ser único'),
+    # ]
+
 
 class ResPartnerIdNumberCategory(models.Model):
     _name = "res.partner.id_category"
