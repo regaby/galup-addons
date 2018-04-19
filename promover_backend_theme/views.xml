@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <template id="assets_backend" name="Open Mobile Assets" inherit_id="v9c_backend_theme.assets_backend">
+            <xpath expr="//link[@href='/v9c_backend_theme/static/src/less/bootswatch/variables.less']" position="replace">
+                <link rel="stylesheet" href="/promover_backend_theme/static/src/less/bootswatch/variables.less"/>
+             </xpath>
+            <xpath expr="//link[@href='/v9c_backend_theme/static/src/less/app_drawer.less']" position="replace">
+                <link rel="stylesheet" href="/promover_backend_theme/static/src/less/app_drawer.less"/>
+            </xpath>
+        </template>
+
+</odoo>
+
