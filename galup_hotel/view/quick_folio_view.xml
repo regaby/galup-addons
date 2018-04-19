@@ -14,12 +14,12 @@
                      </header>
                      <sheet>
                          <group colspan="4" col="4">
-                             <field name="room_id" readonly="1"/>
-                             <field name="partner_id" readonly="1"/>
+                             <field name="room_id" readonly="1" options="{'no_open': True}"/>
+                             <field name="partner_id" readonly="1" options="{'no_open': True}"/>
                              <field name="checkin" readonly="1"/>
                              <field name="checkout" readonly="1"/>
                              <field name="observations" readonly="1"/>
-                             <field name="folio_id" readonly="1"/>
+                             <field name="folio_id" readonly="1" options="{'no_open': True}"/>
                          </group>
                      </sheet>
                      <!-- <footer>
