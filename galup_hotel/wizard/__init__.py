@@ -22,3 +22,4 @@
 
 from . import room_issue_wizard
 from . import check_reservation
+from . import make_invoice

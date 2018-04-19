@@ -46,6 +46,7 @@
         'view/quick_folio_view.xml',
         'wizard/room_issue_wizard_view.xml',
         'wizard/check_reservation_view.xml',
+        'wizard/make_invoice_wizard.xml',
         'data/discount_data.xml',
         'data/floor_data.xml',
         'data/room_type_data.xml',

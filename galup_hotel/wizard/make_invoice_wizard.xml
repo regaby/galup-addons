@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+
+
+        <!--Form view for wizard make folio-->
+        <record model="ir.ui.view" id="make_invoice_wizard_form_view">
+            <field name="name">wizard.make.invoice.form</field>
+            <field name="model">wizard.make.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Create Invoice" version='8.0'>
+                    <separator colspan="4" string="Para crear las facturas, los folios seleccionados deben estar en estado 'Checkout Realizado' y el estado de la factura debe ser 'Para Facturar'" />
+                  <!--  <field name="grouped" /> -->
+                    <newline/>
+                    <footer>
+                        <button name="makeInvoices" string="Crear y ver Facturas" type="object" class="oe_highlight" context="{'open_invoices': True}"/>
+                        <button name="makeInvoices" string="Crear Facturas" type="object" class="oe_highlight" />
+                        or
+                        <button string="Cancelar" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Crear facturas"
+            key2="client_action_multi"
+            res_model="wizard.make.invoice"
+            src_model="hotel.folio"
+            id="act_make_invoice"
+            view_mode="form" target="new"
+            view_type="form"/>
+
+
+    </data>
+</openerp>
