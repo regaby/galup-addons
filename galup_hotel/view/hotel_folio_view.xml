@@ -34,12 +34,17 @@
                     <field name="late_checkout_hour" attrs="{'invisible':[('late_checkout','=',False)],'required':[('late_checkout','!=',False)], 'readonly':['|',('state','not in',['draft','sale']),('check_applied','!=',False)]}" />
                     <field name="check_applied" invisible="True"/>
                 </field>
-                <field name="country_partner" position='after'>
-                     <field name="nacionality_partner" class="oe_inline"   attrs="{'invisible':[('partner_id','=',False)]}"/>
+                <field name="partner_id" position='after'>
+                     <label name="label" string="Huesped No Grato" style="background:red;" attrs="{'invisible':[('unwelcome_guest','=',False)]}" colspan="2" col="2"/>
+                </field>
+                <field name="state_partner" position='after'>
+                     <field name="nacionality_partner" class="oe_inline"   attrs="{'invisible':[('partner_id','=',False)]}" options="{'no_create': True}"/>
                 </field>
                 <field name="email_partner" position='after'>
                     <field name="car_partner" class="oe_inline"   attrs="{'invisible':[('partner_id','=',False)]}"/>
                     <field name="smoker_partner" class="oe_inline"   attrs="{'invisible':[('partner_id','=',False)]}"/>
+                    <field name="regular_passenger" class="oe_inline"   attrs="{'invisible':[('partner_id','=',False)]}"/>
+                    <field name="unwelcome_guest" invisible="True"/>
 
                 </field>
                 <xpath expr="//button[@name='action_done']" position="after">

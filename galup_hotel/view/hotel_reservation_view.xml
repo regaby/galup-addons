@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>         
+
+
+        <record model="ir.ui.view" id="view_hotel_reservation_form_inherit">
+            <field name='name'>hotel.reservation.form</field>
+            <field name="inherit_id" ref="hotel_reservation.view_hotel_reservation_form"/>
+            <field name="model">hotel.reservation</field>
+            <field name="arch" type="xml"> 
+               <!--  <notebook position="inside"> -->
+
+                <field name="partner_id" position='after'>
+                     <label name="label" string="Huesped No Grato" style="background:red;" attrs="{'invisible':[('unwelcome_guest','=',False)]}" colspan="2" col="2"/>
+                     <field name="unwelcome_guest" invisible="True"/>
+                </field>
+                
+
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>

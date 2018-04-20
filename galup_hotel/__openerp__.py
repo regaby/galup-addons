@@ -37,6 +37,7 @@
         'security/ir_ui_menu_view.xml',
         'view/res_partner_view.xml',
         'view/hotel_folio_view.xml',
+        'view/hotel_reservation_view.xml',
         'view/hotel_discount_view.xml',
         'view/hotel_room_view.xml',
         'view/account_tax_view.xml',

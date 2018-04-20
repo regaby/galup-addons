@@ -49,8 +49,9 @@
                     </field>
                     <field name="category_id" position="after">
                         <field name="smoker" attrs="{'invisible':[('customer','!=',True)]}"/>
-                        <!-- <field name="regular_passenger" attrs="{'invisible':[('customer','!=',True)]}"/> -->
                         <field name="has_car" attrs="{'invisible':[('customer','!=',True)]}"/>
+                        <field name="regular_passenger" attrs="{'invisible':[('customer','!=',True)]}"/>
+                        <field name="unwelcome_guest" attrs="{'invisible':[('customer','!=',True)]}"/>
                         <field name="discount_id" attrs="{'invisible':[('customer','!=',True)]}"/>
                     </field>
                     
@@ -96,7 +97,7 @@
                             <field name="observations" placeholder="Observaciones..."/>
                         </page>
                     </xpath> 
-                    <xpath expr="/form/sheet/notebook/page" position="before">
+                    <xpath expr="/form/sheet/notebook/page" position="after">
                         <page string="Folios" autofocus="autofocus">
                             <field name="hotelfolio_ids" context="{'default_partner_id': id}"/>
                         </page>

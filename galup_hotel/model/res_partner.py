@@ -86,6 +86,7 @@ class res_partner(models.Model):
     smoker = fields.Boolean(string="¿Es fumador?")
     regular_passenger = fields.Boolean(string="Pasajero Frecuente")
     is_passenger = fields.Boolean()
+    unwelcome_guest = fields.Boolean(string="Huesped no grato")
     nationality_id = fields.Many2one('res.country', 'Nacionalidad (País)')
     # 'age' : fields.function(_partner_age_fnt, method=True, type='char', size=32, string='Patient Age', help="It shows the age of the patient in years(y), months(m) and days(d).\nIf the patient has died, the age shown is the age at time of death, the age corresponding to the date on the death certificate. It will show also \"deceased\" on the field"),
     age = fields.Char(string='Edad', 
@@ -187,10 +188,12 @@ class HotelFolio(models.Model):
     invoice_state = fields.Selection(string='Estado de Factura', related='hotel_invoice_id.state')
     car_partner = fields.Boolean(string='¿Tiene vehículo?', related='partner_id.has_car')
     smoker_partner = fields.Boolean(String='¿Es Fumador?', related='partner_id.smoker') 
+    regular_passenger = fields.Boolean(String='Pasajero Frecuente', related='partner_id.regular_passenger') 
     nacionality_partner = fields.Many2one('res.country', 'Nacionalidad' , related='partner_id.nationality_id', required=True)
     debt_status = fields.Selection([('debe', 'Debe'),
                                ('pagado', 'Pagado (Anotar en observaciones los detalles del pago)'),],
                               'Estado de Deuda', default='debe', required=True)
+    unwelcome_guest = fields.Boolean(string='Huesped no grato', related='partner_id.unwelcome_guest')
 
     @api.onchange('country_partner')
     def on_change_nationality(self):
@@ -365,6 +368,8 @@ class HotelReservation(models.Model):
             if reservation.state not in ['cancel']:
                 raise ValidationError(_('Para poder eliminar el registro, el mismo debe estar en estado cancelado.'))
         return super(HotelReservation, self).unlink()
+
+    unwelcome_guest = fields.Boolean(string='Huesped no grato', related='partner_id.unwelcome_guest')
 
 class SaleOrder(models.Model):
     _name = "sale.order"
