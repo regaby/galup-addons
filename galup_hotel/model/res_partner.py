@@ -459,3 +459,9 @@ class SaleAdvancePaymentInv(models.TransientModel):
         # ('percentage', 'Down payment (percentage)'),
         # ('fixed', 'Down payment (fixed amount)')
         ], string='What do you want to invoice?', default=_get_advance_payment_method, required=True)
+
+class QuickRoomReservation(models.TransientModel):
+    _name = 'quick.room.reservation'
+    _inherit = 'quick.room.reservation'
+    
+    unwelcome_guest = fields.Boolean(string='Huesped no grato', related='partner_id.unwelcome_guest')

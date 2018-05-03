@@ -11,10 +11,25 @@
                <!--  <notebook position="inside"> -->
 
                 <field name="partner_id" position='after'>
-                     <label name="label" string="Huesped No Grato" style="background:red;" attrs="{'invisible':[('unwelcome_guest','=',False)]}" colspan="2" col="2"/>
+                     <label name="label" string="Huesped No Grato" style="background:red;color:#FFF;" attrs="{'invisible':[('unwelcome_guest','=',False)]}" colspan="2" col="2"/>
                      <field name="unwelcome_guest" invisible="True"/>
                 </field>
                 
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="quick_room_reservation_form_view_inherit">
+            <field name='name'>quick.room.reservation.form</field>
+            <field name="inherit_id" ref="hotel_reservation.quick_room_reservation_form_view"/>
+            <field name="model">quick.room.reservation</field>
+            <field name="arch" type="xml"> 
+                <field name="list_price" position='after'>
+                    <label name="label" string="Huesped No Grato" style="background:red;color:#FFF;" attrs="{'invisible':[('unwelcome_guest','=',False)]}" colspan="2" col="2"/>
+                    <field name="unwelcome_guest" invisible="True"/>
+                </field>
+                
+
 
             </field>
         </record>
