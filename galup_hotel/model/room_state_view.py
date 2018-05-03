@@ -48,6 +48,8 @@ class HotelRoomStateView(models.Model):
     debt_status = fields.Selection([('debe', 'Debe'),
                                ('pagado', 'Pagado'),],
                               'Estado de Deuda', default='debe', required=True)
+    residual = fields.Float(string='Deuda Habitación')
+    service_residual = fields.Float(string='Deuda Servicios')
 
     _order = 'name asc'
 
@@ -57,7 +59,8 @@ class HotelRoomStateView(models.Model):
         cr.execute("""CREATE or REPLACE VIEW hotel_room_state_view as (
             select  hr.id, hr.id as room_id , pt.name as name, hr.status, hr.state , pt.categ_id, pc.name as categ_name, reserva.checkin_hour, --reserva.name as reserva_name , 
                 case when folio.partner_id is not null then folio.partner_id else reserva.partner_id end as partner_id,
-                folio.folio_id, folio.name as folio_name, folio.pax, folio.state as folio_state, to_char(folio.checkout_hour,'DD/MM/YYYY HH24:MI:SS') as checkout_hour, observations, debt_status
+                folio.folio_id, folio.name as folio_name, folio.pax, folio.state as folio_state, to_char(folio.checkout_hour,'DD/MM/YYYY HH24:MI:SS') as checkout_hour, observations, debt_status,
+                residual, service_residual
                 from hotel_room hr 
                 join product_product pp on (hr.product_id=pp.id)
                 join product_template pt on (pp.product_tmpl_id=pt.id)
@@ -69,7 +72,7 @@ class HotelRoomStateView(models.Model):
                     where check_in::date = now()::date and hrrl.state='assigned') reserva on (reserva.room_id = hr.id)
                 left join (select frl.room_id, so.partner_id, rp.name as partner_name, hf.name, coalesce(guest.count,0) + 1 as PAX, ai.state, hf.id as folio_id, 
                         --case when check_out::date = now()::date then check_out::time - '03:00:00'::time  end as checkout_hour
-                        check_out - '03:00:00'::time as checkout_hour, hf.observations, debt_status
+                        check_out - '03:00:00'::time as checkout_hour, hf.observations, debt_status, hf.residual, hf.service_residual
                     from folio_room_line frl
                     join hotel_folio hf on (frl.folio_id = hf.id)
                     join sale_order so on (hf.order_id=so.id)

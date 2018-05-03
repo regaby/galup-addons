@@ -18,7 +18,8 @@
                             <field name="pax" />
                             <field name="checkout_hour" />
                             <field name="observations" />
-                            <field name="debt_status" />
+                            <field name="residual" />
+                            <field name="service_residual" />
                             <field name="folio_state" group="hotel.group_hotel_manager"/>
                             <field name="status" />
                             <field name="state" />
@@ -34,7 +35,7 @@
             <field name="name">hotel.room.state.view.tree</field>
             <field name="model">hotel.room.state.view</field>
             <field name="arch" type="xml">
-                <tree string="Estado de Habitaciones" colors="gray:status in ('blocked');red:status in ('occupied') and debt_status not in ('pagado');orange:status in ('occupied') and debt_status in ('pagado');green:status in ('available') and state in ('clean');darkred:status in ('available') and state in ('dirty')">
+                <tree string="Estado de Habitaciones" colors="gray:status in ('blocked');red:status in ('occupied') and residual+service_residual &lt;&gt; 0;orange:status in ('occupied') and residual+service_residual == 0;green:status in ('available') and state in ('clean');darkred:status in ('available') and state in ('dirty')">
                     <field name="room_id" />
                     <field name="categ_id" />
                     <field name="checkin_hour" />
@@ -43,7 +44,8 @@
                     <field name="pax" />
                     <field name="checkout_hour" />
                     <field name="observations" />
-                    <field name="debt_status" />
+                    <field name="residual" />
+                    <field name="service_residual" />
                     <field name="folio_state" group="hotel.group_hotel_manager"/>
                     <field name="status" />
                     <field name="state" />
