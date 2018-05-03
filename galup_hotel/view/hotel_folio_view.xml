@@ -34,7 +34,7 @@
                     <field name="check_applied" invisible="True"/>
                 </field>
                 <field name="partner_id" position='after'>
-                     <label name="label" string="Huesped No Grato" style="background:red;color:#FFF;" attrs="{'invisible':[('unwelcome_guest','=',False)]}" colspan="2" col="2"/>
+                     <label name="label" string="-- Huésped No Grato --" style="background:coral;color:#FFF;" attrs="{'invisible':[('unwelcome_guest','=',False)]}" colspan="2" col="2"/>
                 </field>
                 <field name="state_partner" position='after'>
                      <field name="nacionality_partner" class="oe_inline"   attrs="{'invisible':[('partner_id','=',False)]}" options="{'no_create': True}"/>
