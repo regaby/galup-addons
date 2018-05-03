@@ -46,8 +46,8 @@ class MakeInvoiceWizard(models.TransientModel):
             ctx.update({'active_ids': [a_id],
                         })
             make_invoice = self.with_context(ctx).env['sale.advance.payment.inv']
-            # make_invoice.advance_payment_method='all'
             make_invoice_id = make_invoice.create({'advance_payment_method':'all'})
+            make_invoice_id.create_invoices()
             hotel = order_obj.browse(a_id)
             res_id = invoice_obj.search([('origin','ilike',hotel.name)])
             if hotel and res_id:
