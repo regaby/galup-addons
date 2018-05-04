@@ -31,7 +31,7 @@
         Galup Hotel
     """,
     "license": "AGPL-3",
-    "depends": ['hotel','hotel_reservation','hr','account_tax_python', 'partner_identification','report_aeroo','auditlog'],
+    "depends": ['hotel','hotel_reservation','hr','account_tax_python', 'partner_identification','report_aeroo','auditlog','amount_to_text_es'],
     "data": [
         'security/ir.model.access.csv',
         'security/ir_ui_menu_view.xml',
@@ -59,6 +59,7 @@
         'reports/report_folio_template.xml',
         'views.xml',
         'reports/registro_huesped_report.xml',
+        'reports/recibo_x_report.xml',
 
     ],
     'qweb': ['static/src/xml/base.xml'],
