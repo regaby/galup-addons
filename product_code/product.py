@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import api, fields, models
+from openerp.exceptions import except_orm, UserError, ValidationError
 
 class ProductCategory(models.Model):
     _inherit = "product.category"
@@ -16,16 +17,15 @@ class ProductProduct(models.Model):
 
     @api.model
     def create(self, vals):
-        print vals
-        print vals
-        print vals
+        code = False
         if 'product_tmpl_id' in vals:
             tmp = self.env['product.template'].browse(vals['product_tmpl_id'])
             code = tmp.categ_id.code
         if 'categ_id' in vals:
             categ_id = self.env['product.category'].browse(vals['categ_id'])
             code = categ_id.code
-        vals['product_code'] = self._get_default_product_code(code)
+        if code:
+            vals['product_code'] = self._get_default_product_code(code)
         return super(ProductProduct, self).create(vals)
 
     product_code = fields.Char(index=True, help='Product Code',
@@ -42,9 +42,12 @@ class ProductProduct(models.Model):
     def action_set_product_code(self):
         for product in self:
             if not product.product_code:
-                product.write({
-                    'product_code': self._get_default_product_code(product.categ_id.code),
-                })
+                if product.categ_id.code:
+                    product.write({
+                        'product_code': self._get_default_product_code(product.categ_id.code),
+                    })
+                else:
+                    raise UserError('Debe seleccionar una categoria de producto')
         return True
 
 
