@@ -43,8 +43,23 @@
                 <data>
                     <field name='name' position='after'>
                         <field name="categ_id" />
+                        <field name="product_code" />
                     </field>
                 </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_template_kanban_product_code_view">
+            <field name="name">Product Template Kanban Stock</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view"/>
+            <field name="arch" type="xml">
+                <field name="lst_price" position="after">
+                    <field name="product_code"/>
+                </field>
+                <ul position="inside">
+                    <li t-if="record.type.raw_value == 'product'">Código de Producto: <field name="product_code"/></li>
+                </ul>
             </field>
         </record>
 
@@ -57,7 +72,7 @@
                 <data>
                     <field name='default_code' position='after'>
                         <field name="product_code" readonly="1"/>
-                        <button string="Set product code"
+                        <button string="Establecer código de producto"
                                 type="object" name="action_set_product_code"
                                 attrs="{'invisible':[('product_code','!=', False)]}"
                                 class="oe_link oe_read_only"
@@ -76,7 +91,7 @@
                 <data>
                     <field name='default_code' position='after'>
                         <field name="product_code" readonly="1"/>
-                        <button string="Set product code"
+                        <button string="Establecer código de producto"
                                 type="object" name="action_set_product_code"
                                 attrs="{'invisible':['|', ('product_code','!=', False), ('product_variant_count', '&gt;', 1)]}"
                                 class="oe_link oe_read_only"

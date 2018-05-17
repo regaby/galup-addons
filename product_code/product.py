@@ -28,7 +28,7 @@ class ProductProduct(models.Model):
             vals['product_code'] = self._get_default_product_code(code)
         return super(ProductProduct, self).create(vals)
 
-    product_code = fields.Char(index=True, help='Product Code',
+    product_code = fields.Char(index=True, help='Código', string="Código de Producto",
                                # default=_get_default_product_code, 
                                copy=False)
 
@@ -56,7 +56,7 @@ class ProductTemplate(models.Model):
 
     product_code = fields.Char(store=True, index=True,
                                related='product_variant_ids.product_code',
-                               readonly=True, help='Product code')
+                               readonly=True, help='Código', string="Código de Producto")
 
     @api.multi
     def action_set_product_code(self):
