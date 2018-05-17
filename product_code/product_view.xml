@@ -87,12 +87,12 @@
         </record>
 
 
-        <record id="seq_product_code" model="ir.sequence">
+        <!-- <record id="seq_product_code" model="ir.sequence">
             <field name="name">Product Code</field>
             <field name="code">product.code</field>
             <field name="prefix">T-</field>
             <field name="padding">8</field>
-        </record>
+        </record> -->
     </data>
 </odoo>
 
