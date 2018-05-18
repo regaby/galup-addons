@@ -28,10 +28,6 @@ class ProductProduct(models.Model):
             vals['default_code'] = self._get_default_product_code(code)
         return super(ProductProduct, self).create(vals)
 
-    # product_code = fields.Char(index=True, help='Código', string="Código de Producto",
-    #                            # default=_get_default_product_code, 
-    #                            copy=False)
-
     _sql_constraints = [
         ('product_product__default_code__uniq',
          'unique (default_code)',
@@ -47,19 +43,15 @@ class ProductProduct(models.Model):
                         'default_code': self._get_default_product_code(product.categ_id.code),
                     })
                 else:
-                    raise UserError('Debe seleccionar una categoria de producto')
+                    raise UserError('Debe seleccionar una categoria de producto con una secuencia asociada')
         return True
 
 
-# class ProductTemplate(models.Model):
-#     _inherit = 'product.template'
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
 
-#     product_code = fields.Char(store=True, index=True,
-#                                related='product_variant_ids.product_code',
-#                                readonly=True, help='Código', string="Código de Producto")
-
-#     @api.multi
-#     def action_set_product_code(self):
-#         for tmpl in self.filtered(lambda r: len(r.product_variant_ids) == 1):
-#             tmpl.product_variant_ids[0].action_set_product_code()
-#         return True
+    @api.multi
+    def action_set_product_code(self):
+        for tmpl in self.filtered(lambda r: len(r.product_variant_ids) == 1):
+            tmpl.product_variant_ids[0].action_set_product_code()
+        return True
