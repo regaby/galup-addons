@@ -25,41 +25,41 @@ class ProductProduct(models.Model):
             categ_id = self.env['product.category'].browse(vals['categ_id'])
             code = categ_id.code
         if code:
-            vals['product_code'] = self._get_default_product_code(code)
+            vals['default_code'] = self._get_default_product_code(code)
         return super(ProductProduct, self).create(vals)
 
-    product_code = fields.Char(index=True, help='Código', string="Código de Producto",
-                               # default=_get_default_product_code, 
-                               copy=False)
+    # product_code = fields.Char(index=True, help='Código', string="Código de Producto",
+    #                            # default=_get_default_product_code, 
+    #                            copy=False)
 
     _sql_constraints = [
-        ('product_product__product_code__uniq',
-         'unique (product_code)',
+        ('product_product__default_code__uniq',
+         'unique (default_code)',
          'Product code must be uniq!'),
     ]
 
     @api.multi
     def action_set_product_code(self):
         for product in self:
-            if not product.product_code:
+            if not product.default_code:
                 if product.categ_id.code:
                     product.write({
-                        'product_code': self._get_default_product_code(product.categ_id.code),
+                        'default_code': self._get_default_product_code(product.categ_id.code),
                     })
                 else:
                     raise UserError('Debe seleccionar una categoria de producto')
         return True
 
 
-class ProductTemplate(models.Model):
-    _inherit = 'product.template'
+# class ProductTemplate(models.Model):
+#     _inherit = 'product.template'
 
-    product_code = fields.Char(store=True, index=True,
-                               related='product_variant_ids.product_code',
-                               readonly=True, help='Código', string="Código de Producto")
+#     product_code = fields.Char(store=True, index=True,
+#                                related='product_variant_ids.product_code',
+#                                readonly=True, help='Código', string="Código de Producto")
 
-    @api.multi
-    def action_set_product_code(self):
-        for tmpl in self.filtered(lambda r: len(r.product_variant_ids) == 1):
-            tmpl.product_variant_ids[0].action_set_product_code()
-        return True
+#     @api.multi
+#     def action_set_product_code(self):
+#         for tmpl in self.filtered(lambda r: len(r.product_variant_ids) == 1):
+#             tmpl.product_variant_ids[0].action_set_product_code()
+#         return True

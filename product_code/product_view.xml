@@ -20,7 +20,7 @@
             </field>
         </record>
 
-        <record id="product_template_tree_view_inherit" model="ir.ui.view">
+        <!-- <record id="product_template_tree_view_inherit" model="ir.ui.view">
             <field name="name">product.product</field>
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_tree_view"/>
@@ -32,7 +32,7 @@
                     </field>
                 </data>
             </field>
-        </record>
+        </record> -->
 
         <record id="product_template_search_view_inherit" model="ir.ui.view">
             <field name="name">product.product</field>
@@ -42,14 +42,14 @@
             <field name="arch" type="xml">
                 <data>
                     <field name='name' position='after'>
+                        <field name="default_code" />
                         <field name="categ_id" />
-                        <field name="product_code" />
                     </field>
                 </data>
             </field>
         </record>
 
-        <record model="ir.ui.view" id="product_template_kanban_product_code_view">
+        <!-- <record model="ir.ui.view" id="product_template_kanban_product_code_view">
             <field name="name">Product Template Kanban Stock</field>
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_kanban_view"/>
@@ -61,7 +61,7 @@
                     <li t-if="record.type.raw_value == 'product'">Código de Producto: <field name="product_code"/></li>
                 </ul>
             </field>
-        </record>
+        </record> -->
 
         <record id="view_product_template_code_form" model="ir.ui.view">
             <field name="name">product.template.code.form.inherit</field>
@@ -70,11 +70,11 @@
             <field name="priority">26</field>
             <field name="arch" type="xml">
                 <data>
-                    <field name='default_code' position='after'>
-                        <field name="product_code" readonly="1"/>
+                    <field name='default_code' position='replace'>
+                        <field name="default_code" readonly="1"/>
                         <button string="Establecer código de producto"
                                 type="object" name="action_set_product_code"
-                                attrs="{'invisible':[('product_code','!=', False)]}"
+                                attrs="{'invisible':[('default_code','!=', False)]}"
                                 class="oe_link oe_read_only"
                                 colspan="2"/>
                     </field>
@@ -89,11 +89,11 @@
             <field name="priority">26</field>
             <field name="arch" type="xml">
                 <data>
-                    <field name='default_code' position='after'>
-                        <field name="product_code" readonly="1"/>
+                    <field name='default_code' position='replace'>
+                        <field name="default_code" readonly="1"/>
                         <button string="Establecer código de producto"
                                 type="object" name="action_set_product_code"
-                                attrs="{'invisible':['|', ('product_code','!=', False), ('product_variant_count', '&gt;', 1)]}"
+                                attrs="{'invisible':['|', ('default_code','!=', False), ('product_variant_count', '&gt;', 1)]}"
                                 class="oe_link oe_read_only"
                                 colspan="2"/>
                     </field>
