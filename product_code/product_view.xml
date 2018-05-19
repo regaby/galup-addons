@@ -30,6 +30,13 @@
                     <field name='name' position='after'>
                         <field name="default_code" />
                     </field>
+                    <field name='volume' position='replace'>
+                        <field name="volume" invisible="1"/>
+                    </field>
+                    <field name='weight' position='replace'>
+                        <field name="weight" invisible="1"/>
+                        <field name="list_price" />
+                    </field>
                 </data>
             </field>
         </record>
