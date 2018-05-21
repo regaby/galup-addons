@@ -44,6 +44,12 @@
                 <!-- <field name="parent_id" search="[('name','=','Habitaciones')]" model="product.category"/> -->
                 <field name="isroomtype" eval="True"/>
             </record>
+            <record model="hotel.room.type" id="room_type_6">
+                <field name="name">Cochera</field> 
+                <field name="capacity">0</field> 
+                <field name="list_price">0</field> 
+                <field name="isroomtype" eval="True"/>
+            </record>
             
         </data>
     </openerp>

@@ -88,6 +88,37 @@
                 <field name="active" eval="True"/>
                 <field name="rental" eval="True"/>
             </record>
+
+            <record model="hotel.room" id="cochera_1">
+                <field name="name">Cochera 1</field> 
+                <field name="categ_id" search="[('name','=','Cochera')]" model="product.category"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+            <record model="hotel.room" id="cochera_2">
+                <field name="name">Cochera 2</field> 
+                <field name="categ_id" search="[('name','=','Cochera')]" model="product.category"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+            <record model="hotel.room" id="cochera_3">
+                <field name="name">Cochera 3</field> 
+                <field name="categ_id" search="[('name','=','Cochera')]" model="product.category"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+            <record model="hotel.room" id="cochera_4">
+                <field name="name">Cochera 4</field> 
+                <field name="categ_id" search="[('name','=','Cochera')]" model="product.category"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
+            <record model="hotel.room" id="cochera_5">
+                <field name="name">Cochera 5</field> 
+                <field name="categ_id" search="[('name','=','Cochera')]" model="product.category"/>
+                <field name="active" eval="True"/>
+                <field name="rental" eval="True"/>
+            </record>
             
             
         </data>
