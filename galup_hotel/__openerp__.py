@@ -45,6 +45,7 @@
         'view/quick_room_blocked_view.xml',
         'view/quick_reservation_view.xml',
         'view/quick_folio_view.xml',
+        'view/account_invoice_view.xml',
         'wizard/room_issue_wizard_view.xml',
         'wizard/check_reservation_view.xml',
         'wizard/make_invoice_wizard.xml',
