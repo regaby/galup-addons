@@ -62,6 +62,24 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="view_hotel_room_state_view_search">
+            <field name="name">hotel.room.state.view.search</field>
+            <field name="model">hotel.room.state.view</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="room_id" />
+                    <field name="categ_id" />
+                    <field name="partner_id" />
+                    <field name="folio_id" />
+                    <filter domain="[('categ_id','!=','Cochera')]" name="habitaciones" string="Habitaciones"/>
+                    <filter domain="[('categ_id','=','Cochera')]" name="cochera" string="Cocheras"/>
+                    <filter domain="[('status','=','occupied')]" name="ocupada" string="Ocupada"/>
+                    <filter domain="[('status','=','available')]" name="disponible" string="Disponible"/>
+                    <filter domain="[('status','=','blocked')]" name="ocupado" string="Bloqueada"/>
+                </search>
+            </field>
+        </record>
+
         <!-- Action of Estado de Habitaciones -->
         <record model="ir.actions.act_window" id="hotel_room_state_view_action">
             <field name="name">Estado de Habitaciones</field>
