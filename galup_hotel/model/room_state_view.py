@@ -82,5 +82,5 @@ class HotelRoomStateView(models.Model):
                     where check_in::date <= now()::date
                     and so.state not in ('done','cancel')
                     and check_out::date >= now()::date) folio on (folio.room_id = hr.id)
-                where pc.name!='Cochera'
+                --where pc.name!='Cochera'
         )""" )
