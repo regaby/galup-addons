@@ -387,6 +387,15 @@ class AccountInvoice(models.Model):
     _name = "account.invoice"
     _inherit = "account.invoice"
 
+    @api.multi
+    def invoice_validate(self):
+        """
+        The last thing we do is request the cae because if an error occurs
+        after cae requested, the invoice has been already validated on afip
+        """
+        self.user_id = self.env.uid
+        return super(AccountInvoice, self).invoice_validate()
+
     state = fields.Selection([
             ('draft','Factura en Borrador'),
             ('proforma', 'Pro-forma'),
