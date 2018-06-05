@@ -51,6 +51,7 @@ class Parser(report_sxw.rml_parse):
                 'amount_total': obj.amount,
                 'fecha_pago': obj.payment_date,
                 'concepto': 'Pago de alojamiento.-',
+                'metodo_de_pago': obj.journal_id,
             }
         else:
             vals = {
@@ -67,6 +68,7 @@ class Parser(report_sxw.rml_parse):
                 'amount_total': obj.amount,
                 'fecha_pago': obj.payment_date,
                 'concepto': 'Seña de alojamiento.-',
+                'metodo_de_pago': obj.journal_id,
             }
         ret = []
         ret.append(vals)
