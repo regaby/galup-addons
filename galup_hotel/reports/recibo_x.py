@@ -49,7 +49,7 @@ class Parser(report_sxw.rml_parse):
                 'partner_country_id': obj.folio_id.partner_id.country_id,
                 'partner_phone': obj.folio_id.partner_id.phone,
                 'amount_total': obj.amount,
-                'fecha_pago': obj.payment_date,
+                'fecha_pago': datetime.strptime(obj.payment_date, '%Y-%m-%d %H:%M:%S') - timedelta(hours=3),
                 'concepto': 'Pago de alojamiento.-',
                 'metodo_de_pago': obj.journal_id,
             }
@@ -66,7 +66,7 @@ class Parser(report_sxw.rml_parse):
                 'partner_country_id': obj.reservation_id.partner_id.country_id,
                 'partner_phone': obj.reservation_id.partner_id.phone,
                 'amount_total': obj.amount,
-                'fecha_pago': obj.payment_date,
+                'fecha_pago': datetime.strptime(obj.payment_date, '%Y-%m-%d %H:%M:%S') - timedelta(hours=3),
                 'concepto': 'Seña de alojamiento.-',
                 'metodo_de_pago': obj.journal_id,
             }
