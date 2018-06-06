@@ -28,7 +28,8 @@ class Parser(report_sxw.rml_parse):
         amount_in_words = amount_in_words.replace(' and Zero Cent', '') # Ugh
         decimals = amount_total % 1
         if decimals >= 10**-2:
-            amount_in_words += _(' and %s/100') % str(int(round(float_round(decimals*100, precision_rounding=1))))
+            amount_in_words = amount_in_words.replace(' con Cero Centavo', '') # Ugh
+            amount_in_words += (' y %s centavos') % str(int(round(float_round(decimals*100, precision_rounding=1))))
         return amount_in_words
 
     def _get_objects(self, objects, context=None):
