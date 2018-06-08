@@ -40,12 +40,12 @@
                     </xpath> -->
                     <field name="function" position="replace">
                          <!-- <field name="identification_id" attrs="{'invisible':[('customer','!=',True)],'required':[('customer','=',False)]}"/> -->
-                         <field name="job_id" attrs="{'invisible':[('customer','!=',True)],'required':[('customer','=',False)]}" />
-                         <field name="nationality_id" attrs="{'invisible':[('customer','!=',True)],'required':[('customer','=',False)]}" />
-                         <field name="birthday" attrs="{'invisible':[('customer','!=',True)],'required':[('customer','=',False)]}" />
+                         <field name="job_id" attrs="{'invisible':[('customer','!=',True)]}" />
+                         <field name="nationality_id" attrs="{'invisible':[('customer','!=',True)]}" />
+                         <field name="birthday" attrs="{'invisible':[('customer','!=',True)]}" />
                          <field name="age" attrs="{'invisible':[('customer','!=',True)]}" />
-                         <field name="gender" attrs="{'invisible':[('customer','!=',True)],'required':[('customer','=',False)]}" />
-                         <field name="marital" attrs="{'invisible':[('customer','!=',True)],'required':[('customer','=',False)]}" />
+                         <field name="gender" attrs="{'invisible':[('customer','!=',True)]}" />
+                         <field name="marital" attrs="{'invisible':[('customer','!=',True)]}" />
                     </field>
                     <field name="category_id" position="after">
                         <field name="smoker" attrs="{'invisible':[('customer','!=',True)]}"/>
