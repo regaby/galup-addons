@@ -62,6 +62,9 @@
                     <field name="mobile" position="attributes">
                          <attribute name="invisible">True</attribute>
                     </field>
+                    <field name="ref" position="attributes">
+                         <attribute name="invisible">True</attribute>
+                    </field>
                     <field name="fax" position="attributes">
                          <attribute name="invisible">True</attribute>
                     </field>
