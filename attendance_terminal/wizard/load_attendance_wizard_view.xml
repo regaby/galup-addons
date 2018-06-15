@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="load_attendance_form_view">
+            <field name="name">load.attendance.form</field>
+            <field name="model">load.attendance</field>
+            <field name="arch" type="xml">
+                <form string="Cargar Asistencias del Reloj" >
+                    <group colspan="4" col="4" states="choose">
+                        <field name="data" colspan="4"/>
+                    </group>
+                    <footer states="choose">
+                        <button name="load_attendance" string="Cargar Asistencias" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancelar" class="oe_link" special="cancel"/>
+                        <field invisible="1" name="state"/>
+                    </footer>
+                    <group colspan="4" col="4" states="done">
+                        <separator string="Fin del proceso" colspan="4"/>
+                        <field name="info" colspan="4" nolabel="1"/>
+                    </group>
+                    <footer states="done">
+                        <button special="cancel" icon="gtk-cancel" string="Cerrar"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_load_attendance"
+            model="ir.actions.act_window">
+            <field name="name">Cargar Asistencias del Reloj</field>
+            <field name="res_model">load.attendance</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+        action="action_load_attendance"
+        id="menu_load_attendance"
+        parent="hr_attendance.menu_hr_attendance_root" groups="base.group_hr_attendance" sequence="90"/>
+
+    </data>
+</openerp>
