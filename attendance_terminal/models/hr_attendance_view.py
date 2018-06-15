@@ -16,8 +16,8 @@ class HrAttendanceView(models.Model):
     _auto = False
 
 
-    employee_id = fields.Many2one('hr.employee', string="Employee", readonly=True)
-    department_id = fields.Many2one('hr.department', string="Department", related="employee_id.department_id", readonly=True)
+    employee_id = fields.Many2one('hr.employee', string="Empleado", readonly=True)
+    department_id = fields.Many2one('hr.department', string="Departamento", related="employee_id.department_id", readonly=True)
     name = fields.Datetime('Fecha', readonly=True)
     action = fields.Selection([('sign_in', 'Entrada'),
                                ('sign_out', 'Salida')],
