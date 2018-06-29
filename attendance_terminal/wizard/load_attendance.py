@@ -29,6 +29,8 @@ import os
 import base64
 import cStringIO
 import csv
+from datetime import timedelta
+from datetime import datetime
 
 class LoadAttendance(models.TransientModel):
 
@@ -49,8 +51,13 @@ class LoadAttendance(models.TransientModel):
         # location = self.location
         reader_info = []
         delimeter = '\t'
+        msg=''
         reader = csv.reader(file_input, delimiter=delimeter,
                             lineterminator='\r\n')
+        ACTION={
+            'sign_in': 'Entrada',
+            'sign_out': 'Salida',
+        }
         try:
             reader_info.extend(reader)
         except Exception:
@@ -65,14 +72,24 @@ class LoadAttendance(models.TransientModel):
                         action='sign_in'
                     else :
                         action='sign_out'
+                    delta = timedelta(hours=3)
+                    DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
+                    from_dt = datetime.strptime(line[1], DATETIME_FORMAT) + delta
+
                     vals = {'employee_id': emp_id.id,
-                            'name': line[1],
+                            'name': str(from_dt),
                             'action': action}
                     print vals
-                    attendance_obj.create(vals)
+                    try:
+                        attendance_obj.create(vals)
+                    except Exception, e:
+                        msg+="%s - Empleado: %s - Horario: %s - Acción: %s \n"%((str(e[0]),emp_id.name,line[1],ACTION[action]))
+
+
 
         self.state='done'
-        self.info='ok!!'
+        msg+='ok!!'
+        self.info=msg
         view_id = self.env['ir.ui.view'].search([('model','=','load.attendance')])
         print view_id
         return {
