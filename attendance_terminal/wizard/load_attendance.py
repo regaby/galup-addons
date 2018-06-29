@@ -84,6 +84,8 @@ class LoadAttendance(models.TransientModel):
                         attendance_obj.create(vals)
                     except Exception, e:
                         msg+="%s - Empleado: %s - Horario: %s - Acción: %s \n"%((str(e[0]),emp_id.name,line[1],ACTION[action]))
+            else:
+                msg+="Código de reloj %s no asociado a un empleado\n"%(line[0])
 
 
 
