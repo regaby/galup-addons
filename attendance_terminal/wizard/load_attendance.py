@@ -52,6 +52,7 @@ class LoadAttendance(models.TransientModel):
         reader_info = []
         delimeter = '\t'
         msg=''
+        count_error = count = 0
         reader = csv.reader(file_input, delimiter=delimeter,
                             lineterminator='\r\n')
         ACTION={
@@ -66,15 +67,16 @@ class LoadAttendance(models.TransientModel):
             print line
             emp_id = employee_obj.search([('emp_code','=',int(line[0]))])
             if emp_id:
-                attendance_id = attendance_obj.search([('name','=',line[1])])
+                delta = timedelta(hours=3)
+                DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
+                from_dt = datetime.strptime(line[1], DATETIME_FORMAT) + delta
+
+                attendance_id = attendance_obj.search([('name','=',str(from_dt))])
                 if not attendance_id:
                     if line[3]=='0':
                         action='sign_in'
                     else :
                         action='sign_out'
-                    delta = timedelta(hours=3)
-                    DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
-                    from_dt = datetime.strptime(line[1], DATETIME_FORMAT) + delta
 
                     vals = {'employee_id': emp_id.id,
                             'name': str(from_dt),
@@ -82,15 +84,17 @@ class LoadAttendance(models.TransientModel):
                     print vals
                     try:
                         attendance_obj.create(vals)
+                        count += 1
                     except Exception, e:
                         msg+="%s - Empleado: %s - Horario: %s - Acción: %s \n"%((str(e[0]),emp_id.name,line[1],ACTION[action]))
+                        count_error += 1
             else:
                 msg+="Código de reloj %s no asociado a un empleado\n"%(line[0])
 
 
 
         self.state='done'
-        msg+='ok!!'
+        msg+='\nCantidad de registros creados %s.\nCantidad de registros con advertencia:%s'%(count,count_error)
         self.info=msg
         view_id = self.env['ir.ui.view'].search([('model','=','load.attendance')])
         print view_id

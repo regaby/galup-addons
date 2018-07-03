@@ -23,6 +23,48 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="view_attendance_who_inherit" model="ir.ui.view">
+            <field name="name">hr.attendance.tree</field>
+            <field name="model">hr.attendance</field>
+            <field eval="47" name="priority"/>
+            <field name="inherit_id" ref="hr_attendance.view_attendance_who"/>
+            <field name="arch" type="xml">
+                 <field name="action" position="after">
+                    <field name="state" />
+                    <field name="user_id" />
+                    <button name="validate_attendance" states="draft" string="Validar Asistencia"
+                            class="btn-primary" type="object" groups="base.group_hr_attendance"/>
+                 </field>
+            </field>
+        </record>
+
+        <record id="view_attendance_form_inherit" model="ir.ui.view">
+            <field name="name">hr.attendance.tree</field>
+            <field name="model">hr.attendance</field>
+            <field eval="47" name="priority"/>
+            <field name="inherit_id" ref="hr_attendance.view_attendance_form"/>
+            <field name="arch" type="xml">
+                 <field name="action_desc" position="after">
+                    <field name="state" />
+                    <field name="user_id" />
+                    <button name="validate_attendance" states="draft" string="Validar Asistencia"
+                            class="btn-primary" type="object" groups="base.group_hr_attendance"/>
+                 </field>
+            </field>
+        </record>
+
+        <record id="view_hr_attendance_filter_inherit" model="ir.ui.view">
+            <field name="name">view_hr_attendance_filter</field>
+            <field name="model">hr.attendance</field>
+            <field eval="47" name="priority"/>
+            <field name="inherit_id" ref="hr_attendance.view_hr_attendance_filter"/>
+            <field name="arch" type="xml">
+                 <field name="department_id" position="after">
+                    <filter string="Sin Validar" domain="[('state', '=', 'draft')]" />
+                 </field>
+            </field>
+        </record>
 	
      </data>
 </openerp>
