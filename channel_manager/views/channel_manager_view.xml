@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="channel_manager_tree_view">
+            <field name="name">channel.manager.tree</field>
+            <field name="model">channel.manager</field>
+            
+            <field name="arch" type="xml">
+                <tree string="Portales" >
+                    <field name="name" />
+                    <field name="xml_name" />
+                    <field name="xml_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="channel_manager_form_view">
+            <field name="name">channel.manager.form</field>
+            <field name="model">channel.manager</field>          
+            <field name="arch" type="xml">
+                <form string="Portales">  
+                    <header>
+                        <button name="test" string="test" type="object"/>
+                    </header>
+                    <sheet> 
+                        <group>
+                            <field name="name" />
+                            <field name="xml_name" />
+                            <field name="xml_id" />                
+                        </group>
+                    </sheet>
+                        
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_channel_manager_tree_view">
+            <field name="name">Portales</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">channel.manager</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="channel_manager_tree_view" />
+        </record>
+
+        <menuitem id="channel_manager_menu" name="Portales" parent="hotel.hotel_configuration_menu" sequence="99" action="action_channel_manager_tree_view" />
+
+    
+</odoo>

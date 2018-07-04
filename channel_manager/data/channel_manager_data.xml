@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+    <openerp>
+        <data noupdate="1">
+            <!-- Data to load -->
+            <record model="channel.manager" id="channel_0">
+                <field name="name">Booking.com</field> 
+                <field name="xml_name">booking_xml</field> 
+                <field name="xml_id">142</field> 
+            </record>
+            <record model="channel.manager" id="channel_1">
+                <field name="name">Expedia</field> 
+                <field name="xml_name">expedia</field> 
+                <field name="xml_id">4</field> 
+            </record>
+            
+        </data>
+    </openerp>
