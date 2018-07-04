@@ -50,6 +50,8 @@
                     <field name="user_id" />
                     <button name="validate_attendance" states="draft" string="Validar Asistencia"
                             class="btn-primary" type="object" groups="base.group_hr_attendance"/>
+                    <button name="draft_attendance" states="validated" string="Volver a borrador"
+                            type="object" groups="base.group_hr_attendance"/>
                  </field>
             </field>
         </record>

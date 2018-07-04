@@ -39,5 +39,13 @@ class HrAttendance(models.Model):
         return True
 
     @api.multi
+    def draft_attendance(self):
+        '''
+        @param self: object pointer
+        '''
+        self.write({'state': 'draft'})
+        return True
+
+    @api.multi
     def copy(self):
         raise exceptions.UserError(_('No se puede duplicar una asistencia.'))
