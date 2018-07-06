@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    <!-- Actualizar Precio de Venta Wizard form -->
+        <record id="view_update_product_price" model="ir.ui.view">
+            <field name="name">update.product.price.form</field>
+            <field name="model">update.product.price</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Actualizar Precio de Venta">
+                
+                    <group >
+                        <field name="percentage" />
+                        <field name="option" />
+                
+                    </group>
+                    
+                   <footer>
+                        <button class="oe_highlight" special="cancel" string="Cancelar"/>
+                        <button name="action_update" string="Actualizar" type="object"/>
+                   </footer>
+               </form>
+            </field>
+        </record>
+
+    <!--  Action of Actualizar Precio de Venta wizard -->
+
+    <record id="action_update_product_price" model="ir.actions.act_window">
+        <field name="name">Actualizar Precio de Venta</field>
+        <field name="res_model">update.product.price</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+       <field name="view_id" ref="view_update_product_price"/>
+       <field name="target">new</field>
+    </record>
+
+    <act_window name="Actualizar Precio de Venta"
+            key2="client_action_multi"
+            res_model="update.product.price"
+            src_model="product.template"
+            id="act_update_product_price"
+            view_mode="form" target="new"
+            view_type="form"/>
+
+    <!-- <menuitem  id="menu_update_product_price" name="Actualizar Precio de Venta" action="action_update_product_price" parent="stock.menu_stock_inventory_control"/> -->
+    </data>
+</openerp>
