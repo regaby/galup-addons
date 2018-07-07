@@ -38,7 +38,7 @@
         <menuitem
         action="action_load_attendance"
         id="menu_load_attendance"
-        parent="hr_attendance.menu_hr_attendance_root" groups="base.group_hr_attendance,hotel.group_hotel_manager" sequence="90"/>
+        parent="hr_attendance.menu_hr_attendance_root" groups="hotel.group_hotel_manager" sequence="90"/>
 
     </data>
 </openerp>
