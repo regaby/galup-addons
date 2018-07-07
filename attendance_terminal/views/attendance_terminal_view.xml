@@ -34,7 +34,7 @@
                     <field name="state" />
                     <field name="user_id" />
                     <button name="validate_attendance" states="draft" string="Validar Asistencia"
-                            class="btn-primary" type="object" groups="base.group_hr_attendance"/>
+                            class="btn-primary" type="object" groups="base.group_hr_attendance,hotel.group_hotel_manager"/>
                  </field>
             </field>
         </record>
@@ -49,9 +49,9 @@
                     <field name="state" />
                     <field name="user_id" />
                     <button name="validate_attendance" states="draft" string="Validar Asistencia"
-                            class="btn-primary" type="object" groups="base.group_hr_attendance"/>
+                            class="btn-primary" type="object" groups="base.group_hr_attendance,hotel.group_hotel_manager"/>
                     <button name="draft_attendance" states="validated" string="Volver a borrador"
-                            type="object" groups="base.group_hr_attendance"/>
+                            type="object" groups="base.group_hr_attendance,hotel.group_hotel_manager"/>
                  </field>
             </field>
         </record>
