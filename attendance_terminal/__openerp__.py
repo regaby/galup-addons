@@ -10,6 +10,7 @@
     "depends": [
         "base",
         "hr_attendance",
+        "hotel",
     ],
     "init_xml": [
     ],
