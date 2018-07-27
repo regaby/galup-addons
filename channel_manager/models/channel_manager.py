@@ -38,7 +38,7 @@ class ChannelManager(models.Model):
     @api.multi
     def test2(self):
         # xml = {'status': u'modification', 'reservationid': u'HS1AT1', 'siteid': u'288', 'site': u'octoevo autosubmit', 'propertyid': u'9922124076'}
-        xml = {'status': u'modification', 'reservationid': u'YD1ED5', 'siteid': u'288', 'site': u'octoevo autosubmit', 'propertyid': u'9922124076'}
+        xml = {'status': u'modification', 'reservationid': u'KW8HM8', 'siteid': u'288', 'site': u'octoevo autosubmit', 'propertyid': u'9922124076'}
         # xml = {'status': u'cancellation', 'reservationid': u'YD1ED5', 'siteid': u'288', 'site': u'octoevo autosubmit', 'propertyid': u'9922124076'}
         headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
         msg = requests.post('http://localhost:8069/test', data=xml, headers=headers).text

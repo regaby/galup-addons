@@ -92,6 +92,8 @@ class Home(http.Controller):
             for l in lines:
                 rtype = request.env['hotel.room.type'].sudo().search([('room_type_id','=',l['room_type_id'])])
                 room = request.env['hotel.room'].sudo().search([('categ_id','=',rtype.cat_id.id)])
+                _logger.info(room)
+
 
                 vals_lines.append((0, 0, {
                             'list_price': l['price'],
