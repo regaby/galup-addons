@@ -90,7 +90,9 @@ class Home(http.Controller):
                 partner = partner_obj.create({'name' : vals['partner_name']})
             vals['partner_id'] = partner.id
             for l in lines:
+                _logger.info(l['room_type_id'])
                 rtype = request.env['hotel.room.type'].sudo().search([('room_type_id','=',l['room_type_id'])])
+                _logger.info(rtype)
                 room = request.env['hotel.room'].sudo().search([('categ_id','=',rtype.cat_id.id)])
                 _logger.info(room)
 
