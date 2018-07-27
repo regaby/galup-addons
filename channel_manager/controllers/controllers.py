@@ -61,6 +61,7 @@ class Home(http.Controller):
                             vals['res_id'] = child.text
                         if child.xpath('local-name()') == 'BbliverateTimestamp':
                             vals['create_date'] = child.text # aparentemente tiene 5 horas de diferencia
+                        # TODO: ResSource creo qe va a traer la info si es booking o expedia...
                         # if child.xpath('local-name()') == 'Customers':
                         for cus2 in child:
                             line={}
@@ -77,8 +78,10 @@ class Home(http.Controller):
                                         pax += int(cus.text)
                                 if cus.xpath('local-name()') == 'Units':
                                     line['cantidad'] = cus.text
+                                if cus.xpath('local-name()') == 'Price':
+                                        line['price'] = cus.text
                                 for ccus in cus:
-                                    if ccus.xpath('local-name()') == 'price':
+                                    if ccus.xpath('local-name()') == 'Price':
                                         line['price'] = ccus.text
                                     if ccus.xpath('local-name()') == 'RoomTypeId':
                                         line['room_type_id'] = ccus.text
@@ -99,8 +102,8 @@ class Home(http.Controller):
             vals['xml_response'] = msg
             if not partner:
                 partner = partner_obj.create({'name' : vals['partner_name'], 
-                                              'email': vals['partner_email'], 
-                                              'phone': vals['partner_phone'], 
+                                              'email': 'partner_email' in vals.keys() and vals['partner_email'], 
+                                              'phone': 'partner_phone' in vals.keys() and vals['partner_phone'], 
                                               'customer': True})
             vals['partner_id'] = partner.id
             for l in lines:
@@ -110,7 +113,8 @@ class Home(http.Controller):
                 room = request.env['hotel.room'].sudo().search([('categ_id','=',rtype.cat_id.id)])
                 _logger.info(room)
 
-
+                print vals
+                # TODO: selecciona la primer habitacion, deberia comprobar disponibilidad
                 vals_lines.append((0, 0, {
                             'list_price': l['price'],
                             'reserve' : [(6,0,[room[0].id])],
