@@ -16,6 +16,8 @@ class HotelReservation(models.Model):
     
 
     res_id = fields.Char('ResId')
+    bb_id = fields.Char('BbliverateId')
+
     channel_manager_id = fields.Many2one('channel.manager', 'Portal')
     xml_request = fields.Text('Solicitud Channel Manager', readonly=True)
     xml_response = fields.Text('Respuesta Channel Manager', readonly=True)
@@ -64,7 +66,7 @@ class HotelReservation(models.Model):
                                  <Cvv></Cvv>
                                  <Submitby></Submitby>"""%(self.adults,price, self.partner_id.name)
                     else:
-                        xml+="""\n<Bbliverateresvid>%s</Bbliverateresvid>"""%(self.res_id)
+                        xml+="""\n<Bbliverateresvid>%s</Bbliverateresvid>"""%(self.bb_id)
                     xml+="""\n<Status>%s</Status>
                               </Room>
                           </Rooms>
@@ -82,7 +84,7 @@ class HotelReservation(models.Model):
         for process in process_list:
             for child in process:
                 if child.xpath('local-name()') == 'Bbliverateresvid':
-                    self.res_id = child.text
+                    self.bb_id = child.text
         return xml
 
     @api.multi
@@ -94,7 +96,7 @@ class HotelReservation(models.Model):
     @api.multi
     def cancel_reservation(self):
         res = super(HotelReservation, self).cancel_reservation()
-        if self.res_id:
+        if self.bb_id:
             xml = self.get_xml('Cancelled')
         return res
 

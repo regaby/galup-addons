@@ -21,6 +21,7 @@
                 <form string="Portales">  
                     <header>
                         <button name="test" string="test" type="object"/>
+                        <button name="test2" string="test2" type="object"/>
                     </header>
                     <sheet> 
                         <group>

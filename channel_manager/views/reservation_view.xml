@@ -11,8 +11,9 @@
                <page name="pago_anticipado" position="after" >
                   <page string="Channel Manager" name="channel_manager">
                     <group>
-                      <field name="channel_manager_id" options="{'no_create': True}"/>
+                      <field name="bb_id" />
                       <field name="res_id" />
+                      <field name="channel_manager_id" options="{'no_create': True}"/>
                       <field name="xml_request" />
                       <field name="xml_response" />
                     </group>
