@@ -40,6 +40,11 @@ class Home(http.Controller):
         reservation_obj = request.env['hotel.reservation']
 
         if data['status'] in ['modification','new']:
+            reservation = reservation_obj.sudo().search([('res_id','=',data['reservationid'])])
+            # control porque se mandan tres veces las reservas...
+            if reservation:
+                # si ya está creada le zafo
+                return Response("TEST",content_type='text/html;charset=utf-8',status=500)
             root = etree.fromstring(msg)
             process_list = root.findall('Bookings', root.nsmap)
             pax = 0
@@ -64,12 +69,8 @@ class Home(http.Controller):
                                     vals['partner_name'] = cus.text
                                 if cus.xpath('local-name()') == 'CustomerEmail':
                                     vals['partner_email'] = cus.text
-                                else:
-                                    vals['partner_email'] = False
                                 if cus.xpath('local-name()') == 'CustomerPhone':
                                     vals['partner_phone'] = cus.text
-                                else:
-                                    vals['partner_phone'] = False
                                 if cus.xpath('local-name()') == 'CustomerNote':
                                     vals['observations'] = cus.text
                                 if cus.xpath('local-name()') == 'Pax':
@@ -85,7 +86,7 @@ class Home(http.Controller):
                                         line['cantidad'] = ccus.text
                             if len(line)>0:
                                 lines.append(line)
-            vals['pax'] = pax
+            vals['adults'] = pax
             partner_obj = request.env['res.partner'].sudo()
             partner = partner_obj.search([('name','=',vals['partner_name'])])
             vals['pricelist_id'] = request.env['product.pricelist'].sudo().search([]).id
