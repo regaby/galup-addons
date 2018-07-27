@@ -62,6 +62,16 @@ class Home(http.Controller):
                             for cus in cus2:
                                 if cus.xpath('local-name()') == 'CustomerFName':
                                     vals['partner_name'] = cus.text
+                                if cus.xpath('local-name()') == 'CustomerEmail':
+                                    vals['partner_email'] = cus.text
+                                else:
+                                    vals['partner_email'] = False
+                                if cus.xpath('local-name()') == 'CustomerPhone':
+                                    vals['partner_phone'] = cus.text
+                                else:
+                                    vals['partner_phone'] = False
+                                if cus.xpath('local-name()') == 'CustomerNote':
+                                    vals['observations'] = cus.text
                                 if cus.xpath('local-name()') == 'Pax':
                                         pax += int(cus.text)
                                 if cus.xpath('local-name()') == 'Units':
@@ -87,7 +97,10 @@ class Home(http.Controller):
             vals['xml_request'] = data
             vals['xml_response'] = msg
             if not partner:
-                partner = partner_obj.create({'name' : vals['partner_name']})
+                partner = partner_obj.create({'name' : vals['partner_name'], 
+                                              'email': vals['partner_email'], 
+                                              'phone': vals['partner_phone'], 
+                                              'customer': True})
             vals['partner_id'] = partner.id
             for l in lines:
                 _logger.info(l['room_type_id'])
