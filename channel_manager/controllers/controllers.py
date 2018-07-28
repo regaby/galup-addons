@@ -12,7 +12,7 @@ class Home(http.Controller):
     @http.route('/test', type='http', auth="public", csrf=False)
     def test(self, **kwargs):
         config_obj = request.env['channel.manager.config.settings']
-        config = config_obj.search([])
+        config = config_obj.sudo().search([])
         print config
 
         data = kwargs 
@@ -113,11 +113,29 @@ class Home(http.Controller):
                 room = request.env['hotel.room'].sudo().search([('categ_id','=',rtype.cat_id.id)])
                 _logger.info(room)
 
-                print vals
-                # TODO: selecciona la primer habitacion, deberia comprobar disponibilidad
+                summary_obj = request.env['room.reservation.summary']
+                # vals['checkin_date'] = '2018-07-27'
+                # vals['checkout_date'] = '2018-07-31'
+                res = summary_obj.sudo().check_reservation(rtype.cat_id.id, '%s 12:00:00'%vals['checkin_date'], '%s 10:00:00'%vals['checkout_date'])
+                print res['room_summary']
+                ## chequeo disponibilidad...
+                for r in res['room_summary']:
+                    print r
+                    free_room_id =r['value'][0]['room_id'] 
+                    libre = True
+                    for v in r['value']:
+                        if v['state']!='Libre':
+                            libre=False
+                    if libre == True:
+                        break
+                if libre == True:
+                    print 'habitacion libre', free_room_id
+                else:
+                    print 'no hay hab. libres'
+                print free_room_id
                 vals_lines.append((0, 0, {
                             'list_price': l['price'],
-                            'reserve' : [(6,0,[room[0].id])],
+                            'reserve' : [(6,0,[free_room_id])],
                         }))
             vals['reservation_line'] = vals_lines
             reservation_obj.sudo().create(vals)

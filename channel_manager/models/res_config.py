@@ -10,7 +10,7 @@ from openerp.osv import fields, osv
 
 _logger = logging.getLogger(__name__)
 
-class channel_manager_configuration(osv.TransientModel):
+class channel_manager_configuration(osv.osv):
     _name = 'channel.manager.config.settings'
     _inherit = 'res.config.settings'	
     

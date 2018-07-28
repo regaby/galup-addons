@@ -90,13 +90,14 @@ class HotelReservation(models.Model):
     @api.multi
     def confirmed_reservation(self):
         res = super(HotelReservation, self).confirmed_reservation()
-        xml = self.get_xml('Confirmed')
+        if not self.res_id:
+            xml = self.get_xml('Confirmed')
         return res
 
     @api.multi
     def cancel_reservation(self):
         res = super(HotelReservation, self).cancel_reservation()
-        if self.bb_id:
+        if self.bb_id and not self.res_id:
             xml = self.get_xml('Cancelled')
         return res
 
