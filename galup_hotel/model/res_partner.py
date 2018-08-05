@@ -217,7 +217,13 @@ class HotelFolio(models.Model):
                 tax_id = tax_obj.search([('check_type', '=', 'late'),('hour_from', '<=', self.late_checkout_hour),('hour_to', '>=', self.late_checkout_hour)])
                 tax_ids.append(tax_id.id)
             line.tax_id = tax_ids
-        self.write({'check_applied': True})
+        vals = {'check_applied': True}
+        if self.early_checkin:
+            vals['checkin_date'] = '%s %s:00:00'%(self.checkin_date[0:10],self.early_checkin_hour+3)
+        if self.late_checkout:
+            vals['checkout_date'] = '%s %s:00:00'%(self.checkout_date[0:10],self.late_checkout_hour+3)
+        self.write(vals)
+        self.onchange_dates()
 
     @api.multi
     def uncalculate_check(self):
@@ -231,7 +237,13 @@ class HotelFolio(models.Model):
                 tax_id = tax_obj.search([('check_type', '=', 'late'),('hour_from', '<=', self.late_checkout_hour),('hour_to', '>=', self.late_checkout_hour)])
                 tax_ids.remove(tax_id.id)
             line.tax_id = [(6, 0, tax_ids)]
-        self.write({'check_applied': False})
+        vals = {'check_applied': False}
+        if self.early_checkin:
+            vals['checkin_date'] = '%s 15:00:00'%(self.checkin_date[0:10])
+        if self.late_checkout:
+            vals['checkout_date'] = '%s 15:00:00'%(self.checkout_date[0:10])
+        self.write(vals)
+        self.onchange_dates()
 
     @api.multi
     def unlink(self):
