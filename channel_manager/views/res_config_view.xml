@@ -15,8 +15,8 @@
             <field name="arch" type="xml">
                 <form string="Configurar Channel Manager" class="oe_form_configuration">
                     <header>
-                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
-                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight" groups="channel_manager.group_channel_manager" />
+                        <button string="Cancel" type="object" name="cancel" class="oe_link" groups="channel_manager.group_channel_manager" />
                     </header>
                     <group string="Channel Manager">
                         <label for="id" string="Api Key"/>

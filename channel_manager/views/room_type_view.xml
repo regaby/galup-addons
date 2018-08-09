@@ -9,7 +9,18 @@
             <field name="inherit_id" ref="hotel.view_hotel_room_type_form"/>
             <field name="arch" type="xml">
             	 <field name="list_price" position="after">
-                  <field name="room_type_id" />
+                  <field name="room_type_id" groups="channel_manager.group_channel_manager" />
+               </field>
+            </field>
+        </record>
+
+    <record id="view_hotel_room_type_tree_inherit" model="ir.ui.view">
+            <field name="name">hotel.room.type.tree</field>
+            <field name="model">hotel.room.type</field>
+            <field name="inherit_id" ref="hotel.view_hotel_room_type_tree"/>
+            <field name="arch" type="xml">
+               <field name="list_price" position="after">
+                  <field name="room_type_id" groups="channel_manager.group_channel_manager" />
                </field>
             </field>
         </record>
