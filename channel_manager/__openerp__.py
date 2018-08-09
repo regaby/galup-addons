@@ -14,6 +14,9 @@
     "init_xml": [
     ],
     "data": [
+        ##security
+        'security/channel_manager_security.xml',
+        'security/ir.model.access.csv',
         'views/res_config_view.xml',
         'views/channel_manager_view.xml',
         'views/reservation_view.xml',

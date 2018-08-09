@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="1">
+
+    <!--Group for channel manager -->
+    <record id="group_channel_manager" model="res.groups">
+        <field name="name">Channel Manager</field>
+    </record>
+
+</data>
+</openerp>
