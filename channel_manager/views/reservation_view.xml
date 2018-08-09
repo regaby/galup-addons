@@ -11,6 +11,7 @@
                <page name="pago_anticipado" position="after" >
                   <page string="Channel Manager" name="channel_manager">
                     <group>
+                      <field name="no_migrar" groups="channel_manager.group_channel_manager" />
                       <field name="bb_id" />
                       <field name="res_id" />
                       <field name="channel_manager_id" options="{'no_create': True}"/>

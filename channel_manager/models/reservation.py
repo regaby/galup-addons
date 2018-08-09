@@ -21,6 +21,7 @@ class HotelReservation(models.Model):
     channel_manager_id = fields.Many2one('channel.manager', 'Portal')
     xml_request = fields.Text('Solicitud Channel Manager', readonly=True)
     xml_response = fields.Text('Respuesta Channel Manager', readonly=True)
+    no_migrar = fields.Boolean('No migrar')
 
     def get_xml(self,state):
         config_obj = self.env['channel.manager.config.settings']
