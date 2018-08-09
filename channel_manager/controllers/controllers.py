@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from openerp import http
 import requests
 import json
@@ -51,6 +52,8 @@ class Home(http.Controller):
             for process in process_list:
                 for child2 in process:
                     for child in child2:
+                        if child.xpath('local-name()') == 'Channel':
+                            vals['channel'] = child.text
                         if child.xpath('local-name()') == 'StartDate':
                             vals['checkin_date'] = child.text
                         if child.xpath('local-name()') == 'EndDate':
@@ -67,7 +70,7 @@ class Home(http.Controller):
                             line={}
                             for cus in cus2:
                                 if cus.xpath('local-name()') == 'CustomerFName':
-                                    vals['partner_name'] = cus.text
+                                    vals['partner_name'] = cus.text.upper()
                                 if cus.xpath('local-name()') == 'CustomerEmail':
                                     vals['partner_email'] = cus.text
                                 if cus.xpath('local-name()') == 'CustomerPhone':
@@ -92,6 +95,10 @@ class Home(http.Controller):
             vals['adults'] = pax
             partner_obj = request.env['res.partner'].sudo()
             partner = partner_obj.search([('name','=',vals['partner_name'])])
+            if 'channel' in vals.keys():
+                channel_obj = request.env['channel.manager'].sudo()
+                channel = channel_obj.search([('xml_id','=',vals['channel'])])
+                vals['channel_manager_id'] = channel.id
             vals['pricelist_id'] = request.env['product.pricelist'].sudo().search([]).id
             vals['checkin_hour'] = 15
             vals['checkout_hour'] = 13
@@ -106,22 +113,23 @@ class Home(http.Controller):
                                               'phone': 'partner_phone' in vals.keys() and vals['partner_phone'], 
                                               'customer': True})
             vals['partner_id'] = partner.id
+            rcateg_id = []
+            ocupadas = []
             for l in lines:
                 _logger.info(l['room_type_id'])
                 rtype = request.env['hotel.room.type'].sudo().search([('room_type_id','=',l['room_type_id'])])
                 _logger.info(rtype)
-                room = request.env['hotel.room'].sudo().search([('categ_id','=',rtype.cat_id.id)])
-                _logger.info(room)
+                rcateg_id.append(rtype.cat_id.id)
+            summary_obj = request.env['room.reservation.summary']
+            res = summary_obj.sudo().check_reservation(rcateg_id, '%s 12:00:00'%vals['checkin_date'], '%s 10:00:00'%vals['checkout_date'])
 
-                summary_obj = request.env['room.reservation.summary']
-                # vals['checkin_date'] = '2018-07-27'
-                # vals['checkout_date'] = '2018-07-31'
-                res = summary_obj.sudo().check_reservation(rtype.cat_id.id, '%s 12:00:00'%vals['checkin_date'], '%s 10:00:00'%vals['checkout_date'])
-                print res['room_summary']
+            for l in lines:
                 ## chequeo disponibilidad...
                 for r in res['room_summary']:
                     print r
                     free_room_id =r['value'][0]['room_id'] 
+                    if free_room_id in ocupadas:
+                        continue
                     libre = True
                     for v in r['value']:
                         if v['state']!='Libre':
@@ -130,6 +138,7 @@ class Home(http.Controller):
                         break
                 if libre == True:
                     print 'habitacion libre', free_room_id
+                    ocupadas.append(free_room_id)
                 else:
                     print 'no hay hab. libres'
                 print free_room_id
@@ -138,7 +147,11 @@ class Home(http.Controller):
                             'reserve' : [(6,0,[free_room_id])],
                         }))
             vals['reservation_line'] = vals_lines
-            reservation_obj.sudo().create(vals)
+            reservation = reservation_obj.sudo().create(vals)
+            try:
+                reservation.confirmed_reservation()
+            except Exception, e:
+                _logger.info(e)
         else:
             # cancelo reserva
             reservation = reservation_obj.sudo().search([('res_id','=',data['reservationid'])])
