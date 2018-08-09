@@ -20,8 +20,9 @@
             <field name="arch" type="xml">
                 <form string="Portales">  
                     <header>
-                        <button name="test" string="test" type="object"/>
-                        <button name="test2" string="test2" type="object"/>
+                        <button name="test" string="test" type="object" groups="channel_manager.group_channel_manager" />
+                        <button name="test2" string="test2" type="object" groups="channel_manager.group_channel_manager" />
+                        <button name="test3" string="test3" type="object" groups="channel_manager.group_channel_manager" />
                     </header>
                     <sheet> 
                         <group>

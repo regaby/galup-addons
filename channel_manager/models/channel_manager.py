@@ -23,24 +23,33 @@ class ChannelManager(models.Model):
         config_obj = self.env['channel.manager.config.settings']
         config = config_obj.search([],order="id desc",limit=1)
         xml = """xml=<?xml version="1.0" encoding="UTF-8"?>
-          <GetAllBookings>
-          <Auth>
+          <GetRoomTypes>
               <ApiKey>%s</ApiKey>
         <PropertyId>%s</PropertyId>
-          </Auth>
-         </GetAllBookings>"""%(config.apikey,config.property_id)
+         </GetRoomTypes>"""%(config.apikey,config.property_id)
         print xml
         print '\n'
         headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'} # set what your server accepts
-        msg = requests.post('https://www.octorate.com/api/live/callApi.php?method=GetAllBookings', data=xml, headers=headers).text
+        msg = requests.post('https://www.octorate.com/api/live/callApi.php?method=GetRoomTypes', data=xml, headers=headers).text
         raise UserError(msg)
 
     @api.multi
     def test2(self):
         # xml = {'status': u'modification', 'reservationid': u'HS1AT1', 'siteid': u'288', 'site': u'octoevo autosubmit', 'propertyid': u'9922124076'}
-        xml = {'status': u'modification', 'reservationid': u'KW8HM8', 'siteid': u'288', 'site': u'octoevo autosubmit', 'propertyid': u'9922124076'}
+        xml = {'status': u'modification', 'reservationid': u'HA7ZA4', 'siteid': u'288', 'site': u'octoevo autosubmit', 'propertyid': u'9922124076'}
         # xml = {'status': u'cancellation', 'reservationid': u'YD1ED5', 'siteid': u'288', 'site': u'octoevo autosubmit', 'propertyid': u'9922124076'}
         headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
         msg = requests.post('http://localhost:8069/test', data=xml, headers=headers).text
         raise UserError(msg)
+
+    @api.multi
+    def test3(self):
+        reservation_obj = self.env['hotel.reservation']
+        current_date =  str(datetime.now())[0:10]
+        res = reservation_obj.search([('checkin_date','>=',current_date),('state','=','confirm'),('no_migrar','=',False)])
+        for r in res:
+            xml = r.get_xml('Confirmed')
+            print xml
+        print 'fin del proceso....'
+
 
