@@ -92,6 +92,11 @@ class Home(http.Controller):
                                         line['cantidad'] = ccus.text
                             if len(line)>0:
                                 lines.append(line)
+            reservation = reservation_obj.sudo().search([('bb_id','=',vals['bb_id'])])
+            # control para qe no ve vuelva a crear una reserva enviada desde el sistema
+            if reservation:
+                # si ya esta creada le zafo
+                return Response("TEST",content_type='text/html;charset=utf-8',status=500)
             vals['adults'] = pax
             partner_obj = request.env['res.partner'].sudo()
             partner = partner_obj.search([('name','=',vals['partner_name'])])
