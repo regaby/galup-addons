@@ -22,6 +22,17 @@
                </page>
             </field>
         </record>
+
+    <record id="view_hotel_reservation_tree_inherit" model="ir.ui.view">
+            <field name="name">hotel.reservation.form</field>
+            <field name="model">hotel.reservation</field>
+            <field name="inherit_id" ref="hotel_reservation.view_hotel_reservation_tree"/>
+            <field name="arch" type="xml">
+               <field name="checkout" position="after">
+                  <field name="no_migrar" groups="channel_manager.group_channel_manager" />
+               </field>
+            </field>
+        </record>
 	
      </data>
 </openerp>
