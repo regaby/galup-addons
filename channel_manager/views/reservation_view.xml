@@ -29,6 +29,7 @@
             <field name="inherit_id" ref="hotel_reservation.view_hotel_reservation_tree"/>
             <field name="arch" type="xml">
                <field name="checkout" position="after">
+                  <field name="channel_manager_id" />
                   <field name="no_migrar" groups="channel_manager.group_channel_manager" />
                </field>
             </field>
