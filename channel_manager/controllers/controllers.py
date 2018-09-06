@@ -41,11 +41,11 @@ class Home(http.Controller):
         reservation_obj = request.env['hotel.reservation']
 
         if data['status'] in ['modification','new']:
-            reservation = reservation_obj.sudo().search([('res_id','=',data['reservationid'])])
-            # control porque se mandan tres veces las reservas...
-            if reservation:
-                # si ya esta creada le zafo
-                return Response("TEST",content_type='text/html;charset=utf-8',status=500)
+            # reservation = reservation_obj.sudo().search([('res_id','=',data['reservationid'])])
+            # # control porque se mandan tres veces las reservas...
+            # if reservation:
+            #     # si ya esta creada le zafo
+            #     return Response("TEST",content_type='text/html;charset=utf-8',status=500)
             root = etree.fromstring(msg)
             process_list = root.findall('Bookings', root.nsmap)
             pax = 0
@@ -152,7 +152,12 @@ class Home(http.Controller):
                             'reserve' : [(6,0,[free_room_id])],
                         }))
             vals['reservation_line'] = vals_lines
-            reservation = reservation_obj.sudo().create(vals)
+            reservation = reservation_obj.sudo().search([('res_id','=',data['reservationid'])])
+            # control porque se mandan tres veces las reservas...
+            if not reservation:
+                reservation = reservation_obj.sudo().create(vals)
+            else:
+                reservation = reservation_obj.sudo().write(vals)
             try:
                 reservation.confirmed_reservation()
             except Exception, e:
