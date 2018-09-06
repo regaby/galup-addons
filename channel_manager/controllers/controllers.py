@@ -157,7 +157,7 @@ class Home(http.Controller):
             if not reservation:
                 reservation = reservation_obj.sudo().create(vals)
             else:
-                reservation = reservation_obj.sudo().write(vals)
+                reservation = reservation.write(vals)
             try:
                 reservation.confirmed_reservation()
             except Exception, e:
