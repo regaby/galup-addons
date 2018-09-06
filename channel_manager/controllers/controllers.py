@@ -118,6 +118,8 @@ class Home(http.Controller):
                                               'phone': 'partner_phone' in vals.keys() and vals['partner_phone'], 
                                               'customer': True})
             vals['partner_id'] = partner.id
+            vals['partner_invoice_id'] = partner.id
+            vals['partner_shipping_id'] = partner.id
             rcateg_id = []
             ocupadas = []
             for l in lines:
