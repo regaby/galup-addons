@@ -175,6 +175,8 @@ class Home(http.Controller):
                 reservation.cancel_reservation()
                 reservation.set_to_draft_reservation()
                 reservation.reservation_line = vals_lines
+                reservation.xml_request = data
+                reservation.xml_response = msg
             try:
                 if reservation.state=='draft':
                     reservation.confirmed_reservation()
