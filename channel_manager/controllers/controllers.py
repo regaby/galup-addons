@@ -39,7 +39,7 @@ class Home(http.Controller):
         line = {}
         vals_lines = []
         reservation_obj = request.env['hotel.reservation']
-        if date['siteid'] not in ['142','4']:
+        if data['siteid'] not in ['142','4']:
             # si no viene de expedia o booking le zafo
             return Response("TEST",content_type='text/html;charset=utf-8',status=500)
         if data['status'] in ['modification','new']:
