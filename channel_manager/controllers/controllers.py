@@ -101,6 +101,11 @@ class Home(http.Controller):
                 ## si no cambia la fecha de entrada o salida le zafo...
                 if reservation.checkin_date == vals['checkin_date'] and reservation.checkout_date == vals['checkout_date']:
                     return Response("TEST",content_type='text/html;charset=utf-8',status=500)
+                else:
+                    ## elimino la linea anterior... TODO verificiar que una confirmada se quite del resumen de reserva.
+                    reservation_line_obj = request.env['hotel_reservation.line']
+                    rline_ids = reservation_line_obj.sudo().search([('line_id','=',reservation.id)])
+                    rline_ids.sudo().unlink()
             vals['adults'] = pax
             partner_obj = request.env['res.partner'].sudo()
             partner = partner_obj.search([('name','=',vals['partner_name'])])
@@ -169,10 +174,6 @@ class Home(http.Controller):
                 reservation.checkout_date = vals['checkout_date']
                 reservation.cancel_reservation()
                 reservation.set_to_draft_reservation()
-                ## elimino la linea anterior... TODO verificiar que una confirmada se quite del resumen de reserva.
-                reservation_line_obj = request.env['hotel_reservation.line']
-                rline_ids = reservation_line_obj.sudo().search([('line_id','=',reservation.id)])
-                rline_ids.sudo().unlink()
                 reservation.reservation_line = vals_lines
             try:
                 if reservation.state=='draft':
