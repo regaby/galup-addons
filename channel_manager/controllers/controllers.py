@@ -114,10 +114,10 @@ class Home(http.Controller):
                 channel = channel_obj.search([('xml_id','=',vals['channel'])])
                 vals['channel_manager_id'] = channel.id
             vals['pricelist_id'] = request.env['product.pricelist'].sudo().search([]).id
-            vals['checkin_hour'] = 15
-            vals['checkout_hour'] = 13
             vals['checkin'] = '%s %s:00:00'%(vals['checkin_date'], vals['checkin_hour'])
             vals['checkout'] = '%s %s:00:00'%(vals['checkout_date'], vals['checkout_hour'])
+            vals['checkin_hour'] = 12
+            vals['checkout_hour'] = 10
             vals['state'] = 'draft'
             vals['xml_request'] = data
             vals['xml_response'] = msg
