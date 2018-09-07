@@ -44,11 +44,7 @@ class Home(http.Controller):
             return Response("TEST",content_type='text/html;charset=utf-8',status=500)
         if data['status'] in ['modification','new']:
             ## TODO sacar este hardcode
-            # reservation = reservation_obj.sudo().search([('res_id','=',data['reservationid'])])
-            # # control porque se mandan tres veces las reservas...
-            # if reservation:
-            #     # si ya esta creada le zafo
-            #     return Response("TEST",content_type='text/html;charset=utf-8',status=500)
+            reservation = reservation_obj.sudo().search([('res_id','=',data['reservationid'])])
             root = etree.fromstring(msg)
             process_list = root.findall('Bookings', root.nsmap)
             pax = 0
@@ -95,11 +91,16 @@ class Home(http.Controller):
                                         line['cantidad'] = ccus.text
                             if len(line)>0:
                                 lines.append(line)
-            reservation = reservation_obj.sudo().search([('bb_id','=',vals['bb_id'])])
+            # reservation = reservation_obj.sudo().search([('bb_id','=',vals['bb_id'])])
             # control para qe no ve vuelva a crear una reserva enviada desde el sistema
+            # if reservation:
+            #     # si ya esta creada le zafo
+            #     return Response("TEST",content_type='text/html;charset=utf-8',status=500)
+
             if reservation:
-                # si ya esta creada le zafo
-                return Response("TEST",content_type='text/html;charset=utf-8',status=500)
+                ## si no cambia la fecha de entrada o salida le zafo...
+                if reservation.checkin_date == vals['checkin_date'] and reservation.checkout_date == vals['checkout_date']:
+                    return Response("TEST",content_type='text/html;charset=utf-8',status=500)
             vals['adults'] = pax
             partner_obj = request.env['res.partner'].sudo()
             partner = partner_obj.search([('name','=',vals['partner_name'])])
@@ -162,9 +163,20 @@ class Home(http.Controller):
             if not reservation:
                 reservation = reservation_obj.sudo().create(vals)
             else:
-                reservation = reservation.sudo().write(vals)
+                reservation.checkin = '%s %s:00:00'%(vals['checkin_date'], vals['checkin_hour'])
+                reservation.checkout = '%s %s:00:00'%(vals['checkout_date'], vals['checkout_hour'])
+                reservation.checkin_date = vals['checkin_date']
+                reservation.checkout_date = vals['checkout_date']
+                reservation.cancel_reservation()
+                reservation.set_to_draft_reservation()
+                ## elimino la linea anterior... TODO verificiar que una confirmada se quite del resumen de reserva.
+                reservation_line_obj = request.env['hotel_reservation.line']
+                rline_ids = reservation_line_obj.sudo().search([('line_id','=',reservation.id)])
+                rline_ids.sudo().unlink()
+                reservation.reservation_line = vals_lines
             try:
-                reservation.confirmed_reservation()
+                if reservation.state=='draft':
+                    reservation.confirmed_reservation()
             except Exception, e:
                 _logger.info(e)
         else:
