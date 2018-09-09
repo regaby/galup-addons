@@ -35,9 +35,8 @@ class ChannelManager(models.Model):
 
     @api.multi
     def test2(self):
-        # xml = {'status': u'modification', 'reservationid': u'HS1AT1', 'siteid': u'288', 'site': u'octoevo autosubmit', 'propertyid': u'9922124076'}
-        xml = {'status': u'modification', 'reservationid': u'HA7ZA4', 'siteid': u'288', 'site': u'octoevo autosubmit', 'propertyid': u'9922124076'}
-        # xml = {'status': u'cancellation', 'reservationid': u'YD1ED5', 'siteid': u'288', 'site': u'octoevo autosubmit', 'propertyid': u'9922124076'}
+        ## reserva de rosana arce
+        xml = {'status': u'new', 'reservationid': u'1209019422', 'siteid': u'142', 'site': u'booking_xml', 'propertyid': u'616123'}
         headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
         msg = requests.post('http://localhost:8069/test', data=xml, headers=headers).text
         raise UserError(msg)
