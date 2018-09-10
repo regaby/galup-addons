@@ -76,6 +76,16 @@ class Home(http.Controller):
                                     vals['partner_phone'] = cus.text
                                 if cus.xpath('local-name()') == 'CustomerNote':
                                     vals['observations'] = cus.text
+                                if cus.xpath('local-name()') == 'CustomerCity':
+                                    vals['city'] = cus.text.upper()
+                                if cus.xpath('local-name()') == 'CustomerState':
+                                    vals['street'] = cus.text.upper()
+                                if cus.xpath('local-name()') == 'CustomerPostCode':
+                                    vals['zip'] = cus.text
+                                if cus.xpath('local-name()') == 'CustomerCountry':
+                                    vals['country_code'] = cus.text.upper()
+                                if cus.xpath('local-name()') == 'CustomerNationality':
+                                    vals['nationality_code'] = cus.text.upper()
                                 if cus.xpath('local-name()') == 'Pax':
                                         pax += int(cus.text)
                                 if cus.xpath('local-name()') == 'Units':
@@ -113,6 +123,14 @@ class Home(http.Controller):
                 channel_obj = request.env['channel.manager'].sudo()
                 channel = channel_obj.search([('xml_id','=',vals['channel'])])
                 vals['channel_manager_id'] = channel.id
+            if 'country_code' in vals.keys():
+                country_obj = request.env['res.country'].sudo()
+                country = country_obj.search([('code','=',vals['country_code'])])
+                vals['country_id'] = country.id
+            if 'nationality_code' in vals.keys():
+                country_obj = request.env['res.country'].sudo()
+                country = country_obj.search([('code','=',vals['nationality_code'])])
+                vals['nationality_id'] = country.id
             vals['pricelist_id'] = request.env['product.pricelist'].sudo().search([]).id
             vals['checkin_hour'] = 15
             vals['checkout_hour'] = 13
