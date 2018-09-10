@@ -123,14 +123,6 @@ class Home(http.Controller):
                 channel_obj = request.env['channel.manager'].sudo()
                 channel = channel_obj.search([('xml_id','=',vals['channel'])])
                 vals['channel_manager_id'] = channel.id
-            if 'country_code' in vals.keys():
-                country_obj = request.env['res.country'].sudo()
-                country = country_obj.search([('code','=',vals['country_code'])])
-                vals['country_id'] = country.id
-            if 'nationality_code' in vals.keys():
-                country_obj = request.env['res.country'].sudo()
-                country = country_obj.search([('code','=',vals['nationality_code'])])
-                vals['nationality_id'] = country.id
             vals['pricelist_id'] = request.env['product.pricelist'].sudo().search([]).id
             vals['checkin_hour'] = 15
             vals['checkout_hour'] = 13
@@ -142,10 +134,20 @@ class Home(http.Controller):
             vals['xml_request'] = data
             vals['xml_response'] = msg
             if not partner:
-                partner = partner_obj.create({'name' : vals['partner_name'], 
-                                              'email': 'partner_email' in vals.keys() and vals['partner_email'], 
-                                              'phone': 'partner_phone' in vals.keys() and vals['partner_phone'], 
-                                              'customer': True})
+                partner_val = {'name' : vals['partner_name'], 
+                                  'email': 'partner_email' in vals.keys() and vals['partner_email'], 
+                                  'phone': 'partner_phone' in vals.keys() and vals['partner_phone'], 
+                                  'customer': True,
+                                  }
+                if 'country_code' in vals.keys():
+                    country_obj = request.env['res.country'].sudo()
+                    country = country_obj.search([('code','=',vals['country_code'])])
+                    partner_val['country_id'] = country.id
+                if 'nationality_code' in vals.keys():
+                    country_obj = request.env['res.country'].sudo()
+                    country = country_obj.search([('code','=',vals['nationality_code'])])
+                    partner_val['nationality_id'] = country.id
+                partner = partner_obj.create(partner_val)
             vals['partner_id'] = partner.id
             vals['partner_invoice_id'] = partner.id
             vals['partner_shipping_id'] = partner.id
