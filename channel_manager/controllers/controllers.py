@@ -47,6 +47,8 @@ class Home(http.Controller):
             reservation = reservation_obj.sudo().search([('res_id','=',data['reservationid'])])
             root = etree.fromstring(msg)
             process_list = root.findall('Bookings', root.nsmap)
+            cochera_request = "You have a booker that would like free parking. (based on availability)"
+            cochera = False
             pax = 0
             for process in process_list:
                 for child2 in process:
@@ -76,6 +78,8 @@ class Home(http.Controller):
                                     vals['partner_phone'] = cus.text
                                 if cus.xpath('local-name()') == 'CustomerNote':
                                     vals['observations'] = cus.text
+                                    if cochera_request in cus.text:
+                                        cochera = True
                                 if cus.xpath('local-name()') == 'CustomerCity':
                                     vals['city'] = cus.text.upper()
                                 if cus.xpath('local-name()') == 'CustomerState':
@@ -153,18 +157,23 @@ class Home(http.Controller):
             vals['partner_shipping_id'] = partner.id
             rcateg_id = []
             ocupadas = []
+            if cochera:
+                lines.append({'room_type_id': '000000', 'price': '0.00', 'cantidad': '1'})
             for l in lines:
                 _logger.info(l['room_type_id'])
                 rtype = request.env['hotel.room.type'].sudo().search([('room_type_id','=',l['room_type_id'])])
                 _logger.info(rtype)
                 rcateg_id.append(rtype.cat_id.id)
+                l['categ_id'] = rtype.cat_id.id
             summary_obj = request.env['room.reservation.summary']
             res = summary_obj.sudo().check_reservation(rcateg_id, '%s 12:00:00'%vals['checkin_date'], '%s 10:00:00'%vals['checkout_date'])
 
             for l in lines:
                 ## chequeo disponibilidad...
                 for r in res['room_summary']:
-                    print r
+                    ## si no se trata del mismo tipo de habitación que estoy queriendo reservar, continuo por el siguiente
+                    if l['categ_id'] != r['categ_id']:
+                        continue
                     free_room_id =r['value'][0]['room_id'] 
                     if free_room_id in ocupadas:
                         continue
