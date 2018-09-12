@@ -45,7 +45,7 @@ class HotelReservation(models.Model):
                     price = line2.list_price
                 else:
                     price = line.price
-                if room_type.room_type_id:
+                if int(room_type.room_type_id) > 0:
                     xml+="""\n<Reservation>
                           <From>%s</From>
                           <To>%s</To>
