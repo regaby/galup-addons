@@ -80,10 +80,12 @@ class Home(http.Controller):
                                     vals['observations'] = cus.text
                                     if cochera_request in cus.text:
                                         cochera = True
+                                if cus.xpath('local-name()') == 'CustomerAddress':
+                                    vals['street'] = cus.text.upper()
                                 if cus.xpath('local-name()') == 'CustomerCity':
                                     vals['city'] = cus.text.upper()
                                 if cus.xpath('local-name()') == 'CustomerState':
-                                    vals['street'] = cus.text.upper()
+                                    vals['street2'] = cus.text.upper()
                                 if cus.xpath('local-name()') == 'CustomerPostCode':
                                     vals['zip'] = cus.text
                                 if cus.xpath('local-name()') == 'CustomerCountry':
@@ -141,6 +143,10 @@ class Home(http.Controller):
                 partner_val = {'name' : vals['partner_name'], 
                                   'email': 'partner_email' in vals.keys() and vals['partner_email'], 
                                   'phone': 'partner_phone' in vals.keys() and vals['partner_phone'], 
+                                  'street': 'street' in vals.keys() and vals['street'], 
+                                  'city': 'city' in vals.keys() and vals['city'], 
+                                  'street2': 'street2' in vals.keys() and vals['street2'], 
+                                  'zip': 'zip' in vals.keys() and vals['zip'], 
                                   'customer': True,
                                   }
                 if 'country_code' in vals.keys():
