@@ -16,6 +16,7 @@
     ],
     "data": [
         "views/account_register_payments_view.xml",
+        "views/account_payment_invoice_view.xml",
     ],
     "active": False,
     "installable": True
