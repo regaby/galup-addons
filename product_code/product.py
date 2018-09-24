@@ -26,6 +26,8 @@ class ProductProduct(models.Model):
             code = categ_id.code
         if code:
             vals['default_code'] = self._get_default_product_code(code)
+        else:
+            raise UserError('Debe seleccionar una categoria de producto con una secuencia asociada')
         return super(ProductProduct, self).create(vals)
 
     _sql_constraints = [

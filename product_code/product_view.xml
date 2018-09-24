@@ -101,7 +101,7 @@
                         <button string="Establecer código de producto"
                                 type="object" name="action_set_product_code"
                                 attrs="{'invisible':['|', ('default_code','!=', False), ('product_variant_count', '&gt;', 1)]}"
-                                class="oe_link oe_read_only"
+                                class="oe_link"
                                 colspan="2"/>
                     </field>
                 </data>
