@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="product_price_history_tree_view">
+            <field name="name">product.price.history.tree</field>
+            <field name="model">product.price.history</field>
+            <field name="arch" type="xml">
+                <tree string="Product Price History" >
+                    <field name="cost" />
+                    <field name="datetime" />
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="product_template_only_form_view_inherit_history" model="ir.ui.view">
+            <field name="name">product.template.code.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="priority">26</field>
+            <field name="arch" type="xml">
+                <data>
+                    <field name='seller_ids' position='after'>
+                        <separator string="Histórico de Costos"/>
+                        <field name="history_ids" readonly="1"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+
+        <record id="product_normal_form_view_inherit_history" model="ir.ui.view">
+            <field name="name">product.code.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="priority">26</field>
+            <field name="arch" type="xml">
+                <data>
+                    <field name='seller_ids' position='after'>
+                        <separator string="Histórico de Costos"/>
+                        <field name="history_ids" readonly="1"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
+
