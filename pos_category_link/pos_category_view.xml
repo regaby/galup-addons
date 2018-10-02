@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_category_form_view_inherit_pos_category" model="ir.ui.view">
+            <field name="name">product.category</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="priority">26</field>
+            <field name="arch" type="xml">
+                <data>
+                    <field name='type' position='after'>
+                        <field name="pos_categ_id" />
+                    </field>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+
