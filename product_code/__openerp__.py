@@ -9,6 +9,7 @@
     'depends': [
         'base',
         'product',
+        'purchase'
     ],
     'summary': """
         Simple automatic product codes

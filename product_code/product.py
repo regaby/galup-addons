@@ -26,9 +26,17 @@ class ProductProduct(models.Model):
             code = categ_id.code
         if code:
             vals['default_code'] = self._get_default_product_code(code)
-        else:
-            raise UserError('Debe seleccionar una categoria de producto con una secuencia asociada')
         return super(ProductProduct, self).create(vals)
+
+    @api.multi
+    def write(self, vals):
+        code = False
+        if 'categ_id' in vals:
+            categ_id = self.env['product.category'].browse(vals['categ_id'])
+            code = categ_id.code
+        if code:
+            vals['default_code'] = self._get_default_product_code(code)
+        return super(ProductProduct, self).write(vals)
 
     _sql_constraints = [
         ('product_product__default_code__uniq',
@@ -57,3 +65,16 @@ class ProductTemplate(models.Model):
         for tmpl in self.filtered(lambda r: len(r.product_variant_ids) == 1):
             tmpl.product_variant_ids[0].action_set_product_code()
         return True
+
+class PurchaseOrderLine(models.Model):
+    _inherit = "purchase.order.line"
+
+
+    @api.model
+    def create(self, vals):
+        if 'product_id' in vals:
+            tmp = self.env['product.product'].browse(vals['product_id'])
+            if not tmp.default_code:
+                raise UserError('El producto %s no tiene categoria asociada'%(tmp.name))
+        return super(PurchaseOrderLine, self).create(vals)        
+        
