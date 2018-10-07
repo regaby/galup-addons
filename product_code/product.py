@@ -76,5 +76,11 @@ class PurchaseOrderLine(models.Model):
             tmp = self.env['product.product'].browse(vals['product_id'])
             if not tmp.default_code:
                 raise UserError('El producto %s no tiene categoria asociada'%(tmp.name))
+        if 'price_unit' in vals:
+            if vals['price_unit'] == 0:
+                if 'name' in vals:
+                    raise UserError('El producto %s tiene precio de compra igual a cero'%(vals['name']))
+                else:
+                    raise UserError('Existe un producto con un precio de compra igual a cero')
         return super(PurchaseOrderLine, self).create(vals)        
         
