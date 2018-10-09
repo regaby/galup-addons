@@ -54,7 +54,7 @@
         'data/room_type_data.xml',
         'data/room_data.xml',
         'data/account_tax_data.xml',
-        'data/state_data.xml',
+        # 'data/state_data.xml',
         'data/service_data.xml',
         # 'reports/report_folio_view.xml',
         'reports/report_folio_template.xml',
