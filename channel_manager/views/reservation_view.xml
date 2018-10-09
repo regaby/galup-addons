@@ -24,13 +24,24 @@
         </record>
 
     <record id="view_hotel_reservation_tree_inherit" model="ir.ui.view">
-            <field name="name">hotel.reservation.form</field>
+            <field name="name">hotel.reservation.tree</field>
             <field name="model">hotel.reservation</field>
             <field name="inherit_id" ref="hotel_reservation.view_hotel_reservation_tree"/>
             <field name="arch" type="xml">
                <field name="checkout" position="after">
                   <field name="channel_manager_id" />
                   <field name="no_migrar" groups="channel_manager.group_channel_manager" />
+               </field>
+            </field>
+        </record>
+
+    <record id="view_hotel_reservation_search_inherit" model="ir.ui.view">
+            <field name="name">hotel.reservation.search</field>
+            <field name="model">hotel.reservation</field>
+            <field name="inherit_id" ref="hotel_reservation.view_hotel_reservation_search"/>
+            <field name="arch" type="xml">
+               <field name="partner_id" position="after">
+                  <filter domain="[('channel_manager_id','!=',False)]" string="Portal"/>
                </field>
             </field>
         </record>
