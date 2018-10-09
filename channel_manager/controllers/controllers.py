@@ -108,7 +108,6 @@ class Home(http.Controller):
             # if reservation:
             #     # si ya esta creada le zafo
             #     return Response("TEST",content_type='text/html;charset=utf-8',status=500)
-
             if reservation:
                 ## si no cambia la fecha de entrada o salida le zafo...
                 if reservation.checkin_date == vals['checkin_date'] and reservation.checkout_date == vals['checkout_date']:
@@ -130,6 +129,7 @@ class Home(http.Controller):
             vals['checkout_hour'] = 13
             vals['checkin'] = '%s %s:00:00'%(vals['checkin_date'], vals['checkin_hour'])
             vals['checkout'] = '%s %s:00:00'%(vals['checkout_date'], vals['checkout_hour'])
+            myduration = reservation_obj._get_dur(vals['checkin'], vals['checkout'])
             vals['checkin_hour'] = 12
             vals['checkout_hour'] = 10
             vals['state'] = 'draft'
@@ -190,7 +190,7 @@ class Home(http.Controller):
                     print 'no hay hab. libres'
                 print free_room_id
                 vals_lines.append((0, 0, {
-                            'list_price': l['price'],
+                            'list_price': float(l['price']) / myduration,
                             'reserve' : [(6,0,[free_room_id])],
                         }))
             vals['reservation_line'] = vals_lines
