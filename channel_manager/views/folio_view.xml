@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+	
+		<record id="view_hotel_folio1_form_inherit_channel" model="ir.ui.view">
+            <field name="name">hotel.folio.form</field>
+            <field name="model">hotel.folio</field>
+            <field name="inherit_id" ref="hotel.view_hotel_folio1_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[4]" position="after">
+                      <page string="Channel Manager" name="channel_manager">
+                        <group>
+                          <field name="bb_id" />
+                          <field name="xml_request" />
+                          <field name="xml_response" />
+                        </group>
+                      </page>
+              </xpath>
+            </field>
+        </record>
+
+    <record id="view_hotel_folio1_tree_inherit_channel" model="ir.ui.view">
+            <field name="name">hotel.folio.tree</field>
+            <field name="model">hotel.folio</field>
+            <field name="inherit_id" ref="hotel.view_hotel_folio1_tree"/>
+            <field name="arch" type="xml">
+               <field name="state" position="after">
+                  <field name="bb_id" groups="channel_manager.group_channel_manager" />
+               </field>
+            </field>
+        </record>
+
+    <record id="view_hotel_folio_search_inherit_channel" model="ir.ui.view">
+            <field name="name">hotel.folio.search</field>
+            <field name="model">hotel.folio</field>
+            <field name="inherit_id" ref="hotel.view_hotel_folio_search"/>
+            <field name="arch" type="xml">
+               <field name="partner_id" position="after">
+                  <filter domain="[('bb_id','!=',False)]" string="BB id" groups="channel_manager.group_channel_manager" />
+               </field>
+            </field>
+        </record>
+	
+     </data>
+</openerp>

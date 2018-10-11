@@ -23,7 +23,7 @@ class HotelReservation(models.Model):
     xml_response = fields.Text('Respuesta Channel Manager', readonly=True)
     no_migrar = fields.Boolean('No migrar')
 
-    def get_xml(self,state):
+    def get_header(self):
         config_obj = self.env['channel.manager.config.settings']
         config = config_obj.search([],order="id desc",limit=1)
         xml = """xml=<?xml version="1.0" encoding="UTF-8"?>
@@ -33,12 +33,51 @@ class HotelReservation(models.Model):
       <PropertyId>%s</PropertyId>
   </Auth>
   <Reservations>"""%(config.apikey,config.property_id)
+        return xml
 
+    def get_line(self, checkin_date, checkout_date, room_type_id, pax, price, partner_name, bb_id, state):
+        xml = """\n<Reservation>
+              <From>%s</From>
+              <To>%s</To>
+              <Rooms>
+                  <Room>
+                     <Recordid></Recordid>
+                     <Roomid>%s</Roomid>"""%(checkin_date, checkout_date, room_type_id)
+        if state=="Confirmed":
+            xml+="""\n<Pax>%s</Pax>
+                     <Total>%s</Total>
+                     <Guestname>%s</Guestname>
+                     <Comment></Comment>
+                     <Telephone></Telephone>
+                     <Provenienza></Provenienza>
+                     <Cardtype></Cardtype>
+                     <Cardholder></Cardholder>
+                     <Cardnumber></Cardnumber>
+                     <Cardexpiry></Cardexpiry>
+                     <Cvv></Cvv>
+                     <Submitby></Submitby>"""%(pax, price, partner_name)
+        else:
+            xml+="""\n<Bbliverateresvid>%s</Bbliverateresvid>"""%(bb_id)
+        xml+="""\n<Status>%s</Status>
+                  </Room>
+              </Rooms>
+              </Reservation>"""%(state)
+        return xml
+
+    def get_footer(self):
+        xml = """\n</Reservations>
+ </BookReservationRequest>"""
+        return xml
+
+    def send_msg(self, xml):
+        headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'} # set what your server accepts
+        msg = requests.post('https://www.octorate.com/api/live/callApi.php?method=bookreservation', data=xml, headers=headers).text.encode('utf-8')
+        return msg
+
+    def get_xml(self,state):
+        xml = self.get_header()
         for line2 in self.reservation_line:
             for line in line2.reserve:
-                print self.checkin_date, self.checkout_date, self.adults, self.amount_total, self.partner_id.name
-                print line.categ_id.name
-                print line.categ_id.id
                 room_type = self.env['hotel.room.type'].search([('cat_id','=',line.categ_id.id)])
                 price=0
                 if line2.list_price:
@@ -46,39 +85,11 @@ class HotelReservation(models.Model):
                 else:
                     price = line.price
                 if int(room_type.room_type_id) > 0:
-                    xml+="""\n<Reservation>
-                          <From>%s</From>
-                          <To>%s</To>
-                          <Rooms>
-                              <Room>
-                                 <Recordid></Recordid>
-                                 <Roomid>%s</Roomid>"""%(self.checkin_date, self.checkout_date,room_type.room_type_id)
-                    if state=="Confirmed":
-                        xml+="""\n<Pax>%s</Pax>
-                                 <Total>%s</Total>
-                                 <Guestname>%s</Guestname>
-                                 <Comment></Comment>
-                                 <Telephone></Telephone>
-                                 <Provenienza></Provenienza>
-                                 <Cardtype></Cardtype>
-                                 <Cardholder></Cardholder>
-                                 <Cardnumber></Cardnumber>
-                                 <Cardexpiry></Cardexpiry>
-                                 <Cvv></Cvv>
-                                 <Submitby></Submitby>"""%(self.adults,price, self.partner_id.name)
-                    else:
-                        xml+="""\n<Bbliverateresvid>%s</Bbliverateresvid>"""%(self.bb_id)
-                    xml+="""\n<Status>%s</Status>
-                              </Room>
-                          </Rooms>
-                          </Reservation>"""%(state)
-        xml+="""\n</Reservations>
- </BookReservationRequest>"""
-        print xml
+                    xml += self.get_line(self.checkin_date, self.checkout_date, room_type.room_type_id, \
+                                          self.adults, price, self.partner_id.name, self.bb_id, state)
+        xml += self.get_footer()
         self.xml_request = xml
-        headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'} # set what your server accepts
-        msg = requests.post('https://www.octorate.com/api/live/callApi.php?method=bookreservation', data=xml, headers=headers).text.encode('utf-8')
-        print msg
+        msg = self.send_msg(xml)
         self.xml_response = msg
         root = etree.fromstring(msg)
         process_list = root.findall('RoomUpdateMessage', root.nsmap)
@@ -102,6 +113,16 @@ class HotelReservation(models.Model):
             xml = self.get_xml('Cancelled')
         return res
 
-    
-
-
+    @api.multi
+    def copy(self, default=None):
+        '''
+        @param self: object pointer
+        @param default: dict of default values to be set
+        '''
+        default['res_id'] = False
+        default['bb_id'] = False
+        default['channel_manager_id'] = False
+        default['xml_request'] = False
+        default['xml_response'] = False
+        default['no_migrar'] = False
+        return super(HotelReservation, self).copy(default=default)

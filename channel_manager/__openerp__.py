@@ -21,6 +21,7 @@
         'views/channel_manager_view.xml',
         'views/reservation_view.xml',
         'views/room_type_view.xml',
+        'views/folio_view.xml',
         ##data
         'data/channel_manager_data.xml',
     ],
