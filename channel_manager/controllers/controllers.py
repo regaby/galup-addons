@@ -7,6 +7,7 @@ import logging
 _logger = logging.getLogger(__name__)
 from openerp.http import request
 from lxml import etree
+from datetime import datetime
 
 
 class Home(http.Controller):
@@ -16,7 +17,7 @@ class Home(http.Controller):
         config = config_obj.sudo().search([])
         print config
 
-        data = kwargs 
+        data = kwargs
         print kwargs
         _logger.info(kwargs)
         xml="""xml=<?xml version="1.0" encoding="UTF-8"?>
@@ -63,6 +64,8 @@ class Home(http.Controller):
                             vals['res_id'] = child.text
                         if child.xpath('local-name()') == 'BbliverateTimestamp':
                             vals['create_date'] = child.text # aparentemente tiene 5 horas de diferencia
+                        if child.xpath('local-name()') == 'ResCreationDate':
+                            vals['res_creation_date'] = child.text
                         # TODO: ResSource creo qe va a traer la info si es booking o expedia...
                         # if child.xpath('local-name()') == 'Customers':
                         for cus2 in child:
@@ -103,11 +106,12 @@ class Home(http.Controller):
                                         line['cantidad'] = ccus.text
                             if len(line)>0:
                                 lines.append(line)
-            # reservation = reservation_obj.sudo().search([('bb_id','=',vals['bb_id'])])
-            # control para qe no ve vuelva a crear una reserva enviada desde el sistema
-            # if reservation:
-            #     # si ya esta creada le zafo
-            #     return Response("TEST",content_type='text/html;charset=utf-8',status=500)
+            now = datetime.now()
+            ## si la fecha de creacion de la reserva no es la misma que la del dia zafo
+            ## TODO: podria mejorar este control, considerando dos dias a posterior
+            ## ya que si la reserva entra a las 23:59:59 por ahi no va a entrar
+            if vals['res_creation_date'] != now.strftime("%Y-%m-%d"):
+                return Response("TEST",content_type='text/html;charset=utf-8',status=500)
             if reservation:
                 ## si no cambia la fecha de entrada o salida le zafo...
                 if reservation.checkin_date == vals['checkin_date'] and reservation.checkout_date == vals['checkout_date']:
@@ -136,13 +140,13 @@ class Home(http.Controller):
             vals['xml_request'] = data
             vals['xml_response'] = msg
             if not partner:
-                partner_val = {'name' : vals['partner_name'], 
-                                  'email': 'partner_email' in vals.keys() and vals['partner_email'], 
-                                  'phone': 'partner_phone' in vals.keys() and vals['partner_phone'], 
-                                  'street': 'street' in vals.keys() and vals['street'], 
-                                  'city': 'city' in vals.keys() and vals['city'], 
-                                  'street2': 'street2' in vals.keys() and vals['street2'], 
-                                  'zip': 'zip' in vals.keys() and vals['zip'], 
+                partner_val = {'name' : vals['partner_name'],
+                                  'email': 'partner_email' in vals.keys() and vals['partner_email'],
+                                  'phone': 'partner_phone' in vals.keys() and vals['partner_phone'],
+                                  'street': 'street' in vals.keys() and vals['street'],
+                                  'city': 'city' in vals.keys() and vals['city'],
+                                  'street2': 'street2' in vals.keys() and vals['street2'],
+                                  'zip': 'zip' in vals.keys() and vals['zip'],
                                   'customer': True,
                                   }
                 if 'country_code' in vals.keys():
@@ -174,7 +178,7 @@ class Home(http.Controller):
                     ## si no se trata del mismo tipo de habitación que estoy queriendo reservar, continuo por el siguiente
                     if l['categ_id'] != r['categ_id']:
                         continue
-                    free_room_id =r['value'][0]['room_id'] 
+                    free_room_id =r['value'][0]['room_id']
                     if free_room_id in ocupadas:
                         continue
                     libre = True
