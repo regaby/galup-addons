@@ -7,7 +7,7 @@ import logging
 _logger = logging.getLogger(__name__)
 from openerp.http import request
 from lxml import etree
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class Home(http.Controller):
@@ -106,7 +106,7 @@ class Home(http.Controller):
                                         line['cantidad'] = ccus.text
                             if len(line)>0:
                                 lines.append(line)
-            now = datetime.now()
+            now = datetime.now() + timedelta(hours=2)
             ## si la fecha de creacion de la reserva no es la misma que la del dia zafo
             ## TODO: podria mejorar este control, considerando dos dias a posterior
             ## ya que si la reserva entra a las 23:59:59 por ahi no va a entrar
