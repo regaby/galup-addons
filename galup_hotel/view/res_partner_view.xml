@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>         
+    <data>
          <!-- <record model="ir.actions.act_window" id="res_partner_action">
             <field name="name">Partner</field>
             <field name="res_model">res.partner</field>
             <field name="view_mode">tree,form,search</field>
         </record>     -->
-        
+
         <record model="ir.ui.view" id="view_res_partner_tree">
             <field name="name">view.res.partner.tree</field>
             <field name="inherit_id" ref="base.view_partner_tree"/>
@@ -24,16 +24,16 @@
                     </field>
             </field>
         </record>
-        		
+
 
         <record model="ir.ui.view" id="view_res_partner_form">
             <field name='name'>view.res_partner.form</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="model">res.partner</field>
-            <field name="arch" type="xml">                    
+            <field name="arch" type="xml">
                     <field name="website" position="before">
-                        
-                        
+
+
                     </field>
 <!--                     <xpath expr="/form/sheet/notebook/page/group/group/field" position="before">
                         <field name="customer" string="Huesped"/>
@@ -54,10 +54,10 @@
                         <field name="unwelcome_guest" attrs="{'invisible':[('customer','!=',True)]}"/>
                         <field name="discount_id" attrs="{'invisible':[('customer','!=',True)]}"/>
                     </field>
-                    
+
                      <field name="main_id_category_id" position="attributes">
                         <attribute name="options">'no_create' : False</attribute>
-                       
+
                     </field>
                     <field name="mobile" position="attributes">
                          <attribute name="invisible">True</attribute>
@@ -86,20 +86,16 @@
                     <field name="website" position="attributes">
                          <attribute name="invisible">True</attribute>
                     </field>
-                    <page name="sales_purchases" position="attributes">
-                         <attribute name="invisible">True</attribute>
-                         <attribute name="autofocus">False</attribute>
-                    </page>
                     <page name="internal_notes" position="attributes">
                          <attribute name="invisible">True</attribute>
                          <attribute name="autofocus">False</attribute>
                     </page>
-                    
+
                     <xpath expr="//notebook/page" position="replace">
                          <page name='observaciones' string="Observaciones" autofocus="autofocus">
                             <field name="observations" placeholder="Observaciones..."/>
                         </page>
-                    </xpath> 
+                    </xpath>
                     <xpath expr="/form/sheet/notebook/page" position="after">
                         <page string="Folios" autofocus="autofocus">
                             <field name="hotelfolio_ids" context="{'default_partner_id': id}"/>
@@ -120,10 +116,10 @@
             <field name='name'>view.res_partner.form</field>
             <field name="inherit_id" ref="account.view_partner_property_form"/>
             <field name="model">res.partner</field>
-            <field name="arch" type="xml">  
+            <field name="arch" type="xml">
                 <page name="accounting" position="attributes">
                      <attribute name="invisible">True</attribute>
-                </page>                 
+                </page>
             </field>
         </record>
 
