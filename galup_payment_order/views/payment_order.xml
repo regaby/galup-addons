@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="payment_order_tree_view">
+            <field name="name">payment.order.tree</field>
+            <field name="model">payment.order</field>
+
+            <field name="arch" type="xml">
+                <tree string="Payment Order" >
+                    <field name="name" />
+                    <field name="date" />
+                    <field name="partner_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="payment_order_form_view">
+            <field name="name">payment.order.form</field>
+            <field name="model">payment.order</field>
+            <field name="arch" type="xml">
+                <form string="Payment Order">
+                    <!-- <header>
+                        <button name="test" string="GetRoomTypes" type="object" />
+                    </header> -->
+                    <sheet>
+                    <h1 class="mt0">
+                        <field name="name" readonly="1" class="oe_inline"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="partner_id" context="{'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1, 'show_address': 1 }" domain="[('supplier', '=', True)]" options="{&quot;always_reload&quot;: True}"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Invoices">
+                            <field name="invoice_ids" domain="[('state','=','open'),
+                                                               ('partner_id','=',partner_id),
+                                                               ('type','=','in_invoice')]"/>
+                        </page>
+
+                    </notebook>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_payment_order_tree_view">
+            <field name="name">Payment Order</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">payment.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="payment_order_tree_view" />
+        </record>
+
+        <menuitem id="payment_order_menu" name="Payment Order" parent="account.menu_finance_payables" sequence="10" action="action_payment_order_tree_view" />
+
+
+</odoo>
