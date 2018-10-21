@@ -4,7 +4,7 @@
     <record id="report_payment_order" model="ir.actions.report.xml">
         <field name="name">Orden de Pago</field>
         <field name="type">ir.actions.report.xml</field>
-        <field name="model">account.invoice</field>
+        <field name="model">payment.order</field>
         <field name="report_name">payment_order</field>
         <field name="report_type">aeroo</field>
         <field name="in_format">oo-odt</field>

@@ -3,9 +3,9 @@
 #    Module Writen to OpenERP, Open Source Management Solution
 #
 #    All Rights Reserved.
-#    
+#
 ############################################################################
-#    
+#
 ############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -31,7 +31,7 @@
         Módulo que implementa orden de pago para Promover SRL
     """,
     "license": "AGPL-3",
-    "depends": ['account','report_aeroo'],
+    "depends": ['galup_payment_order','report_aeroo'],
     "data": [
         'reports/payment_order_report.xml',
     ],
