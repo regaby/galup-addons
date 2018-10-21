@@ -33,6 +33,7 @@
     "license": "AGPL-3",
     "depends": ['account'],
     "data": [
+        'security/ir.model.access.csv',
         'views/payment_order.xml',
         'data/payment_order_sequence.xml',
     ],
