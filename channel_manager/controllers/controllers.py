@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime, timedelta
+import logging
+from lxml import etree
+from openerp.http import request
 from openerp import http
 import requests
-import json
 from openerp.http import Response
-import logging
 _logger = logging.getLogger(__name__)
-from openerp.http import request
-from lxml import etree
-from datetime import datetime, timedelta
 
 
 class Home(http.Controller):
@@ -20,7 +19,7 @@ class Home(http.Controller):
         data = kwargs
         print kwargs
         _logger.info(kwargs)
-        xml="""xml=<?xml version="1.0" encoding="UTF-8"?>
+        xml = """xml=<?xml version="1.0" encoding="UTF-8"?>
   <GetBookings>
   <Auth>
 <ApiKey>%s</ApiKey>
@@ -29,23 +28,23 @@ class Home(http.Controller):
 
       <ReservationId>%s</ReservationId>
  </GetBookings>
-        """%('a7e80fc2a07ac2661bf20b020ba0b135',data['propertyid'],data['reservationid'])
+        """%('a7e80fc2a07ac2661bf20b020ba0b135', data['propertyid'], data['reservationid'])
         print xml
         print '\n'
-        headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'} # set what your server accepts
-        msg = requests.post('https://www.octorate.com/api/live/callApi.php?method=GetBookings', data=xml, headers=headers).text.encode('utf-8')
+        headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
+        msg = requests.post('https://www.octorate.com/api/live/callApi.php?method=GetBookings',
+                            data=xml, headers=headers).text.encode('utf-8')
         print msg
         vals = {}
         lines = []
         line = {}
         vals_lines = []
         reservation_obj = request.env['hotel.reservation']
-        if data['siteid'] not in ['142','4']:
+        if data['siteid'] not in ['142', '4']:
             # si no viene de expedia o booking le zafo
-            return Response("TEST",content_type='text/html;charset=utf-8',status=500)
-        if data['status'] in ['modification','new']:
-            ## TODO sacar este hardcode
-            reservation = reservation_obj.sudo().search([('res_id','=',data['reservationid'])])
+            return Response("TEST", content_type='text/html;charset=utf-8', status=500)
+        if data['status'] in ['modification', 'new']:
+            reservation = reservation_obj.sudo().search([('res_id', '=', data['reservationid'])])
             root = etree.fromstring(msg)
             process_list = root.findall('Bookings', root.nsmap)
             pax = 0
@@ -63,13 +62,13 @@ class Home(http.Controller):
                         if child.xpath('local-name()') == 'ResId':
                             vals['res_id'] = child.text
                         if child.xpath('local-name()') == 'BbliverateTimestamp':
-                            vals['create_date'] = child.text # aparentemente tiene 5 horas de diferencia
+                            vals['create_date'] = child.text # aparentemente tiene 5 horas de dif.
                         if child.xpath('local-name()') == 'ResCreationDate':
                             vals['res_creation_date'] = child.text
-                        # TODO: ResSource creo qe va a traer la info si es booking o expedia...
+                        # TOD: ResSource creo qe va a traer la info si es booking o expedia...
                         # if child.xpath('local-name()') == 'Customers':
                         for cus2 in child:
-                            line={}
+                            line = {}
                             for cus in cus2:
                                 if cus.xpath('local-name()') == 'CustomerFName':
                                     vals['partner_name'] = cus.text.upper()
@@ -92,11 +91,11 @@ class Home(http.Controller):
                                 if cus.xpath('local-name()') == 'CustomerNationality':
                                     vals['nationality_code'] = cus.text.upper()
                                 if cus.xpath('local-name()') == 'Pax':
-                                        pax += int(cus.text)
+                                    pax += int(cus.text)
                                 if cus.xpath('local-name()') == 'Units':
                                     line['cantidad'] = cus.text
                                 if cus.xpath('local-name()') == 'Price':
-                                        line['price'] = cus.text
+                                    line['price'] = cus.text
                                 for ccus in cus:
                                     if ccus.xpath('local-name()') == 'Price':
                                         line['price'] = ccus.text
@@ -104,29 +103,32 @@ class Home(http.Controller):
                                         line['room_type_id'] = ccus.text
                                     if ccus.xpath('local-name()') == 'Units':
                                         line['cantidad'] = ccus.text
-                            if len(line)>0:
+                            if len(line) > 0:
                                 lines.append(line)
             now = datetime.now() + timedelta(hours=2)
             ## si la fecha de creacion de la reserva no es la misma que la del dia zafo
-            ## TODO: podria mejorar este control, considerando dos dias a posterior
+            ## TOD: podria mejorar este control, considerando dos dias a posterior
             ## ya que si la reserva entra a las 23:59:59 por ahi no va a entrar
             if vals['res_creation_date'] != now.strftime("%Y-%m-%d"):
-                return Response("TEST",content_type='text/html;charset=utf-8',status=500)
+                return Response("TEST", content_type='text/html;charset=utf-8', status=500)
             if reservation:
                 ## si no cambia la fecha de entrada o salida le zafo...
-                if reservation.checkin_date == vals['checkin_date'] and reservation.checkout_date == vals['checkout_date']:
-                    return Response("TEST",content_type='text/html;charset=utf-8',status=500)
+                if reservation.checkin_date == vals['checkin_date'] and \
+                   reservation.checkout_date == vals['checkout_date']:
+                    return Response("TEST", content_type='text/html;charset=utf-8', status=500)
                 else:
-                    ## elimino la linea anterior... TODO verificiar que una confirmada se quite del resumen de reserva.
+                    ## elimino la linea anterior...
+                    ## TOD verificiar que una confirmada se quite del resumen de reserva.
                     reservation_line_obj = request.env['hotel_reservation.line']
-                    rline_ids = reservation_line_obj.sudo().search([('line_id','=',reservation.id)])
+                    rline_ids = reservation_line_obj.sudo().search([('line_id', '=',
+                                                                     reservation.id)])
                     rline_ids.sudo().unlink()
             vals['adults'] = pax
             partner_obj = request.env['res.partner'].sudo()
-            partner = partner_obj.search([('name','=',vals['partner_name'])])
+            partner = partner_obj.search([('name', '=', vals['partner_name'])])
             if 'channel' in vals.keys():
                 channel_obj = request.env['channel.manager'].sudo()
-                channel = channel_obj.search([('xml_id','=',vals['channel'])])
+                channel = channel_obj.search([('xml_id', '=', vals['channel'])])
                 vals['channel_manager_id'] = channel.id
             vals['pricelist_id'] = request.env['product.pricelist'].sudo().search([]).id
             vals['checkin_hour'] = 15
@@ -141,21 +143,21 @@ class Home(http.Controller):
             vals['xml_response'] = msg
             if not partner:
                 partner_val = {'name' : vals['partner_name'],
-                                  'email': 'partner_email' in vals.keys() and vals['partner_email'],
-                                  'phone': 'partner_phone' in vals.keys() and vals['partner_phone'],
-                                  'street': 'street' in vals.keys() and vals['street'],
-                                  'city': 'city' in vals.keys() and vals['city'],
-                                  'street2': 'street2' in vals.keys() and vals['street2'],
-                                  'zip': 'zip' in vals.keys() and vals['zip'],
-                                  'customer': True,
-                                  }
+                               'email': 'partner_email' in vals.keys() and vals['partner_email'],
+                               'phone': 'partner_phone' in vals.keys() and vals['partner_phone'],
+                               'street': 'street' in vals.keys() and vals['street'],
+                               'city': 'city' in vals.keys() and vals['city'],
+                               'street2': 'street2' in vals.keys() and vals['street2'],
+                               'zip': 'zip' in vals.keys() and vals['zip'],
+                               'customer': True,
+                              }
                 if 'country_code' in vals.keys():
                     country_obj = request.env['res.country'].sudo()
-                    country = country_obj.search([('code','=',vals['country_code'])])
+                    country = country_obj.search([('code', '=', vals['country_code'])])
                     partner_val['country_id'] = country.id
                 if 'nationality_code' in vals.keys():
                     country_obj = request.env['res.country'].sudo()
-                    country = country_obj.search([('code','=',vals['nationality_code'])])
+                    country = country_obj.search([('code', '=', vals['nationality_code'])])
                     partner_val['nationality_id'] = country.id
                 partner = partner_obj.create(partner_val)
             vals['partner_id'] = partner.id
@@ -165,40 +167,44 @@ class Home(http.Controller):
             ocupadas = []
             for l in lines:
                 _logger.info(l['room_type_id'])
-                rtype = request.env['hotel.room.type'].sudo().search([('room_type_id','=',l['room_type_id'])])
+                rtype = request.env['hotel.room.type'].sudo().search([('room_type_id', '=',
+                                                                       l['room_type_id'])])
                 _logger.info(rtype)
                 rcateg_id.append(rtype.cat_id.id)
                 l['categ_id'] = rtype.cat_id.id
             summary_obj = request.env['room.reservation.summary']
-            res = summary_obj.sudo().check_reservation(rcateg_id, '%s 12:00:00'%vals['checkin_date'], '%s 10:00:00'%vals['checkout_date'])
+            res = summary_obj.sudo().check_reservation(rcateg_id,
+                                                       '%s 12:00:00'%vals['checkin_date'],
+                                                       '%s 10:00:00'%vals['checkout_date'])
 
             for l in lines:
                 ## chequeo disponibilidad...
                 for r in res['room_summary']:
-                    ## si no se trata del mismo tipo de habitación que estoy queriendo reservar, continuo por el siguiente
+                    ## si no se trata del mismo tipo de habitación que estoy queriendo reservar,
+                    ## continuo por el siguiente
                     if l['categ_id'] != r['categ_id']:
                         continue
-                    free_room_id =r['value'][0]['room_id']
+                    free_room_id = r['value'][0]['room_id']
                     if free_room_id in ocupadas:
                         continue
                     libre = True
                     for v in r['value']:
-                        if v['state']!='Libre':
-                            libre=False
-                    if libre == True:
+                        if v['state'] != 'Libre':
+                            libre = False
+                    if libre:
                         break
-                if libre == True:
+                if libre:
                     print 'habitacion libre', free_room_id
                     ocupadas.append(free_room_id)
                 else:
                     print 'no hay hab. libres'
                 print free_room_id
                 vals_lines.append((0, 0, {
-                            'list_price': float(l['price']) / myduration,
-                            'reserve' : [(6,0,[free_room_id])],
-                        }))
+                    'list_price': float(l['price']) / myduration,
+                    'reserve' : [(6, 0, [free_room_id])],
+                    }))
             vals['reservation_line'] = vals_lines
-            reservation = reservation_obj.sudo().search([('res_id','=',data['reservationid'])])
+            reservation = reservation_obj.sudo().search([('res_id', '=', data['reservationid'])])
             # control porque se mandan tres veces las reservas...
             if not reservation:
                 reservation = reservation_obj.sudo().create(vals)
@@ -213,14 +219,14 @@ class Home(http.Controller):
                 reservation.xml_request = data
                 reservation.xml_response = msg
             try:
-                if reservation.state=='draft':
+                if reservation.state == 'draft':
                     reservation.confirmed_reservation()
             except Exception, e:
                 _logger.info(e)
         else:
             # cancelo reserva
-            reservation = reservation_obj.sudo().search([('res_id','=',data['reservationid'])])
+            reservation = reservation_obj.sudo().search([('res_id', '=', data['reservationid'])])
             if reservation:
                 reservation.state = 'cancel'
 
-        return Response("TEST",content_type='text/html;charset=utf-8',status=500)
+        return Response("TEST", content_type='text/html;charset=utf-8', status=500)
