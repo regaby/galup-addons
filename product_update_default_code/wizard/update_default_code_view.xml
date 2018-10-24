@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    <!-- Actualizar Referencia Interna Wizard form -->
+        <record id="view_update_default_code" model="ir.ui.view">
+            <field name="name">update.default.code.form</field>
+            <field name="model">update.default.code</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Actualizar Referencia Interna">
+
+                    <!-- <group >
+                        <field name="percentage" />
+                        <field name="option" />
+
+                    </group> -->
+
+                   <footer>
+                        <button class="oe_highlight" special="cancel" string="Cancelar"/>
+                        <button name="action_update" string="Actualizar" type="object"/>
+                   </footer>
+               </form>
+            </field>
+        </record>
+
+    <!--  Action of Actualizar Referencia Interna wizard -->
+
+    <record id="action_update_default_code" model="ir.actions.act_window">
+        <field name="name">Actualizar Referencia Interna</field>
+        <field name="res_model">update.default.code</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+       <field name="view_id" ref="view_update_default_code"/>
+       <field name="target">new</field>
+    </record>
+
+    <act_window name="Actualizar Referencia Interna"
+            key2="client_action_multi"
+            res_model="update.default.code"
+            src_model="product.template"
+            id="act_update_default_code"
+            view_mode="form" target="new"
+            view_type="form"/>
+
+    <!-- <menuitem  id="menu_update_default_code" name="Actualizar Referencia Interna" action="action_update_default_code" parent="stock.menu_stock_inventory_control"/> -->
+    </data>
+</openerp>
