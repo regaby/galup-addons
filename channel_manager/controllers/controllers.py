@@ -106,10 +106,13 @@ class Home(http.Controller):
                             if len(line) > 0:
                                 lines.append(line)
             now = datetime.now() + timedelta(hours=2)
-            ## si la fecha de creacion de la reserva no es la misma que la del dia zafo
-            ## TOD: podria mejorar este control, considerando dos dias a posterior
-            ## ya que si la reserva entra a las 23:59:59 por ahi no va a entrar
-            if vals['res_creation_date'] != now.strftime("%Y-%m-%d"):
+            ## si la fecha de creacion de la reserva no es la misma que la del dia
+            ## o un dia posterior zafo
+            formato_fecha = "%Y-%m-%d"
+            hoy = now.strftime(formato_fecha)
+            dia_posterior = str(datetime.strptime(vals['res_creation_date'], formato_fecha)
+                                + timedelta(days=1))[0:10]
+            if vals['res_creation_date'] != hoy and dia_posterior != hoy:
                 return Response("TEST", content_type='text/html;charset=utf-8', status=500)
             if reservation:
                 ## si no cambia la fecha de entrada o salida le zafo...

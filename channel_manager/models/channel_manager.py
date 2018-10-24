@@ -35,7 +35,8 @@ class ChannelManager(models.Model):
 
     @api.multi
     def test2(self):
-        xml = {'status': u'new', 'reservationid': u'2035345871', 'siteid': u'142', 'site': u'booking_xml', 'propertyid': u'616123'}
+        ## reserva expedia alpi olivera
+        xml = {'status': u'new', 'reservationid': u'1136434077', 'siteid': u'4', 'site': u'Expedia', 'propertyid': u'616123'}
         headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
         msg = requests.post('http://localhost:8069/test', data=xml, headers=headers).text
         raise UserError(msg)
