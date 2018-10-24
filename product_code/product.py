@@ -7,6 +7,34 @@ class ProductCategory(models.Model):
 
     code = fields.Char(size=4)
 
+    @api.model
+    def create(self, vals):
+        ## code required
+        if 'code' in vals.keys():
+            if not vals['code']:
+                raise UserError('El código de categoría es un campo obligatorio')
+        ## create sequence
+        sequence = {
+            'name': vals['name'],
+            'code': vals['code'],
+            'prefix': vals['code'],
+            'padding': 5,
+            'number_increment': 1,
+            'number_next_actual': 1,
+            'implementation': 'standard'
+        }
+        seq_id = self.env['ir.sequence'].create(sequence)
+        return super(ProductCategory, self).create(vals)
+
+    _sql_constraints = [
+        ('product_category_code_uniq',
+         'unique (code)',
+         'El código de categoría de producto debe ser único!'),
+        ('product_category_name_uniq',
+         'unique (name)',
+         'El nombre de categoría de producto debe ser único!'),
+    ]
+
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
@@ -82,5 +110,5 @@ class PurchaseOrderLine(models.Model):
                     raise UserError('El producto %s tiene precio de compra igual a cero'%(vals['name']))
                 else:
                     raise UserError('Existe un producto con un precio de compra igual a cero')
-        return super(PurchaseOrderLine, self).create(vals)        
-        
+        return super(PurchaseOrderLine, self).create(vals)
+
