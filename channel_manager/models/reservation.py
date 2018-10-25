@@ -13,7 +13,7 @@ class HotelReservation(models.Model):
     _name = "hotel.reservation"
     _inherit = "hotel.reservation"
 
-    
+
 
     res_id = fields.Char('ResId')
     bb_id = fields.Char('BbliverateId')

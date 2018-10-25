@@ -40,6 +40,7 @@ class Home(http.Controller):
         line = {}
         vals_lines = []
         reservation_obj = request.env['hotel.reservation']
+        tax_obj = request.env['account.tax']
         if data['siteid'] not in ['142', '4']:
             # si no viene de expedia o booking le zafo
             return Response("TEST", content_type='text/html;charset=utf-8', status=500)
@@ -207,6 +208,9 @@ class Home(http.Controller):
                     'reserve' : [(6, 0, [free_room_id])],
                     }))
             vals['reservation_line'] = vals_lines
+            ## agrego impuesto
+            tax = tax_obj.sudo().search([('name', '=', 'IVA Ventas 21%')])
+            vals['tax_id'] = tax.id
             reservation = reservation_obj.sudo().search([('res_id', '=', data['reservationid'])])
             # control porque se mandan tres veces las reservas...
             if not reservation:
