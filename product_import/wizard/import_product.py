@@ -79,7 +79,7 @@ class ImportProduct(models.TransientModel):
         prodcat_obj = self.env['product.category']
         # if 'active_id' in ctx:
         #     inventory = inventory_obj.browse(ctx['active_id'])
-        
+
         keys, reader_info = self.get_reader_info()
 
         values = {}
@@ -133,7 +133,7 @@ class ImportProduct(models.TransientModel):
         prodcat_obj = self.env['product.category']
         # if 'active_id' in ctx:
         #     inventory = inventory_obj.browse(ctx['active_id'])
-        
+
         keys, reader_info = self.get_reader_info()
 
         values = {}
@@ -163,8 +163,9 @@ class ImportProduct(models.TransientModel):
             #     val['product'] = prod_lst[0].id
             # if 'lot' in values and values['lot']:
             #     val['lot'] = values['lot']
-            
+
             val['name'] = values['nombre']
+            print values['nombre']
             val['default_code'] = values['codigo']
             val['standard_price'] = values['precio_costo']
             val['list_price'] = values['precio_lista']
@@ -172,7 +173,8 @@ class ImportProduct(models.TransientModel):
             val['categ_id'] = prod_category and prod_category.id
             val['type'] = 'product'
             product_obj.create(val)
-        self.change_product_qty(reader_info,keys)
+        if len(values['cantidad']) > 0:
+            self.change_product_qty(reader_info,keys)
         self.import_image(reader_info,keys)
 
     @api.one
@@ -188,7 +190,7 @@ class ImportProduct(models.TransientModel):
         #     ctx = context.copy()
         #     ctx['location'] = data.location_id.id
         #     ctx['lot_id'] = data.lot_id.id
-            
+
         actual_date = fields.Date.today()
         # inv_name = self.name + ' - ' + actual_date
         # inventory.write({'name': inv_name,
@@ -268,7 +270,7 @@ class ImportProduct(models.TransientModel):
             # get image and convert to base64
             try:
                 image = None
-                
+
                 if prod_path[0:4] == 'http':
                     response = urllib2.urlopen(prod_path)
                     image = response.read()
