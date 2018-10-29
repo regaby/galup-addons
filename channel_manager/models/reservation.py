@@ -22,6 +22,7 @@ class HotelReservation(models.Model):
     xml_request = fields.Text('Solicitud Channel Manager', readonly=True)
     xml_response = fields.Text('Respuesta Channel Manager', readonly=True)
     no_migrar = fields.Boolean('No migrar')
+    dolar = fields.Float('Subtotal (En Dolares)', readonly=True)
 
     def get_header(self):
         config_obj = self.env['channel.manager.config.settings']

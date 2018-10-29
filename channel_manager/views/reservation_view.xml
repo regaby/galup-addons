@@ -29,6 +29,9 @@
                <field name="amount_tax" position="attributes">
                   <attribute name="attrs">{'invisible': [('channel_manager_id', '=', False)]}</attribute>
                </field>
+               <field name="amount_untaxed" position="after">
+                  <field name="dolar" sum="Subtotal (dolares)" widget='monetary' attrs="{'invisible': [('channel_manager_id', '=', False)]}"/>
+               </field>
 
 
             </field>
