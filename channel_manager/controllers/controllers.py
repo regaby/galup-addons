@@ -49,6 +49,7 @@ class Home(http.Controller):
             root = etree.fromstring(msg)
             process_list = root.findall('Bookings', root.nsmap)
             pax = 0
+            vals['dolar'] = 0
             for process in process_list:
                 for child2 in process:
                     for child in child2:
@@ -66,6 +67,9 @@ class Home(http.Controller):
                             vals['create_date'] = child.text # aparentemente tiene 5 horas de dif.
                         if child.xpath('local-name()') == 'ResCreationDate':
                             vals['res_creation_date'] = child.text
+                        ## si no es booking
+                        if child.xpath('local-name()') == 'TotalPrice' and data['siteid'] != '142':
+                            vals['dolar'] = float(child.text)
                         # TOD: ResSource creo qe va a traer la info si es booking o expedia...
                         # if child.xpath('local-name()') == 'Customers':
                         for cus2 in child:
@@ -98,6 +102,8 @@ class Home(http.Controller):
                                 if cus.xpath('local-name()') == 'Price':
                                     line['price'] = cus.text
                                 for ccus in cus:
+                                    if ccus.xpath('local-name()') == 'price':
+                                        vals['dolar'] += float(ccus.text)
                                     if ccus.xpath('local-name()') == 'Price':
                                         line['price'] = ccus.text
                                     if ccus.xpath('local-name()') == 'RoomTypeId':
