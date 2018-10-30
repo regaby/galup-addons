@@ -20,3 +20,4 @@ class PaymentOrder(models.Model):
     partner_id = fields.Many2one('res.partner', 'Partner', required=True)
     invoice_ids = fields.Many2many('account.invoice', 'payment_order_invoice_rel', 'payment_order_id',
                                    'invoice_id', string='Invoices', copy=False)
+    company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env.user.company_id)
