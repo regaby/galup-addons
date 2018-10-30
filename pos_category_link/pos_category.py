@@ -25,12 +25,19 @@ class ProductTemplate(models.Model):
 
     @api.onchange('categ_id')
     def on_change_categ_id(self):
-        self.pos_categ_id = self.categ_id.pos_categ_id
+        if self.categ_id.pos_categ_id:
+            self.pos_categ_id = self.categ_id.pos_categ_id
+        else:
+            raise UserError('Debe modificar la categoria TODOS (Pestaña inventario)')
+
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
     @api.onchange('categ_id')
     def on_change_categ_id(self):
-        self.pos_categ_id = self.categ_id.pos_categ_id
+        if self.categ_id.pos_categ_id:
+            self.pos_categ_id = self.categ_id.pos_categ_id
+        else:
+            raise UserError('Debe modificar la categoria TODOS (Pestaña inventario)')
 
