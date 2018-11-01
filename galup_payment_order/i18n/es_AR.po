@@ -1,0 +1,163 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* galup_payment_order
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-23 21:56+0000\n"
+"PO-Revision-Date: 2018-10-23 21:56+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: galup_payment_order
+#: model:ir.ui.view,arch_db:galup_payment_order.payment_order_form_view
+msgid "<?xml version=\"1.0\"?>\n"
+"<form string=\"Payment Order\">\n"
+"                    <!-- <header>\n"
+"                        <button name=\"test\" string=\"GetRoomTypes\" type=\"object\" />\n"
+"                    </header> -->\n"
+"                    <sheet>\n"
+"                    <h1 class=\"mt0\">\n"
+"                        <field name=\"name\" readonly=\"1\" class=\"oe_inline\"/>\n"
+"                    </h1>\n"
+"                    <group>\n"
+"                        <group>\n"
+"                            <field name=\"partner_id\" context=\"{'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1, 'show_address': 1 }\" domain=\"[('supplier', '=', True)]\" options=\"{&quot;always_reload&quot;: True}\"/>\n"
+"                        </group>\n"
+"                        <group>\n"
+"                            <field name=\"date\"/>\n"
+"                        </group>\n"
+"                    </group>\n"
+"                    <notebook>\n"
+"                        <page string=\"Invoices\">\n"
+"                            <field name=\"invoice_ids\" domain=\"[('state','=','open'),                                                                ('partner_id','=',partner_id),                                                                ('type','=','in_invoice')]\"/>\n"
+"                        </page>\n"
+"\n"
+"                    </notebook>\n"
+"                    </sheet>\n"
+"\n"
+"                </form>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<form string=\"Payment Order\">\n"
+"                    <!-- <header>\n"
+"                        <button name=\"test\" string=\"GetRoomTypes\" type=\"object\" />\n"
+"                    </header> -->\n"
+"                    <sheet>\n"
+"                    <h1 class=\"mt0\">\n"
+"                        <field name=\"name\" readonly=\"1\" class=\"oe_inline\"/>\n"
+"                    </h1>\n"
+"                    <group>\n"
+"                        <group>\n"
+"                            <field name=\"partner_id\" context=\"{'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1, 'show_address': 1 }\" domain=\"[('supplier', '=', True)]\" options=\"{&quot;always_reload&quot;: True}\"/>\n"
+"                        </group>\n"
+"                        <group>\n"
+"                            <field name=\"date\"/>\n"
+"                        </group>\n"
+"                    </group>\n"
+"                    <notebook>\n"
+"                        <page string=\"Invoices\">\n"
+"                            <field name=\"invoice_ids\" domain=\"[('state','=','open'),                                                                ('partner_id','=',partner_id),                                                                ('type','=','in_invoice')]\"/>\n"
+"                        </page>\n"
+"\n"
+"                    </notebook>\n"
+"                    </sheet>\n"
+"\n"
+"                </form>\n"
+"            "
+
+#. module: galup_payment_order
+#: model:ir.ui.view,arch_db:galup_payment_order.payment_order_tree_view
+msgid "<?xml version=\"1.0\"?>\n"
+"<tree string=\"Payment Order\">\n"
+"                    <field name=\"name\"/>\n"
+"                    <field name=\"date\"/>\n"
+"                    <field name=\"partner_id\"/>\n"
+"                </tree>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<tree string=\"Payment Order\">\n"
+"                    <field name=\"name\"/>\n"
+"                    <field name=\"date\"/>\n"
+"                    <field name=\"partner_id\"/>\n"
+"                </tree>\n"
+"            "
+
+#. module: galup_payment_order
+#: model:ir.model.fields,field_description:galup_payment_order.field_payment_order_create_uid
+#: field:payment.order,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: galup_payment_order
+#: model:ir.model.fields,field_description:galup_payment_order.field_payment_order_create_date
+#: field:payment.order,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: galup_payment_order
+#: model:ir.model.fields,field_description:galup_payment_order.field_payment_order_display_name
+#: field:payment.order,display_name:0
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: galup_payment_order
+#: model:ir.model.fields,field_description:galup_payment_order.field_payment_order_id
+#: field:payment.order,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: galup_payment_order
+#: model:ir.model.fields,field_description:galup_payment_order.field_payment_order_invoice_ids
+#: field:payment.order,invoice_ids:0
+msgid "Invoices"
+msgstr "Facturas"
+
+#. module: galup_payment_order
+#: model:ir.model.fields,field_description:galup_payment_order.field_payment_order___last_update
+#: field:payment.order,__last_update:0
+msgid "Last Modified on"
+msgstr "Última Modifiación en"
+
+#. module: galup_payment_order
+#: model:ir.model.fields,field_description:galup_payment_order.field_payment_order_write_uid
+#: field:payment.order,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: galup_payment_order
+#: model:ir.model.fields,field_description:galup_payment_order.field_payment_order_write_date
+#: field:payment.order,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: galup_payment_order
+#: model:ir.model.fields,field_description:galup_payment_order.field_payment_order_partner_id
+#: field:payment.order,partner_id:0
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: galup_payment_order
+#: model:ir.actions.act_window,name:galup_payment_order.action_payment_order_tree_view
+#: model:ir.ui.menu,name:galup_payment_order.payment_order_menu
+msgid "Payment Order"
+msgstr "Orden de Pago"
+
+#. module: galup_payment_order
+#: model:ir.model.fields,field_description:galup_payment_order.field_payment_order_date
+#: field:payment.order,date:0
+msgid "Payment Order Date"
+msgstr "Fecha de Orden de Pago"
+
+#. module: galup_payment_order
+#: model:ir.model.fields,field_description:galup_payment_order.field_payment_order_name
+#: field:payment.order,name:0
+msgid "Payment Order Number"
+msgstr "Orden de Pago Nro."
+
