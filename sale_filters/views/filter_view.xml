@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record model="ir.ui.view" id="view_order_product_search_inherit">
+            <field name="name">sale.report</field>
+            <field name="model">sale.report</field>
+            <field name="inherit_id" ref="sale.view_order_product_search"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <filter name="mas_vendido" string="Productos más vendidos" domain="[[u'state', u'not in', [u'draft', u'cancel']]]" context="{u'pivot_column_groupby': [], u'pivot_row_groupby': [u'product_id'], u'pivot_measures': [u'product_uom_qty', u'price_subtotal', u'price_total'], 'group_by':'product_id'}" />
+
+                    <filter name="categ_mas_vendido" string="Categorias más vendidas" domain="[[u'state', u'not in', [u'draft', u'cancel']]]" context="{u'pivot_column_groupby': [], u'pivot_row_groupby': [u'categ_id'], u'pivot_measures': [u'product_uom_qty', u'price_subtotal', u'price_total'], 'group_by':'categ_id'}" />
+                </field>
+            </field>
+        </record>
+
+        <record id="sale.action_order_report_all" model="ir.actions.act_window">
+            <field name="context">{'search_default_mas_vendido':1}</field>
+        </record>
+
+    </data>
+</odoo>
