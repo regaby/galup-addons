@@ -13,7 +13,9 @@ class Home(http.Controller):
     @http.route('/test', type='http', auth="public", csrf=False)
     def test(self, **kwargs):
         config_obj = request.env['channel.manager.config.settings']
+        rate_obj = request.env['currency.rate.update.service']
         config = config_obj.sudo().search([])
+        rate = rate_obj.sudo().search([])
         print config
 
         data = kwargs
@@ -112,6 +114,10 @@ class Home(http.Controller):
                                         line['cantidad'] = ccus.text
                             if len(line) > 0:
                                 lines.append(line)
+            _logger.info('pre cotizacion', rate.currency_to_update.rate)
+            rate.sudo().refresh_currency()
+            cotizacion = round(1 / rate.currency_to_update.rate, 2)
+            _logger.info('post cotizacion', rate.currency_to_update.rate)
             now = datetime.now() + timedelta(hours=2)
             ## si la fecha de creacion de la reserva no es la misma que la del dia
             ## o un dia posterior zafo
@@ -151,6 +157,7 @@ class Home(http.Controller):
             vals['state'] = 'draft'
             vals['xml_request'] = data
             vals['xml_response'] = msg
+            vals['dolar_rate'] = cotizacion
             if not partner:
                 partner_val = {'name' : vals['partner_name'],
                                'email': 'partner_email' in vals.keys() and vals['partner_email'],

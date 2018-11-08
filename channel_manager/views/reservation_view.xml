@@ -23,6 +23,9 @@
                <field name="tax_id" position="attributes">
                   <attribute name="attrs">{'invisible': [('channel_manager_id', '=', False)]}</attribute>
                </field>
+               <field name="dolar_rate" position="attributes">
+                  <attribute name="attrs">{'invisible': [('channel_manager_id', '=', False)]}</attribute>
+               </field>
                <field name="amount_untaxed" position="attributes">
                   <attribute name="attrs">{'invisible': [('channel_manager_id', '=', False)]}</attribute>
                </field>
