@@ -38,7 +38,7 @@ class res_partner(models.Model):
     main_id_category_id = fields.Many2one('res.partner.id_category', required=True)
 
     def _get_default_category(self, cr, uid, context=None):
-        res = self.pool.get('res.partner.id_category').search(cr, uid, [('code','=','DNI')], context=context)
+        res = self.pool.get('res.partner.id_category').search(cr, uid, [('code','=','CUIT')], context=context)
         return res and res[0] or False
 
     _defaults = {
