@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
-#    
+#
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -13,7 +13,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -30,7 +30,7 @@ class QuickReservation(models.TransientModel):
     _name = 'quick.reservation'
     _description = 'Quick Reservation'
 
-    
+
     room_id = fields.Many2one('hotel.room', 'Habitación', required=True)
     partner_id = fields.Many2one('res.partner', string="Huesped",
                                  required=True)
@@ -39,7 +39,7 @@ class QuickReservation(models.TransientModel):
     observations = fields.Text('Observaciones')
     reservation_id = fields.Many2one(comodel_name='hotel.reservation',
                                      string='Reserva')
-    
+
 
     @api.model
     def default_get(self, fields):
@@ -57,21 +57,29 @@ class QuickReservation(models.TransientModel):
             if 'room_id' in keys:
                 roomid = self._context['room_id']
                 res.update({'room_id': int(roomid)})
-                room_reservation_obj = self.env['hotel.room.reservation.line']
                 reservation_obj = self.env['hotel.reservation']
                 date = self._context['date'][0:10]
                 cin = date+' 23:59:59'
                 cout = date+' 00:00:00'
-                reservation_id = room_reservation_obj.search([('room_id','=',int(roomid)),('check_in','<=',cin),('check_out','>=',cout),('state','=','assigned')],order="check_out desc",limit=1)
+                sql = """select rl.reservation_id from hotel_room_reservation_line rl
+                            inner join hotel_reservation r on (rl.reservation_id=r.id)
+                            where rl.room_id in (%s)
+                            and check_in <= '%s'
+                            and check_out >= '%s'
+                            and r.state <> 'cancel'
+                            order by check_out desc
+                            limit 1"""%(int(roomid), cin, cout)
+                self._cr.execute(sql)
+                reservation_id = self._cr.fetchone()
                 if reservation_id:
-                    reservation = reservation_obj.browse(reservation_id.reservation_id.id)
+                    reservation = reservation_obj.browse(reservation_id)
                     res.update({'partner_id': reservation.partner_id.id,
-                        'checkin':reservation.checkin,
-                        'checkout':reservation.checkout,
-                        'observations':reservation.observations,
-                        'reservation_id': reservation.id,
-                        })
+                                'checkin':reservation.checkin,
+                                'checkout':reservation.checkout,
+                                'observations':reservation.observations,
+                                'reservation_id': reservation.id,
+                               })
 
         return res
 
-   
+
