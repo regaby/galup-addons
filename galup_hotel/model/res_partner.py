@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
-#    
+#
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -13,7 +13,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -52,7 +52,7 @@ class res_partner(models.Model):
 
     # _partner_age_fnt = lambda self, cr, uid, ids, name, arg, context={}: self._partner_age(cr, uid, ids, name, arg, context)
 
-    
+
 
     @api.one
     @api.depends('birthday')
@@ -77,7 +77,7 @@ class res_partner(models.Model):
         # for partner_data in self.browse(cr, uid, ids, context=context):
         partner_data = self
         self.age= compute_age_from_dates (partner_data.birthday)
- 
+
     #identification_id = fields.Char(size=20,string="Nro. Documento",help="DNI/CPF/Pasaporte/Travel document")
     job_id = fields.Many2one('hr.job', 'Ocupación/Profesión')
     birthday = fields.Date('Fecha de nacimiento')
@@ -89,7 +89,7 @@ class res_partner(models.Model):
     unwelcome_guest = fields.Boolean(string="Huesped no grato")
     nationality_id = fields.Many2one('res.country', 'Nacionalidad (País)')
     # 'age' : fields.function(_partner_age_fnt, method=True, type='char', size=32, string='Patient Age', help="It shows the age of the patient in years(y), months(m) and days(d).\nIf the patient has died, the age shown is the age at time of death, the age corresponding to the date on the death certificate. It will show also \"deceased\" on the field"),
-    age = fields.Char(string='Edad', 
+    age = fields.Char(string='Edad',
         store=False, readonly=False, compute='_partner_age_fnt')
     observations = fields.Text('Observaciones')
     has_car = fields.Boolean(string="¿Tiene vehiculo?", default=False)
@@ -111,7 +111,7 @@ class res_partner(models.Model):
         'customer': False,
         'main_id_number' : 0,
         'main_id_category_id' : _get_default_category,
-        
+
     }
 
 
@@ -145,7 +145,7 @@ class ResPartnerIdNumber(models.Model):
             raise ValidationError(_('El número de identificación del huésped debe ser único. Actualmente existe para %s')%(demo_record.partner_id.name))
             return False
         return True
-        
+
     _constraints = [(_check_dni,"El número de identificación del huésped debe ser único",[])]
     # _sql_constraints = [
     #     ('partner_id_number_uniq', 'UNIQUE (category_id,name)',  'El número de identificación del huésped debe ser único'),
@@ -160,8 +160,8 @@ class ResPartnerIdNumberCategory(models.Model):
 class ResCountryEstate(models.Model):
     _name = "res.country.state"
     _inherit = "res.country.state"
-    
-    code = fields.Char(required=False) 
+
+    code = fields.Char(required=False)
 
 class Guest(models.Model):
 
@@ -187,8 +187,8 @@ class HotelFolio(models.Model):
     check_applied = fields.Boolean('Check applied', default=lambda *a: False)
     invoice_state = fields.Selection(string='Estado de Factura', related='hotel_invoice_id.state')
     car_partner = fields.Boolean(string='¿Tiene vehículo?', related='partner_id.has_car')
-    smoker_partner = fields.Boolean(String='¿Es Fumador?', related='partner_id.smoker') 
-    regular_passenger = fields.Boolean(String='Pasajero Frecuente', related='partner_id.regular_passenger') 
+    smoker_partner = fields.Boolean(String='¿Es Fumador?', related='partner_id.smoker')
+    regular_passenger = fields.Boolean(String='Pasajero Frecuente', related='partner_id.regular_passenger')
     nacionality_partner = fields.Many2one('res.country', 'Nacionalidad' , related='partner_id.nationality_id', required=True)
     debt_status = fields.Selection([('debe', 'Debe'),
                                ('pagado', 'Pagado (Anotar en observaciones los detalles del pago)'),],
@@ -198,6 +198,13 @@ class HotelFolio(models.Model):
     @api.onchange('country_partner')
     def on_change_nationality(self):
         self.nacionality_partner = self.country_partner
+
+    @api.onchange('early_checkin_hour', 'late_checkout_hour')
+    def on_change_early_late_hour(self):
+        if self.early_checkin:
+            self.checkin_date = '%s %s:00:00'%(self.checkin_date[0:10],self.early_checkin_hour+3)
+        if self.late_checkout:
+            self.checkout_date = '%s %s:00:00'%(self.checkout_date[0:10],self.late_checkout_hour+3)
 
     @api.multi
     def calculate_check(self):
@@ -301,14 +308,14 @@ class HotelFolioLine(models.Model):
 
 class HotelRoom(models.Model):
 
-    _inherit = 'hotel.room'    
+    _inherit = 'hotel.room'
 
     status = fields.Selection([('available', 'Available'),
                                ('occupied', 'Occupied'),
                                ('blocked', 'Bloqueado'),
                                ],
                               'Status', default='available')
-    
+
     issue_lines = fields.One2many('hotel.room.issue', 'room_id',help="Incidencias.")
 
     @api.multi
@@ -336,7 +343,7 @@ class FolioRoomLine(models.Model):
     _inherit = 'folio.room.line'
     invoice_state = fields.Selection(string='Estado de Factura', related='folio_id.invoice_state')
     debt_status = fields.Selection(string='Estado de Factura', related='folio_id.debt_status')
-    
+
 
 class HotelRoomIssue(models.Model):
 
@@ -344,7 +351,7 @@ class HotelRoomIssue(models.Model):
 
     name = fields.Char('Descripcion', required=True)
     room_id = fields.Many2one('hotel.room', string='Habitación',
-                               ondelete='cascade')    
+                               ondelete='cascade')
     issue_date = fields.Datetime('Fecha de la incidencia', required=True,
                                           default=(lambda *a:
                                           time.strftime
@@ -352,7 +359,7 @@ class HotelRoomIssue(models.Model):
     close_date = fields.Datetime('Fecha de resolucion', required=False)
 
 class AccountTax(models.Model):
-    _inherit = 'account.tax'    
+    _inherit = 'account.tax'
 
     # early checkin / late checkout
 
@@ -462,7 +469,7 @@ class AccountInvoice(models.Model):
                     re.sub("[^0-9]", "", point_of_sale))
 
 class SaleAdvancePaymentInv(models.TransientModel):
-    _name = "sale.advance.payment.inv"    
+    _name = "sale.advance.payment.inv"
     _inherit = "sale.advance.payment.inv"
 
     @api.model
@@ -484,5 +491,5 @@ class SaleAdvancePaymentInv(models.TransientModel):
 class QuickRoomReservation(models.TransientModel):
     _name = 'quick.room.reservation'
     _inherit = 'quick.room.reservation'
-    
+
     unwelcome_guest = fields.Boolean(string='Huesped no grato', related='partner_id.unwelcome_guest')
