@@ -202,9 +202,9 @@ class HotelFolio(models.Model):
     @api.onchange('early_checkin_hour', 'late_checkout_hour')
     def on_change_early_late_hour(self):
         if self.early_checkin:
-            self.checkin_date = '%s %s:00:00'%(self.checkin_date[0:10],self.early_checkin_hour+3)
+            self.checkin_date = '%s %s:00:00'%(self.checkin_date[0:10],str(self.early_checkin_hour+3).zfill(2))
         if self.late_checkout:
-            self.checkout_date = '%s %s:00:00'%(self.checkout_date[0:10],self.late_checkout_hour+3)
+            self.checkout_date = '%s %s:00:00'%(self.checkout_date[0:10],str(self.late_checkout_hour+3).zfill(2))
 
     @api.multi
     def calculate_check(self):
