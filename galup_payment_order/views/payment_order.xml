@@ -57,7 +57,7 @@
             <field name="view_id" ref="payment_order_tree_view" />
         </record>
 
-        <menuitem id="payment_order_menu" name="Payment Order" parent="account.menu_finance_payables" sequence="10" action="action_payment_order_tree_view" />
+        <!-- <menuitem id="payment_order_menu" name="Payment Order" parent="account.menu_finance_payables" sequence="10" action="action_payment_order_tree_view" /> -->
 
 
 </odoo>
