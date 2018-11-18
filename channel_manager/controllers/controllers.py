@@ -114,10 +114,10 @@ class Home(http.Controller):
                                         line['cantidad'] = ccus.text
                             if len(line) > 0:
                                 lines.append(line)
-            _logger.info('pre cotizacion', rate.currency_to_update.rate)
+            _logger.info('pre cotizacion %s', rate.currency_to_update.rate)
             rate.sudo().refresh_currency()
             cotizacion = round(1 / rate.currency_to_update.rate, 2)
-            _logger.info('post cotizacion', rate.currency_to_update.rate)
+            _logger.info('post cotizacion %s', rate.currency_to_update.rate)
             now = datetime.now() + timedelta(hours=2)
             ## si la fecha de creacion de la reserva no es la misma que la del dia
             ## o un dia posterior zafo
