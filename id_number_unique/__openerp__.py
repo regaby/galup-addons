@@ -3,9 +3,9 @@
 #    Module Writen to OpenERP, Open Source Management Solution
 #
 #    All Rights Reserved.
-#    
+#
 ############################################################################
-#    
+#
 ############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -31,9 +31,9 @@
         Galup Hotel
     """,
     "license": "AGPL-3",
-    "depends": ['partner_identification'],
+    "depends": ['partner_identification', 'l10n_ar_partner'],
     "data": [
-
+        'views/res_partner_view.xml'
     ],
     "installable": True,
     "active": False,
