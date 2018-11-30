@@ -30,7 +30,7 @@
         Este módulo adaptar el módulo account de odoo v9
     """,
     "license": "AGPL-3",
-    "depends": ['account'],
+    "depends": ['account', 'account_check'],
     "data": [
         'data/account_payment_method_data.xml'
     ],
