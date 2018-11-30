@@ -18,7 +18,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, _
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil import relativedelta
 import openerp.addons.decimal_precision as dp
 import time
@@ -202,9 +202,15 @@ class HotelFolio(models.Model):
     @api.onchange('early_checkin_hour', 'late_checkout_hour')
     def on_change_early_late_hour(self):
         if self.early_checkin:
+            if self.early_checkin_hour > 11:
+                raise ValidationError(_('El early checkin debe ser entre las 0 y 11 hs.'))
             self.checkin_date = '%s %s:00:00'%(self.checkin_date[0:10],str(self.early_checkin_hour+3).zfill(2))
         if self.late_checkout:
-            self.checkout_date = '%s %s:00:00'%(self.checkout_date[0:10],str(self.late_checkout_hour+3).zfill(2))
+            if self.late_checkout_hour > 24:
+                raise ValidationError(_('El late checkout debe ser entre las 11 y 24 hs.'))
+            lco_hour = self.late_checkout_hour < 24 and self.late_checkout_hour or 0
+            co_date = '%s %s:00:00'%(self.checkout_date[0:10],str(lco_hour))
+            self.checkout_date = datetime.strptime(co_date, '%Y-%m-%d %H:%M:%S') + timedelta(hours=3)
 
     @api.multi
     def calculate_check(self):
