@@ -32,6 +32,7 @@
     "license": "AGPL-3",
     "depends": ['account'],
     "data": [
+        'data/account_payment_method_data.xml'
     ],
     'qweb': [],
     "installable": True,
