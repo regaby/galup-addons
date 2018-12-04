@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>         
+    <data>
 
 
         <record model="ir.ui.view" id="view_hotel_folio1_form_inherit">
             <field name='name'>hotel.folio.form</field>
             <field name="inherit_id" ref="hotel.view_hotel_folio1_form"/>
             <field name="model">hotel.folio</field>
-            <field name="arch" type="xml"> 
+            <field name="arch" type="xml">
                <!--  <notebook position="inside"> -->
                <xpath expr="//form/sheet/notebook/page" position="after">
                     <page string="Acompañantes">
@@ -27,9 +27,9 @@
                 <field name="invoice_status" position='after'>
                     <field name="invoice_state" attrs="{'invisible':[('invoice_status','!=','invoiced')]}" group="hotel.group_hotel_manager"/>
                     <newline />
-                    <field name="early_checkin" attrs="{'readonly':[('check_applied','!=',False)]}"/>
+                    <field name="early_checkin" />
                     <field name="early_checkin_hour" attrs="{'invisible':[('early_checkin','=',False)],'required':[('early_checkin','!=',False)],'readonly':['|',('state','not in',['draft','sale']),('check_applied','!=',False)]}" />
-                    <field name="late_checkout" attrs="{'readonly':[('check_applied','!=',False)]}" />
+                    <field name="late_checkout"  />
                     <field name="late_checkout_hour" attrs="{'invisible':[('late_checkout','=',False)],'required':[('late_checkout','!=',False)], 'readonly':['|',('state','not in',['draft','sale']),('check_applied','!=',False)]}" />
                     <field name="check_applied" invisible="True"/>
                 </field>

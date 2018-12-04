@@ -180,8 +180,10 @@ class HotelFolio(models.Model):
 
     guest_lines = fields.One2many('hotel.guest', 'folio_id',
                                  help="Acompañantes.")
-    early_checkin = fields.Boolean('Early Checkin')
-    late_checkout = fields.Boolean('Late Checkout')
+    early_checkin = fields.Boolean('Early Checkin', readonly=True,
+                                   states={'draft': [('readonly', False)]})
+    late_checkout = fields.Boolean('Late Checkout', readonly=True,
+                                   states={'draft': [('readonly', False)]})
     early_checkin_hour = fields.Integer('Hora Early Checkin', required=False, default=lambda *a: 0)
     late_checkout_hour = fields.Integer('Hora Late Checkout', required=False, default=lambda *a: 11)
     check_applied = fields.Boolean('Check applied', default=lambda *a: False)
