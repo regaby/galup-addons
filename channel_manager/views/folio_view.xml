@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-    
-	
+
+
 		<record id="view_hotel_folio1_form_inherit_channel" model="ir.ui.view">
             <field name="name">hotel.folio.form</field>
             <field name="model">hotel.folio</field>
             <field name="inherit_id" ref="hotel.view_hotel_folio1_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/notebook/page[4]" position="after">
-                      <page string="Channel Manager" name="channel_manager" attrs="{'invisible': [('reservation_id', '!=', False)]}">
+                      <page string="Channel Manager" name="channel_manager">
                         <group>
                           <field name="bb_id" />
                           <field name="xml_request" />
@@ -41,6 +41,6 @@
                </field>
             </field>
         </record>
-	
+
      </data>
 </openerp>
