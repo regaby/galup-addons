@@ -127,3 +127,15 @@ class HotelReservation(models.Model):
         default['xml_response'] = False
         default['no_migrar'] = False
         return super(HotelReservation, self).copy(default=default)
+
+    @api.multi
+    def _create_folio(self):
+        hotel_folio_obj = self.env['hotel.folio']
+        res = super(HotelReservation, self)._create_folio()
+        print '\n\nres', res
+        folio_id = res['res_id']
+        folio = hotel_folio_obj.browse(folio_id)
+        folio.bb_id = self.bb_id
+        return res
+
+
