@@ -14,11 +14,9 @@ class ImportProduct(models.TransientModel):
     def get_reader_info(self):
         if not self.data:
             raise exceptions.Warning(_("You need to select a file!"))
-        # Decode the file data
         data = base64.b64decode(self.data)
         file_input = cStringIO.StringIO(data)
         file_input.seek(0)
-        # location = self.location
         reader_info = []
         if self.delimeter:
             delimeter = str(self.delimeter)
@@ -31,7 +29,6 @@ class ImportProduct(models.TransientModel):
         except Exception:
             raise exceptions.Warning(_("Not a valid file!"))
         keys = reader_info[0]
-        # check if keys exist
         if not isinstance(keys, list) or ('nombre' not in keys or
                                           'codigo' not in keys):
             raise exceptions.Warning(
@@ -125,30 +122,15 @@ class ImportProduct(models.TransientModel):
     @api.one
     def create_product(self):
         """Load Inventory data from the CSV file."""
-        ctx = self._context
-        stloc_obj = self.env['stock.location']
-        inventory_obj = self.env['stock.inventory']
-        # inv_imporline_obj = self.env['stock.inventory.import.line']
         product_obj = self.env['product.product']
         prodcat_obj = self.env['product.category']
-        # if 'active_id' in ctx:
-        #     inventory = inventory_obj.browse(ctx['active_id'])
-
         keys, reader_info = self.get_reader_info()
-
         values = {}
-        # actual_date = fields.Date.today()
-        # inv_name = self.name + ' - ' + actual_date
-        # inventory.write({'name': inv_name,
-        #                  'date': fields.Datetime.now(),
-        #                  'imported': True, 'state': 'confirm'})
         for i in range(len(reader_info)):
             val = {}
             field = reader_info[i]
             values = dict(zip(keys, field))
-
             prod_category = False
-
             if 'categoria' in values and values['categoria']:
                 locat_lst = prodcat_obj.search([('name', '=',
                                                values['categoria'])])
@@ -156,14 +138,6 @@ class ImportProduct(models.TransientModel):
                     prod_category = locat_lst[0]
                 else:
                     prod_category = prodcat_obj.create({'name':values['categoria']})
-
-            # prod_lst = product_obj.search([('default_code', '=',
-            #                                 values['code'])])
-            # if prod_lst:
-            #     val['product'] = prod_lst[0].id
-            # if 'lot' in values and values['lot']:
-            #     val['lot'] = values['lot']
-
             val['name'] = values['nombre']
             print values['nombre']
             val['default_code'] = values['codigo']
@@ -173,9 +147,9 @@ class ImportProduct(models.TransientModel):
             val['categ_id'] = prod_category and prod_category.id
             val['type'] = 'product'
             product_obj.create(val)
-        if len(values['cantidad']) > 0:
-            self.change_product_qty(reader_info,keys)
-        self.import_image(reader_info,keys)
+        if int(values['cantidad']) > 0:
+            self.change_product_qty(reader_info, keys)
+        self.import_image(reader_info, keys)
 
     @api.one
     def change_product_qty(self, reader_info,keys):
@@ -183,19 +157,7 @@ class ImportProduct(models.TransientModel):
         inventory_obj = self.env['stock.inventory']
         inventory_line_obj = self.env['stock.inventory.line']
         product_obj = self.env['product.product']
-
-        # for data in self.browse(cr, uid, ids, context=context):
-        #     if data.new_quantity < 0:
-        #         raise UserError(_('Quantity cannot be negative.'))
-        #     ctx = context.copy()
-        #     ctx['location'] = data.location_id.id
-        #     ctx['lot_id'] = data.lot_id.id
-
         actual_date = fields.Date.today()
-        # inv_name = self.name + ' - ' + actual_date
-        # inventory.write({'name': inv_name,
-        #                  'date': fields.Datetime.now(),
-        #                  'imported': True, 'state': 'confirm'})
         inventory_id = inventory_obj.create({
             'name': self.name + ' - ' + actual_date,
             'date': fields.Datetime.now(),
@@ -205,16 +167,12 @@ class ImportProduct(models.TransientModel):
             val = {}
             field = reader_info[i]
             values = dict(zip(keys, field))
-
             prod_lst = product_obj.search([('default_code', '=',
                                             values['codigo'])])
             if prod_lst:
                 val['product'] = prod_lst[0].id
                 val['uom_id'] = prod_lst[0].uom_id.id
                 val['qty_available'] = prod_lst[0].qty_available
-
-            # product = data.product_id.with_context(location=data.location_id.id, lot_id= data.lot_id.id)
-            # th_qty = product.qty_available
             if 'add' in keys:
                 qty = prod_lst[0].qty_available + float(values['cantidad'])
             else:
@@ -226,10 +184,8 @@ class ImportProduct(models.TransientModel):
                 'product_id': val['product'],
                 'product_uom_id': val['uom_id'],
                 'theoretical_qty': qty,
-                # 'prod_lot_id': data.lot_id.id
             }
             inventory_line_obj.create(line_data)
-        # inventory_obj.action_done([inventory_id])
         inventory_id.action_done()
         return {}
 
