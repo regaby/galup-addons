@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 import requests
 from openerp.exceptions import UserError
 from lxml import etree
-    
+
 class HotelFolio(models.Model):
 
     _name = 'hotel.folio'
@@ -42,14 +42,14 @@ class HotelFolio(models.Model):
     @api.multi
     def action_confirm(self):
         res = super(HotelFolio, self).action_confirm()
-        if not self.reservation_id:
+        if not self.reservation_id or self.bb_id:
             xml = self.get_xml('Confirmed')
         return res
 
     @api.multi
     def action_cancel(self):
         res = super(HotelFolio, self).action_cancel()
-        if not self.reservation_id and self.bb_id:
+        if not self.reservation_id or self.bb_id:
             xml = self.get_xml('Cancelled')
         return res
 
