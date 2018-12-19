@@ -31,7 +31,7 @@ class AccountInvoice(models.Model):
                 'seller_ids': [(0, 0, supplierinfo)],
                 'standard_price' : self.currency_id.compute(line.price_unit, currency),
             }
-            if line.product_id.lst_price <= line.price_unit:
+            if line.product_id.lst_price < line.price_unit:
                 raise UserError('El precio de venta es menor o igual que el precio de compra del producto: %s'%(line.product_id.name))
             try:
                 line.product_id.write(vals)
