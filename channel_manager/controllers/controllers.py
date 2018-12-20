@@ -126,6 +126,7 @@ class Home(http.Controller):
             dia_posterior = str(datetime.strptime(vals['res_creation_date'], formato_fecha)
                                 + timedelta(days=1))[0:10]
             if vals['res_creation_date'] != hoy and dia_posterior != hoy:
+                print 'exit... no se crean reservan con fecha anterior a la fecha del dia'
                 return Response("TEST", content_type='text/html;charset=utf-8', status=500)
             if reservation:
                 ## si no cambia la fecha de entrada o salida le zafo...
@@ -177,9 +178,9 @@ class Home(http.Controller):
                     country = country_obj.search([('code', '=', vals['nationality_code'])])
                     partner_val['nationality_id'] = country.id
                 partner = partner_obj.create(partner_val)
-            vals['partner_id'] = partner.id
-            vals['partner_invoice_id'] = partner.id
-            vals['partner_shipping_id'] = partner.id
+            vals['partner_id'] = partner[0].id
+            vals['partner_invoice_id'] = partner[0].id
+            vals['partner_shipping_id'] = partner[0].id
             rcateg_id = []
             ocupadas = []
             for l in lines:
