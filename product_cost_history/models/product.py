@@ -31,7 +31,7 @@ class AccountInvoice(models.Model):
                 'seller_ids': [(0, 0, supplierinfo)],
                 'standard_price' : self.currency_id.compute(line.price_unit, currency),
             }
-            if line.product_id.lst_price < line.price_unit:
+            if line.product_id.lst_price <= line.price_unit:
                 raise UserError('El precio de venta es menor o igual que el precio de compra del producto: %s'%(line.product_id.name))
             try:
                 line.product_id.write(vals)
@@ -46,6 +46,8 @@ class AccountInvoice(models.Model):
                 print 'line', line.price_unit
                 if line.price_unit == 0:
                     raise UserError('El producto %s tiene precio de compra igual a cero'%(line.name))
-            invoice._add_supplier_to_product()
+            # si no es factura de cliete, llamo al método de arriba
+            if self.type != 'out_invoice':
+                invoice._add_supplier_to_product()
             super(AccountInvoice, self).invoice_validate()
 
