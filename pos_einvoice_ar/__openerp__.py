@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'POS Fields Partner',
+    'name': 'POS einvoice AR',
     'version': '0.1',
     'author': 'Galup Sistemas',
     'license': 'LGPL-3',
