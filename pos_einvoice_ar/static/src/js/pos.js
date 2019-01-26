@@ -44,6 +44,7 @@ odoo.define('pos_einvoice_ar.PosModel', function(require){
                             .all()
 
                 records.then(function(result){
+                    var ids = [result[0].invoice_id[0]]
                     var action = {
                         type: 'ir.actions.report.xml',
                         report_name: 'aeroo_report_ar_einvoice',
