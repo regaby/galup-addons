@@ -3,9 +3,9 @@
 #    Module Writen to OpenERP, Open Source Management Solution
 #
 #    All Rights Reserved.
-#    
+#
 ############################################################################
-#    
+#
 ############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -34,6 +34,7 @@
     "depends": ['account','report_aeroo'],
     "data": [
         'reports/recibo_x_report.xml',
+        'views/account_payment_view.xml',
     ],
     'qweb': [],
     "installable": True,
