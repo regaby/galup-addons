@@ -34,6 +34,7 @@
     "depends": ['galup_payment_order','report_aeroo'],
     "data": [
         'reports/payment_order_report.xml',
+        'views/account_payment_view.xml'
     ],
     'qweb': [],
     "installable": True,
