@@ -130,6 +130,9 @@ class ImportProduct(models.TransientModel):
             val = {}
             field = reader_info[i]
             values = dict(zip(keys, field))
+            product_id = product_obj.search([('name_template', '=', values['nombre'])])
+            if product_id:
+                raise exceptions.Warning(_("Producto duplicado %s!"%values['nombre']))
             prod_category = False
             if 'categoria' in values and values['categoria']:
                 locat_lst = prodcat_obj.search([('name', '=',

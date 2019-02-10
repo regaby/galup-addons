@@ -70,6 +70,9 @@ class ProductProduct(models.Model):
         ('product_product__default_code__uniq',
          'unique (default_code)',
          'Product code must be uniq!'),
+        ('product_product__default_name__uniq',
+         'unique (name_template)',
+         'El nombre del producto debe ser unico!'),
     ]
 
     @api.multi
