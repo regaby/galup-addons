@@ -53,7 +53,8 @@ class pos_session(osv.osv):
 
                 ctx = context.copy()
                 ctx.update({'active_ids': move_line})
-                self.pool.get('account.move.line.reconcile').trans_rec_reconcile_full(cr, uid, [], ctx)
+                if move_line:
+                    self.pool.get('account.move.line.reconcile').trans_rec_reconcile_full(cr, uid, [], ctx)
                 #move_line_ids = self.pool.get('account.move.line').search(cr, uid, [('name','=',obj_order_id.name)])
                 #print "@######move_line_id@@@@", move_line_ids
 
