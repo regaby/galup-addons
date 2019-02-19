@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # from openerp import models, fields
 # from openerp.tools import float_is_zero
-# from openerp.exceptions import UserError, ValidationError
+from openerp.exceptions import UserError, ValidationError
 # import time
 from openerp.tools.translate import _
 from openerp.osv import fields, osv
@@ -36,7 +36,6 @@ class pos_session(osv.osv):
             for obj_order_id in self.pool.get('pos.order').browse(cr, uid, order_ids, context=context):
                 move_line = []
 
-                print '\n\n\nobj_order_id.invoice_id.move_id', obj_order_id.invoice_id.move_id
                 for move_line_id in obj_order_id.invoice_id.move_id.line_ids:
                     if move_line_id.name == obj_order_id.name:
 
@@ -53,7 +52,12 @@ class pos_session(osv.osv):
 
                 ctx = context.copy()
                 ctx.update({'active_ids': move_line})
-                if move_line:
+
+                all_accounts = []
+                for line in account_move_line_obj.browse(cr, uid, move_line):
+                    all_accounts.append(line.account_id)
+
+                if move_line and len(set(all_accounts)) <= 1:
                     self.pool.get('account.move.line.reconcile').trans_rec_reconcile_full(cr, uid, [], ctx)
                 #move_line_ids = self.pool.get('account.move.line').search(cr, uid, [('name','=',obj_order_id.name)])
                 #print "@######move_line_id@@@@", move_line_ids
