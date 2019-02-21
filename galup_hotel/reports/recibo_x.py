@@ -74,6 +74,11 @@ class Parser(report_sxw.rml_parse):
                 }
         else:
             obj = self.pool.get('hotel.folio').browse(cr, uid, active_id)
+            journal_id = False
+            for service in obj.folio_service_ids:
+                if service.journal_id:
+                    journal_id = service.journal_id
+                    break
             vals = {
                 'website': obj.warehouse_id.partner_id.website,
                 'city': obj.warehouse_id.partner_id.city,
@@ -88,7 +93,7 @@ class Parser(report_sxw.rml_parse):
                 'amount_total': obj.service_total,
                 'fecha_pago': datetime.strptime(obj.date_order, '%Y-%m-%d %H:%M:%S') - timedelta(hours=3),
                 'concepto': 'Cargos extras.-',
-                'metodo_de_pago': False,
+                'metodo_de_pago': journal_id,
 
                 }
         ret = []
