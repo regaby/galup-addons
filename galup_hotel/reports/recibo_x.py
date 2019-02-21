@@ -20,9 +20,9 @@ class Parser(report_sxw.rml_parse):
         self.localcontext.update({
             'amount_to_text':self._amount_to_text,
             'get_objects':self._get_objects,
-            
+
         })
-        
+
     def _amount_to_text(self, amount_total):
         amount_in_words = amount_to_text_es.amount_to_text(math.floor(amount_total), lang='es', currency='')
         amount_in_words = amount_in_words.replace(' and Zero Cent', '') # Ugh
@@ -36,42 +36,62 @@ class Parser(report_sxw.rml_parse):
         active_id = self.localcontext['active_ids'][0]
         cr = self.cr
         uid = self.uid
-        obj = self.pool.get('hotel.payment').browse(cr, uid, active_id)
-        if obj.folio_id:
-            vals = {
-                'website': obj.folio_id.warehouse_id.partner_id.website,
-                'city': obj.folio_id.warehouse_id.partner_id.city,
-                'state_id': obj.folio_id.warehouse_id.partner_id.state_id,
-                'country_id': obj.folio_id.warehouse_id.partner_id.country_id,
-                'partner_id': obj.folio_id.partner_id.name,
-                'partner_street': obj.folio_id.partner_id.street,
-                'partner_city': obj.folio_id.partner_id.city,
-                'partner_state_id': obj.folio_id.partner_id.state_id,
-                'partner_country_id': obj.folio_id.partner_id.country_id,
-                'partner_phone': obj.folio_id.partner_id.phone,
-                'amount_total': obj.amount,
-                'fecha_pago': datetime.strptime(obj.payment_date, '%Y-%m-%d %H:%M:%S') - timedelta(hours=3),
-                'concepto': 'Pago de alojamiento.-',
-                'metodo_de_pago': obj.journal_id,
-            }
+        if self.localcontext['data']['model'] != 'hotel.folio':
+            obj = self.pool.get('hotel.payment').browse(cr, uid, active_id)
+            if obj.folio_id:
+                vals = {
+                    'website': obj.folio_id.warehouse_id.partner_id.website,
+                    'city': obj.folio_id.warehouse_id.partner_id.city,
+                    'state_id': obj.folio_id.warehouse_id.partner_id.state_id,
+                    'country_id': obj.folio_id.warehouse_id.partner_id.country_id,
+                    'partner_id': obj.folio_id.partner_id.name,
+                    'partner_street': obj.folio_id.partner_id.street,
+                    'partner_city': obj.folio_id.partner_id.city,
+                    'partner_state_id': obj.folio_id.partner_id.state_id,
+                    'partner_country_id': obj.folio_id.partner_id.country_id,
+                    'partner_phone': obj.folio_id.partner_id.phone,
+                    'amount_total': obj.amount,
+                    'fecha_pago': datetime.strptime(obj.payment_date, '%Y-%m-%d %H:%M:%S') - timedelta(hours=3),
+                    'concepto': 'Pago de alojamiento.-',
+                    'metodo_de_pago': obj.journal_id,
+                }
+            else:
+                vals = {
+                    'website': obj.reservation_id.warehouse_id.partner_id.website,
+                    'city': obj.reservation_id.warehouse_id.partner_id.city,
+                    'state_id': obj.reservation_id.warehouse_id.partner_id.state_id,
+                    'country_id': obj.reservation_id.warehouse_id.partner_id.country_id,
+                    'partner_id': obj.reservation_id.partner_id.name,
+                    'partner_street': obj.reservation_id.partner_id.street,
+                    'partner_city': obj.reservation_id.partner_id.city,
+                    'partner_state_id': obj.reservation_id.partner_id.state_id,
+                    'partner_country_id': obj.reservation_id.partner_id.country_id,
+                    'partner_phone': obj.reservation_id.partner_id.phone,
+                    'amount_total': obj.amount,
+                    'fecha_pago': datetime.strptime(obj.payment_date, '%Y-%m-%d %H:%M:%S') - timedelta(hours=3),
+                    'concepto': 'Seña de alojamiento.-',
+                    'metodo_de_pago': obj.journal_id,
+                }
         else:
+            obj = self.pool.get('hotel.folio').browse(cr, uid, active_id)
             vals = {
-                'website': obj.reservation_id.warehouse_id.partner_id.website,
-                'city': obj.reservation_id.warehouse_id.partner_id.city,
-                'state_id': obj.reservation_id.warehouse_id.partner_id.state_id,
-                'country_id': obj.reservation_id.warehouse_id.partner_id.country_id,
-                'partner_id': obj.reservation_id.partner_id.name,
-                'partner_street': obj.reservation_id.partner_id.street,
-                'partner_city': obj.reservation_id.partner_id.city,
-                'partner_state_id': obj.reservation_id.partner_id.state_id,
-                'partner_country_id': obj.reservation_id.partner_id.country_id,
-                'partner_phone': obj.reservation_id.partner_id.phone,
-                'amount_total': obj.amount,
-                'fecha_pago': datetime.strptime(obj.payment_date, '%Y-%m-%d %H:%M:%S') - timedelta(hours=3),
-                'concepto': 'Seña de alojamiento.-',
-                'metodo_de_pago': obj.journal_id,
-            }
+                'website': obj.warehouse_id.partner_id.website,
+                'city': obj.warehouse_id.partner_id.city,
+                'state_id': obj.warehouse_id.partner_id.state_id,
+                'country_id': obj.warehouse_id.partner_id.country_id,
+                'partner_id': obj.partner_id.name,
+                'partner_street': obj.partner_id.street,
+                'partner_city': obj.partner_id.city,
+                'partner_state_id': obj.partner_id.state_id,
+                'partner_country_id': obj.partner_id.country_id,
+                'partner_phone': obj.partner_id.phone,
+                'amount_total': obj.service_total,
+                'fecha_pago': datetime.strptime(obj.date_order, '%Y-%m-%d %H:%M:%S') - timedelta(hours=3),
+                'concepto': 'Cargos extras.-',
+                'metodo_de_pago': False,
+
+                }
         ret = []
         ret.append(vals)
         return ret
-        
+
