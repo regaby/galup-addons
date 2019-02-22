@@ -85,8 +85,14 @@ class HotelReservation(models.Model):
                     price = line2.list_price
                 else:
                     price = line.price
+                chout_date = self.checkout_date
+                if self.checkout_hour > 10: # es late checkout, entonces sumo 1 dia
+                    chout_date = (datetime.strptime(chout_date, '%Y-%m-%d') + timedelta(days=1)).strftime('%Y-%m-%d')
+                chin_date = self.checkin_date
+                if self.checkin_hour < 12: # es early checkin, entonces resto 1 dia
+                    chin_date = (datetime.strptime(chin_date, '%Y-%m-%d') - timedelta(days=1)).strftime('%Y-%m-%d')
                 if int(room_type.room_type_id) > 0:
-                    xml += self.get_line(self.checkin_date, self.checkout_date, room_type.room_type_id, \
+                    xml += self.get_line(chin_date, chout_date, room_type.room_type_id, \
                                           self.adults, price, self.partner_id.name, self.bb_id, state)
         xml += self.get_footer()
         self.xml_request = xml
@@ -132,10 +138,12 @@ class HotelReservation(models.Model):
     def _create_folio(self):
         hotel_folio_obj = self.env['hotel.folio']
         res = super(HotelReservation, self)._create_folio()
+        # se creo el folio ya en estado confirmado
         print '\n\nres', res
         folio_id = res['res_id']
         folio = hotel_folio_obj.browse(folio_id)
-        folio.bb_id = self.bb_id
+        folio.xml_request = self.xml_request
+        folio.xml_response = self.xml_response
         return res
 
 

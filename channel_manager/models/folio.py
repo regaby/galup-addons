@@ -24,8 +24,14 @@ class HotelFolio(models.Model):
             room_type = self.env['hotel.room.type'].search([('cat_id','=',line.categ_id.id)])
             price = line.order_line_id.price_unit
             pax = self.guest_lines and len(self.guest_lines) or 1
+            chout_date = self.checkout_date[0:10]
+            if self.late_checkout and self.late_checkout_hour > 10: # es late checkout, entonces sumo 1 dia
+                chout_date = (datetime.strptime(chout_date, '%Y-%m-%d') + timedelta(days=1)).strftime('%Y-%m-%d')
+            chin_date = self.checkin_date[0:10]
+            if self.early_checkin and self.early_checkin_hour < 12: # es early checkin, entonces resto 1 dia
+                chin_date = (datetime.strptime(chin_date, '%Y-%m-%d') - timedelta(days=1)).strftime('%Y-%m-%d')
             if int(room_type.room_type_id) > 0:
-                xml += reservation.get_line(self.checkin_date[0:10], self.checkout_date[0:10], room_type.room_type_id, \
+                xml += reservation.get_line(chin_date, chout_date, room_type.room_type_id, \
                                       pax, price, self.partner_id.name, self.bb_id, state)
         xml += reservation.get_footer()
         self.xml_request = xml
