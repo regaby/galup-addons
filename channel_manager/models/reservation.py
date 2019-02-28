@@ -142,6 +142,7 @@ class HotelReservation(models.Model):
         print '\n\nres', res
         folio_id = res['res_id']
         folio = hotel_folio_obj.browse(folio_id)
+        folio.bb_id = self.bb_id
         folio.xml_request = self.xml_request
         folio.xml_response = self.xml_response
         return res
