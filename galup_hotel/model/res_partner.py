@@ -108,7 +108,7 @@ class res_partner(models.Model):
 
     _defaults = {
         'is_company': False,
-        'customer': False,
+        'customer': True,
         'main_id_number' : 0,
         'main_id_category_id' : _get_default_category,
 
