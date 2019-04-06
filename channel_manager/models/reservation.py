@@ -92,6 +92,8 @@ class HotelReservation(models.Model):
                 if self.checkin_hour < 12: # es early checkin, entonces resto 1 dia
                     chin_date = (datetime.strptime(chin_date, '%Y-%m-%d') - timedelta(days=1)).strftime('%Y-%m-%d')
                 if int(room_type.room_type_id) > 0:
+                    # TODO: si state == 'cancel' y tengo seteado bb_list_id,
+                    # estas lineas debería iterar por bb_list_id
                     xml += self.get_line(chin_date, chout_date, room_type.room_type_id, \
                                           self.adults, price, self.partner_id.name, self.bb_id, state)
         xml += self.get_footer()
@@ -103,6 +105,9 @@ class HotelReservation(models.Model):
         for process in process_list:
             for child in process:
                 if child.xpath('local-name()') == 'Bbliverateresvid':
+                    # TODO: cuando se reserva más de una habitación devuelve un bb_id por cada habitación
+                    # supongamos que el nuevo campo se llama bb_lista_id
+                    # donde se van a concatenar todos los bb_id
                     self.bb_id = child.text
         return xml
 
@@ -116,7 +121,9 @@ class HotelReservation(models.Model):
     @api.multi
     def cancel_reservation(self):
         res = super(HotelReservation, self).cancel_reservation()
-        if self.bb_id and not self.res_id:
+        # if self.bb_id and not self.res_id:
+        # quito la comprobación res_id ya que no se estaban cancelado las reservas que venian del channel.
+        if self.bb_id:
             xml = self.get_xml('Cancelled')
         return res
 
