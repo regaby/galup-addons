@@ -249,5 +249,7 @@ class Home(http.Controller):
             reservation = reservation_obj.sudo().search([('res_id', '=', data['reservationid'])])
             if reservation:
                 reservation.state = 'cancel'
+                reservation.xml_request = data
+                reservation.xml_response = msg
 
         return Response("TEST", content_type='text/html;charset=utf-8', status=500)
