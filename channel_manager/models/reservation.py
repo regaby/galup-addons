@@ -125,6 +125,8 @@ class HotelReservation(models.Model):
         # quito la comprobación res_id ya que no se estaban cancelado las reservas que venian del channel.
         if self.bb_id:
             xml = self.get_xml('Cancelled')
+            # borro res_id ya que luego no se confirmaba reserva si estaba este valor seteado (linea 117)
+            self.res_id = False
         return res
 
     @api.multi
