@@ -41,6 +41,7 @@ class Home(http.Controller):
         lines = []
         line = {}
         vals_lines = []
+        bb_id_list = []
         reservation_obj = request.env['hotel.reservation']
         tax_obj = request.env['account.tax']
         if data['siteid'] not in ['142', '4']:
@@ -103,6 +104,8 @@ class Home(http.Controller):
                                     line['cantidad'] = cus.text
                                 if cus.xpath('local-name()') == 'Price':
                                     line['price'] = cus.text
+                                if cus.xpath('local-name()') == 'BbliverateNumberId':
+                                        line['bb_id'] = cus.text
                                 for ccus in cus:
                                     if ccus.xpath('local-name()') == 'price':
                                         vals['dolar'] += float(ccus.text)
@@ -221,7 +224,11 @@ class Home(http.Controller):
                     'list_price': float(l['price']) / myduration,
                     'reserve' : [(6, 0, [free_room_id])],
                     }))
+                bb_id_list.append((0, 0, {
+                    'bb_id': l['bb_id'],
+                    }))
             vals['reservation_line'] = vals_lines
+            vals['bb_id_list'] = bb_id_list
             ## agrego impuesto
             tax = tax_obj.sudo().search([('name', '=', 'IVA Ventas 21%')])
             vals['tax_id'] = tax.id

@@ -23,6 +23,7 @@ class HotelReservation(models.Model):
     xml_response = fields.Text('Respuesta Channel Manager', readonly=True)
     no_migrar = fields.Boolean('No migrar')
     dolar = fields.Float('Subtotal (En Dolares)', readonly=True)
+    bb_id_list = fields.One2many('channel.manager.bb.id', 'reservation_id','Bb ids')
 
     def get_header(self):
         config_obj = self.env['channel.manager.config.settings']
@@ -77,6 +78,8 @@ class HotelReservation(models.Model):
 
     def get_xml(self,state):
         xml = self.get_header()
+        i = 0
+        bb_id_list = []
         for line2 in self.reservation_line:
             for line in line2.reserve:
                 room_type = self.env['hotel.room.type'].search([('cat_id','=',line.categ_id.id)])
@@ -92,10 +95,10 @@ class HotelReservation(models.Model):
                 if self.checkin_hour < 12: # es early checkin, entonces resto 1 dia
                     chin_date = (datetime.strptime(chin_date, '%Y-%m-%d') - timedelta(days=1)).strftime('%Y-%m-%d')
                 if int(room_type.room_type_id) > 0:
-                    # TODO: si state == 'cancel' y tengo seteado bb_list_id,
-                    # estas lineas debería iterar por bb_list_id
+                    bb_id = self.bb_id_list and self.bb_id_list[i].bb_id or self.bb_id
+                    i += 1
                     xml += self.get_line(chin_date, chout_date, room_type.room_type_id, \
-                                          self.adults, price, self.partner_id.name, self.bb_id, state)
+                                          self.adults, price, self.partner_id.name, bb_id, state)
         xml += self.get_footer()
         self.xml_request = xml
         msg = self.send_msg(xml)
@@ -105,10 +108,13 @@ class HotelReservation(models.Model):
         for process in process_list:
             for child in process:
                 if child.xpath('local-name()') == 'Bbliverateresvid':
-                    # TODO: cuando se reserva más de una habitación devuelve un bb_id por cada habitación
-                    # supongamos que el nuevo campo se llama bb_lista_id
-                    # donde se van a concatenar todos los bb_id
                     self.bb_id = child.text
+                    bb_id_list.append((0, 0, {
+                        'bb_id': child.text,
+                        }))
+        if bb_id_list:
+            self.bb_id_list = bb_id_list
+
         return xml
 
     @api.multi
@@ -127,6 +133,7 @@ class HotelReservation(models.Model):
             xml = self.get_xml('Cancelled')
             # borro res_id ya que luego no se confirmaba reserva si estaba este valor seteado (linea 117)
             self.res_id = False
+            self.bb_id_list = False
         return res
 
     @api.multi
@@ -141,6 +148,7 @@ class HotelReservation(models.Model):
         default['xml_request'] = False
         default['xml_response'] = False
         default['no_migrar'] = False
+        default['bb_id_list'] = False
         return super(HotelReservation, self).copy(default=default)
 
     @api.multi
@@ -151,9 +159,18 @@ class HotelReservation(models.Model):
         print '\n\nres', res
         folio_id = res['res_id']
         folio = hotel_folio_obj.browse(folio_id)
-        folio.bb_id = self.bb_id
+        folio.bb_id = self.bb_id ## esto se debe copiar ya que sino no se realizan los envios al channel!
         folio.xml_request = self.xml_request
         folio.xml_response = self.xml_response
+        folio.bb_id_list = self.bb_id_list
         return res
 
+class bb_id(models.Model):
 
+    _name = 'channel.manager.bb.id'
+
+    bb_id = fields.Char('BbliverateId')
+    reservation_id = fields.Many2one('hotel.reservation', string='Reserva',
+                               ondelete='cascade')
+    folio_id = fields.Many2one('hotel.folio', string='Folio',
+                               ondelete='cascade')

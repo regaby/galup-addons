@@ -12,6 +12,14 @@
                       <page string="Channel Manager" name="channel_manager">
                         <group>
                           <field name="bb_id" />
+                          <field name="bb_id_list" >
+                            <tree>
+                              <field name="bb_id" />
+                            </tree>
+                            <form>
+                              <field name="bb_id" />
+                            </form>
+                          </field>
                           <field name="xml_request" />
                           <field name="xml_response" />
                         </group>

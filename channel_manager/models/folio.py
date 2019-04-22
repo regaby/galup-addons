@@ -15,10 +15,13 @@ class HotelFolio(models.Model):
     bb_id = fields.Char('BbliverateId')
     xml_request = fields.Text('Solicitud Channel Manager', readonly=True)
     xml_response = fields.Text('Respuesta Channel Manager', readonly=True)
+    bb_id_list = fields.One2many('channel.manager.bb.id', 'folio_id','Bb ids')
 
     def get_xml(self,state):
         reservation = self.env['hotel.reservation']
         xml = reservation.get_header()
+        i = 0
+        bb_id_list = []
         # for line2 in self.room_lines:
         for line in self.room_lines:
             room_type = self.env['hotel.room.type'].search([('cat_id','=',line.categ_id.id)])
@@ -31,8 +34,10 @@ class HotelFolio(models.Model):
             if self.early_checkin and self.early_checkin_hour < 12: # es early checkin, entonces resto 1 dia
                 chin_date = (datetime.strptime(chin_date, '%Y-%m-%d') - timedelta(days=1)).strftime('%Y-%m-%d')
             if int(room_type.room_type_id) > 0:
+                bb_id = self.bb_id_list and self.bb_id_list[i].bb_id or self.bb_id
+                i += 1
                 xml += reservation.get_line(chin_date, chout_date, room_type.room_type_id, \
-                                      pax, price, self.partner_id.name, self.bb_id, state)
+                                      pax, price, self.partner_id.name, bb_id, state)
         xml += reservation.get_footer()
         self.xml_request = xml
         msg = reservation.send_msg(xml)
@@ -43,6 +48,11 @@ class HotelFolio(models.Model):
             for child in process:
                 if child.xpath('local-name()') == 'Bbliverateresvid':
                     self.bb_id = child.text
+                    bb_id_list.append((0, 0, {
+                        'bb_id': child.text,
+                        }))
+        if bb_id_list:
+            self.bb_id_list = bb_id_list
         return xml
 
     @api.multi
@@ -57,5 +67,6 @@ class HotelFolio(models.Model):
         res = super(HotelFolio, self).action_cancel()
         if not self.reservation_id or self.bb_id:
             xml = self.get_xml('Cancelled')
+            self.bb_id_list = False
         return res
 

@@ -13,6 +13,14 @@
                     <group>
                       <field name="no_migrar" groups="channel_manager.group_channel_manager" />
                       <field name="bb_id" />
+                      <field name="bb_id_list" >
+                        <tree>
+                          <field name="bb_id" />
+                        </tree>
+                        <form>
+                          <field name="bb_id" />
+                        </form>
+                      </field>
                       <field name="res_id" />
                       <field name="channel_manager_id" options="{'no_create': True}"/>
                       <field name="xml_request" />
