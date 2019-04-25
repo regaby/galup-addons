@@ -85,6 +85,8 @@ class HotelReservation(models.Model):
             result_msg += 'Estado de reserva ha sido cancelado\n'
         elif res_channel_msg == 'Status Already Same.':
             result_msg += 'Error! El estado ya es el mismo\n'
+        elif result_msg == 'Reservation not found.':
+            result_msg += 'Error! Reserva no encontrada\n'
         else:
             result_msg += "%s\n"%res_channel_msg
         return result_msg
@@ -171,6 +173,11 @@ class HotelReservation(models.Model):
             # borro res_id ya que luego no se confirmaba reserva si estaba este valor seteado (linea 157)
             self.res_id = False
             self.bb_id_list = False
+        return res
+
+    def set_to_draft_reservation(self):
+        res = super(HotelReservation, self).set_to_draft_reservation()
+        self.result_msg = False
         return res
 
     @api.multi
