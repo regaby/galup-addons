@@ -10,7 +10,7 @@
             <field name="arch" type="xml">
                <xpath expr="/form/header" position="after">
                   <div class="alert alert-info" role="alert" style="margin-bottom:0px;"
-                        attrs="{'invisible': ['|',('state','not in',['confirm','cancel']),('result_msg','=',False)]}">
+                        attrs="{'invisible': ['|',('state','not in',['confirm','cancel','done']),('result_msg','=',False)]}">
                         <field name="result_msg" />
                   </div>
                </xpath>
