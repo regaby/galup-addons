@@ -8,6 +8,12 @@
             <field name="model">hotel.folio</field>
             <field name="inherit_id" ref="hotel.view_hotel_folio1_form"/>
             <field name="arch" type="xml">
+                <xpath expr="/form/header" position="after">
+                  <div class="alert alert-info" role="alert" style="margin-bottom:0px;"
+                        attrs="{'invisible': ['|',('state','not in',['sale','cancel']),('result_msg','=',False)]}">
+                        <field name="result_msg" />
+                  </div>
+               </xpath>
                 <xpath expr="//form/sheet/notebook/page[4]" position="after">
                       <page string="Channel Manager" name="channel_manager">
                         <group>

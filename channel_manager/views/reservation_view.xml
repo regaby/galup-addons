@@ -8,6 +8,12 @@
             <field name="model">hotel.reservation</field>
             <field name="inherit_id" ref="hotel_reservation.view_hotel_reservation_form"/>
             <field name="arch" type="xml">
+               <xpath expr="/form/header" position="after">
+                  <div class="alert alert-info" role="alert" style="margin-bottom:0px;"
+                        attrs="{'invisible': ['|',('state','not in',['confirm','cancel']),('result_msg','=',False)]}">
+                        <field name="result_msg" />
+                  </div>
+               </xpath>
                <page name="pago_anticipado" position="after" >
                   <page string="Channel Manager" name="channel_manager">
                     <group>

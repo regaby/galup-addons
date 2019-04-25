@@ -16,12 +16,14 @@ class HotelFolio(models.Model):
     xml_request = fields.Text('Solicitud Channel Manager', readonly=True)
     xml_response = fields.Text('Respuesta Channel Manager', readonly=True)
     bb_id_list = fields.One2many('channel.manager.bb.id', 'folio_id','Bb ids')
+    result_msg = fields.Text('Mensaje', readonly=True)
 
     def get_xml(self,state):
         reservation = self.env['hotel.reservation']
         xml = reservation.get_header()
         i = 0
         bb_id_list = []
+        vals = {}
         # for line2 in self.room_lines:
         for line in self.room_lines:
             room_type = self.env['hotel.room.type'].search([('cat_id','=',line.categ_id.id)])
@@ -39,20 +41,10 @@ class HotelFolio(models.Model):
                 xml += reservation.get_line(chin_date, chout_date, room_type.room_type_id, \
                                       pax, price, self.partner_id.name, bb_id, state)
         xml += reservation.get_footer()
-        self.xml_request = xml
+        vals['xml_request'] = xml
         msg = reservation.send_msg(xml)
-        self.xml_response = msg
-        root = etree.fromstring(msg)
-        process_list = root.findall('RoomUpdateMessage', root.nsmap)
-        for process in process_list:
-            for child in process:
-                if child.xpath('local-name()') == 'Bbliverateresvid':
-                    self.bb_id = child.text
-                    bb_id_list.append((0, 0, {
-                        'bb_id': child.text,
-                        }))
-        if bb_id_list:
-            self.bb_id_list = bb_id_list
+        vals = reservation.parse_msg(msg, vals)
+        self.write(vals)
         return xml
 
     @api.multi

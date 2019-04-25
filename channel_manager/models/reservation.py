@@ -24,6 +24,7 @@ class HotelReservation(models.Model):
     no_migrar = fields.Boolean('No migrar')
     dolar = fields.Float('Subtotal (En Dolares)', readonly=True)
     bb_id_list = fields.One2many('channel.manager.bb.id', 'reservation_id','Bb ids')
+    result_msg = fields.Text('Mensaje', readonly=True)
 
     def get_header(self):
         config_obj = self.env['channel.manager.config.settings']
@@ -76,10 +77,54 @@ class HotelReservation(models.Model):
         msg = requests.post('https://www.octorate.com/api/live/callApi.php?method=bookreservation', data=xml, headers=headers).text.encode('utf-8')
         return msg
 
+    def get_result_msg(self, res_channel_id, res_channel_msg):
+        result_msg = 'Reserva %s: '%str(int(res_channel_id)+1)
+        if res_channel_msg == 'Successfully inserted':
+            result_msg += 'Ha sido insertada correctamente\n'
+        elif res_channel_msg == 'Status Changed.':
+            result_msg += 'Estado de reserva ha sido cancelado\n'
+        elif res_channel_msg == 'Status Already Same.':
+            result_msg += 'Error! El estado ya es el mismo\n'
+        else:
+            result_msg += "%s\n"%res_channel_msg
+        return result_msg
+
+    def parse_msg(self, msg, vals):
+        bb_id_list = []
+        root = etree.fromstring(msg)
+        process_list = root.findall('RoomUpdateMessage', root.nsmap)
+        result_msg = ''
+        if not process_list:
+            process_list = root.findall('Errors', root.nsmap)
+        for process in process_list:
+            for child in process:
+                if child.xpath('local-name()') == 'Bbliverateresvid':
+                    vals['bb_id'] = child.text
+                    bb_id_list.append((0, 0, {
+                        'bb_id': child.text,
+                        }))
+                if child.xpath('local-name()') == 'Recordid':
+                    res_channel_id = "%s"%child.text
+                if child.xpath('local-name()') in ['Succmessage', 'Errormessage']:
+                    res_channel_msg = "%s"%child.text
+                for child2 in child:
+                    for child3 in child2:
+                        if child3.xpath('local-name()') == 'Recordid':
+                            res_channel_id = "%s"%child3.text
+                        if child3.xpath('local-name()') in ['Succmessage', 'Errormessage']:
+                            res_channel_msg = "%s"%child3.text
+                    result_msg += self.get_result_msg(res_channel_id, res_channel_msg)
+            result_msg += self.get_result_msg(res_channel_id, res_channel_msg)
+        vals['result_msg'] = result_msg
+        vals['xml_response'] = msg
+        if bb_id_list:
+            vals['bb_id_list'] = bb_id_list
+        return vals
+
     def get_xml(self,state):
+        vals = {}
         xml = self.get_header()
         i = 0
-        bb_id_list = []
         for line2 in self.reservation_line:
             for line in line2.reserve:
                 room_type = self.env['hotel.room.type'].search([('cat_id','=',line.categ_id.id)])
@@ -100,21 +145,10 @@ class HotelReservation(models.Model):
                     xml += self.get_line(chin_date, chout_date, room_type.room_type_id, \
                                           self.adults, price, self.partner_id.name, bb_id, state)
         xml += self.get_footer()
-        self.xml_request = xml
+        vals['xml_request'] = xml
         msg = self.send_msg(xml)
-        self.xml_response = msg
-        root = etree.fromstring(msg)
-        process_list = root.findall('RoomUpdateMessage', root.nsmap)
-        for process in process_list:
-            for child in process:
-                if child.xpath('local-name()') == 'Bbliverateresvid':
-                    self.bb_id = child.text
-                    bb_id_list.append((0, 0, {
-                        'bb_id': child.text,
-                        }))
-        if bb_id_list:
-            self.bb_id_list = bb_id_list
-
+        vals = self.parse_msg(msg, vals)
+        self.write(vals)
         return xml
 
     @api.multi
@@ -131,7 +165,7 @@ class HotelReservation(models.Model):
         # quito la comprobación res_id ya que no se estaban cancelado las reservas que venian del channel.
         if self.bb_id:
             xml = self.get_xml('Cancelled')
-            # borro res_id ya que luego no se confirmaba reserva si estaba este valor seteado (linea 117)
+            # borro res_id ya que luego no se confirmaba reserva si estaba este valor seteado (linea 157)
             self.res_id = False
             self.bb_id_list = False
         return res
