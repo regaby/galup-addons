@@ -91,6 +91,7 @@ class HotelReservation(models.Model):
 
     def parse_msg(self, msg, vals):
         bb_id_list = []
+        res_channel_id = 0
         root = etree.fromstring(msg)
         process_list = root.findall('RoomUpdateMessage', root.nsmap)
         result_msg = ''
@@ -105,7 +106,7 @@ class HotelReservation(models.Model):
                         }))
                 if child.xpath('local-name()') == 'Recordid':
                     res_channel_id = "%s"%child.text
-                if child.xpath('local-name()') in ['Succmessage', 'Errormessage']:
+                if child.xpath('local-name()') in ['Succmessage', 'Errormessage', 'ErrorMsg']:
                     res_channel_msg = "%s"%child.text
                 for child2 in child:
                     for child3 in child2:
