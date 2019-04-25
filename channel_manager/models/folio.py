@@ -51,6 +51,7 @@ class HotelFolio(models.Model):
     def action_confirm(self):
         res = super(HotelFolio, self).action_confirm()
         if not self.reservation_id or self.bb_id:
+            self.result_msg = False
             xml = self.get_xml('Confirmed')
         return res
 
@@ -58,6 +59,7 @@ class HotelFolio(models.Model):
     def action_cancel(self):
         res = super(HotelFolio, self).action_cancel()
         if not self.reservation_id or self.bb_id:
+            self.result_msg = False
             xml = self.get_xml('Cancelled')
             self.bb_id_list = False
         return res
