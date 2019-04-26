@@ -157,8 +157,8 @@ class HotelReservation(models.Model):
     @api.multi
     def confirmed_reservation(self):
         res = super(HotelReservation, self).confirmed_reservation()
+        self.result_msg = False
         if not self.res_id:
-            self.result_msg = False
             xml = self.get_xml('Confirmed')
         return res
 
@@ -167,8 +167,8 @@ class HotelReservation(models.Model):
         res = super(HotelReservation, self).cancel_reservation()
         # if self.bb_id and not self.res_id:
         # quito la comprobación res_id ya que no se estaban cancelado las reservas que venian del channel.
+        self.result_msg = False
         if self.bb_id:
-            self.result_msg = False
             xml = self.get_xml('Cancelled')
             # borro res_id ya que luego no se confirmaba reserva si estaba este valor seteado (linea 157)
             self.res_id = False

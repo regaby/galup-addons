@@ -50,19 +50,19 @@ class HotelFolio(models.Model):
     @api.multi
     def action_confirm(self):
         res = super(HotelFolio, self).action_confirm()
+        self.result_msg = False
         if not self.reservation_id or self.bb_id:
-            self.result_msg = False
             xml = self.get_xml('Confirmed')
         return res
 
     @api.multi
     def action_cancel(self):
         pre_state = self.state
+        self.result_msg = False
         res = super(HotelFolio, self).action_cancel()
         if pre_state == 'draft':
             return res
         if not self.reservation_id or self.bb_id:
-            self.result_msg = False
             xml = self.get_xml('Cancelled')
             self.bb_id_list = False
 
