@@ -203,10 +203,13 @@ class HotelReservation(models.Model):
         print '\n\nres', res
         folio_id = res['res_id']
         folio = hotel_folio_obj.browse(folio_id)
-        folio.bb_id = self.bb_id ## esto se debe copiar ya que sino no se realizan los envios al channel!
-        folio.xml_request = self.xml_request
-        folio.xml_response = self.xml_response
+        folio.write({
+            'bb_id' : self.bb_id, ## esto se debe copiar ya que sino no se realizan los envios al channel!
+            'xml_request' : self.xml_request,
+            'xml_response' : self.xml_response,
+        })
         folio.bb_id_list = self.bb_id_list
+
         return res
 
 class bb_id(models.Model):
