@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    <record id="report_cash_flow" model="ir.actions.report.xml">
+        <field name="name">POS Cash Flow Report</field>
+        <field name="type">ir.actions.report.xml</field>
+        <field name="model">pos.cash.flow.wizard</field>
+        <field name="report_name">pos.cash.flow.report</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-ods</field>
+        <field name="out_format">4</field>
+        <field name="parser_loc">pos_cash_flow_report/report/cash_flow.py</field>
+        <field name="report_rml">pos_cash_flow_report/report/cash_flow.ods</field>
+        <field name="parser_state">loc</field>
+        <field name="tml_source">file</field>
+    </record>
+    </data>
+</openerp>
+
