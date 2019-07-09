@@ -268,7 +268,7 @@ class HotelFolio(models.Model):
         @return: True/False.
         """
         for folio in self:
-            if folio.state not in ['cancel']:
+            if folio.state not in ['cancel', 'done']:
                 raise ValidationError(_('Para poder eliminar el registro, el mismo debe estar en estado cancelado.'))
         return super(HotelFolio, self).unlink()
 
