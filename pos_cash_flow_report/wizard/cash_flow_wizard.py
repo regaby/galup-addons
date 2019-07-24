@@ -30,6 +30,7 @@ class CashFlowWizard(models.TransientModel):
     date_end = fields.Date('Date End', required=True, default=fields.Date.context_today)
     journal_ids = fields.Many2many('account.journal', 'pos_cash_flow_journals_rel', 'journal_id',
                                    'wizard_id', 'Journals')
+    start_balance = fields.Float('Start Balance', required=True, default=0)
 
     @api.multi
     def print_report(self):

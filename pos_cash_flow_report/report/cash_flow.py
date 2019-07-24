@@ -29,7 +29,18 @@ class Parser(report_sxw.rml_parse):
         self.cr.execute(sql%(date_start, date_end))
         statement_ids = [x[0] for x in self.cr.fetchall()]
         res = []
-        balance = 0
+        balance = objects.start_balance
+        vals = {
+            'date': '',
+            'order': '',
+            'statement': 'Saldo Inicial',
+            'journal': '',
+            'partner': '',
+            'amount': balance,
+            'reference': '',
+            'balance': balance,
+            }
+        res.append(vals)
         for line in statement_line.browse(self.cr, self.uid, statement_ids):
             reference = ''
             if line.journal_id.id == 10:
