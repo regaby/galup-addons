@@ -20,8 +20,14 @@ class Parser(report_sxw.rml_parse):
         args = [('date', '>=', date_start), ('date', '<=', date_end)]
         if objects.journal_ids:
             args.append(('journal_id', 'in', objects.journal_ids.ids))
-        statement_ids = statement_line.search(self.cr, self.uid, args,
-                                              order="date asc, pos_statement_id asc")
+        sql = """select id
+            from account_bank_statement_line
+            where date >='%s'
+            and date <='%s'
+            order by date asc, pos_statement_id asc
+        """
+        self.cr.execute(sql%(date_start, date_end))
+        statement_ids = [x[0] for x in self.cr.fetchall()]
         res = []
         balance = 0
         for line in statement_line.browse(self.cr, self.uid, statement_ids):
