@@ -98,7 +98,7 @@ class Home(http.Controller):
                                     vals['country_code'] = cus.text.upper()
                                 if cus.xpath('local-name()') == 'CustomerNationality':
                                     vals['nationality_code'] = cus.text.upper()
-                                if cus.xpath('local-name()') == 'Pax':
+                                if cus.xpath('local-name()') == 'Adult':
                                     pax += int(cus.text)
                                 if cus.xpath('local-name()') == 'Units':
                                     line['cantidad'] = cus.text
