@@ -52,6 +52,7 @@ class Home(http.Controller):
             root = etree.fromstring(msg)
             process_list = root.findall('Bookings', root.nsmap)
             pax = 0
+            children = 0
             vals['dolar'] = 0
             for process in process_list:
                 for child2 in process:
@@ -100,6 +101,8 @@ class Home(http.Controller):
                                     vals['nationality_code'] = cus.text.upper()
                                 if cus.xpath('local-name()') == 'Adult':
                                     pax += int(cus.text)
+                                if cus.xpath('local-name()') == 'Child':
+                                    children += int(cus.text)
                                 if cus.xpath('local-name()') == 'Units':
                                     line['cantidad'] = cus.text
                                 if cus.xpath('local-name()') == 'Price':
@@ -144,6 +147,7 @@ class Home(http.Controller):
                                                                      reservation.id)])
                     rline_ids.sudo().unlink()
             vals['adults'] = pax
+            vals['children'] = children
             partner_obj = request.env['res.partner'].sudo()
             partner = partner_obj.search([('name', '=', vals['partner_name'])])
             if 'channel' in vals.keys():
