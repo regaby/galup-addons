@@ -6,6 +6,8 @@ from datetime import datetime, timedelta
 import requests
 from openerp.exceptions import UserError
 from lxml import etree
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class HotelReservation(models.Model):
@@ -94,6 +96,7 @@ class HotelReservation(models.Model):
     def parse_msg(self, msg, vals):
         bb_id_list = []
         res_channel_id = 0
+        _logger.info(msg)
         root = etree.fromstring(msg)
         process_list = root.findall('RoomUpdateMessage', root.nsmap)
         result_msg = ''
