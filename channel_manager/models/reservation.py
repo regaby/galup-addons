@@ -153,8 +153,11 @@ class HotelReservation(models.Model):
         xml += self.get_footer()
         vals['xml_request'] = xml
         msg = self.send_msg(xml)
-        vals = self.parse_msg(msg, vals)
-        self.write(vals)
+        try:
+            vals = self.parse_msg(msg, vals)
+            self.write(vals)
+        except Exception, e:
+            _logger.error(e)
         return xml
 
     @api.multi

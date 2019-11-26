@@ -47,8 +47,11 @@ class HotelFolio(models.Model):
         _logger.info(xml)
         msg = reservation.send_msg(xml)
         _logger.info(msg)
-        vals = reservation.parse_msg(msg, vals)
-        self.write(vals)
+        try:
+            vals = reservation.parse_msg(msg, vals)
+            self.write(vals)
+        except Exception, e:
+            _logger.error(e)
         return xml
 
     @api.multi
