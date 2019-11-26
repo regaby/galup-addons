@@ -44,6 +44,7 @@ class HotelFolio(models.Model):
                                       pax, price, self.partner_id.name, bb_id, state)
         xml += reservation.get_footer()
         vals['xml_request'] = xml
+        _logger.info(xml)
         msg = reservation.send_msg(xml)
         _logger.info(msg)
         vals = reservation.parse_msg(msg, vals)
