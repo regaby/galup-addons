@@ -6,6 +6,8 @@ from datetime import datetime, timedelta
 import requests
 from openerp.exceptions import UserError
 from lxml import etree
+import logging
+_logger = logging.getLogger(__name__)
 
 class HotelFolio(models.Model):
 
@@ -43,6 +45,7 @@ class HotelFolio(models.Model):
         xml += reservation.get_footer()
         vals['xml_request'] = xml
         msg = reservation.send_msg(xml)
+        _logger.info(msg)
         vals = reservation.parse_msg(msg, vals)
         self.write(vals)
         return xml
