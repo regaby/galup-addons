@@ -34,7 +34,7 @@ class Home(http.Controller):
         print xml
         print '\n'
         headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
-        msg = requests.post('https://www.octorate.com/api/live/callApi.php?method=GetBookings',
+        msg = requests.post('https://rate.octorate.com/api/live/callApi.php?method=GetBookings',
                             data=xml, headers=headers).text.encode('utf-8')
         print msg
         vals = {}

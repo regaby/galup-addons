@@ -30,7 +30,7 @@ class ChannelManager(models.Model):
         print xml
         print '\n'
         headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'} # set what your server accepts
-        msg = requests.post('https://www.octorate.com/api/live/callApi.php?method=GetRoomTypes', data=xml, headers=headers).text
+        msg = requests.post('https://rate.octorate.com/api/live/callApi.php?method=GetRoomTypes', data=xml, headers=headers).text
         raise UserError(msg)
 
     @api.multi
