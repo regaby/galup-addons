@@ -76,7 +76,7 @@ class HotelReservation(models.Model):
 
     def send_msg(self, xml):
         headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'} # set what your server accepts
-        msg = requests.post('https://rate.octorate.com/api/live/callApi.php?method=bookreservation', data=xml, headers=headers).text.encode('utf-8')
+        msg = requests.post('https://api.octorate.com/api/live/callApi.php?method=bookreservation', data=xml, headers=headers).text.encode('utf-8')
         return msg
 
     def get_result_msg(self, res_channel_id, res_channel_msg):
